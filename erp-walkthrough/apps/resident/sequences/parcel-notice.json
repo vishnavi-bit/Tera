@@ -1,0 +1,39 @@
+{
+  "id": "parcel-notice",
+  "title": "Parcel waiting at the gate",
+  "startStep": "home",
+  "completionMessage": "Parcel {parcel.reference} is held at {parcel.gate}. The courier never entered the society.",
+  "steps": {
+    "home": {
+      "user": "resident-a1204",
+      "screen": "R01",
+      "proposedAction": "Tap Parcels",
+      "infoPanel": [
+        {
+          "key": "counts.parcels",
+          "label": "Parcels at the gate"
+        }
+      ],
+      "actions": {
+        "goto-R07": {
+          "performedText": "opened Parcels",
+          "nextStep": "parcels"
+        }
+      }
+    },
+    "parcels": {
+      "user": "resident-a1204",
+      "screen": "R07",
+      "proposedAction": "Check the parcel at the gate",
+      "infoPanel": [
+        {
+          "key": "counts.parcels",
+          "label": "Parcels at the gate"
+        }
+      ],
+      "performedText": "checked the parcel",
+      "nextStep": null,
+      "notDefined": "Whether the resident is notified when a parcel is held, and whether the resident confirms collection in the app, is not defined."
+    }
+  }
+}

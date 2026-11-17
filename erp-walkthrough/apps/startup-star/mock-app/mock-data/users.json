@@ -1,0 +1,23 @@
+{
+  "founder-women": {
+    "name": "Demo Meera",
+    "roleLabel": "Founder (Women Entrepreneurs)",
+    "side": "founder",
+    "org": "Startup Star",
+    "initial": "M"
+  },
+  "founder-genz": {
+    "name": "Demo Aarav",
+    "roleLabel": "Founder (Gen Z Founders)",
+    "side": "founder",
+    "org": "Startup Star",
+    "initial": "A"
+  },
+  "founder-midlife": {
+    "name": "Demo Vikram",
+    "roleLabel": "Founder (Midlife Career Changers)",
+    "side": "founder",
+    "org": "Startup Star",
+    "initial": "V"
+  }
+}

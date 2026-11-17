@@ -1,0 +1,29 @@
+{
+  "name": "resident",
+  "title": "Residents - Resident App",
+  "spec": "docs/resident_app_scope.md",
+  "feedbackApp": "RESIDENT",
+  "walkthroughs": [
+    {
+      "id": "unexpected-visitor",
+      "title": "Approve or reject a visitor",
+      "description": "The guard asks about an unexpected visitor. The resident opens the request and approves or rejects it, then sees it in the visitor history.",
+      "sequenceFile": "sequences/unexpected-visitor.json",
+      "seedData": "mock-app/mock-data/seeds/unexpected-visitor.json"
+    },
+    {
+      "id": "pre-approve-guest",
+      "title": "Pre-approve a guest",
+      "description": "The resident creates a pass for an expected guest and sees the QR pass to share.",
+      "sequenceFile": "sequences/pre-approve-guest.json",
+      "seedData": "mock-app/mock-data/seeds/pre-approve-guest.json"
+    },
+    {
+      "id": "parcel-notice",
+      "title": "Parcel waiting at the gate",
+      "description": "The resident checks a parcel that the guard is holding at the gate.",
+      "sequenceFile": "sequences/parcel-notice.json",
+      "seedData": "mock-app/mock-data/seeds/parcel-notice.json"
+    }
+  ]
+}

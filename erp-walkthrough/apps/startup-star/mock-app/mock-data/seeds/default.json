@@ -1,0 +1,314 @@
+{
+  "_sample": "DEMO DATA for the Startup Star walkthroughs. All names, ideas, scores, cities, testimonials, prices shown as results, report content and receipts are invented samples. No payment, WhatsApp, AI or PDF generation is connected.",
+  "persona": {
+    "id": "women",
+    "label": "Women Entrepreneurs",
+    "emoji": "👩‍💼",
+    "gradient": [
+      "#ec4899",
+      "#a855f7",
+      "#4f46e5"
+    ],
+    "headline": "Your business idea deserves a real plan",
+    "sub": "Join thousands of women who turned their idea into a thriving income",
+    "pain": [
+      "Not sure where to start?",
+      "Worried about licenses & legalities?",
+      "Need funding but don't know how?",
+      "Finding time between home and work?"
+    ],
+    "testimonial": {
+      "quote": "I always dreamed of starting a boutique. This gave me a step-by-step roadmap and the confidence to actually do it.",
+      "who": "Demo Lakshmi, Bengaluru (sample testimonial)"
+    },
+    "hint": "a home-based tiffin service that delivers healthy meals to working professionals in my area",
+    "concerns": [
+      "I don't know where to start",
+      "I need to validate my idea",
+      "I need funding",
+      "I want my first customer",
+      "I don't understand legalities/licenses",
+      "I need to balance business with family",
+      "I'm not sure if my idea will work"
+    ],
+    "extra": [
+      {
+        "id": "x1",
+        "label": "Who Is With You",
+        "title": "Who will be building this with you?",
+        "sub": "Some founders start alone, some with family. Both work.",
+        "options": [
+          "Just me",
+          "A family member",
+          "A friend or partner",
+          "I am looking for a co-founder"
+        ],
+        "a": "Just me"
+      },
+      {
+        "id": "x2",
+        "label": "Support You Need",
+        "title": "What kind of support would help you most?",
+        "sub": "We will point your plan towards it",
+        "options": [
+          "Funding or loans",
+          "A mentor",
+          "Legal and licences",
+          "A women founders network",
+          "Support from my family"
+        ],
+        "a": "A women founders network"
+      }
+    ]
+  },
+  "business": {
+    "idea": "Healthy tiffin meals for office workers near my home in Hyderabad",
+    "stage": "idea",
+    "concern": "I don't know where to start",
+    "location": "local",
+    "city": "Hyderabad"
+  },
+  "profile": {
+    "interests": [
+      "Food & Beverages",
+      "Health & Wellness"
+    ],
+    "skills": [
+      "Domain Expertise",
+      "Operations / Management"
+    ],
+    "budget": "₹50,000 – ₹2 Lakh",
+    "businessType": "Product-based"
+  },
+  "followups": [
+    {
+      "id": "q1",
+      "text": "Do you have any prior business or entrepreneurship experience?",
+      "options": [
+        "No experience at all",
+        "Some freelance/side income",
+        "Ran a small business before",
+        "Currently running a business"
+      ],
+      "a": "No experience at all"
+    },
+    {
+      "id": "q2",
+      "text": "How many hours per week can you dedicate to this business?",
+      "options": [
+        "Less than 5 hours",
+        "5–15 hours",
+        "15–30 hours",
+        "Full time (30+ hours)"
+      ],
+      "a": "5–15 hours"
+    },
+    {
+      "id": "q3",
+      "text": "What is your biggest fear about starting this business?",
+      "options": [
+        "Failing and losing money",
+        "Not knowing enough",
+        "Competition in the market",
+        "Family / social pressure",
+        "No fear — I'm ready!"
+      ],
+      "a": "Not knowing enough"
+    }
+  ],
+  "preview": {
+    "score": 64,
+    "top": 35,
+    "why": [
+      "Your passion for Food & Beverages gives you domain knowledge that most early competitors simply don't have.",
+      "Product-based businesses build brand equity and scalable revenue. Even a small niche product can grow nationally.",
+      "Hyderabad has a fast-growing urban consumer base with rising disposable incomes, a strong launchpad for new businesses."
+    ]
+  },
+  "contact": {
+    "name": "Meera",
+    "email": "demo.women@example.com",
+    "phone": "9000000001",
+    "state": "form"
+  },
+  "plan": {
+    "id": "core",
+    "name": "Core",
+    "price": 199,
+    "originalPrice": 399,
+    "tag": "Most Popular",
+    "outcome": "I know exactly what to do next",
+    "features": [
+      "Everything in Entry",
+      "Personalized analysis (7 areas)",
+      "Top 3 business ideas",
+      "City-specific insights (licenses, demand, competitors)",
+      "7-day action plan",
+      "Mistakes to avoid",
+      "Advanced templates",
+      "WhatsApp support (3 questions)",
+      "1 year \"Stay Motivated\" app access"
+    ]
+  },
+  "order": {
+    "id": "DEMO-ORD-WOMEN",
+    "paid": false,
+    "coupon": "",
+    "method": "UPI",
+    "total": 199
+  },
+  "report": {
+    "ready": false,
+    "finalScore": 65,
+    "finalBand": "Ready to Plan",
+    "finalTone": "yellow",
+    "prelim": 64,
+    "categories": [
+      {
+        "name": "Idea Clarity & Market Fit",
+        "score": 17,
+        "max": 25,
+        "rationale": "Specific idea with a clear customer.",
+        "improve": "Name the exact offices or areas you will serve first."
+      },
+      {
+        "name": "Execution Readiness",
+        "score": 2,
+        "max": 20,
+        "rationale": "You do not know where to start yet.",
+        "improve": "Offer a free sample tiffin to 5 people this week."
+      },
+      {
+        "name": "Financial Preparedness",
+        "score": 14,
+        "max": 20,
+        "rationale": "Your budget covers a small start.",
+        "improve": "Keep a simple cost tracker for ingredients and packing."
+      },
+      {
+        "name": "Skill & Domain Alignment",
+        "score": 17,
+        "max": 20,
+        "rationale": "Your domain knowledge fits a food business.",
+        "improve": "Learn basic food-safety rules for selling from home."
+      },
+      {
+        "name": "Location & Context Advantage",
+        "score": 15,
+        "max": 15,
+        "rationale": "Big city with steady office demand.",
+        "improve": "Pick one or two nearby office clusters."
+      }
+    ],
+    "card": {
+      "topIdea": "Home Tiffin & Meal Prep Service",
+      "idea": "Healthy tiffin meals for office workers near my home in Hyderabad",
+      "tags": [
+        "Food & Beverages",
+        "Product-based",
+        "Hyderabad"
+      ],
+      "score": 65,
+      "date": "27 Oct 2026",
+      "status": "ready",
+      "plan": "core"
+    },
+    "title": "Investor-Ready Startup Launch Playbook",
+    "summary": "Hyderabad · Telangana · Healthy tiffin for office workers",
+    "benchmarks": [
+      [
+        "₹90",
+        "Basic meal",
+        "Single-day tiffin"
+      ],
+      [
+        "₹550",
+        "Weekly plan",
+        "5 days, one meal"
+      ],
+      [
+        "₹2,000",
+        "Monthly plan",
+        "Best margin"
+      ]
+    ],
+    "channels": [
+      [
+        "WhatsApp office groups",
+        "Share a weekly menu with 3 nearby offices."
+      ],
+      [
+        "Referral rewards",
+        "Free meal for each office friend who joins."
+      ]
+    ],
+    "funnel": [
+      "Greet and share the menu",
+      "Offer a trial meal",
+      "Ask for the weekly plan"
+    ],
+    "unit": [
+      [
+        "Target CAC",
+        "Keep below ₹150"
+      ],
+      [
+        "Average order value",
+        "Target ₹2,000 a month"
+      ],
+      [
+        "Break-even",
+        "Close 25 weekly customers"
+      ]
+    ],
+    "automate": [
+      "Daily order list from WhatsApp",
+      "Payment reminders by UPI"
+    ],
+    "compliance": [
+      "FSSAI registration for food sellers",
+      "Business PAN and a current account",
+      "Local trade licence, if required"
+    ],
+    "brand": [
+      "#be185d",
+      "#f59e0b"
+    ],
+    "weeks": [
+      "Finalize menu and costs",
+      "Start outreach to 3 offices",
+      "Run trial meals and collect feedback",
+      "Open weekly plans"
+    ]
+  },
+  "dashboard": {
+    "others": [
+      {
+        "topIdea": "Vernacular EdTech Tutoring",
+        "idea": "Online tutoring platform for school students focusing on vernacular language instruction",
+        "tags": [
+          "Education",
+          "Online",
+          "Pan-India"
+        ],
+        "score": 61,
+        "date": "15 Feb 2026",
+        "status": "ready",
+        "plan": "entry"
+      },
+      {
+        "topIdea": "Artisan Sustainable Fashion",
+        "idea": "Sustainable fashion brand selling handmade clothes using local artisans",
+        "tags": [
+          "Fashion",
+          "Product-based",
+          "Jaipur"
+        ],
+        "score": 68,
+        "date": "02 Apr 2026",
+        "status": "generating",
+        "plan": "premium"
+      }
+    ]
+  }
+}

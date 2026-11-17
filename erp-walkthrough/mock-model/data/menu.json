@@ -1,0 +1,16 @@
+{
+  "oem": [
+    { "code": "O03", "icon": "dashboard", "label": "Dashboard" },
+    { "code": "O17", "icon": "orders",    "label": "Orders" },
+    { "code": "O18", "icon": "production","label": "Production" },
+    { "code": "O45", "icon": "payments",  "label": "Payments" },
+    { "code": "O25", "icon": "products",  "label": "Products" }
+  ],
+  "dealer": [
+    { "code": "D04", "icon": "dashboard", "label": "Dashboard" },
+    { "code": "D28", "icon": "orders",    "label": "Purchases" },
+    { "code": "D15", "icon": "customers", "label": "Customers" },
+    { "code": "D24", "icon": "inventory", "label": "Inventory" },
+    { "code": "D45", "icon": "payments",  "label": "Payments" }
+  ]
+}

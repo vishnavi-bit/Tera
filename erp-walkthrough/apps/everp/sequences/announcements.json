@@ -1,0 +1,66 @@
+{
+  "id": "announcements",
+  "title": "Announcements",
+  "startStep": "oem-announcements-list",
+  "completionMessage": "{announcement.title} is visible to {users.dealer-owner.name} on the Announcements List, and the dealer opened it.",
+  "steps": {
+    "oem-announcements-list": {
+      "user": "oem-super-admin",
+      "screen": "O15",
+      "proposedAction": "Click new to create an announcement",
+      "infoPanel": [
+        { "key": "announcements.count", "label": "Announcements" }
+      ],
+      "actions": {
+        "new-announcement": { "performedText": "clicked new on the Announcements List", "nextStep": "oem-create-announcement" }
+      }
+    },
+    "oem-create-announcement": {
+      "user": "oem-super-admin",
+      "screen": "O16",
+      "proposedAction": "Click create",
+      "infoPanel": [
+        { "key": "announcements.count", "label": "Announcements" }
+      ],
+      "actions": {
+        "create-announcement": {
+          "performedText": "created the announcement {announcement.title} for {announcement.target}",
+          "stateChange": { "announcements.count": 1 },
+          "nextStep": "oem-list-after-create"
+        }
+      }
+    },
+    "oem-list-after-create": {
+      "user": "oem-super-admin",
+      "screen": "O15",
+      "proposedAction": "See the new announcement on the list",
+      "infoPanel": [
+        { "key": "announcements.count", "label": "Announcements" }
+      ],
+      "notDefined": "Not defined in screen_details.md, so the WhatsApp employee broadcast (N20) cannot be shown.",
+      "performedText": "saw {announcement.title} on the Announcements List",
+      "nextStep": "dealer-announcements-list"
+    },
+    "dealer-announcements-list": {
+      "user": "dealer-owner",
+      "screen": "D05",
+      "proposedAction": "Click view on the announcement",
+      "infoPanel": [
+        { "key": "announcements.count", "label": "Announcements" }
+      ],
+      "actions": {
+        "view-announcement": { "performedText": "opened the announcements list and clicked view", "nextStep": "dealer-announcement-view" }
+      }
+    },
+    "dealer-announcement-view": {
+      "user": "dealer-owner",
+      "screen": "D06",
+      "proposedAction": "Read the announcement",
+      "infoPanel": [
+        { "key": "announcements.count", "label": "Announcements" }
+      ],
+      "performedText": "read {announcement.title} with the attachment {announcement.attachmentFile}",
+      "nextStep": null
+    }
+  }
+}

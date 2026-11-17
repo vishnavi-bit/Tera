@@ -1,0 +1,312 @@
+{
+  "_sample": "DEMO DATA for the Startup Star walkthroughs. All names, ideas, scores, cities, testimonials, prices shown as results, report content and receipts are invented samples. No payment, WhatsApp, AI or PDF generation is connected.",
+  "persona": {
+    "id": "midlife",
+    "label": "Midlife Career Changers",
+    "emoji": "🧭",
+    "gradient": [
+      "#0ea5e9",
+      "#6366f1",
+      "#0f172a"
+    ],
+    "headline": "Twenty years of experience. One bold next chapter.",
+    "sub": "Turn what you already know into a business, built around your savings, family and time",
+    "pain": [
+      "Worried about leaving a steady income?",
+      "Wondering if it is too late to start?",
+      "Not sure how your experience fits a new business?",
+      "Need a plan that respects your responsibilities?"
+    ],
+    "testimonial": {
+      "quote": "I sat on my idea for 2 years. This showed me exactly what to do first. Got my first client in 3 weeks.",
+      "who": "Demo Rahul, Mumbai (sample testimonial)"
+    },
+    "hint": "a training and compliance consulting service for small factories, built on my years in operations",
+    "concerns": [
+      "I don't know where to start",
+      "I need to validate my idea",
+      "I'm afraid to give up a stable income",
+      "I want my first customer",
+      "I'm not sure my experience applies",
+      "I don't understand legalities/licenses",
+      "I need funding"
+    ],
+    "extra": [
+      {
+        "id": "x1",
+        "label": "Your Experience",
+        "title": "How many years have you worked?",
+        "sub": "Your experience is an asset. We will use it.",
+        "options": [
+          "10 to 15 years",
+          "15 to 20 years",
+          "20 to 25 years",
+          "More than 25 years"
+        ],
+        "a": "20 to 25 years"
+      },
+      {
+        "id": "x2",
+        "label": "Your Runway",
+        "title": "How long can you cover your expenses while the business grows?",
+        "sub": "This keeps your plan safe and realistic",
+        "options": [
+          "Less than 6 months",
+          "6 to 12 months",
+          "1 to 2 years",
+          "I will keep my salary for now"
+        ],
+        "a": "1 to 2 years"
+      }
+    ]
+  },
+  "business": {
+    "idea": "Compliance and staff-training consulting for small manufacturing units around Pune",
+    "stage": "idea",
+    "concern": "I need to validate my idea",
+    "location": "local",
+    "city": "Pune"
+  },
+  "profile": {
+    "interests": [
+      "Services / Consulting",
+      "Manufacturing"
+    ],
+    "skills": [
+      "Operations / Management",
+      "Teaching / Training"
+    ],
+    "budget": "₹2 Lakh – ₹10 Lakh",
+    "businessType": "Service-based"
+  },
+  "followups": [
+    {
+      "id": "q1",
+      "text": "Do you have any prior business or entrepreneurship experience?",
+      "options": [
+        "No experience at all",
+        "Some freelance/side income",
+        "Ran a small business before",
+        "Currently running a business"
+      ],
+      "a": "Some freelance/side income"
+    },
+    {
+      "id": "q2",
+      "text": "How many hours per week can you dedicate to this business?",
+      "options": [
+        "Less than 5 hours",
+        "5–15 hours",
+        "15–30 hours",
+        "Full time (30+ hours)"
+      ],
+      "a": "15–30 hours"
+    },
+    {
+      "id": "q3",
+      "text": "What is your biggest fear about starting this business?",
+      "options": [
+        "Failing and losing money",
+        "Not knowing enough",
+        "Competition in the market",
+        "Family / social pressure",
+        "No fear — I'm ready!"
+      ],
+      "a": "Failing and losing money"
+    }
+  ],
+  "preview": {
+    "score": 76,
+    "top": 20,
+    "why": [
+      "Your passion for Services / Consulting gives you domain knowledge that most early competitors simply don't have.",
+      "Service businesses have low startup costs and can generate revenue from day one, often from your existing network.",
+      "Pune has a fast-growing urban consumer base with rising disposable incomes, a strong launchpad for new businesses."
+    ]
+  },
+  "contact": {
+    "name": "Vikram",
+    "email": "demo.midlife@example.com",
+    "phone": "9000000001",
+    "state": "form"
+  },
+  "plan": {
+    "id": "premium",
+    "name": "Premium",
+    "price": 2999,
+    "originalPrice": 9999,
+    "tag": "Best Value",
+    "outcome": "I am confident and ready to launch",
+    "features": [
+      "Everything in Core",
+      "1:1 Consultation (30–60 min)",
+      "Deep personalized roadmap",
+      "Market validation guidance",
+      "Custom execution plan",
+      "Priority WhatsApp/email support",
+      "Investor pitch guidance",
+      "Incubation pathway recommendation"
+    ]
+  },
+  "order": {
+    "id": "DEMO-ORD-MIDLIFE",
+    "paid": false,
+    "coupon": "",
+    "method": "UPI",
+    "total": 2999
+  },
+  "report": {
+    "ready": false,
+    "finalScore": 75,
+    "finalBand": "Launch-Ready",
+    "finalTone": "good",
+    "prelim": 76,
+    "categories": [
+      {
+        "name": "Idea Clarity & Market Fit",
+        "score": 17,
+        "max": 25,
+        "rationale": "Specific service for a named customer group.",
+        "improve": "Interview 5 factory owners before you build anything."
+      },
+      {
+        "name": "Execution Readiness",
+        "score": 6,
+        "max": 20,
+        "rationale": "You want to validate first, which is wise.",
+        "improve": "Pitch a paid pilot to one unit this month."
+      },
+      {
+        "name": "Financial Preparedness",
+        "score": 18,
+        "max": 20,
+        "rationale": "Your savings give a comfortable runway.",
+        "improve": "Set a monthly spending cap for the first year."
+      },
+      {
+        "name": "Skill & Domain Alignment",
+        "score": 19,
+        "max": 20,
+        "rationale": "Your operations and training skills fit this service.",
+        "improve": "Package your experience into one clear offer."
+      },
+      {
+        "name": "Location & Context Advantage",
+        "score": 15,
+        "max": 15,
+        "rationale": "Pune has a dense cluster of manufacturers.",
+        "improve": "Start with one industrial area you know."
+      }
+    ],
+    "card": {
+      "topIdea": "Factory Compliance & Training Consulting",
+      "idea": "Compliance and staff-training consulting for small manufacturing units around Pune",
+      "tags": [
+        "Services / Consulting",
+        "Service-based",
+        "Pune"
+      ],
+      "score": 75,
+      "date": "27 Oct 2026",
+      "status": "ready",
+      "plan": "premium"
+    },
+    "title": "Investor-Ready Startup Launch Playbook",
+    "summary": "Pune · Maharashtra · Compliance and training consulting",
+    "benchmarks": [
+      [
+        "₹15,000",
+        "Compliance audit",
+        "Entry package"
+      ],
+      [
+        "₹40,000",
+        "Training programme",
+        "Core package"
+      ],
+      [
+        "₹90,000",
+        "Retainer, 3 months",
+        "Best margin"
+      ]
+    ],
+    "channels": [
+      [
+        "LinkedIn proof posts",
+        "Publish 3 posts a week on lessons from your years in operations."
+      ],
+      [
+        "Industry association referrals",
+        "Offer a free talk at a local manufacturers' association."
+      ]
+    ],
+    "funnel": [
+      "Qualify the unit and its pain",
+      "Offer a paid pilot audit",
+      "Convert to a retainer"
+    ],
+    "unit": [
+      [
+        "Target CAC",
+        "Keep below ₹3,000"
+      ],
+      [
+        "Average order value",
+        "Target ₹40,000"
+      ],
+      [
+        "Break-even",
+        "Close 2 projects a month"
+      ]
+    ],
+    "automate": [
+      "Proposal and invoice templates",
+      "Follow-up reminders for open leads"
+    ],
+    "compliance": [
+      "Business PAN and Udyam registration",
+      "GST registration once turnover requires it",
+      "Contract template with clear scope"
+    ],
+    "brand": [
+      "#0f4c81",
+      "#d89b2d"
+    ],
+    "weeks": [
+      "Define the offer and price",
+      "Reach 10 owners from your network",
+      "Run one paid pilot",
+      "Document results and ask for referrals"
+    ]
+  },
+  "dashboard": {
+    "others": [
+      {
+        "topIdea": "Vernacular EdTech Tutoring",
+        "idea": "Online tutoring platform for school students focusing on vernacular language instruction",
+        "tags": [
+          "Education",
+          "Online",
+          "Pan-India"
+        ],
+        "score": 61,
+        "date": "15 Feb 2026",
+        "status": "ready",
+        "plan": "entry"
+      },
+      {
+        "topIdea": "Artisan Sustainable Fashion",
+        "idea": "Sustainable fashion brand selling handmade clothes using local artisans",
+        "tags": [
+          "Fashion",
+          "Product-based",
+          "Jaipur"
+        ],
+        "score": 68,
+        "date": "02 Apr 2026",
+        "status": "generating",
+        "plan": "premium"
+      }
+    ]
+  }
+}

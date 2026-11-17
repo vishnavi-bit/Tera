@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EV ERP: open questions by screen</title>
+<style>
+  :root { --ink:#1d2433; --muted:#5b6577; --line:#dde2ea; --bg:#e9edf3; --card:#fff; --brand:#1a56db; --soft:#eef3fc; --good:#0a7d3b; --goodbg:#e3f6ea; --prop:#c2570c; --propbg:#fff4e8;
+          font-family: system-ui,-apple-system,"Segoe UI",sans-serif; color:var(--ink); }
+  @media (prefers-color-scheme: dark) { :root { --ink:#e6e9f0; --muted:#9aa6bb; --line:#2f3a4d; --bg:#0c1018; --card:#161d2b; --soft:#1c2740; --goodbg:#12301f; --good:#74dd9b; --prop:#ffb77a; --propbg:#3a2412; } }
+  * { box-sizing:border-box; } body { margin:0; background:var(--bg); line-height:1.45; font-size:15px; }
+  button, input, textarea { font:inherit; color:inherit; }
+  button { min-height:44px; padding:8px 16px; border-radius:8px; border:1px solid var(--line); background:var(--card); cursor:pointer; }
+  button.primary { background:var(--brand); border-color:var(--brand); color:#fff; font-weight:600; }
+  button:disabled { opacity:.4; cursor:default; }
+  .top { position:sticky; top:0; z-index:5; background:var(--card); border-bottom:1px solid var(--line); }
+  .top-in { max-width:1360px; margin:0 auto; padding:8px 16px; display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+  .top h1 { font-size:16px; margin:0 auto 0 0; } .count { color:var(--muted); font-size:14px; }
+  .dots { display:flex; gap:6px; } .dots button { min-height:44px; min-width:44px; padding:0; border-radius:50%; font-size:13px; }
+  .dots button.on { background:var(--brand); color:#fff; border-color:var(--brand); } .dots button.done { border-color:var(--good); color:var(--good); }
+  .slide { max-width:1360px; margin:16px auto 48px; padding:0 16px; }
+  .sheet { background:var(--card); border:1px solid var(--line); border-radius:14px; box-shadow:0 8px 28px rgba(0,0,0,.08); display:grid; grid-template-columns:minmax(0,11fr) minmax(0,9fr); min-height:640px; overflow:hidden; }
+  .left { padding:24px; border-right:1px solid var(--line); min-width:0; } .right { padding:24px; background:var(--soft); min-width:0; }
+  .code { display:inline-block; background:var(--brand); color:#fff; font-weight:700; border-radius:8px; padding:2px 12px; margin-right:10px; }
+  h2 { margin:0 0 8px; font-size:24px; } h3 { margin:20px 0 8px; font-size:13px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); }
+  .chips { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:6px; } .chip { background:var(--soft); border-radius:999px; padding:2px 10px; font-size:13px; } .chip b { color:var(--muted); font-weight:500; }
+  table.spec { border-collapse:collapse; width:100%; font-size:13px; display:block; overflow-x:auto; } .spec th, .spec td { text-align:left; padding:5px 8px; border-bottom:1px solid var(--line); white-space:nowrap; } .spec th { color:var(--muted); font-weight:600; }
+  .rules { margin:6px 0 0; padding-left:18px; font-size:13px; color:var(--muted); }
+  .legend { font-size:12px; color:var(--muted); margin:0 0 8px; } .legend i { display:inline-block; width:14px; height:10px; border:2px dashed var(--prop); background:var(--propbg); vertical-align:middle; margin:0 4px 0 8px; }
+  .draw { display:grid; gap:12px; background:#f6f7fa; color:#1d2433; border:1px solid var(--line); border-radius:10px; padding:12px; }
+  .m-win { background:#fff; border:1px solid #cfd6e2; border-radius:10px; overflow:hidden; font-size:13px; }
+  .m-bar { background:#1d2433; color:#fff; padding:6px 12px; font-weight:600; }
+  .m-row { display:flex; gap:8px; align-items:center; justify-content:space-between; padding:8px 12px; flex-wrap:wrap; } .m-row.end { justify-content:flex-end; }
+  .m-btn { border:1px solid #cfd6e2; border-radius:6px; padding:4px 10px; background:#fff; } .m-btn.pri { background:#1a56db; color:#fff; border-color:#1a56db; }
+  .m-tbl { width:calc(100% - 24px); margin:0 12px 6px; border-collapse:collapse; } .m-tbl th, .m-tbl td { border:1px solid #e2e7ef; padding:4px 8px; text-align:left; } .m-tbl th { background:#f1f4f9; }
+  .m-f { padding:6px 12px; display:flex; flex-wrap:wrap; gap:3px 4px; align-items:baseline; } .m-f b { color:#b42318; } .m-in, .m-radio, .prop-t { flex-basis:100%; } .m-in { border:1px solid #cfd6e2; border-radius:6px; padding:5px 8px; background:#fff; color:#4b5565; display:block; } .m-in.tall { min-height:42px; } .m-in.w { flex:1; }
+  .m-radio { padding:2px 0; } .m-tabs { display:inline-flex; gap:0; border:1px solid #cfd6e2; border-radius:6px; overflow:hidden; } .m-tabs span { padding:4px 12px; } .m-tabs .on { background:#1a56db; color:#fff; }
+  .m-cap { margin:0; padding:4px 12px 8px; color:#667085; font-size:12px; } .m-dialog { width:min(92%,440px); margin:0 auto; box-shadow:0 10px 30px rgba(0,0,0,.18); }
+  .prop { outline:2px dashed #c2570c; outline-offset:-2px; background:#fff4e8 !important; color:#7a2e0e !important; } th.prop, td.prop { outline:none; } .prop-t { color:#c2570c; font-style:normal; font-size:12px; } .m-tbl.prop { outline-offset:2px; }
+  .q { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px; margin-bottom:14px; }
+  .q.fin { border-color:var(--good); } .screen-fin { margin-top:6px; } .qh { margin:0 0 8px; font-weight:600; } .qn { color:var(--brand); margin-right:6px; }
+  .sug { background:var(--goodbg); border-left:4px solid var(--good); border-radius:6px; padding:8px 12px; font-size:14px; margin:0 0 8px; } .sug b { color:var(--good); }
+  textarea { width:100%; min-height:84px; resize:vertical; border:1px solid var(--line); border-radius:8px; padding:8px 10px; background:var(--card); font-size:16px; }
+  .fin-row { display:flex; align-items:center; gap:8px; min-height:44px; font-weight:600; } .fin-row input { width:22px; height:22px; } .state { font-size:12px; color:var(--muted); margin-left:auto; font-weight:400; } .state.ok { color:var(--good); }
+
+  .purpose { font-size:16px; margin:0 0 6px; } .tours { color:var(--muted); font-size:13px; margin:0 0 4px; }
+  details.spec { margin-top:14px; } details.spec > summary { cursor:pointer; font-size:13px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:600; min-height:32px; }
+  .guess { margin:6px 0 0; padding-left:18px; font-size:13px; } .guess li { margin-bottom:4px; } .guess em { color:var(--muted); font-style:normal; }
+  .fb { background:var(--propbg); border-left:4px solid var(--prop); border-radius:6px; padding:8px 12px; margin:6px 0; font-size:14px; white-space:pre-wrap; } .fb small { display:block; color:var(--muted); }
+  .why, .raised { font-size:13px; color:var(--muted); margin:0 0 6px; } .why b, .raised b { color:var(--ink); } .raised.new b { color:var(--brand); }
+  .tag { font-size:11px; font-weight:700; border-radius:999px; padding:1px 8px; margin-left:6px; background:var(--propbg); color:var(--prop); white-space:nowrap; }
+  .top-in select { flex:1 1 220px; max-width:100%; min-width:0; } .topbar select { min-height:44px; max-width:300px; font-size:14px; border-radius:8px; border:1px solid var(--line); background:var(--card); color:var(--ink); padding:0 8px; }
+  .m-tile { border:1px solid #cfd6e2; border-radius:8px; padding:8px 12px; background:#fff; } .m-tile b { display:block; font-size:18px; }
+  .m-tiles { display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:8px; padding:8px 12px; }
+  .m-flow { display:flex; flex-wrap:wrap; gap:6px; align-items:center; padding:10px 12px; } .m-flow span { border:1px solid #cfd6e2; border-radius:6px; padding:5px 10px; background:#fff; } .m-flow i { color:#667085; font-style:normal; }
+  .m-cal { display:grid; grid-template-columns:repeat(7,1fr); gap:3px; padding:8px 12px; font-size:11px; } .m-cal div { border:1px solid #e2e7ef; min-height:36px; padding:2px 3px; background:#fff; } .m-cal b { display:block; color:#667085; font-weight:600; } .m-cal em { font-style:normal; display:block; }
+  .m-tabs.row { margin:8px 12px; flex-wrap:wrap; }
+  .m-note { padding:8px 12px; color:#667085; font-size:12px; }
+  .err { padding:32px; text-align:center; color:#b42318; }
+  @media (max-width:900px) { .sheet { grid-template-columns:1fr; } .left { border-right:0; border-bottom:1px solid var(--line); } }
+</style>
+</head>
+<body>
+<div class="top"><div class="top-in">
+  <h1>EV ERP: open questions by screen</h1>
+  <span class="count" id="count"></span>
+  <button id="prev">‹ Previous</button><select id="jump" aria-label="Jump to a screen"></select><button id="next">Next ›</button>
+  <button class="primary" id="download">Download all feedback</button>
+</div></div>
+<div class="slide" id="slide"><p class="err" id="msg">Loading…</p></div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const md = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/`(.+?)`/g, '<code>$1</code>');
+const DRAFT = 'everp-slide-feedback-draft-v2';
+let slides = [], at = 0;
+const saved = { q: {}, s: {} };
+let draft = { q: {}, s: {} };
+try { const d = JSON.parse(localStorage.getItem(DRAFT) || ''); if (d && d.q && d.s) draft = d; } catch { /* none */ }
+const keep = () => { try { localStorage.setItem(DRAFT, JSON.stringify(draft)); } catch { /* storage blocked */ } };
+const comment = (id) => draft.q[id]?.comment ?? saved.q[id]?.comment ?? '';
+const finalized = (code) => draft.s[code] ?? saved.s[code] ?? false;
+
+async function load() {
+  try { slides = (await (await fetch('slides.json', { cache: 'no-store' })).json()).slides; }
+  catch {
+    $('msg').innerHTML = 'Could not load slides.json. Open this page through a web server: run <code>python3 -m http.server 8765</code> in <code>erp-walkthrough/</code>, then open <code>/apps/everp/feedback/</code>.';
+    return;
+  }
+  try {
+    const f = await (await fetch('feedback.json', { cache: 'no-store' })).json();
+    (f.feedback || []).forEach((x) => (saved.q[x.id] = x));
+    (f.screens || []).forEach((x) => (saved.s[x.code] = !!x.finalized));
+  } catch { /* none yet */ }
+  $('jump').innerHTML = slides.map((x, i) => `<option value="${i}">${i + 1}. ${esc(x.code)} ${esc(x.name)}</option>`).join('');
+  const h = Number(location.hash.slice(1)); if (h >= 1 && h <= slides.length) at = h - 1;
+  show();
+}
+
+/* ---- drawn screens. "~" at the start of a text means: my proposal, not in the spec ---- */
+const pr = (t) => { t = String(t ?? ''); return t.startsWith('~') ? [t.slice(1), true] : [t, false]; };
+const P = (t, tag = 'span') => { const [x, p] = pr(t); return `<${tag}${p ? ' class="prop"' : ''}>${esc(x)}</${tag}>`; };
+const btns = (a) => (a || []).map((x) => { const [t, p] = pr(x); return `<span class="m-btn${p ? ' prop' : ''}">${esc(t)}</span>`; }).join(' ');
+const tabs = (a, on = 0) => a.length ? `<div class="m-tabs row">${a.map((t, i) => { const [x, p] = pr(t); return `<span class="${i === on ? 'on' : ''}${p ? ' prop' : ''}">${esc(x)}</span>`; }).join('')}</div>` : '';
+
+function block(b) {
+  switch (b.t) {
+    case 'list': {
+      const pcol = b.cols.map((c) => pr(c));
+      return `<div class="m-win"><div class="m-bar">${esc(b.title)}</div>${tabs(b.tabs)}
+        <div class="m-row"><span>${b.search ? `<span class="m-in">🔍 ${esc(b.search)}</span>` : ''} ${b.filters.map((f) => P(f, 'span').replace('<span', '<span class="m-in"').replace('class="m-in" class="prop"', 'class="m-in prop"')).join(' ')}</span><span>${btns(b.actions)}</span></div>
+        <div style="overflow-x:auto"><table class="m-tbl"><tr>${pcol.map(([t, p]) => `<th${p ? ' class="prop"' : ''}>${esc(t)}</th>`).join('')}</tr>
+        ${b.rows.map((r) => `<tr>${r.map((c, i) => `<td${pcol[i] && pcol[i][1] ? ' class="prop"' : ''}>${esc(c)}</td>`).join('')}</tr>`).join('')}</table></div></div>`;
+    }
+    case 'form':
+      return `<div class="m-win${b.dialog ? ' m-dialog' : ''}"><div class="m-bar">${esc(b.title)}</div>
+        ${b.fields.map(([l, v]) => { const [lt, lp] = pr(l); const req = /\*$/.test(lt) ? '<b>*</b>' : /\?$/.test(lt) ? '<b title="required? not stated in spec">?</b>' : ''; const [vt, vp] = pr(v);
+          return `<div class="m-f"><span${lp ? ' class="prop"' : ''}>${esc(lt.replace(/[*?]$/, ''))}</span>${req}<span class="m-in${vp || lp ? ' prop' : ''}">${esc(vt)}</span></div>`; }).join('')}
+        <div class="m-row end">${btns(b.actions)}</div></div>`;
+    case 'detail':
+      return `<div class="m-win"><div class="m-bar">${esc(b.title)}</div>${tabs(b.tabs)}
+        ${b.kv.map(([k, v]) => { const [kt, kp] = pr(k); const [vt, vp] = pr(v); return `<div class="m-f"><span${kp ? ' class="prop"' : ''}>${esc(kt)}</span><span class="m-in${vp || kp ? ' prop' : ''}">${esc(vt)}</span></div>`; }).join('')}
+        <div class="m-row">${btns(b.actions)}</div></div>`;
+    case 'dash':
+      return `<div class="m-win"><div class="m-bar">${esc(b.title)}</div><div class="m-row"><span>${b.filters.map((f) => `<span class="m-in">${esc(f)}</span>`).join(' ')}</span></div>
+        <div class="m-tiles">${b.tiles.map(([t, v]) => { const [vt, vp] = pr(v); return `<div class="m-tile">${esc(t)}<b${vp ? ' class="prop"' : ''}>${esc(vt)}</b></div>`; }).join('')}</div>${b.note ? `<p class="m-cap prop">${esc(b.note)}</p>` : ''}</div>`;
+    case 'tabs': return tabs(b.tabs);
+    case 'note': return `<p class="m-note">${P(b.text)}</p>`;
+    case 'flow': return `<div class="m-win"><div class="m-flow">${b.steps.map((x, i) => (i ? '<i>→</i>' : '') + P(x)).join('')}</div></div>`;
+    case 'cal': {
+      const days = ['S', 'M', 'T', 'W', 'T', 'F', 'S']; const m = {}; b.marks.forEach((x) => { const [d, t] = x.split(':'); m[Number(d)] = t; });
+      return `<div class="m-win"><div class="m-bar">${esc(b.title)}</div><div class="m-cal">${days.map((d) => `<b>${d}</b>`).join('')}${Array.from({ length: 31 }, (_, i) => { const t = m[i + 1]; const [x, p] = t ? pr(t) : ['', false]; return `<div><b>${i + 1}</b>${t ? `<em${p ? ' class="prop"' : ''}>${esc(x)}</em>` : ''}</div>`; }).join('')}</div>${b.note ? `<p class="m-cap prop">${esc(b.note)}</p>` : ''}</div>`;
+    }
+    default: return '';
+  }
+}
+
+const table = (rows) => rows.length
+  ? `<table class="spec"><tr><th>Label</th><th>API field</th><th>Type</th><th>Req</th><th>Options / validation</th><th>Notes</th></tr>${rows.map((r) => `<tr>${r.map((c) => `<td>${md(c)}</td>`).join('')}</tr>`).join('')}</table>` : '';
+
+function specBlock(s) {
+  const chip = (k, v) => v ? `<span class="chip"><b>${k}</b> ${esc(v)}</span>` : '';
+  const w = s.workbook;
+  return `<details class="spec" open><summary>What the spec says</summary>
+    <div class="chips" style="margin-top:6px">${chip('Path', s.spec.path)}${chip('Type', s.spec.type)}${chip('Mode', s.spec.mode)}${chip('Roles', s.spec.roles)}${chip('Priority', s.priority)}${chip('Est. days', s.estDays)}</div>
+    ${s.spec.buttons ? `<p class="legend"><b>Buttons:</b> ${md(s.spec.buttons)}</p>` : ''}${s.spec.note ? `<p class="legend">${md(s.spec.note)}</p>` : ''}${table(s.spec.fields)}
+    ${s.spec.rules.length ? `<ul class="rules">${s.spec.rules.map((r) => `<li>${md(r)}</li>`).join('')}</ul>` : ''}
+    ${w.notes ? `<p class="legend"><b>Estimation sheet:</b> ${md(w.notes)}${w.dependencies ? ' <b>Depends on:</b> ' + md(w.dependencies) : ''}${w.openQuestion ? ' <b>Open question:</b> ' + md(w.openQuestion) : ''}</p>` : ''}</details>`;
+}
+
+function show() {
+  const s = slides[at];
+  location.hash = at + 1;
+  const guessHtml = s.guesses.length ? `<details class="spec"><summary>What the walkthrough had to guess (${s.guesses.length})</summary><ul class="guess">${s.guesses.map((g) => `<li>${esc(g.text)} <em>(${esc(g.where)})</em></li>`).join('')}</ul></details>` : '';
+  const fbHtml = s.feedback.length ? `<h3>Feedback already given</h3>${s.feedback.map((f) => `<div class="fb">${esc(f.text)}<small>${esc(f.by)} · ${esc(f.walkthrough)}</small></div>`).join('')}` : '';
+  $('slide').innerHTML = `<div class="sheet">
+    <section class="left"><h2><span class="code">${esc(s.code)}</span>${esc(s.name)}</h2>
+      <p class="purpose">${esc(s.purpose)}</p><p class="tours">Seen in: ${s.tours.map(esc).join(', ')}</p>
+      ${specBlock(s)}${guessHtml}${fbHtml}
+      <h3>Proposed screen</h3><p class="legend">Solid = from the spec.<i></i>Dashed orange = my proposal.</p><div class="draw">${s.mock.map(block).join('')}</div></section>
+    <section class="right"><h3 style="margin-top:0">Questions (${s.questions.length})</h3>
+      ${s.questions.map((q, i) => `<div class="q"><p class="qh"><span class="qn">${i + 1}.</span>${esc(q.question)}</p>
+        <p class="why"><b>Why we ask:</b> ${esc(q.why)}</p>
+        <p class="raised${q.raised.length ? '' : ' new'}"><b>${q.raised.length ? 'Already raised in:' : 'New question'}</b> ${q.raised.map(esc).join('; ')}</p>
+        <p class="sug"><b>Suggestion</b><span class="tag">my proposal</span> ${esc(q.suggestion)}</p>
+        <textarea data-id="${esc(q.id)}" placeholder="Decision or feedback…" aria-label="Feedback for question ${i + 1}">${esc(comment(q.id))}</textarea>
+        <div class="state" data-state="${esc(q.id)}"></div></div>`).join('')}
+      <div class="q screen-fin${finalized(s.code) ? ' fin' : ''}" id="finbox"><label class="fin-row"><input type="checkbox" id="fin"${finalized(s.code) ? ' checked' : ''}> Finalized? Tick when ${esc(s.code)} is settled.<span class="state" id="finstate"></span></label></div>
+    </section></div>`;
+  s.questions.forEach((q) => qstate(q.id));
+  fstate(s.code); chrome();
+  window.scrollTo(0, 0);
+}
+
+function chrome() {
+  $('prev').disabled = at === 0; $('next').disabled = at === slides.length - 1;
+  $('jump').value = String(at);
+  [...$('jump').options].forEach((o, i) => { o.textContent = `${finalized(slides[i].code) ? '✓ ' : ''}${i + 1}. ${slides[i].code} ${slides[i].name}`; });
+  $('count').textContent = `${slides.filter((x) => finalized(x.code)).length} of ${slides.length} finalized`;
+}
+function qstate(id) {
+  const el = document.querySelector(`[data-state="${CSS.escape(id)}"]`); if (!el) return;
+  const c = comment(id), same = saved.q[id] && saved.q[id].comment === c;
+  el.className = 'state' + (same ? ' ok' : ''); el.textContent = same ? 'Saved in feedback.json' : c ? 'Not downloaded yet' : '';
+}
+function fstate(code) {
+  const el = $('finstate'); if (!el) return;
+  const same = code in saved.s && saved.s[code] === finalized(code);
+  el.className = 'state' + (same ? ' ok' : ''); el.textContent = same ? 'Saved in feedback.json' : finalized(code) ? 'Not downloaded yet' : '';
+}
+
+document.addEventListener('input', (e) => {
+  if (!e.target.matches('textarea[data-id]')) return;
+  const id = e.target.dataset.id, v = e.target.value;
+  if (v === (saved.q[id]?.comment ?? '')) delete draft.q[id]; else draft.q[id] = { comment: v, updatedAt: new Date().toISOString() };
+  keep(); qstate(id);
+});
+document.addEventListener('change', (e) => {
+  if (e.target.id === 'jump') { at = Number(e.target.value); show(); return; }
+  if (e.target.id !== 'fin') return;
+  const code = slides[at].code;
+  if (e.target.checked === (saved.s[code] ?? false)) delete draft.s[code]; else draft.s[code] = e.target.checked;
+  keep(); $('finbox').classList.toggle('fin', e.target.checked); fstate(code); chrome();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.target.matches('textarea, input, select')) return;
+  if (e.key === 'ArrowRight' && at < slides.length - 1) { at++; show(); } else if (e.key === 'ArrowLeft' && at > 0) { at--; show(); }
+});
+$('prev').onclick = () => { at--; show(); }; $('next').onclick = () => { at++; show(); };
+
+$('download').onclick = () => {
+  const feedback = [];
+  for (const s of slides) for (const q of s.questions) {
+    const c = comment(q.id).trim(); if (!c) continue;
+    feedback.push({ id: q.id, screen: `${s.code} ${s.name}`, question: q.question, suggestion: q.suggestion, comment: c, updatedAt: draft.q[q.id]?.updatedAt ?? saved.q[q.id]?.updatedAt ?? new Date().toISOString() });
+  }
+  const screens = slides.map((s) => ({ code: s.code, name: s.name, finalized: finalized(s.code) }));
+  const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(new Blob([JSON.stringify({ feedback, screens }, null, 2) + '\n'], { type: 'application/json' })), download: 'feedback.json' });
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(a.href);
+};
+load();
+</script>
+</body>
+</html>

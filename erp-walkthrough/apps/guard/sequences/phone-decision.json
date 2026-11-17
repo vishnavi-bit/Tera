@@ -1,0 +1,102 @@
+{
+  "id": "phone-decision",
+  "title": "Resident gives a decision by phone",
+  "startStep": "home",
+  "completionMessage": "The resident did not answer in the app. The guard called, recorded the explicit decision (source: phone), and only then checked {visit.visitor} in.",
+  "steps": {
+    "home": {
+      "user": "guard-gate1",
+      "screen": "S02",
+      "proposedAction": "Tap Pending Approvals",
+      "infoPanel": [
+        {
+          "key": "counts.pending",
+          "label": "Pending approvals"
+        }
+      ],
+      "actions": {
+        "goto-S05": {
+          "performedText": "opened pending approvals",
+          "nextStep": "approval-pending"
+        }
+      }
+    },
+    "approval-pending": {
+      "user": "guard-gate1",
+      "screen": "S05",
+      "proposedAction": "The resident has not answered. Call the resident",
+      "actions": {
+        "call-resident": {
+          "performedText": "called {visit.resident}",
+          "nextStep": "call-open",
+          "stateChange": {
+            "visit.callOpen": {
+              "set": true
+            }
+          }
+        }
+      }
+    },
+    "call-open": {
+      "user": "guard-gate1",
+      "screen": "S05",
+      "proposedAction": "Record the resident's explicit decision",
+      "actions": {
+        "record-approved": {
+          "performedText": "recorded that the resident approved by phone",
+          "nextStep": "approval-approved",
+          "stateChange": {
+            "visit.status": {
+              "set": "approved"
+            },
+            "visit.callOpen": {
+              "set": false
+            },
+            "counts.pending": -1
+          }
+        }
+      }
+    },
+    "approval-approved": {
+      "user": "guard-gate1",
+      "screen": "S05",
+      "proposedAction": "Continue to the entry decision",
+      "actions": {
+        "continue-entry": {
+          "performedText": "continued to the entry decision",
+          "nextStep": "entry-decision"
+        }
+      }
+    },
+    "entry-decision": {
+      "user": "guard-gate1",
+      "screen": "S06",
+      "proposedAction": "Confirm entry",
+      "actions": {
+        "confirm-entry": {
+          "performedText": "confirmed entry for {visit.visitor}",
+          "nextStep": "inside",
+          "stateChange": {
+            "counts.inside": 1,
+            "entry.done": {
+              "set": true
+            }
+          }
+        }
+      }
+    },
+    "inside": {
+      "user": "guard-gate1",
+      "screen": "S07",
+      "proposedAction": "Check the visitor is in the inside list",
+      "infoPanel": [
+        {
+          "key": "counts.inside",
+          "label": "Visitors inside"
+        }
+      ],
+      "performedText": "checked the visitors-inside list",
+      "nextStep": null
+    }
+  }
+}

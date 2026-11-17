@@ -1,0 +1,14 @@
+{
+  "guard-gate1": {
+    "name": "Demo Guard",
+    "roleLabel": "Guard (Gate 1)",
+    "side": "guard",
+    "org": "Demo Society, New Delhi"
+  },
+  "resident-a1204": {
+    "name": "Demo Resident",
+    "roleLabel": "Resident (A-1204)",
+    "side": "resident",
+    "org": "Demo Society, New Delhi"
+  }
+}

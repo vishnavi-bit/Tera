@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proposed Screen Details (N01-N28)</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#1c2230;--mute:#5d6678;--line:#dfe3ea;--acc:#0b6b4f;--accbg:#e3f3ed;--warn:#8a5a00;--warnbg:#fff3d6;--q:#7a2a8a;--qbg:#f5e8f8}
+@media(prefers-color-scheme:dark){:root{--bg:#12151b;--card:#1a1f28;--ink:#e6e9ef;--mute:#9aa3b5;--line:#2b3340;--acc:#4cc9a0;--accbg:#173128;--warn:#f0c36a;--warnbg:#3a2e12;--q:#d9a6e8;--qbg:#2e1c35}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{padding:20px 24px;border-bottom:1px solid var(--line);background:var(--card)}
+h1{margin:0 0 4px;font-size:22px}
+header p{margin:4px 0;color:var(--mute);max-width:900px}
+.banner{background:var(--warnbg);color:var(--warn);padding:8px 12px;border-radius:6px;margin-top:10px;max-width:900px;font-size:14px}
+.wrap{display:flex;align-items:flex-start}
+nav{position:sticky;top:0;width:290px;flex:none;height:100vh;overflow:auto;padding:14px;border-right:1px solid var(--line);background:var(--card)}
+nav input{width:100%;padding:8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);margin-bottom:10px}
+nav h4{margin:12px 0 4px;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--mute)}
+nav a{display:block;padding:3px 6px;border-radius:4px;color:var(--ink);text-decoration:none;font-size:13px}
+nav a:hover{background:var(--accbg)}
+nav a b{color:var(--acc);margin-right:6px}
+main{flex:1;min-width:0;padding:20px 24px 80px;max-width:1000px}
+section.s{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-bottom:18px}
+section.s h2{margin:0 0 6px;font-size:18px}
+section.s h2 .id{display:inline-block;background:var(--acc);color:#fff;border-radius:5px;padding:1px 8px;margin-right:8px;font-size:14px}
+.meta{color:var(--mute);font-size:13px;margin-bottom:8px}
+.pill{display:inline-block;border:1px solid var(--line);border-radius:10px;padding:0 8px;margin-right:4px;font-size:12px}
+h3{margin:14px 0 4px;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--mute)}
+table{border-collapse:collapse;width:100%;font-size:13.5px;display:block;overflow-x:auto}
+th,td{border:1px solid var(--line);padding:4px 8px;text-align:left;vertical-align:top}
+th{background:var(--bg);white-space:nowrap}
+ul{margin:4px 0;padding-left:20px}
+.q{background:var(--qbg);color:var(--q);border-radius:6px;padding:6px 10px;margin-top:8px;font-size:14px}
+.q ul{margin:2px 0}
+.src{font-size:12.5px;color:var(--mute);margin-top:8px}
+.hide{display:none}
+.global li{margin-bottom:3px}
+details.mk{margin:10px 0;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+details.mk>summary{cursor:pointer;padding:6px 12px;background:var(--accbg);color:var(--acc);font-weight:600;font-size:13px}
+.scr{background:var(--bg);padding:12px}
+.app{background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden;max-width:880px;margin:0 auto}
+.bar{display:flex;justify-content:space-between;align-items:center;background:var(--acc);color:#fff;padding:7px 12px;font-size:13px}
+.bar small{opacity:.85}
+.crumb{padding:6px 12px;font-size:12px;color:var(--mute);border-bottom:1px solid var(--line)}
+.body{padding:12px}
+.body h4{margin:0 0 8px;font-size:16px}
+.fg{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px 12px}
+.fld label{display:block;font-size:11.5px;color:var(--mute);margin-bottom:2px}
+.fld label i{color:#c0392b;font-style:normal}
+.inp{border:1px solid var(--line);border-radius:5px;padding:5px 8px;font-size:13px;min-height:30px;background:var(--bg);display:flex;justify-content:space-between;gap:6px;word-break:break-word}
+.inp.ro{background:transparent;border-style:dashed;color:var(--mute)}
+.inp.ph{color:var(--mute);font-style:italic}
+.inp.ta{min-height:54px}
+.inp.fl{border-style:dashed;justify-content:center;color:var(--mute)}
+.badge{display:inline-block;border-radius:10px;padding:1px 10px;background:var(--accbg);color:var(--acc);font-size:12px}
+.tg{display:inline-block;width:34px;height:18px;border-radius:9px;background:var(--acc);position:relative;vertical-align:middle}
+.tg:after{content:"";position:absolute;right:2px;top:2px;width:14px;height:14px;border-radius:7px;background:#fff}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:5px;overflow:hidden;font-size:12px}
+.seg span{padding:3px 9px;border-right:1px solid var(--line)}.seg span:last-child{border:0}.seg .on{background:var(--acc);color:#fff}
+.mt{margin-top:12px}
+.mt .cap{font-size:12px;color:var(--mute);margin-bottom:3px}
+.mt table{font-size:12px}
+.btns{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;padding-top:10px;border-top:1px solid var(--line)}
+.btn{border:1px solid var(--line);border-radius:5px;padding:4px 11px;font-size:12.5px;background:var(--card)}
+.btn.p{background:var(--acc);border-color:var(--acc);color:#fff}
+.note{font-size:11.5px;color:var(--mute);text-align:center;margin-top:6px}
+@media(max-width:800px){.wrap{display:block}nav{position:static;width:auto;height:auto;max-height:240px}main{padding:14px 16px 60px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Proposed screen details: N01 to N28</h1>
+  <p>Fills the gap for the 28 "New Features" screens that <code>docs/screen_details.md</code> marks "Not yet speced". Each screen has proposed buttons, fields, rules and open questions, in the same shape as the spec.</p>
+  <p>Grounded in: <code>docs/EV_App_Screens_Estimation.xlsx</code>, the existing spec, the flow documents, and the two sample invoices in <code>docs/input</code> (Tera tax invoice INV26-27-TEV0001; Jitendra EV/999 invoice with e-way bill).</p>
+  <div class="banner">PROPOSAL. The same details were written into <code>screen_details.md</code> (N01-N28, marked "proposed"). Nothing is final until the owner approves it. Sample screens below are illustrative, generated from the proposed fields with made-up sample data.</div>
+</header>
+<div class="wrap">
+<nav><input id="f" placeholder="Filter (e.g. N08, BOM, QC)"><div id="idx"></div></nav>
+<main>
+<section class="s" id="global">
+  <h2>Cross-cutting proposals (apply to several screens)</h2>
+  <ul class="global">
+    <li><b>Unit identifiers.</b> Both sample invoices show each unit carries chassis, motor, controller and battery numbers (Jitendra: one row per unit with Battery No, Color, Controller No, Motor No, Chassis No; Tera: "Chassis Number" in Notes). Proposed unit record: <i>chassisNo (unique), motorNo, controllerNo, batteryNo[], chargerNo, colour, variant, productionDate, status</i>. N04 creates it, N05/N27/N07 read it, D20 binds it to a customer.</li>
+    <li><b>Status trail of a unit:</b> Built, QC passed, In stock, Reserved (Assigned), Billed (OK to Bill), PDI done, Dispatched, Delivered. Each change writes an audit-log row (O54).</li>
+    <li><b>Roles</b> follow <code>docs/people.md</code> and the existing role codes (e.g. <code>oem-production-mgr</code>, <code>oem-logistics-mgr</code>). New roles are only introduced by N28.</li>
+    <li><b>Common buttons</b> on every create/edit form: Save draft, Submit, Cancel; every list: search, filter, export.</li>
+    <li><b>Validation style</b> follows the spec: required marked, inline errors, 7-char user IDs untouched.</li>
+  </ul>
+</section>
+<div id="out"></div>
+</main>
+</div>
+<script>
+// Field tuple: [Label, apiField, type, req(1/0), options/validation, notes]
+const S = [
+/* ---------- VENDORS ---------- */
+{id:'N01',sec:'Vendors',name:'GST Lookup / Auto-fetch from GST Portal',pri:'P1',type:'Form enhancement (inline widget)',roles:'Super Admin, Procurement Mgr (vendors); Super Admin (dealer onboarding)',path:'Inside O39/O40 vendor form and O05 dealer form',
+ purpose:'Typing a GSTIN fetches legal name, trade name, address, state, registration status and fills the form, so these are not typed by hand.',
+ buttons:['Fetch details (next to GSTIN)','Use fetched values','Edit manually (unlocks fields)','Clear'],
+ fields:[['GSTIN','gstin','text',1,'15 chars, pattern 2 digits + PAN + 1Z + check char; state code (first 2 digits) must match chosen state','Check digit validated before calling the API'],
+ ['Legal name','legalName','text',0,'filled from portal, read-only until "Edit manually"','Maps to vendor/dealer name'],
+ ['Trade name','tradeName','text',0,'filled from portal',''],
+ ['Address','address','text',0,'filled from portal (building, street, city, pincode)','Maps to billing address'],
+ ['State / code','state','select',0,'derived from GSTIN','Drives CGST+SGST vs IGST (Tera invoice: Tamil Nadu 33 = CGST/SGST)'],
+ ['Registration status','gstStatus','badge',0,'Active / Cancelled / Suspended','Block save when Cancelled (rule below)'],
+ ['Last fetched','fetchedAt','datetime',0,'read-only','Audit']],
+ rules:['Never overwrite a field the user already edited unless they confirm "Use fetched values".','Cancelled or suspended GSTIN: show a warning and block saving a new dealer or vendor.','If the provider is down or times out, show "Could not reach GST portal" and let the user continue manually.','Fetched data is a snapshot; no auto-refresh.','Rate limit: one fetch per GSTIN per minute per user.'],
+ q:['Which GST-portal API/provider? (already open in the spec)','Should PAN and the legal name from the portal be locked after fetch?'],
+ src:'Spec N01; Tera invoice shows GSTIN 33AAMCT1837D1ZH and buyer GSTIN 33BFAPD8510E1Z5.'},
+{id:'N23',sec:'Vendors',name:'Vendor: Extended Profile',pri:'P1',type:'Form enhancement',roles:'Super Admin, Procurement Mgr',path:'/vendors/:id (tabs on O39 form)',
+ purpose:'Adds bank, contacts, status, payment terms and warranty terms to the vendor.',
+ buttons:['Save','Add contact','Remove contact','Block vendor','Unblock (admin only)','Add warranty tier'],
+ fields:[['Bank name','bankName','text',0,'',''],['Account holder','bankAccountName','text',0,'','Tera invoice prints "Account Name"'],['Account number','bankAccountNo','text',0,'9-18 digits','Mask in list views'],['Account type','bankAccountType','select',0,'Current / Savings / CC',''],['IFSC','ifsc','text',0,'4 letters + 0 + 6 alphanumeric','Tera invoice: UTIB0000123'],['Branch','branch','text',0,'',''],
+ ['Contacts (repeatable grid)','contacts[]','grid',0,'name, designation, phone, email, primary (one only)','At least one primary when any row exists'],
+ ['Website','website','url',0,'valid URL',''],
+ ['Status','status','select',1,'Active / Inactive / Blocked','Default Active'],['Status reason','statusReason','text',0,'required when Inactive or Blocked',''],
+ ['Payment modes','paymentModes[]','multiselect',0,'Cash, Cheque, NEFT/RTGS, UPI, Credit',''],['Payment terms (days)','paymentTermsDays','number',0,'0-180','"Due on Receipt" = 0 (Tera invoice)'],
+ ['Parts warranty (months)','warrantyMonths','select',0,'15 / 18 / 24','Spec: tiers 15/18/24'],['Product warranty list','productWarranty[]','grid',0,'product, months, terms',''],
+ ['Freight','freight','select',0,'Included / Excluded','Tera invoice: "Transportation cost additional"']],
+ rules:['Blocked vendors cannot be selected on a new vendor PO (O41); existing POs are not cancelled.','Only Super Admin may unblock; unblocking needs a reason and is audited.','Only one primary contact; deleting the primary forces choosing another.','Bank fields are PII-like: visible to Super Admin and Procurement Mgr only (new F-rule proposed).'],
+ q:['Who besides Super Admin may change bank details (maker-checker)?'],
+ src:'Spec N23 (ERP_changes_ceo slide 16); bank block layout from the Tera invoice.'},
+/* ---------- MATERIAL INWARD ---------- */
+{id:'N02',sec:'Material Inward',name:'Material Inward: Receiving & QC Check',pri:'P0',type:'Form / Action',roles:'Inventory Executive, Inventory Manager (approve)',path:'/mu/:muId/inward/new, /inward/:id',
+ purpose:'Receive goods against a vendor PO, count against the PO, QC each item, record shortfall and scrap, then post accepted quantity to MU stock (O35).',
+ buttons:['Select PO','Add line / scan item','Mark pass','Mark fail','Mark scrap','Report shortfall','Save draft','Post to stock','Print GRN'],
+ fields:[['Vendor PO','vendorPoId','select',1,'only Approved / Part-received POs of this MU',''],['Inward date','inwardDate','date',1,'default today; past dates only via N18',''],['Vendor invoice no.','vendorInvoiceNo','text',1,'',''],['Vendor invoice date','vendorInvoiceDate','date',1,'',''],['Transporter / vehicle no.','vehicleNo','text',0,'',''],
+ ['Lines: part','lines[].productId','select',1,'from PO lines',''],['Ordered qty','lines[].orderedQty','number',0,'read-only from PO',''],['Previously received','lines[].receivedQty','number',0,'read-only',''],['Received now','lines[].qty','number',1,'0 to (ordered - received) unless over-receipt allowed',''],['Passed','lines[].passQty','number',1,'',''],['Failed','lines[].failQty','number',1,'',''],['Scrap','lines[].scrapQty','number',1,'passed+failed+scrap must equal received now',''],['Fail reason','lines[].failReason','text',0,'required if failed or scrap > 0',''],['Photos','lines[].photos[]','file',0,'up to 5 per line',''],['Remarks','remarks','textarea',0,'','']],
+ rules:['Shortfall = ordered - (received + now); shown in red, PO stays Part-received.','Only passed quantity increases MU stock. Failed goes to a "Quarantine" bucket; scrap writes off with a reason.','Over-receipt beyond a tolerance (proposed 0%) needs Inventory Manager approval.','Posted inward cannot be edited; corrections via a reversal entry.','Serial-tracked parts (battery, motor, controller) need one serial per piece.'],
+ q:['Is over-receipt ever allowed? What tolerance?','Does a failed line trigger a debit note to the vendor in this release?'],
+ src:'Spec N02 and gaps/procurement-to-material-inward.md.'},
+/* ---------- PRODUCTION ---------- */
+{id:'N03',sec:'Production',name:'Material Requisition (Order / Forecast / Damage)',pri:'P0',type:'Form',roles:'Production Head (request), Inventory Manager (issue)',path:'/production/requisitions/new',
+ purpose:'Production asks Inventory for parts, prefilled from the BOM, for an order, a forecast, or loss/damage replacement.',
+ buttons:['Load BOM','Add part','Remove line','Submit','Save draft','Cancel request'],
+ fields:[['Reason','reason','select',1,'Against order / Forecast / Damage replacement',''],['Order','orderId','select',0,'required when reason = order',''],['Forecast period','forecastPeriod','month',0,'required when reason = forecast',''],['Vehicle model + variant','modelId','select',1,'drives BOM',''],['Units to build','units','number',1,'>= 1','BOM qty x units'],['BOM version','bomVersionId','select',1,'defaults to the Approved version (N09)',''],['Lines: part','lines[].productId','select',1,'',''],['Required qty','lines[].requiredQty','number',1,'BOM x units, editable only for Damage',''],['Available','lines[].available','number',0,'live MU stock',''],['Needed by','neededBy','date',1,'',''],['Damage note / photos','damageNote','textarea',0,'required when reason = damage','']],
+ rules:['Lines whose required qty exceeds available stock are flagged "Short" and can feed N25 reorder.','Damage requisitions need a note and a photo.','A requisition moves Requested, Issued (full or part), Closed; issue itself follows FIFO (N13).','Cannot request against an order that is not Approved.'],
+ q:['Can Production edit BOM quantities on an order requisition or only on Damage?'],
+ src:'Spec N03; depends on N08.'},
+{id:'N04',sec:'Production',name:'Production Completion & Handover',pri:'P0',type:'Form / Action',roles:'Production Manager (oem-production-mgr), Inventory Manager (receives)',path:'/production/complete, /production/units/:chassisNo',
+ purpose:'When a batch is built, capture each finished unit\'s identifiers and hand it to QC then Inventory. This is the screen that first binds a chassis to a vehicle.',
+ buttons:['Select order / batch','Add unit','Scan / enter identifiers','Remove unit','Import CSV','Submit for QC','Hand over to inventory'],
+ fields:[['Order / batch','orderId','select',1,'only In-production',''],['Model + variant','variantId','read-only',0,'from order',''],['Units completed','unitsDone','number',1,'<= remaining on order',''],['Per unit: chassis no.','units[].chassisNo','text',1,'unique across all units; 17 chars (Tera sample ME9ECETEJ26499002)','Barcode scan allowed'],['Per unit: motor no.','units[].motorNo','text',1,'unique','Jitendra sample: 00W60VLM22G12226'],['Per unit: controller no.','units[].controllerNo','text',1,'unique','Sample: JMT...F18721'],['Per unit: battery no.(s)','units[].batteryNo[]','text list',1,'unique; count per model (1 or more)','Sample: TK-6034-16CW-C-008452'],['Per unit: charger no.','units[].chargerNo','text',0,'unique when present','Tera model sold "Without Battery & Charger"'],['Per unit: colour','units[].colour','select',1,'from variant colours','Sample: RED'],['Production date','productionDate','date',1,'<= today',''],['Remarks','remarks','textarea',0,'','']],
+ rules:['Every identifier must be unique across the whole system; duplicates are rejected with the unit that already uses it.','Units cannot be handed over until N05 QC passes; status Built then QC pending.','Handover posts the unit to Inventory (O30/O31) as In stock and creates the unit record.','Models sold without battery/charger have those fields optional (model flag).','Chassis cannot be edited after handover; fix via an authorised correction (audited).'],
+ q:['Chassis number format (VIN 17 chars?) and who generates it: factory stamp or the system?','How many battery numbers per model?'],
+ src:'Spec N04; Tera invoice (chassis in Notes); Jitendra invoice (battery, controller, motor, chassis per unit).'},
+/* ---------- QC ---------- */
+{id:'N05',sec:'QC',name:'QC Inspection Checklist',pri:'P0',type:'Form',roles:'Quality Control Manager (Ganesh per people.md)',path:'/qc/inspect/:chassisNo',
+ purpose:'Yes/No checklist per finished unit; a unit is released only when all mandatory items pass.',
+ buttons:['Mark all Yes','Save','Pass unit','Fail unit (send to rework)','Attach photo','Print QC sheet'],
+ fields:[['Chassis no.','chassisNo','read-only',0,'from N04',''],['Checklist version','templateId','read-only',0,'per model',''],['Item (rows)','items[].label','text',0,'e.g. frame welds, paint, brakes, lights, horn, throttle, display, motor run, controller, battery fit, charger, tyre pressure, fasteners torque','Template maintained by admin'],['Result','items[].result','Yes / No / N/A',1,'N/A only for non-applicable items',''],['Mandatory','items[].mandatory','flag',0,'read-only',''],['Remark','items[].remark','text',0,'required when No',''],['Photo','items[].photo','file',0,'optional',''],['Inspector','inspectorId','read-only',0,'logged-in user',''],['Inspected on','inspectedAt','datetime',0,'auto',''],['Overall result','overall','Pass / Fail',1,'Pass only if no mandatory No','']],
+ rules:['Fail sends the unit back to Production with the failed items listed; re-inspection creates a new inspection record, the old one stays.','Pass moves the unit to QC passed and unlocks N06 and Inventory.','Inspector cannot be the user who completed production of the same unit (segregation).'],
+ q:['Please supply the actual checklist items per model, the draft above is generic.','Should the rework loop be built now? (gaps/qc-and-packaging.md item 8)'],
+ src:'Spec N05; gaps/qc-and-packaging.md.'},
+{id:'N06',sec:'QC',name:'QC Branding / Packaging Requisition',pri:'P1',type:'Form / Action',roles:'Quality Control Manager (request), Inventory Manager (issue)',path:'/qc/packaging-requisition/new',
+ purpose:'QC requests branding and packaging materials for a finished product from Inventory, using the BOM branding/packaging lines.',
+ buttons:['Select unit(s)','Load branding & packaging lines','Edit qty','Submit','Cancel'],
+ fields:[['Finished product / units','unitIds[]','multiselect',1,'units at QC passed',''],['BOM version','bomVersionId','read-only',0,'from N08/N09',''],['Lines: item','lines[].productId','select',1,'category Branding or Packaging only','Stickers, decals, carton, foam, manual, etc.'],['Qty per unit','lines[].qtyPerUnit','number',0,'from BOM',''],['Total qty','lines[].qty','number',1,'= qtyPerUnit x units',''],['Needed by','neededBy','date',1,'',''],['Remarks','remarks','textarea',0,'','']],
+ rules:['Lines come only from the BOM; adding a non-BOM item needs a reason.','Issue is FIFO (N13); the requisition closes when all lines are issued.','Cannot be raised for units not yet QC passed.'],
+ q:['Is branding/packaging a separate item category in Products, or flagged inside Accessories?'],
+ src:'Spec N06; depends on N08.'},
+{id:'N27',sec:'QC',name:'PDI (Pre-Delivery Inspection) Checklist',pri:'P1',type:'Form',roles:'PDI Manager (Ganesh per people.md), Logistics Mgr',path:'/dispatch/:orderId/pdi/:chassisNo',
+ purpose:'Checklist at dispatch confirming PDI parts and packing before the unit ships. Different from N05, which gates production completion.',
+ buttons:['Mark all Yes','Save','Pass PDI','Fail PDI','Print PDI sheet'],
+ fields:[['Chassis no.','chassisNo','read-only',0,'from assigned unit (O21)',''],['Order / dealer','orderId','read-only',0,'',''],['Items (rows)','items[].label','text',0,'PDI parts present (mirrors, key, charger, tool kit, manual, warranty card), packing intact, no transit damage, battery charged level, tyre pressure','Template per model'],['Result','items[].result','Yes / No / N/A',1,'',''],['Remark','items[].remark','text',0,'required on No',''],['Photos','photos[]','file',0,'up to 5',''],['Overall','overall','Pass / Fail',1,'',''],['Inspector / time','inspectorId, at','auto',0,'','']],
+ rules:['Dispatch (O22) is blocked for a unit until PDI = Pass.','Fail returns the unit to Reserved with the failed items; re-PDI creates a new record.','Sits after N26 OK to Bill and as part of N07.'],
+ q:['Exact PDI items and who owns the checklist template.'],
+ src:'Spec N27 (ERP_changes_ceo slide 36).'},
+/* ---------- ORDERS ---------- */
+{id:'N07',sec:'Orders',name:'Despatch: Chassis Validation Gate',pri:'P0',type:'Action',roles:'Logistics Manager (oem-logistics-mgr)',path:'/orders/:id/despatch',
+ purpose:'Starting from the invoice, check that each unit assigned to the order carries the right chassis and all identifiers before dispatch is allowed.',
+ buttons:['Scan chassis','Validate all','Fix mismatch (reassign via O21)','Proceed to PDI (N27)','Proceed to dispatch (O22)'],
+ fields:[['Invoice no.','invoiceNo','read-only',0,'e.g. INV26-27-TEV0001','From the invoice'],['Order / dealer','orderId','read-only',0,'',''],['Per line: model','lines[].model','read-only',0,'Tera invoice: KAT LX 3.0',''],['Expected chassis','lines[].expectedChassis','read-only',0,'from invoice notes / O21',''],['Scanned chassis','lines[].scannedChassis','text',1,'must equal expected',''],['Motor / controller / battery','lines[].ids','text',1,'scanned, must match unit record (N04)',''],['Result','lines[].result','badge',0,'Match / Mismatch / Missing','']],
+ rules:['All units must be Match to continue; one Mismatch blocks the whole dispatch.','A chassis already dispatched or assigned to another order is rejected.','Needs N26 (OK to Bill) = Billed and N27 PDI = Pass before O22 is enabled.','Each validation attempt is audited with user and time.'],
+ q:['Is validation done per unit by scan or by typing? (assume scan with manual fallback)'],
+ src:'Spec N07; Tera invoice (Chassis Number in Notes).'},
+{id:'N26',sec:'Orders',name:'Accounts: "OK to Bill" Gate',pri:'P1',type:'Action',roles:'Accounts (Finance) user',path:'/orders/:id/ok-to-bill',
+ purpose:'Accounts explicitly confirms billing after payment verification (O23). Dispatch cannot release the unit until this is done.',
+ buttons:['OK to Bill','Hold (with reason)','Generate invoice','View payments'],
+ fields:[['Order','orderId','read-only',0,'',''],['Dealer','dealerId','read-only',0,'',''],['Order value','orderTotal','read-only',0,'incl. GST',''],['Verified payments','verifiedTotal','read-only',0,'from O23','Tera invoice shows "Payment Made" and "Balance Due"'],['Balance due','balance','read-only',0,'',''],['Invoice no.','invoiceNo','auto',0,'series INVyy-yy-TEVnnnn','From the Tera invoice numbering'],['Invoice date','invoiceDate','date',1,'default today',''],['Terms','terms','select',1,'Due on Receipt / Net N days',''],['Hold reason','holdReason','text',0,'required for Hold','']],
+ rules:['Enabled only when payment is verified (O23) per the dealer\'s credit rule.','On OK to Bill the invoice is generated (CGST+SGST or IGST by place of supply) and the order becomes Billed.','Hold keeps dispatch locked and notifies the Logistics Manager.','Only Accounts users may click OK to Bill (separate from Verify, to keep two steps).'],
+ q:['Can a dealer with credit/ledger balance be billed before full payment?','Invoice number series rules (financial-year reset)?'],
+ src:'Spec N26 (slide 36); Tera invoice format.'},
+{id:'N10',sec:'Orders',name:'E-Way Bill (real build)',pri:'P1',type:'Form',roles:'Logistics Manager, Accounts',path:'/orders/:id/e-waybill',
+ purpose:'Generate a GST-compliant e-way bill from the invoice and dispatch details, replacing the D51/O56 mock. Fields follow the sample e-way bill in docs/input.',
+ buttons:['Fetch from invoice','Generate e-way bill','Extend validity','Cancel e-way bill','Print / download','Update vehicle (Part-B)'],
+ fields:[['Supply type','supplyType','select',1,'Outward / Inward','Sample: Outward Supply'],['Transaction type','transactionType','select',1,'Regular / Bill To-Ship To / Bill From-Dispatch From','Sample: Bill To - Ship To'],['Document type / no. / date','docType, docNo, docDate','',1,'Tax Invoice','Sample: EV/999/22-23, 27-Mar-23'],['IRN, Ack no., Ack date','irn, ackNo, ackDate','text',0,'from e-invoice','Sample prints all three'],['From (supplier) GSTIN','fromGstin','text',1,'',''],['Dispatch from address','dispatchFrom','text',1,'',''],['To (buyer) GSTIN','toGstin','text',1,'',''],['Ship to address','shipTo','text',1,'',''],['Goods: HSN','items[].hsn','text',1,'8 digits','Sample 87149100; Tera invoice 87032420'],['Goods: description, qty, unit, taxable value, tax rate','items[]','',1,'',''],['Total taxable / CGST / SGST / IGST / other','totals','number',0,'auto',''],['Transport mode','mode','select',1,'Road / Rail / Air / Ship','Sample: 1 - Road'],['Approx distance (km)','distanceKm','number',1,'',' Sample: 696 km'],['Transporter ID / name','transporterId, transporterName','text',0,'Transporter ID is 15-char GSTIN','Sample: EKTA LOGISTICS'],['Vehicle no.','vehicleNo','text',1,'pattern like NL01AF5733','Part-B'],['Generated by / on','generatedBy, generatedAt','auto',0,'',''],['Valid upto','validUpto','datetime',0,'auto from distance (1 day per 200 km)','Sample: 31-Mar-23 11:59 PM'],['E-way bill no.','ewbNo','read-only',0,'12 digits','Sample: 221568053022']],
+ rules:['E-way bill is mandatory when consignment value exceeds the GST threshold; screen warns otherwise.','Validity: 1 day per 200 km (rounded up); extension allowed only near expiry, with reason.','Cancel allowed within 24 hours if not verified in transit.','Dispatch (O22) shows the e-way bill number and blocks departure when required and missing.','Provider integration (GSP) credentials kept in Settings > Security (O55).'],
+ q:['Which GSP/API provider for e-way and e-invoice (IRN)?','Is e-invoice (IRN) in scope with this?'],
+ src:'Spec N10; e-way bill page of "EV 999 MIC ELECTRONICS- BIKEWO.pdf".'},
+{id:'N18',sec:'Orders',name:'Backdated Data Entry Support (PO, Material Inward)',pri:'P1',type:'Enhancement',roles:'Super Admin (enable), data-entry users (use)',path:'Date field on O20/O17 PO and N02, plus Settings > Data Migration',
+ purpose:'Allow historical-dated PO and Material Inward records while migrating old data.',
+ buttons:['Enable backdating (Settings)','Set cut-off date','Disable'],
+ fields:[['Backdating enabled','backdateEnabled','toggle',1,'Super Admin only',''],['Earliest allowed date','backdateFrom','date',1,'not earlier than company go-live minus N years',''],['Entry date on PO / inward','docDate','date',1,'past dates allowed only when enabled',''],['Reason','backdateReason','text',1,'required when date < today','']],
+ rules:['Backdated records are flagged "Backdated" and show both entry date and document date.','Backdated records do not trigger notifications, WhatsApp (N19) or auto-email (N17).','Closed financial periods are never backdatable.','Stock ledger uses the document date for FIFO order (N13).'],
+ q:['Is there a hard cut-off, e.g. no earlier than start of last financial year?'],
+ src:'Spec N18.'},
+/* ---------- BOM ---------- */
+{id:'N08',sec:'Production / BOM',name:'BOM Create / Edit',pri:'P0',type:'Form',roles:'Production Head, Super Admin',path:'/production/bom/new, /production/bom/:id',
+ purpose:'Bill of Materials per vehicle model/variant: parts, quantities, images and landing price to the OEM. Basis for N03, N06 and N09.',
+ buttons:['Add part','Remove part','Duplicate BOM','Upload image','Save draft','Submit for approval','Print'],
+ fields:[['Model','modelId','select',1,'from Products (O26)',''],['Variant','variantId','select',1,'one BOM per variant',''],['BOM code','bomCode','text',1,'unique, e.g. BOM-KATLX30',''],['Version','version','read-only',0,'auto (N09)',''],['Effective from','effectiveFrom','date',1,'',''],['Lines: part','lines[].productId','select',1,'any Spare/Component/Branding/Packaging product',''],['Category','lines[].category','select',1,'Frame, Electrical, Battery, Motor, Branding, Packaging, Other',''],['Qty per unit','lines[].qty','number',1,'> 0',''],['UoM','lines[].uom','select',1,'Nos, Kg, Set, Metre','From N24'],['Image','lines[].image','file',0,'png/jpg, 2 MB',''],['Landing price (OEM)','lines[].landingPrice','money',1,'>= 0, excl. GST','OEM-only; hidden from dealers (F1)'],['Total BOM cost','totalCost','read-only',0,'sum(qty x price)',''],['Notes','notes','textarea',0,'','']],
+ rules:['A part appears once per BOM; duplicates are rejected.','Landing price is visible to OEM Production/Finance roles only.','Only an Approved BOM version can be used by N03/N06.','Editing an Approved BOM creates a new draft version (N09), the old one stays in use until approval.'],
+ q:['Are sub-assemblies (nested BOM) needed or is a flat list enough?','Where does landing price come from: last PO price, or typed by hand?'],
+ src:'Spec N08.'},
+{id:'N09',sec:'Production / BOM',name:'BOM Versioning & Approval Workflow',pri:'P1',type:'Form / Action',roles:'Production Head (submit), Approver (open Q), Super Admin',path:'/production/bom/:id/versions',
+ purpose:'Keep a history of BOM versions and require approval before a new version takes effect.',
+ buttons:['Submit for approval','Approve','Reject (reason)','Compare versions','Restore as new draft','Retire version'],
+ fields:[['Version no.','version','read-only',0,'v1, v2...',''],['Status','status','badge',0,'Draft / Pending approval / Approved / Rejected / Retired',''],['Change summary','changeNote','textarea',1,'required on submit',''],['Submitted by / on','submittedBy, at','auto',0,'',''],['Approver','approverId','select',1,'role chosen by owner',''],['Decision remark','decisionRemark','textarea',0,'required on Reject',''],['Effective from','effectiveFrom','date',1,'on approval','']],
+ rules:['Exactly one Approved version per variant is active at a time.','Approving a version retires the previous one from its effective date; requisitions already issued keep their version.','Submitter cannot approve their own version.','Compare shows added, removed and changed lines with quantity and price deltas.'],
+ q:['Does every BOM change need versioning or only material changes? (spec open question)','Who approves: Production Head, QC, or OEM Admin? (spec open question)'],
+ src:'Spec N09.'},
+/* ---------- DEALER MGMT ---------- */
+{id:'N11',sec:'Dealer Management',name:'RBAC: Dealer & Sub-dealer Role Assignment',pri:'P1',type:'Form enhancement',roles:'Super Admin (OEM), Dealer owner (for own staff and sub-dealers)',path:'In O05 dealer form and O53 user form; new tab "Roles & Hierarchy" on O06',
+ purpose:'Make role assignment explicit for a dealer, its staff and its connected sub-dealers.',
+ buttons:['Assign role','Remove role','Connect sub-dealer','Disconnect sub-dealer','Save'],
+ fields:[['Dealer type','dealerType','select',1,'Dealer / Distributor / Sub-dealer',''],['Parent dealer','parentDealerId','select',0,'required for Sub-dealer','R2 connection'],['Sub-dealers','subDealers[]','grid',0,'connected dealers and status',''],['User','userId','select',1,'',''],['Roles','roles[]','multiselect',1,'Dealer (owner), Sales Man, Service Man, Accounts (proposed)','Existing: Sales Man / Service Man / Dealer'],['Scope','scope','select',1,'Own dealer only / Own + sub-dealers (read-only)','Sub-dealer data visible upward read-only'],['Active','active','toggle',1,'','']],
+ rules:['A sub-dealer\'s data is visible to its parent read-only; parents cannot edit it.','Only the owner role can assign roles to staff; staff cannot assign roles.','A sub-dealer has one parent at a time (R2).','Role change is audited and takes effect at next login.'],
+ q:['Is "Accounts" a new dealer-side role, or are only Sales/Service/Owner needed?','Can a sub-dealer also have sub-dealers (depth limit)? See clarification_dealer_hierarchy_subdealers.md.'],
+ src:'Spec N11; docs/clarification_dealer_hierarchy_subdealers.md.'},
+/* ---------- WAREHOUSE ---------- */
+{id:'N12',sec:'Warehouse',name:'Warehouse Location Master',pri:'P1',type:'Form / List',roles:'Inventory Manager, Super Admin',path:'/mu/:muId/locations',
+ purpose:'Define zones, racks and bins for each manufacturing unit so stock can be placed and found.',
+ buttons:['Add location','Edit','Deactivate','Bulk import (CSV)','Print location labels'],
+ fields:[['Manufacturing unit','muId','select',1,'',''],['Zone','zone','text',1,'e.g. A, Cold, Battery cage',''],['Rack','rack','text',0,'',''],['Bin','bin','text',0,'',''],['Location code','code','auto',1,'MU-ZONE-RACK-BIN, unique',''],['Type','type','select',1,'Saleable / Internal-use / Quarantine / Scrap','Matches N14 and N02 quarantine'],['Capacity','capacity','number',0,'units',''],['Active','active','toggle',1,'','']],
+ rules:['Code is unique within an MU.','A location with stock cannot be deactivated.','Quarantine and Scrap locations are never issued to dealers.'],
+ q:['Does capacity need to be enforced, or only informational?'],
+ src:'Spec N12.'},
+{id:'N13',sec:'Warehouse',name:'FIFO Stock Issuance & Location Report',pri:'P1',type:'Report / Action',roles:'Inventory Manager, Inventory Executive',path:'/mu/:muId/stock-by-location, issue dialog on requisitions and orders',
+ purpose:'Issue stock oldest-first from the correct location and report current stock by location.',
+ buttons:['Issue (FIFO suggested)','Override location (with reason)','Export','Filter'],
+ fields:[['Product','productId','select',1,'',''],['Quantity to issue','qty','number',1,'<= available',''],['Suggested pick (read-only)','picks[]','grid',0,'location, lot/receipt date, qty — oldest first',''],['Override reason','overrideReason','text',0,'required if the pick differs',''],['Report columns','','',0,'Product, Location, Lot date, On-hand, Reserved, Available, Age (days)','Filters: MU, product, location, age'],['Serial no(s)','serials[]','text list',0,'for serial-tracked items','']],
+ rules:['Default pick order is by inward date (oldest first), then location code.','Reserved stock (assigned to an order) is excluded from issuance for other uses.','Override is allowed to Inventory Manager only and audited.','Quarantine, Scrap and Internal-use (N14) locations are excluded from dealer-facing availability.'],
+ q:['FIFO by receipt date or by manufacturing date for batteries?'],
+ src:'Spec N13; depends on N12.'},
+{id:'N14',sec:'Products',name:'Inventory Type Flag (Internal-use vs Saleable)',pri:'P1',type:'Form enhancement',roles:'Super Admin, Inventory Manager',path:'Field on O26-O28 product forms; filter on O30/O31',
+ purpose:'Flag products as Saleable or Internal-use; internal-use items never appear in dealer-facing inventory or purchase carts.',
+ buttons:['Toggle on product form','Filter by type (inventory lists)'],
+ fields:[['Inventory type','inventoryType','select',1,'Saleable / Internal-use (names are placeholders)','Default Saleable'],['Where shown','','',0,'Product forms, OEM inventory lists, product list column',''],['Filter','type filter','select',0,'All / Saleable / Internal-use','']],
+ rules:['Internal-use products are excluded from D24/D25, the purchase cart (D29) and quotations (D12).','Switching an item with dealer reservations to Internal-use is blocked.','BOM lines (N08) may use either type.'],
+ q:['Final terminology (spec open question).'],
+ src:'Spec N14.'},
+{id:'N24',sec:'Products',name:'Spare Part: Extended Fields',pri:'P1',type:'Form enhancement',roles:'Super Admin, Procurement Mgr',path:'Extra section in O27 spare form',
+ purpose:'Add procurement and physical attributes, multi-model applicability and a price-change history to spare parts.',
+ buttons:['Add model','Remove model','Add price revision','View history'],
+ fields:[['Supplier part number','supplierPartNo','text',0,'',''],['UoM','uom','select',1,'Nos / Kg / Set / Metre',''],['Weight','weight','number',0,'kg, 3 decimals',''],['Material','material','select',0,'Metal / Mixed metal / Plastic / ABS',''],['Applicable models','modelIds[]','multiselect',1,'one or more (today O27 allows one)',''],['Purchase cost (excl. GST)','purchaseCost','money',0,'separate from sale price','OEM-only (F1)'],['Freight','freight','select',0,'Included / Excluded',''],['Price revisions','priceHistory[]','grid',0,'date, old, new, reason, proof file; latest 10 kept','Tera invoice: "Rate" separate from tax']],
+ rules:['Purchase cost is never shown to dealers.','Each price change must carry a proof attachment; history keeps the last 10 revisions.','Removing a model that has open orders for that part is blocked.'],
+ q:['Is the "last 10 revisions" limit a display limit or are older ones deleted?'],
+ src:'Spec N24 (slide 23).'},
+{id:'N25',sec:'Vendor POs',name:'Min-Stock / Sales-Forecast Triggered Reorder',pri:'P1',type:'Action / List',roles:'Procurement Manager',path:'/vendors/reorder, widget on O40',
+ purpose:'Flag products below a minimum level, or short against a sales forecast, and feed them into Vendor Procurement (O40).',
+ buttons:['Set min level','Set forecast','Create vendor PO from selected','Dismiss alert','Recalculate'],
+ fields:[['Product','productId','select',1,'',''],['MU','muId','select',1,'',''],['Minimum stock','minQty','number',1,'>= 0',''],['Reorder qty','reorderQty','number',0,'default suggestion',''],['Forecast qty (period)','forecastQty','number',0,'monthly, manual entry','No AI forecasting (deferred)'],['On hand / on order','onHand, onOrder','read-only',0,'',''],['Suggested qty','suggested','read-only',0,'max(min - (onHand+onOrder), forecast - (onHand+onOrder))',''],['Preferred vendor','vendorId','select',0,'default from last PO','']],
+ rules:['An alert is raised when onHand + onOrder < min or < forecast.','Alerts are de-duplicated per product per MU until dismissed or resolved.','Create PO prefills O40/O41 lines; user still approves the PO.','Quarantine and Internal-use stock does not count toward onHand (N12/N14).'],
+ q:['Alert only on screen, or also email/WhatsApp to Procurement?'],
+ src:'Spec N25 (slide 26).'},
+{id:'N17',sec:'Vendor POs',name:'Auto-email PO to Vendor on Approval',pri:'P1',type:'Action enhancement',roles:'System (trigger), Procurement Mgr (settings)',path:'Settings on O41; log on vendor PO detail',
+ purpose:'When a vendor PO is approved, email the PO PDF to the vendor automatically.',
+ buttons:['Resend email','Edit recipients','View email log','Toggle auto-send'],
+ fields:[['Auto-send on approval','autoSend','toggle',1,'default on',''],['To','to[]','email list',1,'default = vendor primary contact (N23)',''],['CC','cc[]','email list',0,'default = approver + buyer',''],['Subject / body','subject, body','text',0,'template with PO no., vendor, total',''],['Attachment','pdf','auto',0,'PO PDF',''],['Send status','status','badge',0,'Queued / Sent / Failed','Log: time, recipient, error']],
+ rules:['Sent once on first approval; failures retry 3 times then show Failed with a Resend button.','Distinct from the internal approval-admin email.','Not sent for backdated POs (N18).'],
+ q:['If the PO changes after approval and is re-approved, send a revised email automatically? (spec open question)'],
+ src:'Spec N17.'},
+/* ---------- SETTINGS ---------- */
+{id:'N15',sec:'Settings',name:'Audit Log: Purge / Retention Policy',pri:'P1',type:'Form / Action',roles:'Super Admin only',path:'/settings/audit-logs/retention',
+ purpose:'Set how long audit rows are kept and purge older ones.',
+ buttons:['Save retention','Preview purge','Purge now','Download before purge'],
+ fields:[['Retention period','retentionMonths','number',1,'minimum 12 (proposed)',''],['Purge records older than','purgeBefore','date',1,'<= today minus retention',''],['Records affected','count','read-only',0,'from preview',''],['Confirm text','confirm','text',1,'type PURGE','Prevents accidents'],['Reason','reason','text',1,'','']],
+ rules:['Super Admin only; the purge itself writes one non-deletable audit row.','Preview is mandatory before Purge now.','Offer an export of the rows before purge (N16).','Rows tied to open warranty/legal holds are skipped.'],
+ q:['Minimum retention allowed by policy/legal?','Automatic scheduled purge or manual only?'],
+ src:'Spec N15.'},
+{id:'N16',sec:'Settings',name:'Audit Log: Customer Export / Download',pri:'P1',type:'Action enhancement',roles:'Customer admin (the OEM/dealer account owner)',path:'Export button on O54 audit list',
+ purpose:'Let a customer organisation download its own audit trail.',
+ buttons:['Export CSV','Export PDF','Choose date range','Choose columns'],
+ fields:[['From / To','dateFrom, dateTo','date',1,'range <= 12 months per export',''],['Entity type','entity','select',0,'All / Orders / Payments / Users / ...',''],['User','userId','select',0,'',''],['Format','format','select',1,'CSV / PDF',''],['Columns','columns[]','multiselect',0,'time, user, entity, action, before, after, IP','']],
+ rules:['An export contains only the requester\'s own tenant data (RLS).','PII fields in before/after values are masked unless the role allows.','The export itself is an audit event.','Large exports run in the background and arrive as a notification link.'],
+ q:['Who counts as the "customer": OEM Super Admin only, or dealer owners for their own dealer too?'],
+ src:'Spec N16.'},
+{id:'N22',sec:'Settings',name:'OEM Profile: Compliance Fields & Edit',pri:'P1',type:'Form enhancement',roles:'Super Admin',path:'/settings/profile (extends O49)',
+ purpose:'Add statutory fields and make the OEM profile editable.',
+ buttons:['Edit','Save','Cancel','Add director','Remove director','Upload document'],
+ fields:[['CIN','cin','text',0,'21 chars',''],['TAN','tan','text',0,'10 chars',''],['PAN','pan','text',1,'10 chars, ABCDE1234F','Tera invoice shows GSTIN 33AAMCT1837D1ZH, so PAN AAMCT1837D'],['GSTIN','gstin','text',1,'15 chars; N01 lookup',''],['MSME / Udyam no.','msme','text',0,'',''],['IEC','iec','text',0,'10 chars','Jitendra invoice prints IEC code'],['Directors','directors[]','grid',0,'name, DIN (8 digits), designation, phone',''],['Bank details','bank','group',0,'as N23','Tera invoice bank block'],['Approval email','approvalEmail','email',1,'existing field',''],['Website / support email / phone','','text',0,'','Tera invoice: www.teraev.in, accounts@teraev.in, phone']],
+ rules:['PAN must match the PAN embedded in the GSTIN.','Edits by Super Admin only; every change is audited with before/after.','Statutory values appear on printed invoices and the e-way bill (N10).'],
+ q:['Is the OEM profile editable by anyone besides Super Admin?'],
+ src:'Spec N22 (slide 4); Tera invoice header/footer.'},
+{id:'N28',sec:'Settings',name:'Expanded OEM Role Taxonomy',pri:'P1',type:'Form enhancement',roles:'Super Admin',path:'/settings/users/new (role list on O53)',
+ purpose:'Add Procurement Manager, Inventory Manager, National Sales Head and Area Sales Manager roles.',
+ buttons:['Assign role','Edit role permissions (view only in v1)','Save'],
+ fields:[['Role','role','select',1,'existing + Procurement Manager, Inventory Manager, National Sales Head, Area Sales Manager',''],['Reports to','reportsTo','select',0,'National Sales Head > Sales Head > Regional Head > Zonal Head > Area Sales Manager',''],['Region / zone scope','scope','multiselect',0,'required for Regional/Zonal/Area roles','O51'],['Permissions summary','','read-only',0,'lists screens the role can see','Proposed matrix below']],
+ rules:['Procurement Manager: vendors, vendor POs, reorder (N25), BOM view.','Inventory Manager: inventory, warehouse (N12/N13), material inward (N02), requisitions issue (N03/N06).','Sales hierarchy sees only the dealers in their zone/region (R7 extended).','A user can hold one primary role; multi-role needs owner decision.'],
+ q:['Please confirm the permission matrix; the one above is a first guess from the screen names.','Can one person hold two roles (e.g. Production + QC + PDI as Ganesh in people.md)?'],
+ src:'Spec N28 (slide 4); docs/people.md.'},
+/* ---------- COMMUNICATIONS ---------- */
+{id:'N19',sec:'Communications',name:'WhatsApp: Order / Delivery / Due Notifications (Dealer)',pri:'P0',type:'Integration',roles:'System; Super Admin (templates & settings)',path:'/settings/whatsapp, message log',
+ purpose:'Send dealers a WhatsApp message on order accepted, order delivered, and outstanding dues.',
+ buttons:['Edit template','Send test','Enable/disable event','Resend','View log'],
+ fields:[['Event','event','select',1,'Order accepted / Delivered / Due reminder',''],['Template name','template','text',1,'pre-approved by WhatsApp',''],['Message variables','vars','',0,'dealerName, orderNo, amount, dueDate, link',''],['Recipient number','phone','phone',1,'dealer WhatsApp number (D16 has WhatsApp field)','E.164'],['Reminder schedule','dueSchedule','text',0,'e.g. 3 days before, on due, every 7 days after',''],['Status','status','badge',0,'Queued / Sent / Delivered / Failed',''],['Credits left','credits','read-only',0,'of 20k (client quotation)','']],
+ rules:['Only approved templates can be sent.','No message if the dealer has opted out; opt-in captured at onboarding.','Retry failed once, then log Failed.','Stop reminders when the due is paid.','Backdated entries (N18) send nothing.'],
+ q:['WhatsApp provider (Meta Cloud API or reseller)?','Opt-in capture: at dealer onboarding (O05)?'],
+ src:'Spec N19.'},
+{id:'N20',sec:'Communications',name:'WhatsApp: Employee Broadcast',pri:'P1',type:'Integration',roles:'Super Admin, Department heads',path:'/communications/broadcast',
+ purpose:'Send operational messages to employees by WhatsApp.',
+ buttons:['Select audience','Send','Schedule','Save as template','View log'],
+ fields:[['Audience','audience','multiselect',1,'All / role / MU / custom list',''],['Message','message','textarea',1,'template or free text within WhatsApp rules',''],['Attachment','attachment','file',0,'PDF/image',''],['Send time','sendAt','datetime',0,'now or scheduled',''],['Recipients count','count','read-only',0,'',''],['Delivery log','log','grid',0,'per user: status','']],
+ rules:['Uses the same integration and credits as N19.','Employees without a WhatsApp number or opt-in are skipped and listed.','Only authorised roles may broadcast; each send is audited.'],
+ q:['Should it also show as an in-app notification (D00/O00)?'],
+ src:'Spec N20.'},
+/* ---------- MU ---------- */
+{id:'N21',sec:'Manufacturing Unit',name:'Unit Asset Register (Fixed / Movable)',pri:'P2',type:'List + Form',roles:'Super Admin, Inventory Manager',path:'/mu/:muId/assets',
+ purpose:'Track fixed and movable assets per manufacturing unit.',
+ buttons:['Add asset','Edit','Retire asset','Transfer to another MU','Add asset type','Export'],
+ fields:[['MU','muId','select',1,'',''],['Asset tag','assetTag','auto',1,'unique',''],['Name','name','text',1,'',''],['Class','class','select',1,'Fixed / Movable',''],['Asset type','assetType','select',1,'admin-extensible dropdown','Add asset type button'],['Make / model / serial','make, model, serial','text',0,'',''],['Purchase date / cost','purchaseDate, cost','',0,'',''],['Location','locationId','select',0,'from N12',''],['Status','status','select',1,'In use / Under repair / Retired',''],['Photo / invoice','files[]','file',0,'','']],
+ rules:['Asset tag cannot be reused.','Retire needs a reason and date; retired assets stay in history.','Transfer records from-MU, to-MU and date.'],
+ q:['Is depreciation needed, or register only?'],
+ src:'Spec N21 (slide 2).'}
+];
+const out=document.getElementById('out'), idx=document.getElementById('idx');
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const SAMPLE={gstin:'33AAMCT1837D1ZH',legalName:'SRI SAKTHI MOTORS',tradeName:'Sri Sakthi Motors',address:'No.219, Ring Road, Shanthi Nagar West, Hosur 635109',state:'Tamil Nadu (33)',gstStatus:'Active',bankName:'Axis Bank Ltd.',bankAccountName:'TERA ELECTRIC VEHICLES PRIVATE LIMITED',bankAccountNo:'925020044763385',ifsc:'UTIB0000123',branch:'Karur [TN]',website:'www.teraev.in',chassisNo:'ME9ECETEJ26499002',motorNo:'00W60VLM22G12226',controllerNo:'JMTCNT60V35A22F18721',batteryNo:'TK-6034-16CW-C-008452',colour:'RED',orderId:'PO-2026-0412',invoiceNo:'INV26-27-TEV0001',vehicleNo:'NL01AF5733',ewbNo:'221568053022',vendorPoId:'VPO-2026-0087',vendorInvoiceNo:'VI/2026/1184',model:'KAT LX 3.0',modelId:'KAT LX 3.0',variantId:'KAT LX 3.0 - Without Battery & Charger',muId:'MU Hosur',productId:'Hub motor 60V 1000W',pan:'AAMCT1837D',cin:'U34100TZ2020PTC000001',tan:'CHET12345A',iec:'3116926581',approvalEmail:'accounts@teraev.in',transporterName:'EKTA LOGISTICS',transporterId:'06AHWPG8931B3Z5',irn:'cc70bea954378a7668e86782...',zone:'A',rack:'R-03',bin:'B-12',code:'HOS-A-R03-B12',assetTag:'AST-0042',name:'Welding station',message:'Plant shutdown on Sunday for maintenance.',remarks:'',reason:'Cycle count mismatch',phone:'+91 98765 43210',fromGstin:'27AADCJ7176J1Z4',toGstin:'36AABCM3693B1ZN',dispatchFrom:'Arihant Plaza, MIDC Ambad, Nashik 422010',shipTo:'Amara Jyoti Road 31, Jubilee Hills, Hyderabad 500033',mode:'Road',totals:'₹40,05,440.00',supplierPartNo:'SP-HM-1000',uom:'Nos',weight:'2.450',material:'Metal',purchaseCost:'₹4,200.00',freight:'Included',minQty:'20',reorderQty:'40',forecastQty:'60',onHand:'12',suggested:'48',vendorId:'Jitendra Components Pvt Ltd',subject:'Purchase Order VPO-2026-0087 approved',to:'sales@vendor.example',cc:'accounts@teraev.in',event:'Order accepted',template:'order_accepted_v2',credits:'18,420',audience:'All Production staff',dateFrom:'01/10/2026',dateTo:'31/10/2026',format:'CSV',entity:'Orders',userId:'Ruby (Inventory Manager)',role:'Procurement Manager',reportsTo:'Sales Head',scope:'Tamil Nadu',confirm:'PURGE',retentionMonths:'24',purgeBefore:'31/10/2024',count:'1,284',dealerType:'Distributor',parentDealerId:'Sri Sakthi Motors',roles:'Sales Man',paymentTermsDays:'0',statusReason:'',status:'Active',warrantyMonths:'18',paymentModes:'NEFT/RTGS',inwardDate:'07/11/2026',hold:'',holdReason:'Payment cheque pending',terms:'Due on Receipt',neededBy:'15/11/2026',units:'16',unitsDone:'16',reason:'Against order',docDate:'30/09/2026',backdateFrom:'01/04/2026',effectiveFrom:'01/12/2026',bomCode:'BOM-KATLX30',version:'v2',changeNote:'Replaced controller with 35A unit',approverId:'Production Head',landingPrice:'₹12,350.00',totalCost:'₹48,900.00',qty:'16',type:'Saleable',class:'Fixed',assetType:'Machinery',autoSend:'',inventoryType:'Saleable',tan2:''};
+const NSAMPLE={'text':'Sample text','textarea':'Short note about this record.'};
+function sv(f){
+  const [label,api,type,req,opt,notes]=f;
+  const key=(api||'').replace(/^[a-z]+\[\]\./,'').split(',')[0].trim();
+  if(SAMPLE[key]!==undefined&&SAMPLE[key]!=='') return SAMPLE[key];
+  let m=/Sample:?\s*([^;]+)/i.exec(notes||'')||/Sample\s+([A-Za-z0-9\-\/ ]+)/i.exec(notes||''); if(m) return m[1].trim();
+  m=/e\.g\.\s*([^,;]+)/i.exec(opt||''); if(m) return m[1].trim();
+  const t=(type||'').toLowerCase();
+  if(t==='date'||t==='month') return t==='month'?'Nov 2026':'07/11/2026';
+  if(t==='datetime') return '07/11/2026 11:42';
+  if(t==='money') return '₹60,277.00';
+  if(t==='number') return /qty|units|count|weight|capacity|min|reorder|forecast|retention|term|days|distance/i.test(key+label)?(/distance/i.test(key)?'696':/retention/i.test(key)?'24':'16'):'1';
+  if(t==='email'||t==='email list') return 'accounts@teraev.in';
+  if(t==='url') return 'www.teraev.in';
+  if(t==='phone') return '+91 98765 43210';
+  if(t==='select'||t==='multiselect'){ const first=(opt||'').split(/\s\/\s|,/)[0].replace(/\(.*\)/,'').trim(); return first&&first.length<40&&!/^(from|one|any|read|required)/i.test(first)?first:'Select...'; }
+  if(t==='textarea') return NSAMPLE.textarea;
+  return NSAMPLE.text;
+}
+function bump(v,i){ return i? v.replace(/(\d)(\D*)$/,(a,d,r)=>((+d+i)%10)+r):v; }
+function ctrl(f,i){
+  const [label,api,type,req,opt]=f, t=(type||'').toLowerCase(), v=sv(f);
+  if(/^yes \/ no/i.test(t)) return `<span class="seg"><span class="${i?'':'on'}">Yes</span><span class="${i?'on':''}">No</span><span>N/A</span></span>`;
+  if(t==='pass / fail') return `<span class="seg"><span class="on">Pass</span><span>Fail</span></span>`;
+  if(t==='toggle') return '<span class="tg"></span>';
+  if(t==='badge') return `<span class="badge">${esc(bump(v==='Sample text'?(opt.split('/')[0]||'Status').trim():v,0))}</span>`;
+  if(t==='flag') return '<span class="badge">Mandatory</span>';
+  if(t==='file') return '<div class="inp fl">↑ Upload file</div>';
+  if(t==='textarea') return `<div class="inp ta">${esc(v)}</div>`;
+  if(t==='read-only'||t==='auto') return `<div class="inp ro">${esc(bump(v,i))}</div>`;
+  if(t==='select'||t==='multiselect') return `<div class="inp"><span>${esc(v)}</span><span>▾</span></div>`;
+  if(t==='date'||t==='month') return `<div class="inp"><span>${esc(v)}</span><span>📅</span></div>`;
+  if(t==='text list') return `<div class="inp">${esc(bump(v,i))} <span class="badge">+ add</span></div>`;
+  return `<div class="inp">${esc(bump(v,i))}</div>`;
+}
+const ROW=/^(lines|items|units|picks)\[\]/;
+function mock(s){
+  const isRow=f=>ROW.test(f[1]||'')||/^(Lines|Per unit|Per line|Item \(rows\))/.test(f[0]);
+  const rowF=s.fields.filter(f=>isRow(f)), head=s.fields.filter(f=>!isRow(f));
+  const grids=head.filter(f=>(f[2]||'')==='grid'), plain=head.filter(f=>(f[2]||'')!=='grid');
+  const inputs=plain.filter(f=>f[1]||f[2]);
+  let h=`<div class="fg">`+inputs.map(f=>`<div class="fld"><label>${esc(f[0])}${f[3]?' <i>*</i>':''}</label>${ctrl(f,0)}</div>`).join('')+`</div>`;
+  plain.filter(f=>!f[1]&&!f[2]).forEach(f=>{h+=`<div class="note">${esc(f[0])}: ${esc(f[4])}</div>`;});
+  if(rowF.length){
+    const cols=rowF.map(f=>f[0].replace(/^(Lines|Per unit|Per line):\s*/i,''));
+    h+=`<div class="mt"><div class="cap">Lines</div><table><tr>${cols.map(c=>`<th>${esc(c)}</th>`).join('')}</tr>`+[0,1].map(i=>`<tr>${rowF.map(f=>`<td>${ctrl(f,i)}</td>`).join('')}</tr>`).join('')+`</table></div>`;
+  }
+  grids.forEach(g=>{
+    const cols=(g[4]||'').split(',').map(x=>x.replace(/\(.*?\)/g,'').replace(/^(location|date)\b.*?—.*$/,'$1').trim()).filter(x=>x&&x.length<40).slice(0,7);
+    const cs=cols.length>1?cols:['Name','Value','Status'];
+    h+=`<div class="mt"><div class="cap">${esc(g[0])}</div><table><tr>${cs.map(c=>`<th>${esc(c)}</th>`).join('')}</tr>`+[0,1].map(i=>`<tr>${cs.map((c,j)=>`<td>${j===0?esc(c)+' '+(i+1):'—'}</td>`).join('')}</tr>`).join('')+`</table></div>`;
+  });
+  const P=/^(Save|Submit|Post|Generate|Approve|Pass|OK|Send|Purge|Export|Fetch|Issue|Add asset|Add location|Assign|Create|Proceed|Validate|Enable|Resend|Edit$)/i;
+  let used=false;
+  const bt=s.buttons.map(b=>{const p=!used&&P.test(b);if(p)used=true;return `<span class="btn${p?' p':''}">${esc(b)}</span>`}).join('');
+  const side=/WhatsApp|Dealer|Sub-dealer/.test(s.name)&&/D\d\d/.test(s.path)?'Dealer':'OEM';
+  return `<details class="mk" open><summary>Sample screen (illustrative)</summary><div class="scr"><div class="app">
+  <div class="bar"><span>Tera EV ERP</span><small>${side} console &middot; ${esc(s.id)}</small></div>
+  <div class="crumb">${esc(s.path)}</div>
+  <div class="body"><h4>${esc(s.name)}</h4>${h}<div class="btns">${bt}</div></div></div>
+  <div class="note">Mockup generated from the proposed fields; layout, labels and sample data are not final.</div></div></details>`;
+}
+function card(s){
+  const rows=s.fields.map(f=>`<tr><td>${esc(f[0])}</td><td><code>${esc(f[1])}</code></td><td>${esc(f[2])}</td><td>${f[3]?'Yes':'-'}</td><td>${esc(f[4])}</td><td>${esc(f[5])}</td></tr>`).join('');
+  return `<section class="s" id="${s.id}" data-t="${esc((s.id+' '+s.name+' '+s.sec).toLowerCase())}">
+  <h2><span class="id">${s.id}</span>${esc(s.name)}</h2>
+  <div class="meta"><span class="pill">${s.pri}</span><span class="pill">${esc(s.sec)}</span><span class="pill">${esc(s.type)}</span> Roles: ${esc(s.roles)} &middot; Path: <code>${esc(s.path)}</code></div>
+  <p>${esc(s.purpose)}</p>
+  ${mock(s)}
+  <h3>Buttons / actions (proposed)</h3><ul>${s.buttons.map(b=>`<li>${esc(b)}</li>`).join('')}</ul>
+  <h3>Fields (proposed)</h3><table><tr><th>Label</th><th>API field</th><th>Type</th><th>Req</th><th>Options / validation</th><th>Notes</th></tr>${rows}</table>
+  <h3>Business logic / rules (proposed)</h3><ul>${s.rules.map(r=>`<li>${esc(r)}</li>`).join('')}</ul>
+  <div class="q"><b>Questions for the owner</b><ul>${s.q.map(r=>`<li>${esc(r)}</li>`).join('')}</ul></div>
+  <div class="src">Sources: ${esc(s.src)}</div></section>`;
+}
+S.sort((a,b)=>a.id.localeCompare(b.id));
+out.innerHTML=S.map(card).join('');
+const secs={}; S.forEach(s=>(secs[s.sec]=secs[s.sec]||[]).push(s));
+idx.innerHTML='<a href="#global"><b>*</b>Cross-cutting</a>'+Object.keys(secs).map(k=>`<h4>${esc(k)}</h4>`+secs[k].map(s=>`<a href="#${s.id}" data-t="${esc((s.id+' '+s.name+' '+s.sec).toLowerCase())}"><b>${s.id}</b>${esc(s.name)}</a>`).join('')).join('');
+document.getElementById('f').addEventListener('input',e=>{
+  const v=e.target.value.toLowerCase();
+  document.querySelectorAll('main section.s[data-t]').forEach(x=>x.classList.toggle('hide',v&&!x.dataset.t.includes(v)));
+  document.querySelectorAll('nav a[data-t]').forEach(x=>x.classList.toggle('hide',v&&!x.dataset.t.includes(v)));
+});
+</script>
+</body>
+</html>

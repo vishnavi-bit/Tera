@@ -1,0 +1,53 @@
+{
+  "id": "oem-security-audit",
+  "title": "OEM security and audit",
+  "startStep": "oem-audit-expand",
+  "completionMessage": "The audit log, the security settings and the OEM profile of {company.readOnly.org} are shown, with the OEM user roles. Audit purge (N15), audit export (N16), OEM compliance fields (N22) and the expanded role list (N28) are not defined yet.",
+  "steps": {
+    "oem-audit-expand": {
+      "user": "oem-super-admin",
+      "screen": "O54",
+      "proposedAction": "Click expand diff",
+      "infoPanel": [],
+      "actions": {
+        "expand-diff": { "performedText": "expanded the field diff in the audit log", "nextStep": "oem-audit-card" }
+      }
+    },
+    "oem-audit-card": {
+      "user": "oem-super-admin",
+      "screen": "O54",
+      "proposedAction": "Read the audit purge and export requirements",
+      "infoPanel": [],
+      "notDefined": "Not defined in screen_details.md, so the audit purge (N15, super admin only) and the customer export (N16) cannot be shown. Both extend O54. The diff content and the columns are not defined either.",
+      "performedText": "read the audit purge and export requirements",
+      "nextStep": "oem-security"
+    },
+    "oem-security": {
+      "user": "oem-super-admin",
+      "screen": "O55",
+      "proposedAction": "Read the security settings",
+      "infoPanel": [],
+      "notDefined": "Not defined in screen_details.md, so the My devices columns and what sign out does cannot be shown. The default device limit and the accounts table are shown with sample values.",
+      "performedText": "read the security settings",
+      "nextStep": "oem-profile"
+    },
+    "oem-profile": {
+      "user": "oem-super-admin",
+      "screen": "O49",
+      "proposedAction": "Read the OEM profile",
+      "infoPanel": [],
+      "notDefined": "Not defined in screen_details.md, so the compliance fields (CIN, TAN, PAN, MSME, IEC and Directors Details) cannot be shown. N22 extends O49, which is shown unchanged.",
+      "performedText": "read the OEM profile of {company.readOnly.org}",
+      "nextStep": "oem-users-roles"
+    },
+    "oem-users-roles": {
+      "user": "oem-super-admin",
+      "screen": "O53",
+      "proposedAction": "Read the OEM user roles",
+      "infoPanel": [],
+      "notDefined": "Not defined in screen_details.md, so the expanded role list cannot be shown. N28 adds Procurement Manager, Inventory Manager, National Sales Head and Area Sales Manager. O53 is shown unchanged.",
+      "performedText": "read the OEM user form and its roles",
+      "nextStep": null
+    }
+  }
+}

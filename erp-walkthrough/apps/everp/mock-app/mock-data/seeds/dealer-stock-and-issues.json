@@ -1,0 +1,40 @@
+{
+  "_sample": "SAMPLE DATA for the Dealer stock and issues walkthrough. Dealer, MU, PO, serial, issue text, media file and amounts are invented.",
+  "dealer": { "id": "DLR-014", "name": "Sri Lakshmi EVs", "type": "District Dealer", "mu": "MU Hosur" },
+  "mu": { "name": "MU Hosur" },
+  "order": {
+    "id": "PO-2026-0412",
+    "qty": 16,
+    "total": 992000,
+    "status": "Delivered",
+    "lines": [
+      { "product": "Tera Zip", "variant": "60V 30Ah", "colour": "Matte Black", "qty": 10, "price": 62000, "inStock": 0 },
+      { "product": "Tera Zip", "variant": "60V 30Ah", "colour": "Pearl White", "qty": 6, "price": 62000, "inStock": 0 }
+    ],
+    "shipment": {
+      "status": "Delivered",
+      "transportType": "By Truck",
+      "companyName": "Sample Transport Co",
+      "companyNumber": "9000000020",
+      "trackingId": "SAMPLE-TRK-0002",
+      "driverNumber": "9000000021",
+      "vehicleNo": "SAMPLE-TN-00-0002",
+      "transportDate": "2026-11-11",
+      "deliveryDate": "2026-11-12",
+      "paymentStatus": "Paid"
+    }
+  },
+  "issue": {
+    "status": "Not raised",
+    "stage": "Not raised",
+    "outcome": "",
+    "order": "PO-2026-0412",
+    "product": "Tera Zip 60V 30Ah",
+    "serial": "SAMPLE-CHS-0001",
+    "description": "Sample issue text for the walkthrough.",
+    "media": "sample-issue-photo.jpg",
+    "reported": "2026-10-27",
+    "compensation": 15000,
+    "transactionId": "SAMPLE-TXN-0001"
+  }
+}

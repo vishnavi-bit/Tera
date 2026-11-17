@@ -1,0 +1,30 @@
+{
+  "slogan": "Ride clean. Ride Tera.",
+  "filters": {
+    "period": ["This Day", "This Month", "This Year", "Custom Date"],
+    "state": ["All States", "Tamil Nadu", "Karnataka", "Kerala"],
+    "unit": ["All units", "MU Hosur", "MU Coimbatore"]
+  },
+  "kpis": { "dealers": 42, "vehiclesSold": 318, "vehicleStock": 126, "pendingOrders": 9 },
+  "poByModel": [
+    { "model": "Tera Zip 60V 30Ah",  "orders": 14, "units": 224 },
+    { "model": "Tera Zip 72V 40Ah",  "orders": 8,  "units": 128 },
+    { "model": "Tera Cargo 60V 43Ah", "orders": 5, "units": 80 }
+  ],
+  "vehicleSales": [
+    { "month": "May", "units": 52 }, { "month": "Jun", "units": 61 }, { "month": "Jul", "units": 58 },
+    { "month": "Aug", "units": 72 }, { "month": "Sep", "units": 75 }
+  ],
+  "warranty": { "open": 7, "resolved": 38, "replacements": 5 },
+  "topWarrantyDealers": [
+    { "dealer": "Kaveri Motors", "claims": 9 },
+    { "dealer": "Velan Automobiles", "claims": 7 },
+    { "dealer": "Annai EV Hub", "claims": 5 }
+  ],
+  "topSellingVehicle": { "model": "Tera Zip 60V 30Ah", "units": 142 },
+  "topDealersByPurchases": [
+    { "dealer": "Sri Lakshmi EVs", "units": 96, "amount": 5952000 },
+    { "dealer": "Velan Automobiles", "units": 80, "amount": 4960000 },
+    { "dealer": "Kaveri Motors", "units": 64, "amount": 3968000 }
+  ]
+}

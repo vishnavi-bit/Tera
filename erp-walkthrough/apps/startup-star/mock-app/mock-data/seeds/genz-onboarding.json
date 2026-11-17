@@ -1,0 +1,312 @@
+{
+  "_sample": "DEMO DATA for the Startup Star walkthroughs. All names, ideas, scores, cities, testimonials, prices shown as results, report content and receipts are invented samples. No payment, WhatsApp, AI or PDF generation is connected.",
+  "persona": {
+    "id": "genz",
+    "label": "Gen Z Founders",
+    "emoji": "⚡",
+    "gradient": [
+      "#f97316",
+      "#ec4899",
+      "#7c3aed"
+    ],
+    "headline": "Your side hustle, but make it real",
+    "sub": "Turn your skills and your followers into a business, in 2 minutes",
+    "pain": [
+      "Too many ideas, no clear first step?",
+      "Starting with almost no money?",
+      "Not sure anyone will really buy?",
+      "Told to \"just get a job\"?"
+    ],
+    "testimonial": {
+      "quote": "₹59 and I finally had a checklist for my first 10 sales.",
+      "who": "Demo Riya, thrift reseller (sample testimonial)"
+    },
+    "hint": "a thrifted streetwear shop on Instagram that sells to college students",
+    "concerns": [
+      "I don't know where to start",
+      "I need to validate my idea",
+      "I have almost no money to start",
+      "I want my first customer",
+      "I'm not sure if my idea will work",
+      "I'm worried what people will say",
+      "I need a co-founder or team"
+    ],
+    "extra": [
+      {
+        "id": "x1",
+        "label": "Where You Are Now",
+        "title": "What describes you right now?",
+        "sub": "It helps us plan around your time and money",
+        "options": [
+          "Studying",
+          "Just graduated",
+          "Working part-time",
+          "Working full-time",
+          "Taking a gap year"
+        ],
+        "a": "Studying"
+      },
+      {
+        "id": "x2",
+        "label": "Your Audience",
+        "title": "Where is your audience today?",
+        "sub": "Pick the place you already have people",
+        "options": [
+          "Instagram",
+          "YouTube",
+          "WhatsApp groups",
+          "My college campus",
+          "I have not built one yet"
+        ],
+        "a": "Instagram"
+      }
+    ]
+  },
+  "business": {
+    "idea": "Thrifted streetwear resale on Instagram and WhatsApp for college students",
+    "stage": "prototype",
+    "concern": "I want my first customer",
+    "location": "online",
+    "city": ""
+  },
+  "profile": {
+    "interests": [
+      "Fashion & Apparel",
+      "Retail / E-commerce"
+    ],
+    "skills": [
+      "Design / Creative",
+      "Sales & Marketing"
+    ],
+    "budget": "Under ₹10,000",
+    "businessType": "Online / Digital"
+  },
+  "followups": [
+    {
+      "id": "q1",
+      "text": "Do you have any prior business or entrepreneurship experience?",
+      "options": [
+        "No experience at all",
+        "Some freelance/side income",
+        "Ran a small business before",
+        "Currently running a business"
+      ],
+      "a": "Some freelance/side income"
+    },
+    {
+      "id": "q2",
+      "text": "How many hours per week can you dedicate to this business?",
+      "options": [
+        "Less than 5 hours",
+        "5–15 hours",
+        "15–30 hours",
+        "Full time (30+ hours)"
+      ],
+      "a": "5–15 hours"
+    },
+    {
+      "id": "q3",
+      "text": "What is your biggest fear about starting this business?",
+      "options": [
+        "Failing and losing money",
+        "Not knowing enough",
+        "Competition in the market",
+        "Family / social pressure",
+        "No fear — I'm ready!"
+      ],
+      "a": "Failing and losing money"
+    }
+  ],
+  "preview": {
+    "score": 67,
+    "top": 30,
+    "why": [
+      "Your passion for Fashion & Apparel gives you domain knowledge that most early competitors simply don't have.",
+      "Online businesses reach 500M+ internet users with minimal overhead. Your geography is no longer a limitation.",
+      "Pan-India reach means you can test, validate and scale without being limited by local market size."
+    ]
+  },
+  "contact": {
+    "name": "Aarav",
+    "email": "demo.genz@example.com",
+    "phone": "9000000001",
+    "state": "form"
+  },
+  "plan": {
+    "id": "entry",
+    "name": "Entry",
+    "price": 59,
+    "originalPrice": 119,
+    "tag": null,
+    "outcome": "I have basic clarity and direction",
+    "features": [
+      "Startup Readiness Score",
+      "Personalized analysis (3 areas)",
+      "Top 1 business idea",
+      "Basic templates (idea worksheet, cost calculator)",
+      "Webinar: \"How to start a company\"",
+      "1 month \"Stay Motivated\" app access"
+    ]
+  },
+  "order": {
+    "id": "DEMO-ORD-GENZ",
+    "paid": false,
+    "coupon": "",
+    "method": "UPI",
+    "total": 59
+  },
+  "report": {
+    "ready": false,
+    "finalScore": 69,
+    "finalBand": "Ready to Plan",
+    "finalTone": "yellow",
+    "prelim": 67,
+    "categories": [
+      {
+        "name": "Idea Clarity & Market Fit",
+        "score": 22,
+        "max": 25,
+        "rationale": "Specific idea, a named customer and a first version live.",
+        "improve": "Test one price point across 10 buyers."
+      },
+      {
+        "name": "Execution Readiness",
+        "score": 14,
+        "max": 20,
+        "rationale": "You are testing, which is the right next step.",
+        "improve": "Run one small drop and note what sells."
+      },
+      {
+        "name": "Financial Preparedness",
+        "score": 6,
+        "max": 20,
+        "rationale": "A small budget limits stock, not the test.",
+        "improve": "Reinvest the first sales into the next drop."
+      },
+      {
+        "name": "Skill & Domain Alignment",
+        "score": 17,
+        "max": 20,
+        "rationale": "Your creative and sales skills fit this idea.",
+        "improve": "Post before and after photos of each piece."
+      },
+      {
+        "name": "Location & Context Advantage",
+        "score": 10,
+        "max": 15,
+        "rationale": "Selling online reaches students everywhere.",
+        "improve": "Pick one platform and master it first."
+      }
+    ],
+    "card": {
+      "topIdea": "Weekly Thrift Drop Store",
+      "idea": "Thrifted streetwear resale on Instagram and WhatsApp for college students",
+      "tags": [
+        "Fashion & Apparel",
+        "Online / Digital",
+        "Pan-India"
+      ],
+      "score": 69,
+      "date": "27 Oct 2026",
+      "status": "ready",
+      "plan": "entry"
+    },
+    "title": "Launch Playbook for a Thrift Drop Store",
+    "summary": "Pan-India · Online · Thrifted streetwear resale",
+    "benchmarks": [
+      [
+        "₹399",
+        "Tee or shirt",
+        "Entry price"
+      ],
+      [
+        "₹899",
+        "Jacket or denim",
+        "Best margin"
+      ],
+      [
+        "₹1,499",
+        "Curated bundle",
+        "Drop special"
+      ]
+    ],
+    "channels": [
+      [
+        "Instagram Reels",
+        "Post 3 short try-on reels each week with a \"DM to buy\" call to action."
+      ],
+      [
+        "WhatsApp broadcast",
+        "Send the drop list to past buyers one day early."
+      ]
+    ],
+    "funnel": [
+      "Reply within an hour",
+      "Share size and price",
+      "Confirm with UPI advance"
+    ],
+    "unit": [
+      [
+        "Target CAC",
+        "Keep below ₹100"
+      ],
+      [
+        "Average order value",
+        "Target ₹700"
+      ],
+      [
+        "Break-even",
+        "Sell 12 pieces a month"
+      ]
+    ],
+    "automate": [
+      "Saved replies for sizes and price",
+      "Order sheet with status"
+    ],
+    "compliance": [
+      "No licence needed for a very small start; check GST once sales grow",
+      "Keep a simple record of every sale",
+      "Use clear return rules in your bio"
+    ],
+    "brand": [
+      "#7c3aed",
+      "#f97316"
+    ],
+    "weeks": [
+      "Pick 20 pieces and photograph them",
+      "Post teasers and open pre-orders",
+      "Close the drop and ship",
+      "Review sales and plan drop two"
+    ]
+  },
+  "dashboard": {
+    "others": [
+      {
+        "topIdea": "Vernacular EdTech Tutoring",
+        "idea": "Online tutoring platform for school students focusing on vernacular language instruction",
+        "tags": [
+          "Education",
+          "Online",
+          "Pan-India"
+        ],
+        "score": 61,
+        "date": "15 Feb 2026",
+        "status": "ready",
+        "plan": "entry"
+      },
+      {
+        "topIdea": "Artisan Sustainable Fashion",
+        "idea": "Sustainable fashion brand selling handmade clothes using local artisans",
+        "tags": [
+          "Fashion",
+          "Product-based",
+          "Jaipur"
+        ],
+        "score": 68,
+        "date": "02 Apr 2026",
+        "status": "generating",
+        "plan": "premium"
+      }
+    ]
+  }
+}

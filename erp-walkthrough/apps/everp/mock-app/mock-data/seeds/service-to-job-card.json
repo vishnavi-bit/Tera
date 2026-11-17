@@ -1,0 +1,50 @@
+{
+  "_sample": "SAMPLE DATA for the Service request to job card walkthrough. Customer names, phone numbers, IDs, chassis and serial numbers, registration numbers and prices are invented. Dealer and product names match the other walkthrough seeds.",
+  "dealer": { "id": "DLR-014", "name": "Sri Lakshmi EVs", "mu": "MU Hosur" },
+  "counts": { "followUps": 1, "prices": 2, "services": 1 },
+  "customer": { "id": "CUS-0101", "name": "Meena Sample", "phone": "9000000101", "email": "meena.sample@example.com" },
+  "vehicle": {
+    "chassis": "TZ-SAMPLE-0101",
+    "regNumber": "TN00SA0101",
+    "motor": "MTR-SAMPLE-0101",
+    "controller": "CTL-SAMPLE-0101",
+    "charger": "CHG-SAMPLE-0101",
+    "batteries": ["BAT-SAMPLE-0101A", "BAT-SAMPLE-0101B"]
+  },
+  "serviceFollowUps": [
+    { "id": "SFU-SAMPLE-0001", "customer": "Meena Sample", "phone": "9000000101", "chassis": "TZ-SAMPLE-0101", "reason": "First free service due", "due": "2026-10-28" },
+    { "id": "SFU-SAMPLE-0002", "customer": "Arun Sample", "phone": "9000000102", "chassis": "TZ-SAMPLE-0102", "reason": "Battery check due", "due": "2026-11-03" }
+  ],
+  "followUp": {
+    "subject": "Service reminder call",
+    "note": "Customer will bring the scooter on Monday for the battery complaint (sample).",
+    "schedule": "2026-10-31T10:00"
+  },
+  "followUps": [
+    { "subject": "Free service reminder", "note": "Called and left a message (sample).", "schedule": "2026-10-27 10:00" }
+  ],
+  "priceList": [
+    { "name": "General service (sample)", "price": 800, "createdBy": "Ravi Kumar", "createdOn": "2026-09-01" },
+    { "name": "Brake adjustment (sample)", "price": 300, "createdBy": "Ravi Kumar", "createdOn": "2026-09-01" }
+  ],
+  "newPrice": { "name": "Battery health check (sample)", "price": 500, "createdBy": "Latha", "createdOn": "2026-10-27" },
+  "services": [
+    { "number": "SRV-SAMPLE-0000", "customer": "Arun Sample", "chassis": "TZ-SAMPLE-0102", "jobType": "Maintenance", "status": "Completed" }
+  ],
+  "service": {
+    "number": "SRV-SAMPLE-0001",
+    "status": "Not created",
+    "productType": "Vehicle",
+    "meterReading": "1520",
+    "jobType": "Maintenance",
+    "serviceType": "Paid Service",
+    "requirements": ["Battery not holding charge"],
+    "customerNotes": "Battery drains within a day (sample)."
+  },
+  "jobCard": {
+    "mileage": "1600",
+    "rsa": false,
+    "rectification": ["Replace battery pack"],
+    "additionalWork": [{ "text": "Check charger output", "done": false }]
+  }
+}

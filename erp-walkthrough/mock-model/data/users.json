@@ -1,0 +1,10 @@
+{
+  "users": [
+    { "id": "Suresh",   "portal": "oem",    "roles": [{ "label": "Procurement Manager" }] },
+    { "id": "Ruby",     "portal": "oem",    "roles": [{ "label": "Inventory Manager" }] },
+    { "id": "Ganesh",   "portal": "oem",    "roles": [{ "label": "Production Manager", "specCode": "PM" }, { "label": "Quality Control Manager" }, { "label": "PDI Manager" }] },
+    { "id": "Dhivyesh", "portal": "oem",    "roles": [{ "label": "Logistics & Dispatch Manager" }] },
+    { "id": "Charan",   "portal": "oem",    "roles": [{ "label": "Accounts Manager" }, { "label": "Super Admin Panel Control" }] },
+    { "id": "Ravi",     "portal": "dealer", "sample": true, "roles": [{ "label": "Dealer Owner" }] }
+  ]
+}

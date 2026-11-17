@@ -1,0 +1,112 @@
+{
+  "_sample": "DEMO DATA for the Residents - Guard walkthroughs. All names, flats, passes and times are invented. The demo pass does not grant real access and no RFID or gate hardware is connected.",
+  "gate": {
+    "name": "Gate 1"
+  },
+  "guard": {
+    "name": "Demo Guard",
+    "shift": "On shift since 08:00"
+  },
+  "counts": {
+    "inside": 3,
+    "pending": 1
+  },
+  "scan": {
+    "result": "idle"
+  },
+  "pass": {
+    "id": "DEMO-PASS-001",
+    "visitor": "Demo Visitor",
+    "category": "Personal Guest",
+    "flat": "A-1204",
+    "resident": "Demo Resident",
+    "validity": "Valid until 18:00 today",
+    "status": "Pre-approved by resident"
+  },
+  "entry": {
+    "done": false,
+    "time": "10:42",
+    "source": "Scanned pass"
+  },
+  "inside": {
+    "list": [
+      {
+        "visitor": "Demo Plumber",
+        "category": "Service Provider",
+        "flat": "B-0302",
+        "since": "09:15",
+        "overdue": true
+      },
+      {
+        "visitor": "Demo Guest Two",
+        "category": "Personal Guest",
+        "flat": "C-0801",
+        "since": "10:05",
+        "overdue": false
+      },
+      {
+        "visitor": "Demo Domestic Help",
+        "category": "Domestic Help",
+        "flat": "A-0506",
+        "since": "08:30",
+        "overdue": false
+      }
+    ]
+  },
+  "parcels": {
+    "held": 0
+  },
+  "delivery": {
+    "company": "Demo Courier",
+    "flat": "A-1204",
+    "reference": "DEMO-PRCL-001",
+    "received": "10:42",
+    "status": "new"
+  },
+  "visit": {
+    "visitor": "Demo Visitor Three",
+    "phone": "90000 00003",
+    "category": "Personal Guest",
+    "flat": "A-1204",
+    "resident": "Demo Resident",
+    "purpose": "Family visit",
+    "status": "draft",
+    "residentDecision": "approved",
+    "source": "Resident approved in the Resident App",
+    "phoneFlow": false,
+    "callOpen": false
+  },
+  "exit": {
+    "target": "",
+    "confirming": false,
+    "done": false,
+    "time": "11:30"
+  },
+  "activity": [
+    {
+      "time": "10:42",
+      "what": "Entry recorded",
+      "detail": "Demo Visitor \u00b7 A-1204 \u00b7 Gate 1 \u00b7 Scanned pass"
+    },
+    {
+      "time": "10:20",
+      "what": "Parcel held",
+      "detail": "Demo Courier \u00b7 B-0302 \u00b7 Gate 1"
+    },
+    {
+      "time": "10:05",
+      "what": "Entry recorded",
+      "detail": "Demo Guest Two \u00b7 C-0801 \u00b7 Gate 1 \u00b7 Resident approved"
+    },
+    {
+      "time": "09:15",
+      "what": "Entry recorded",
+      "detail": "Demo Plumber \u00b7 B-0302 \u00b7 Gate 1 \u00b7 Resident approved"
+    },
+    {
+      "time": "08:30",
+      "what": "Entry recorded",
+      "detail": "Demo Domestic Help \u00b7 A-0506 \u00b7 Gate 1 \u00b7 Schedule"
+    }
+  ]
+}

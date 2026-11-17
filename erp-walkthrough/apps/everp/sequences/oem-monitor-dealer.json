@@ -1,0 +1,100 @@
+{
+  "id": "oem-monitor-dealer",
+  "title": "OEM monitors a dealer (mirror views)",
+  "startStep": "oem-open-dealer",
+  "completionMessage": "{dealer.name} is viewed read-only through its mirror screens. Its customer {customer.name} ({customer.id}), invoice {invoice.id} and chassis {vehiclesSold.0.chassis} appear on each screen.",
+  "steps": {
+    "oem-open-dealer": {
+      "user": "oem-super-admin",
+      "screen": "O04",
+      "proposedAction": "Open the dealer from the dealers list",
+      "infoPanel": [],
+      "actions": {
+        "goto-O06": { "performedText": "opened {dealer.name} from the dealers list", "nextStep": "oem-dealer-detail" }
+      }
+    },
+    "oem-dealer-detail": {
+      "user": "oem-super-admin",
+      "screen": "O06",
+      "proposedAction": "Look at the dealer detail",
+      "infoPanel": [],
+      "notDefined": "The spec does not say how the dealer detail (O06) leads to the mirror screens. Only the Profile, Connections and Ledger top-ups tab names are given, and no tab links to the mirrors.",
+      "performedText": "looked at the {dealer.name} detail",
+      "nextStep": "oem-customers"
+    },
+    "oem-customers": {
+      "user": "oem-super-admin",
+      "screen": "O07",
+      "proposedAction": "Open one customer to see the customer mirror",
+      "infoPanel": [],
+      "actions": {
+        "open-customer": { "performedText": "opened the customer mirror of {customer.name}", "nextStep": "oem-customer-mirror" }
+      }
+    },
+    "oem-customer-mirror": {
+      "user": "oem-super-admin",
+      "screen": "O07",
+      "proposedAction": "Read the customer mirror (read only)",
+      "infoPanel": [],
+      "performedText": "read the customer mirror of {customer.name} ({customer.id})",
+      "nextStep": "oem-enquiries"
+    },
+    "oem-enquiries": {
+      "user": "oem-super-admin",
+      "screen": "O08",
+      "proposedAction": "Read the dealer's enquiries (read only)",
+      "infoPanel": [],
+      "performedText": "read the enquiries of {dealer.name}",
+      "nextStep": "oem-vehicle-sold"
+    },
+    "oem-vehicle-sold": {
+      "user": "oem-super-admin",
+      "screen": "O09",
+      "proposedAction": "Read the vehicles sold (read only)",
+      "infoPanel": [],
+      "performedText": "read the vehicles sold by {dealer.name}",
+      "nextStep": "oem-vehicle-stock"
+    },
+    "oem-vehicle-stock": {
+      "user": "oem-super-admin",
+      "screen": "O10",
+      "proposedAction": "Click add stock to dealer",
+      "infoPanel": [],
+      "notDefined": "The spec gives no effect and no submit control for add stock to dealer, and no options for Product. The dialog shows its fields only.",
+      "performedText": "opened the add stock to dealer dialog for {dealer.name}",
+      "nextStep": "oem-warranty-claims"
+    },
+    "oem-warranty-claims": {
+      "user": "oem-super-admin",
+      "screen": "O11",
+      "proposedAction": "Read the warranty claims (read only)",
+      "infoPanel": [],
+      "performedText": "read the warranty claims of {dealer.name}",
+      "nextStep": "oem-purchase-orders"
+    },
+    "oem-purchase-orders": {
+      "user": "oem-super-admin",
+      "screen": "O12",
+      "proposedAction": "Read the purchase orders (read only)",
+      "infoPanel": [],
+      "performedText": "read the purchase orders of {dealer.name}",
+      "nextStep": "oem-pending-stock"
+    },
+    "oem-pending-stock": {
+      "user": "oem-super-admin",
+      "screen": "O13",
+      "proposedAction": "Read the pending stock (read only)",
+      "infoPanel": [],
+      "performedText": "read the pending stock of {dealer.name}",
+      "nextStep": "oem-vehicle-sold-report"
+    },
+    "oem-vehicle-sold-report": {
+      "user": "oem-super-admin",
+      "screen": "O48",
+      "proposedAction": "Read the vehicle sold report (read only)",
+      "infoPanel": [],
+      "performedText": "read the vehicle sold report for {dealer.name}",
+      "nextStep": null
+    }
+  }
+}

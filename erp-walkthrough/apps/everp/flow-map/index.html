@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EVERP Screen Flow Map</title>
+<style>
+:root{
+  --bg:#f6f7f9; --card:#fff; --ink:#1b2430; --mute:#667085; --line:#d9dde4; --accent:#2563eb;
+  --walk:#1f2937; --btn:#2563eb; --spec:#9aa3b2; --trace:#e11d48; --warn:#b45309; --warnbg:#fff7ed;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#12161c; --card:#1b212a; --ink:#e6e9ef; --mute:#97a1b2; --line:#303846; --accent:#60a5fa;
+  --walk:#e5e7eb; --btn:#60a5fa; --spec:#6b7587; --trace:#fb7185; --warn:#fbbf24; --warnbg:#2a2110;}}
+:root[data-theme="dark"]{--bg:#12161c; --card:#1b212a; --ink:#e6e9ef; --mute:#97a1b2; --line:#303846; --accent:#60a5fa;
+  --walk:#e5e7eb; --btn:#60a5fa; --spec:#6b7587; --trace:#fb7185; --warn:#fbbf24; --warnbg:#2a2110;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{padding:12px 16px;background:var(--card);border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center}
+h1{font-size:17px;margin:0 8px 0 0}
+.tabs{display:flex;gap:4px}
+.tab{border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:6px 12px;border-radius:8px;cursor:pointer;font:inherit}
+.tab.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 16px;border-bottom:1px solid var(--line);background:var(--card)}
+.tools label{display:inline-flex;gap:5px;align-items:center;font-size:13px}
+select,input[type=search],button.b{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:5px 8px;max-width:100%}
+button.b{cursor:pointer}
+button.b.pri{background:var(--accent);color:#fff;border-color:var(--accent)}
+.sw{display:inline-block;width:26px;height:0;border-top:3px solid var(--walk);vertical-align:middle}
+.sw.btn{border-top:3px dashed var(--btn)} .sw.spec{border-top:3px dotted var(--spec)}
+main{display:grid;grid-template-columns:minmax(0,1fr) 420px;height:calc(100vh - 118px);min-height:520px}
+#left{position:relative;overflow:hidden;min-width:0}
+#panel{border-left:1px solid var(--line);background:var(--card);overflow:auto;padding:14px 16px}
+svg{width:100%;height:100%;display:block;cursor:grab;touch-action:none}
+svg:active{cursor:grabbing}
+.node circle{stroke:var(--card);stroke-width:2;cursor:pointer}
+.node text{font-size:10px;fill:var(--ink);pointer-events:none;paint-order:stroke;stroke:var(--bg);stroke-width:3px}
+.node.sel circle{stroke:var(--ink);stroke-width:3}
+.node.nospec circle{stroke-dasharray:3 2;stroke:var(--warn)}
+.edge{fill:none;stroke-linecap:round}
+.edge.k-tour{stroke:var(--walk);opacity:.7}
+.edge.k-mock{stroke:var(--btn);stroke-dasharray:6 4;opacity:.75}
+.edge.k-spec{stroke:var(--spec);stroke-dasharray:1.5 4;opacity:.45}
+.edge.dim,.node.dim{opacity:.07}
+.edge.hl{opacity:1}
+.edge.trace{stroke:var(--trace);opacity:1;stroke-dasharray:8 6;animation:flow .8s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-14}}
+@media (prefers-reduced-motion:reduce){.edge.trace{animation:none}}
+.hit{fill:none;stroke:transparent;stroke-width:12;cursor:pointer}
+.legend{position:absolute;left:10px;bottom:10px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:12px;max-width:62%;max-height:45%;overflow:auto}
+.chip{display:inline-flex;align-items:center;gap:5px;margin:2px 6px 2px 0;cursor:pointer;user-select:none}
+.chip i{width:11px;height:11px;border-radius:50%;display:inline-block}
+.chip.off{opacity:.35;text-decoration:line-through}
+.hint{position:absolute;right:10px;top:8px;font-size:12px;color:var(--mute);background:var(--card);padding:3px 8px;border-radius:8px;border:1px solid var(--line)}
+/* panel */
+.code{font-weight:700;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:0 8px;font-size:12px;color:var(--mute);margin:0 4px 4px 0}
+.pill.walk{border-color:var(--walk);color:var(--walk)} .pill.btn{border-color:var(--btn);color:var(--btn)}
+.pill.warn{border-color:var(--warn);color:var(--warn);background:var(--warnbg)}
+h2{font-size:16px;margin:0 0 4px} h3{font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);margin:16px 0 6px}
+.lk{background:none;border:0;color:var(--accent);cursor:pointer;font:inherit;padding:0;text-align:left}
+.lk:hover{text-decoration:underline}
+.ecard{border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin:0 0 8px;background:var(--bg)}
+.ecard .top{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.ecard details summary{cursor:pointer;color:var(--mute);font-size:12px;margin-top:4px}
+.ev{margin:6px 0 0;padding:6px 8px;border-left:3px solid var(--line);font-size:13px}
+.ev.t{border-color:var(--walk)} .ev.m{border-color:var(--btn)} .ev.s{border-color:var(--spec)}
+.ev q{color:var(--mute)}
+.mute{color:var(--mute)} .small{font-size:12px}
+.role{display:inline-block;border-radius:6px;padding:0 6px;color:#fff;font-size:12px}
+.empty{color:var(--mute);font-style:italic}
+/* tours */
+.view{display:none;height:100%;overflow:auto;padding:16px}
+.view.on{display:block}
+.tour{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:0 0 12px}
+.strip{display:flex;flex-wrap:wrap;gap:6px 2px;align-items:center;margin-top:8px}
+.step{border:2px solid;border-radius:8px;padding:2px 7px;font-size:12px;background:var(--card);color:var(--ink);cursor:pointer;font-variant-numeric:tabular-nums}
+.step.nd{background:var(--warnbg)}
+.arrow{color:var(--mute);padding:0 3px}
+.arrow.ho{color:var(--trace);font-weight:700}
+table.mx{border-collapse:collapse;font-size:12px}
+.mx th,.mx td{border:1px solid var(--line);padding:4px 6px;text-align:center}
+.mx th.r{text-align:left;white-space:nowrap}
+.mx td{cursor:pointer;min-width:34px}
+.mx td.z{cursor:default;color:var(--mute)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.box ul{margin:6px 0 0;padding-left:18px}
+@media(max-width:900px){body{overflow-x:hidden}.tools>span:last-child{flex:1 1 100%;display:flex;flex-wrap:wrap;gap:6px}.tools select{flex:1 1 100%;width:100%}.legend{display:none}main{grid-template-columns:1fr;height:auto}#left{height:70vh}#panel{border-left:0;border-top:1px solid var(--line)}}
+</style>
+</head>
+<body>
+<header>
+  <h1>EVERP Screen Flow Map</h1>
+  <nav class="tabs" id="tabs">
+    <button class="tab on" data-v="map">Map</button>
+    <button class="tab" data-v="tours">Tours</button>
+    <button class="tab" data-v="matrix">Module matrix</button>
+    <button class="tab" data-v="gaps">Gaps</button>
+  </nav>
+  <span class="mute small" id="counts"></span>
+</header>
+<div class="tools" id="tools">
+  <span><span class="sw"></span> walked in a tour</span>
+  <span><span class="sw btn"></span> button in the mock</span>
+  <span><span class="sw spec"></span> only named in the spec</span>
+  <span style="flex:1"></span>
+  <label><input type="checkbox" data-k="tour" checked> walked</label>
+  <label><input type="checkbox" data-k="mock" checked> button</label>
+  <label><input type="checkbox" data-k="spec" checked> spec</label>
+  <select id="app"><option value="all">Both apps</option><option>Dealer</option><option>OEM</option></select>
+  <select id="tourSel"><option value="">Trace a tour…</option></select>
+  <span>Path
+    <select id="from"></select> →
+    <select id="to"></select>
+    <button class="b pri" id="find">Find</button>
+    <button class="b" id="clear">Clear</button>
+  </span>
+</div>
+<main>
+  <div id="left">
+    <div class="view on" id="v-map" style="padding:0;overflow:hidden">
+      <svg id="svg" aria-label="Screen connection map"></svg>
+      <div class="hint">scroll to zoom · drag to pan · click a screen or a line</div>
+      <div class="legend" id="legend"></div>
+    </div>
+    <div class="view" id="v-tours"></div>
+    <div class="view" id="v-matrix"></div>
+    <div class="view" id="v-gaps"></div>
+  </div>
+  <aside id="panel"></aside>
+</main>
+
+<script>
+(async function(){
+const G = await (await fetch('graph.json')).json();
+let ROLES = {};
+try { ROLES = await (await fetch('../roles.json')).json(); } catch(e) {}
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const N = new Map(G.nodes.map(n => [n.code, n]));
+const E = G.edges;
+const ek = e => e.source + '>' + e.target;
+const EM = new Map(E.map(e => [ek(e), e]));
+const out = new Map(), inn = new Map();
+G.nodes.forEach(n => { out.set(n.code, []); inn.set(n.code, []); });
+E.forEach(e => { out.get(e.source).push(e); inn.get(e.target).push(e); });
+const roleName = r => r.replace(/-/g,' ').replace(/\b\w/g, c => c.toUpperCase());
+const roleColor = r => (ROLES[r] && ROLES[r].color) || '#64748b';
+const roleTag = r => `<span class="role" style="background:${roleColor(r)}">${esc(roleName(r))}</span>`;
+
+const S = { sel:null, edge:null, kinds:{tour:true,mock:true,spec:true}, hideMod:new Set(), app:'all', trace:null, view:'map' };
+
+/* colours per module */
+const mods = [...new Set(G.nodes.map(n => n.module))];
+const modApp = {}; G.nodes.forEach(n => modApp[n.module] = n.app);
+const dm = mods.filter(m => modApp[m]==='Dealer'), om = mods.filter(m => modApp[m]!=='Dealer');
+const modCol = {};
+dm.forEach((m,i) => modCol[m] = `hsl(${165 + i*(100/Math.max(dm.length,1))},62%,46%)`);
+om.forEach((m,i) => modCol[m] = `hsl(${(i*(330/Math.max(om.length,1)))+8},72%,52%)`);
+const colOf = n => modCol[n.module] || '#888';
+
+/* force layout (computed once, deterministic) */
+let seed = 7; const rnd = () => (seed = (seed*16807)%2147483647)/2147483647;
+const W = 1400, H = 900;
+G.nodes.forEach(n => { n.x = W/2 + (n.app==='Dealer'?-1:1)*(150+rnd()*350); n.y = H/2 + (rnd()-.5)*600; n.vx=0; n.vy=0; n.r = 6 + Math.min(14, Math.sqrt(n.degree)*2.4); });
+const pairs = E.map(e => [N.get(e.source), N.get(e.target), e.kinds.includes('tour') ? 1 : e.kinds.includes('mock') ? .7 : .35]);
+for (let it=0; it<420; it++) {
+  const cool = 1 - it/420;
+  for (let i=0;i<G.nodes.length;i++) for (let j=i+1;j<G.nodes.length;j++) {
+    const a=G.nodes[i], b=G.nodes[j]; let dx=a.x-b.x, dy=a.y-b.y, d2=dx*dx+dy*dy+.01, d=Math.sqrt(d2);
+    const f = 2300/d2; a.vx+=dx/d*f; a.vy+=dy/d*f; b.vx-=dx/d*f; b.vy-=dy/d*f;
+  }
+  pairs.forEach(([a,b,w]) => { const dx=b.x-a.x, dy=b.y-a.y, d=Math.sqrt(dx*dx+dy*dy)+.01, f=(d-70)*.012*w; a.vx+=dx/d*f; a.vy+=dy/d*f; b.vx-=dx/d*f; b.vy-=dy/d*f; });
+  G.nodes.forEach(n => {
+    const tx = n.app==='Dealer' ? W*.3 : W*.7;
+    n.vx += (tx-n.x)*.004; n.vy += (H/2-n.y)*.004;
+    n.x += Math.max(-12,Math.min(12,n.vx*.6*cool+.01)); n.y += Math.max(-12,Math.min(12,n.vy*.6*cool)); n.vx*=.55; n.vy*=.55;
+  });
+}
+
+/* visibility */
+const kindOn = e => e.kinds.some(k => S.kinds[k]);
+const nodeOn = n => !S.hideMod.has(n.module) && (S.app==='all' || n.app===S.app);
+const edgeOn = e => kindOn(e) && nodeOn(N.get(e.source)) && nodeOn(N.get(e.target));
+const mainKind = e => e.kinds.includes('tour') ? 'tour' : e.kinds.includes('mock') ? 'mock' : 'spec';
+
+/* ---------- SVG map ---------- */
+const svg = $('#svg'); const NS = 'http://www.w3.org/2000/svg';
+let vb = { x:0, y:0, w:W, h:H };
+function applyVB(){ svg.setAttribute('viewBox', `${vb.x} ${vb.y} ${vb.w} ${vb.h}`); }
+function mk(tag, attrs, parent){ const el = document.createElementNS(NS, tag); for (const k in attrs) el.setAttribute(k, attrs[k]); (parent||svg).appendChild(el); return el; }
+function drawMap(){
+  svg.innerHTML = '';
+  const defs = mk('defs', {});
+  ['tour','mock','spec'].forEach(k => { const m = mk('marker', {id:'ar-'+k, viewBox:'0 0 10 10', refX:9, refY:5, markerWidth:6, markerHeight:6, orient:'auto-start-reverse'}, defs);
+    mk('path', {d:'M0 0L10 5L0 10z', fill: k==='tour'?'var(--walk)':k==='mock'?'var(--btn)':'var(--spec)'}, m); });
+  const mt = mk('marker', {id:'ar-trace', viewBox:'0 0 10 10', refX:9, refY:5, markerWidth:6, markerHeight:6, orient:'auto-start-reverse'}, defs);
+  mk('path', {d:'M0 0L10 5L0 10z', fill:'var(--trace)'}, mt);
+  const gE = mk('g', {}), gN = mk('g', {});
+  E.forEach(e => {
+    if (!edgeOn(e)) return;
+    const a = N.get(e.source), b = N.get(e.target);
+    const dx=b.x-a.x, dy=b.y-a.y, d=Math.sqrt(dx*dx+dy*dy)||1, ux=dx/d, uy=dy/d;
+    const x1=a.x+ux*a.r, y1=a.y+uy*a.r, x2=b.x-ux*(b.r+4), y2=b.y-uy*(b.r+4);
+    const off = Math.min(28, d*.12), cx=(x1+x2)/2 - uy*off, cy=(y1+y2)/2 + ux*off;
+    const k = mainKind(e);
+    const path = `M${x1} ${y1}Q${cx} ${cy} ${x2} ${y2}`;
+    const p = mk('path', {d:path, class:`edge k-${k}`, 'data-e':ek(e), 'stroke-width': k==='tour' ? 1.2+Math.min(3, e.tour.length*.5) : 1.3, 'marker-end':`url(#ar-${k})`}, gE);
+    const h = mk('path', {d:path, class:'hit', 'data-e':ek(e)}, gE);
+    h.addEventListener('click', ev => { ev.stopPropagation(); S.edge = ek(e); S.sel = null; refresh(); });
+  });
+  G.nodes.forEach(n => {
+    if (!nodeOn(n)) return;
+    const g = mk('g', {class:'node'+(n.inSpec?'':' nospec'), 'data-n':n.code, transform:`translate(${n.x} ${n.y})`}, gN);
+    mk('circle', {r:n.r, fill:colOf(n)}, g);
+    mk('title', {}, g).textContent = `${n.code} ${n.name}\n${n.module}`;
+    const t = mk('text', {y:-n.r-3, 'text-anchor':'middle'}, g); t.textContent = n.code;
+    g.addEventListener('click', ev => { ev.stopPropagation(); select(n.code); });
+  });
+  highlight();
+}
+function neighbours(code){ const s = new Set([code]); out.get(code).forEach(e => s.add(e.target)); inn.get(code).forEach(e => s.add(e.source)); return s; }
+function highlight(){
+  const T = S.trace, selN = S.sel && neighbours(S.sel), selE = S.edge;
+  svg.querySelectorAll('.edge').forEach(p => {
+    const key = p.dataset.e, e = EM.get(key), k = mainKind(e);
+    p.classList.remove('dim','hl','trace'); p.setAttribute('marker-end', `url(#ar-${k})`);
+    if (T) { if (T.edges.has(key)) { p.classList.add('trace'); p.setAttribute('marker-end','url(#ar-trace)'); } else p.classList.add('dim'); }
+    else if (selE) { key===selE ? p.classList.add('hl') : p.classList.add('dim'); }
+    else if (S.sel) { (e.source===S.sel||e.target===S.sel) ? p.classList.add('hl') : p.classList.add('dim'); }
+  });
+  svg.querySelectorAll('.node').forEach(g => {
+    const c = g.dataset.n; g.classList.remove('dim','sel');
+    if (T) { if (!T.nodes.has(c)) g.classList.add('dim'); }
+    else if (selE) { const e = EM.get(selE); if (c!==e.source && c!==e.target) g.classList.add('dim'); }
+    else if (S.sel) { if (!selN.has(c)) g.classList.add('dim'); }
+    if (c===S.sel) g.classList.add('sel');
+  });
+}
+/* pan & zoom */
+let drag = null;
+svg.addEventListener('pointerdown', e => { drag = {x:e.clientX, y:e.clientY, vx:vb.x, vy:vb.y, moved:false}; svg.setPointerCapture(e.pointerId); });
+svg.addEventListener('pointermove', e => { if (!drag) return; const r = svg.getBoundingClientRect(); const sx = vb.w/r.width, sy = vb.h/r.height;
+  const dx=e.clientX-drag.x, dy=e.clientY-drag.y; if (Math.abs(dx)+Math.abs(dy)>3) drag.moved=true;
+  vb.x = drag.vx - dx*sx; vb.y = drag.vy - dy*sy; applyVB(); });
+svg.addEventListener('pointerup', () => { if (drag && !drag.moved) { S.sel=null; S.edge=null; refresh(); } drag=null; });
+svg.addEventListener('wheel', e => { e.preventDefault(); const r = svg.getBoundingClientRect();
+  const f = e.deltaY>0 ? 1.12 : .89, mx = vb.x + (e.clientX-r.left)/r.width*vb.w, my = vb.y + (e.clientY-r.top)/r.height*vb.h;
+  vb.x = mx-(mx-vb.x)*f; vb.y = my-(my-vb.y)*f; vb.w*=f; vb.h*=f; applyVB(); }, {passive:false});
+function zoomTo(codes){ const ns = [...codes].map(c => N.get(c)).filter(Boolean); if (!ns.length) return;
+  const xs = ns.map(n=>n.x), ys = ns.map(n=>n.y), pad = 90;
+  let x0=Math.min(...xs)-pad, x1=Math.max(...xs)+pad, y0=Math.min(...ys)-pad, y1=Math.max(...ys)+pad;
+  const r = svg.getBoundingClientRect(), ar = r.width/r.height; let w=x1-x0, h=y1-y0;
+  if (w/h>ar) { const nh=w/ar; y0-=(nh-h)/2; h=nh; } else { const nw=h*ar; x0-=(nw-w)/2; w=nw; }
+  vb = {x:x0,y:y0,w,h}; applyVB(); }
+
+/* ---------- panel ---------- */
+function badges(e){ return [e.tour.length?`<span class="pill walk">walked in ${new Set(e.tour.map(t=>t.tour)).size} tour${new Set(e.tour.map(t=>t.tour)).size>1?'s':''}</span>`:'',
+  e.mock.length?'<span class="pill btn">button in mock</span>':'', e.spec.length?'<span class="pill">named in spec</span>':''].join(''); }
+const nm = c => { const n = N.get(c); return n ? n.name : c; };
+const scLink = c => `<button class="lk" data-go="${c}"><span class="code">${c}</span> ${esc(nm(c))}</button>`;
+function summary(e){
+  if (e.tour.length) { const t = e.tour[0]; return `${roleName(t.by)} ${t.did.charAt(0).toLowerCase()+t.did.slice(1)}${t.handoff?`, then <b>${esc(roleName(t.to))}</b> continues`:''}.`; }
+  if (e.mock.length) return `“${esc(e.mock[0].button)}” button on ${e.source}.`;
+  return esc(e.spec[0].text);
+}
+function evidence(e){
+  let h = '';
+  const byTour = {}; e.tour.forEach(t => (byTour[t.tour] = byTour[t.tour] || []).push(t));
+  Object.values(byTour).forEach(ts => { const t = ts[0];
+    h += `<div class="ev t"><b>Tour:</b> ${esc(t.title)}<br>${roleTag(t.by)} ${esc(t.did)}${t.button?` <span class="mute">[action <code>${esc(t.button)}</code>]</span>`:''}<br>`
+      + (t.handoff ? `<b>Hand-off →</b> ${roleTag(t.to)} <span class="mute">${esc(t.nextStepAction)}</span><br>` : `<span class="mute">Next on ${e.target}: ${esc(t.nextStepAction)}</span><br>`)
+      + (t.result ? `<span class="mute">Result: ${esc(String(t.result).replace(/[{}]/g,''))}</span><br>` : '')
+      + (t.stateChange ? `<span class="small"><b>Data changed:</b> ${esc(summariseState(t.stateChange))}</span><br>` : '')
+      + (t.gap ? `<span class="pill warn">the next screen is “Not defined” in this tour</span>` : '') + `</div>`; });
+  e.mock.forEach(m => h += `<div class="ev m"><b>Mock screen:</b> button “${esc(m.button)}”${m.action?` <span class="mute">(action <code>${esc(m.action)}</code>)</span>`:''} on ${e.source} opens ${e.target}.</div>`);
+  e.spec.forEach(s => h += `<div class="ev s"><b>Spec${s.rel==='counterpart'?' (counterpart / mirror screen)':''}:</b> <q>${esc(s.text)}</q></div>`);
+  return h;
+}
+function summariseState(sc){ try { return Object.entries(sc).map(([k,v]) => `${k} = ${typeof v==='object'?JSON.stringify(v):v}`).join('; ').slice(0,220); } catch(e){ return ''; } }
+function card(e, dirCode, expanded){
+  const c = dirCode;
+  return `<div class="ecard"><div class="top">${scLink(c)}<span class="pill">${esc(N.get(c)?.module||'')}</span></div>
+  <div>${badges(e)}</div><div class="small">${summary(e)}</div>
+  <details${expanded?' open':''}><summary>how they connect · ${e.tour.length+e.mock.length+e.spec.length} piece(s) of evidence</summary>${evidence(e)}</details></div>`;
+}
+function panel(){
+  const p = $('#panel');
+  if (S.edge) { const e = EM.get(S.edge); p.innerHTML = `<h2>${scLink(e.source)} → ${scLink(e.target)}</h2><div>${badges(e)}</div>${evidence(e)}<p><button class="b" data-clear>Back</button></p>`; return; }
+  if (S.sel) {
+    const n = N.get(S.sel);
+    const o = out.get(n.code).filter(edgeOn), i = inn.get(n.code).filter(edgeOn);
+    p.innerHTML = `<h2><span class="code">${n.code}</span> ${esc(n.name)}</h2>
+      <div><span class="pill" style="border-color:${colOf(n)}">${esc(n.app)} · ${esc(n.module)}</span>
+      ${n.inSpec?'':'<span class="pill warn">not in screen_details.md</span>'}
+      ${n.built?'<span class="pill btn">mock screen built</span>':'<span class="pill">no mock screen</span>'}
+      ${n.tours.length?`<span class="pill walk">in ${n.tours.length} tour${n.tours.length>1?'s':''}</span>`:'<span class="pill warn">in no tour</span>'}
+      ${n.openQuestions?`<span class="pill warn">${n.openQuestions} open question${n.openQuestions>1?'s':''}</span>`:''}</div>
+      <h3>Leads to (${o.length})</h3>${o.length ? o.map(e => card(e, e.target)).join('') : '<p class="empty">Nothing leads on from here in the data we have.</p>'}
+      <h3>Reached from (${i.length})</h3>${i.length ? i.map(e => card(e, e.source)).join('') : '<p class="empty">Nothing leads here in the data we have.</p>'}`;
+    return;
+  }
+  if (S.trace) {
+    p.innerHTML = `<h2>${esc(S.trace.label)}</h2>` + (S.trace.steps ? S.trace.steps.map((st,i) => `<div class="ecard"><div class="top"><b>${i+1}.</b> ${scLink(st.code)}</div>${st.edge?`<div>${badges(st.edge)}</div><div class="small">${summary(st.edge)}</div><details><summary>how</summary>${evidence(st.edge)}</details>`:''}</div>`).join('') : `<p class="mute">${S.trace.nodes.size} screens, ${S.trace.edges.size} links highlighted.</p>`) + `<p><button class="b" data-clear>Clear</button></p>`;
+    return;
+  }
+  const top = [...G.nodes].sort((a,b) => b.degree-a.degree).slice(0,8);
+  p.innerHTML = `<h2>How to read this</h2>
+   <p>Every dot is a screen. A line means one screen leads to another. Pick a screen to see <b>where it goes, where it comes from, and how</b>: which button, which role, what data changes.</p>
+   <p><b>Three kinds of evidence</b> per line:</p>
+   <div class="ev t">Walked: a walkthrough step really goes from A to B.</div>
+   <div class="ev m">Button: the mock screen has a button that opens B.</div>
+   <div class="ev s">Spec: <code>screen_details.md</code> names B in A's section.</div>
+   <p class="small mute">Dashed amber ring = the screen is named but has no section in the spec. Red moving lines = a traced tour or path.</p>
+   <h3>Most connected screens</h3>${top.map(n => `<div>${scLink(n.code)} <span class="mute small">${n.degree} links</span></div>`).join('')}`;
+}
+
+/* ---------- selection ---------- */
+function select(code){ S.sel = code; S.edge = null; S.trace = null; $('#tourSel').value=''; refresh(); zoomTo(neighbours(code)); }
+function refresh(){ highlight(); panel(); counts(); }
+function counts(){ const ne = E.filter(edgeOn).length; $('#counts').textContent = `${G.nodes.filter(nodeOn).length} screens · ${ne} links`; }
+document.addEventListener('click', e => {
+  const go = e.target.closest('[data-go]'); if (go) { setView('map'); select(go.dataset.go); }
+  if (e.target.closest('[data-clear]')) { S.edge=null; S.sel=null; S.trace=null; refresh(); }
+});
+
+/* ---------- filters ---------- */
+document.querySelectorAll('#tools [data-k]').forEach(cb => cb.addEventListener('change', () => { S.kinds[cb.dataset.k] = cb.checked; drawMap(); refresh(); }));
+$('#app').onchange = e => { S.app = e.target.value; drawMap(); refresh(); };
+$('#legend').innerHTML = '<b>Module</b> (click to hide)<br>' + mods.map(m => `<span class="chip" data-m="${esc(m)}"><i style="background:${modCol[m]}"></i>${esc(m)}</span>`).join('');
+$('#legend').addEventListener('click', e => { const c = e.target.closest('.chip'); if (!c) return; const m = c.dataset.m;
+  S.hideMod.has(m) ? S.hideMod.delete(m) : S.hideMod.add(m); c.classList.toggle('off'); drawMap(); refresh(); });
+
+/* ---------- tour trace + path finder ---------- */
+G.tours.forEach(t => { const o = document.createElement('option'); o.value = t.id; o.textContent = t.title; $('#tourSel').appendChild(o); });
+function traceTour(id){
+  const t = G.tours.find(x => x.id===id); if (!t) return;
+  const edges = new Set(), nodes = new Set();
+  E.forEach(e => { if (e.tour.some(x => x.tour===id)) { edges.add(ek(e)); nodes.add(e.source); nodes.add(e.target); } });
+  t.steps.forEach(s => nodes.add(s.screen));
+  S.trace = {label:'Tour: '+t.title, edges, nodes}; S.sel=null; S.edge=null; setView('map'); refresh(); zoomTo(nodes);
+}
+$('#tourSel').onchange = e => e.target.value ? traceTour(e.target.value) : (S.trace=null, refresh());
+const opts = G.nodes.map(n => `<option value="${n.code}">${n.code} ${esc(n.name)}</option>`).join('');
+$('#from').innerHTML = opts; $('#to').innerHTML = opts; $('#to').selectedIndex = Math.min(20, G.nodes.length-1);
+$('#find').onclick = () => {
+  const a = $('#from').value, b = $('#to').value;
+  const w = e => e.kinds.includes('tour') ? 1 : e.kinds.includes('mock') ? 1.4 : 2.5;
+  const dist = {[a]:0}, prev = {}, q = [a];
+  while (q.length) { q.sort((x,y) => dist[x]-dist[y]); const u = q.shift(); if (u===b) break;
+    out.get(u).filter(kindOn).forEach(e => { const nd = dist[u]+w(e); if (dist[e.target]===undefined || nd<dist[e.target]) { dist[e.target]=nd; prev[e.target]=e; q.push(e.target); } }); }
+  if (dist[b]===undefined) { S.trace = {label:`No route from ${a} to ${b} in the data we have`, edges:new Set(), nodes:new Set([a,b])}; }
+  else { const path = []; let c = b; while (c!==a) { path.unshift(prev[c]); c = prev[c].source; }
+    const edges = new Set(path.map(ek)), nodes = new Set([a, ...path.map(e => e.target)]);
+    S.trace = {label:`${a} → ${b} in ${path.length} step${path.length>1?'s':''}`, edges, nodes, steps:[{code:a}, ...path.map(e => ({code:e.target, edge:e}))]}; }
+  S.sel=null; S.edge=null; setView('map'); refresh(); zoomTo(S.trace.nodes);
+};
+$('#clear').onclick = () => { S.trace=null; S.sel=null; S.edge=null; $('#tourSel').value=''; refresh(); vb={x:0,y:0,w:W,h:H}; applyVB(); };
+
+/* ---------- tours view ---------- */
+function toursView(){
+  $('#v-tours').innerHTML = `<p class="mute">Each strip is one walkthrough. Colour = the role acting. A red ⇄ marks a hand-off between roles. Amber fill = the step has something “Not defined”. Click a step to see its connections.</p>` +
+  G.tours.map(t => `<div class="tour"><b>${esc(t.title)}</b> <span class="mute small">${t.steps.length} steps · ${[...new Set(t.steps.map(s=>s.user))].map(roleTag).join(' ')}</span>
+   <button class="b" style="float:right" data-trace="${t.id}">Trace on map</button>
+   <div class="strip">${t.steps.map((s,i) => (i? `<span class="arrow${t.steps[i-1].user!==s.user?' ho':''}">${t.steps[i-1].user!==s.user?'⇄':'→'}</span>`:'') + `<button class="step${s.notDefined?' nd':''}" style="border-color:${roleColor(s.user)}" data-go="${s.screen}" title="${esc(roleName(s.user))}: ${esc(s.action)}">${s.screen}</button>`).join('')}</div></div>`).join('');
+}
+$('#v-tours').addEventListener('click', e => { const b = e.target.closest('[data-trace]'); if (b) { $('#tourSel').value = b.dataset.trace; traceTour(b.dataset.trace); } });
+
+/* ---------- module matrix ---------- */
+function matrixView(){
+  const M = mods; const cnt = {};
+  E.forEach(e => { if (!kindOn(e)) return; const a = N.get(e.source).module, b = N.get(e.target).module; (cnt[a+'|'+b] = cnt[a+'|'+b] || []).push(e); });
+  const mx = Math.max(...Object.values(cnt).map(v => v.length), 1);
+  let h = `<p class="mute">Rows = where the link starts, columns = where it lands. Darker = more links. The diagonal is inside one module. Click a cell to list its links.</p><div style="overflow:auto"><table class="mx"><tr><th></th>${M.map((m,i) => `<th title="${esc(m)}">${i+1}</th>`).join('')}</tr>`;
+  M.forEach((a,i) => { h += `<tr><th class="r"><span class="chip" style="cursor:default"><i style="background:${modCol[a]}"></i>${i+1}. ${esc(a)}</span></th>` +
+    M.map(b => { const v = cnt[a+'|'+b]; return v ? `<td data-c="${esc(a+'|'+b)}" style="background:color-mix(in srgb, var(--accent) ${Math.round(14+v.length/mx*70)}%, transparent)">${v.length}</td>` : '<td class="z">·</td>'; }).join('') + '</tr>'; });
+  h += '</table></div><div id="mxlist" class="box" style="margin-top:12px"><span class="empty">Pick a cell.</span></div>';
+  $('#v-matrix').innerHTML = h; $('#v-matrix').dataset.cnt = '1'; window.__cnt = cnt;
+}
+$('#v-matrix').addEventListener('click', e => { const td = e.target.closest('td[data-c]'); if (!td) return; const [a,b] = td.dataset.c.split('|');
+  $('#mxlist').innerHTML = `<b>${esc(a)} → ${esc(b)}</b>` + window.__cnt[td.dataset.c].map(x => `<div style="margin-top:6px">${scLink(x.source)} → ${scLink(x.target)} ${badges(x)}<div class="small mute">${summary(x)}</div></div>`).join(''); });
+
+/* ---------- gaps ---------- */
+function gapsView(){
+  const specOnly = E.filter(e => !e.tour.length && !e.mock.length && e.spec.some(x => x.rel!=='counterpart'));
+  const walkedNoSpec = E.filter(e => e.tour.length && !e.spec.length);
+  const iso = G.nodes.filter(n => n.degree===0);
+  const ndSteps = G.tours.flatMap(t => t.steps.filter(s => s.notDefined).map(s => ({t, s})));
+  const noTour = G.nodes.filter(n => !n.tourSteps && n.degree && n.inSpec);
+  const noSpec = G.nodes.filter(n => !n.inSpec);
+  const li = (e, who) => `<li>${scLink(e.source)} → ${scLink(e.target)}</li>`;
+  $('#v-gaps').innerHTML = `<p class="mute">Where the connections are thin, unproven or missing. Use this list in the review meeting.</p><div class="grid2">
+  <div class="box"><b>Spec names it, no tour or button shows it (${specOnly.length})</b><div class="small mute">Counterpart (mirror) pairs are left out. The spec links these screens but no walkthrough step or mock button does. Is the link real? Does a tour need it?</div><ul>${specOnly.map(li).join('')}</ul></div>
+  <div class="box"><b>Walked in a tour, spec is silent (${walkedNoSpec.length})</b><div class="small mute">The walkthrough had to connect these, but the spec section never mentions the destination. The connection may need to be written into screen_details.md.</div><ul>${walkedNoSpec.map(li).join('')}</ul></div>
+  <div class="box"><b>Tour steps marked “Not defined” (${ndSteps.length})</b><div class="small mute">The walkthrough reached this screen but the spec could not say what it looks like or where it leads.</div><ul>${ndSteps.map(x => `<li>${scLink(x.s.screen)} <span class="mute small">in ${esc(x.t.title)}</span></li>`).join('')}</ul></div>
+  <div class="box"><b>Linked but in no tour (${noTour.length})</b><div class="small mute">Connections exist on paper only; no walkthrough covers these screens.</div><ul>${noTour.map(n => `<li>${scLink(n.code)}</li>`).join('')}</ul></div>
+  <div class="box"><b>Isolated screens (${iso.length})</b><div class="small mute">No link in or out anywhere.</div><ul>${iso.map(n => `<li>${scLink(n.code)}</li>`).join('')}</ul></div>
+  <div class="box"><b>Named but not in screen_details.md (${noSpec.length})</b><ul>${noSpec.map(n => `<li>${scLink(n.code)}</li>`).join('')}</ul></div></div>`;
+}
+
+/* ---------- views ---------- */
+function setView(v){
+  S.view = v; document.querySelectorAll('.tab').forEach(t => t.classList.toggle('on', t.dataset.v===v));
+  document.querySelectorAll('.view').forEach(x => x.classList.toggle('on', x.id==='v-'+v));
+  if (v==='map') requestAnimationFrame(() => { if (!S.trace && !S.sel) { vb={x:0,y:0,w:W,h:H}; applyVB(); } });
+}
+$('#tabs').addEventListener('click', e => { const t = e.target.closest('.tab'); if (t) setView(t.dataset.v); });
+
+applyVB(); drawMap(); toursView(); matrixView(); gapsView(); refresh();
+if (location.hash.length > 1) { const h = location.hash.slice(1), c = h.toUpperCase();
+  if (N.has(c)) select(c); else if (['tours','matrix','gaps'].includes(h)) setView(h); else if (h.startsWith('tour:')) traceTour(h.slice(5)); }
+})();
+</script>
+</body>
+</html>

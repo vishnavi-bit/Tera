@@ -1,0 +1,29 @@
+{
+  "name": "startup-star",
+  "title": "Startup Star",
+  "spec": "docs/00_README.md",
+  "feedbackApp": "STARTUPSTAR",
+  "walkthroughs": [
+    {
+      "id": "women-onboarding",
+      "title": "Onboarding: Women Entrepreneurs",
+      "description": "A woman with a home-based food idea goes from her own landing page through all four stages to a paid Core report.",
+      "sequenceFile": "sequences/women-onboarding.json",
+      "seedData": "mock-app/mock-data/seeds/women-onboarding.json"
+    },
+    {
+      "id": "genz-onboarding",
+      "title": "Onboarding: Gen Z Founders",
+      "description": "A Gen Z seller with a tiny budget checks an online idea and buys the ₹59 Entry report.",
+      "sequenceFile": "sequences/genz-onboarding.json",
+      "seedData": "mock-app/mock-data/seeds/genz-onboarding.json"
+    },
+    {
+      "id": "midlife-onboarding",
+      "title": "Onboarding: Midlife Career Changers",
+      "description": "A midlife professional turns 20 years of experience into a consulting idea and buys the ₹2,999 Premium report.",
+      "sequenceFile": "sequences/midlife-onboarding.json",
+      "seedData": "mock-app/mock-data/seeds/midlife-onboarding.json"
+    }
+  ]
+}

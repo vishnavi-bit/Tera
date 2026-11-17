@@ -1,0 +1,82 @@
+{
+  "id": "unexpected-visitor",
+  "title": "Approve or reject a visitor",
+  "startStep": "home",
+  "completionMessage": "{request.visitor} is now {request.status}. The guard at {request.gate} sees your answer; entry is allowed only after an approval.",
+  "steps": {
+    "home": {
+      "user": "resident-a1204",
+      "screen": "R01",
+      "proposedAction": "Tap Approvals",
+      "infoPanel": [
+        {
+          "key": "counts.pending",
+          "label": "Waiting for approval"
+        }
+      ],
+      "actions": {
+        "goto-R02": {
+          "performedText": "opened Approvals",
+          "nextStep": "approvals"
+        }
+      }
+    },
+    "approvals": {
+      "user": "resident-a1204",
+      "screen": "R02",
+      "proposedAction": "Review the visitor's request",
+      "infoPanel": [
+        {
+          "key": "counts.pending",
+          "label": "Waiting for approval"
+        }
+      ],
+      "actions": {
+        "open-request": {
+          "performedText": "opened the request from {request.visitor}",
+          "nextStep": "request"
+        }
+      }
+    },
+    "request": {
+      "user": "resident-a1204",
+      "screen": "R03",
+      "proposedAction": "Approve or reject the visitor",
+      "actions": {
+        "approve-visitor": {
+          "performedText": "approved {request.visitor}",
+          "nextStep": "history",
+          "stateChange": {
+            "request.status": {
+              "set": "approved"
+            },
+            "counts.pending": -1
+          }
+        },
+        "reject-visitor": {
+          "performedText": "rejected {request.visitor}",
+          "nextStep": "history",
+          "stateChange": {
+            "request.status": {
+              "set": "rejected"
+            },
+            "counts.pending": -1
+          }
+        }
+      }
+    },
+    "history": {
+      "user": "resident-a1204",
+      "screen": "R06",
+      "proposedAction": "Check your answer in the visitor history",
+      "infoPanel": [
+        {
+          "key": "counts.pending",
+          "label": "Waiting for approval"
+        }
+      ],
+      "performedText": "checked the visitor history",
+      "nextStep": null
+    }
+  }
+}

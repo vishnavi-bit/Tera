@@ -1,0 +1,317 @@
+{
+  "id": "enquiry-to-invoice",
+  "title": "Enquiry to invoice",
+  "startStep": "enquiry-list",
+  "completionMessage": "The enquiry became a customer, the customer paid a booking advance, and the vehicle was invoiced from dealer stock with the chassis bound to the customer. The invoice is Pending because only the advance is paid. Next in the real flow: the customer pays the balance (D23, linked to the invoice) and the OEM sees it read only (O07, O08, O09).",
+  "steps": {
+    "enquiry-list": {
+      "user": "dealer-sales",
+      "screen": "D07",
+      "proposedAction": "Click new",
+      "infoPanel": [
+        {
+          "key": "counts.enquiries",
+          "label": "Enquiries"
+        }
+      ],
+      "actions": {
+        "new-enquiry": {
+          "performedText": "clicked new",
+          "nextStep": "enquiry-create"
+        }
+      }
+    },
+    "enquiry-create": {
+      "user": "dealer-sales",
+      "screen": "D08",
+      "proposedAction": "Check the enquiry details and click create",
+      "infoPanel": [
+        {
+          "key": "enquiry.status",
+          "label": "Enquiry status"
+        }
+      ],
+      "actions": {
+        "create-enquiry": {
+          "performedText": "created the enquiry",
+          "nextStep": "enquiry-detail",
+          "stateChange": {
+            "enquiry.status": {
+              "set": "Open"
+            },
+            "counts.enquiries": 1
+          }
+        }
+      }
+    },
+    "enquiry-detail": {
+      "user": "dealer-sales",
+      "screen": "D09",
+      "proposedAction": "Open the follow-up log",
+      "infoPanel": [
+        {
+          "key": "enquiry.status",
+          "label": "Enquiry status"
+        }
+      ],
+      "actions": {
+        "open-followup": {
+          "performedText": "opened the follow-up log",
+          "nextStep": "followup"
+        }
+      }
+    },
+    "followup": {
+      "user": "dealer-sales",
+      "screen": "D10",
+      "proposedAction": "Add a follow-up",
+      "infoPanel": [
+        {
+          "key": "counts.followUps",
+          "label": "Follow-ups"
+        }
+      ],
+      "actions": {
+        "add-followup": {
+          "performedText": "added a follow-up",
+          "nextStep": "quotations",
+          "stateChange": {
+            "counts.followUps": 1
+          }
+        }
+      }
+    },
+    "quotations": {
+      "user": "dealer-sales",
+      "screen": "D11",
+      "proposedAction": "The customer wants a quote: click create",
+      "infoPanel": [
+        {
+          "key": "counts.quotations",
+          "label": "Quotations"
+        }
+      ],
+      "actions": {
+        "create-quotation": {
+          "performedText": "clicked create",
+          "nextStep": "quotation-create"
+        }
+      }
+    },
+    "quotation-create": {
+      "user": "dealer-sales",
+      "screen": "D12",
+      "proposedAction": "Check the vehicle, variant and colour, then click create",
+      "infoPanel": [
+        {
+          "key": "counts.quotations",
+          "label": "Quotations"
+        }
+      ],
+      "actions": {
+        "save-quotation": {
+          "performedText": "created the quotation",
+          "nextStep": "enquiry-convert",
+          "stateChange": {
+            "quotation.status": {
+              "set": "Created"
+            },
+            "counts.quotations": 1
+          }
+        }
+      }
+    },
+    "enquiry-convert": {
+      "user": "dealer-sales",
+      "screen": "D09",
+      "proposedAction": "The customer agrees: convert the enquiry to a customer",
+      "infoPanel": [
+        {
+          "key": "quotation.status",
+          "label": "Quotation"
+        },
+        {
+          "key": "enquiry.status",
+          "label": "Enquiry status"
+        }
+      ],
+      "actions": {
+        "convert-customer": {
+          "performedText": "clicked convert to customer",
+          "nextStep": "customer-create"
+        }
+      }
+    },
+    "customer-create": {
+      "user": "dealer-sales",
+      "screen": "D16",
+      "proposedAction": "Check the customer details and click create",
+      "infoPanel": [
+        {
+          "key": "counts.customers",
+          "label": "Customers"
+        }
+      ],
+      "actions": {
+        "create-customer": {
+          "performedText": "created the customer",
+          "nextStep": "customer-hub",
+          "stateChange": {
+            "customer.status": {
+              "set": "Created"
+            },
+            "enquiry.status": {
+              "set": "Converted"
+            },
+            "counts.customers": 1
+          }
+        }
+      }
+    },
+    "customer-hub": {
+      "user": "dealer-sales",
+      "screen": "D17",
+      "proposedAction": "Open the payment tab to record the booking advance",
+      "infoPanel": [
+        {
+          "key": "counts.customers",
+          "label": "Customers"
+        }
+      ],
+      "actions": {
+        "open-payment-tab": {
+          "performedText": "opened the payment tab",
+          "nextStep": "payments-list"
+        }
+      }
+    },
+    "payments-list": {
+      "user": "dealer-sales",
+      "screen": "D22",
+      "proposedAction": "Click + new",
+      "infoPanel": [
+        {
+          "key": "counts.payments",
+          "label": "Payments"
+        }
+      ],
+      "actions": {
+        "new-payment": {
+          "performedText": "clicked + new",
+          "nextStep": "payment-create"
+        }
+      }
+    },
+    "payment-create": {
+      "user": "dealer-sales",
+      "screen": "D23",
+      "proposedAction": "Check the advance payment and click create",
+      "infoPanel": [
+        {
+          "key": "counts.payments",
+          "label": "Payments"
+        }
+      ],
+      "actions": {
+        "create-payment": {
+          "performedText": "recorded the advance payment",
+          "nextStep": "stock-vehicles",
+          "stateChange": {
+            "payment.status": {
+              "set": "Recorded"
+            },
+            "counts.payments": 1
+          }
+        }
+      }
+    },
+    "stock-vehicles": {
+      "user": "dealer-sales",
+      "screen": "D24",
+      "proposedAction": "Check that the vehicle is in stock",
+      "infoPanel": [
+        {
+          "key": "stock.available",
+          "label": "Vehicles available"
+        }
+      ],
+      "actions": {
+        "open-parts": {
+          "performedText": "checked the vehicle stock",
+          "nextStep": "stock-parts"
+        }
+      }
+    },
+    "stock-parts": {
+      "user": "dealer-sales",
+      "screen": "D25",
+      "proposedAction": "Check the spares in stock",
+      "infoPanel": [
+        {
+          "key": "stock.available",
+          "label": "Vehicles available"
+        }
+      ],
+      "performedText": "checked the spares stock",
+      "nextStep": "invoices-list"
+    },
+    "invoices-list": {
+      "user": "dealer-sales",
+      "screen": "D19",
+      "proposedAction": "Click + new",
+      "infoPanel": [
+        {
+          "key": "counts.invoices",
+          "label": "Invoices"
+        }
+      ],
+      "actions": {
+        "new-invoice": {
+          "performedText": "clicked + new",
+          "nextStep": "invoice-create"
+        }
+      }
+    },
+    "invoice-create": {
+      "user": "dealer-sales",
+      "screen": "D20",
+      "proposedAction": "Check the vehicle and serials, then click create",
+      "infoPanel": [
+        {
+          "key": "counts.invoices",
+          "label": "Invoices"
+        }
+      ],
+      "actions": {
+        "create-invoice": {
+          "performedText": "created the invoice",
+          "nextStep": "invoice-view",
+          "stateChange": {
+            "invoice.status": {
+              "set": "Pending"
+            },
+            "counts.invoices": 1,
+            "stock.available": -1
+          }
+        }
+      }
+    },
+    "invoice-view": {
+      "user": "dealer-sales",
+      "screen": "D21",
+      "proposedAction": "Print the invoice",
+      "infoPanel": [
+        {
+          "key": "invoice.status",
+          "label": "Invoice status"
+        }
+      ],
+      "actions": {
+        "print-invoice": {
+          "performedText": "printed the invoice",
+          "nextStep": null
+        }
+      }
+    }
+  }
+}

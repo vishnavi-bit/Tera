@@ -1,0 +1,327 @@
+{
+  "id": "women-onboarding",
+  "title": "Onboarding: Women Entrepreneurs",
+  "startStep": "landing",
+  "completionMessage": "Demo Meera went from the {persona.label} landing page to a finished report: score {report.finalScore} ({report.finalBand}), {plan.name} plan. In the real flow the report also arrives on WhatsApp and email, and follow-ups come on Day 1, 2 and 3.",
+  "steps": {
+    "landing": {
+      "user": "founder-women",
+      "screen": "W01",
+      "proposedAction": "Read the page and start your journey",
+      "infoPanel": [
+        {
+          "key": "persona.label",
+          "label": "Persona"
+        }
+      ],
+      "actions": {
+        "start": {
+          "performedText": "opened the {persona.label} landing page and started",
+          "nextStep": "idea"
+        }
+      }
+    },
+    "idea": {
+      "user": "founder-women",
+      "screen": "W02",
+      "proposedAction": "Describe the idea and continue",
+      "actions": {
+        "continue": {
+          "performedText": "described the business idea",
+          "nextStep": "stage"
+        }
+      }
+    },
+    "stage": {
+      "user": "founder-women",
+      "screen": "W03",
+      "proposedAction": "Pick your stage and continue",
+      "actions": {
+        "continue": {
+          "performedText": "picked the business stage",
+          "nextStep": "concern"
+        }
+      }
+    },
+    "concern": {
+      "user": "founder-women",
+      "screen": "W04",
+      "proposedAction": "Pick your biggest challenge",
+      "actions": {
+        "continue": {
+          "performedText": "picked the biggest challenge",
+          "nextStep": "location"
+        }
+      }
+    },
+    "location": {
+      "user": "founder-women",
+      "screen": "W05",
+      "proposedAction": "Choose where the business will run",
+      "actions": {
+        "continue": {
+          "performedText": "chose the location",
+          "nextStep": "x1"
+        }
+      }
+    },
+    "x1": {
+      "user": "founder-women",
+      "screen": "W06",
+      "proposedAction": "Answer the first question about you",
+      "actions": {
+        "continue": {
+          "performedText": "answered the first persona question",
+          "nextStep": "x2"
+        }
+      }
+    },
+    "x2": {
+      "user": "founder-women",
+      "screen": "W07",
+      "proposedAction": "Answer the second question about you",
+      "actions": {
+        "continue": {
+          "performedText": "answered the second persona question",
+          "nextStep": "interests"
+        }
+      }
+    },
+    "interests": {
+      "user": "founder-women",
+      "screen": "W08",
+      "proposedAction": "Pick your passion areas",
+      "actions": {
+        "continue": {
+          "performedText": "picked interests",
+          "nextStep": "skills"
+        }
+      }
+    },
+    "skills": {
+      "user": "founder-women",
+      "screen": "W09",
+      "proposedAction": "Pick your strongest skills",
+      "actions": {
+        "continue": {
+          "performedText": "picked skills",
+          "nextStep": "budget"
+        }
+      }
+    },
+    "budget": {
+      "user": "founder-women",
+      "screen": "W10",
+      "proposedAction": "Choose a startup budget",
+      "actions": {
+        "continue": {
+          "performedText": "chose a budget",
+          "nextStep": "biztype"
+        }
+      }
+    },
+    "biztype": {
+      "user": "founder-women",
+      "screen": "W11",
+      "proposedAction": "Choose a business type",
+      "actions": {
+        "continue": {
+          "performedText": "chose a business type",
+          "nextStep": "q1"
+        }
+      }
+    },
+    "q1": {
+      "user": "founder-women",
+      "screen": "W12",
+      "proposedAction": "Pick your experience",
+      "actions": {
+        "continue": {
+          "performedText": "answered the experience question",
+          "nextStep": "q2"
+        }
+      }
+    },
+    "q2": {
+      "user": "founder-women",
+      "screen": "W13",
+      "proposedAction": "Pick your weekly time",
+      "actions": {
+        "continue": {
+          "performedText": "answered the time question",
+          "nextStep": "q3"
+        }
+      }
+    },
+    "q3": {
+      "user": "founder-women",
+      "screen": "W14",
+      "proposedAction": "Pick your biggest fear",
+      "actions": {
+        "continue": {
+          "performedText": "answered the mindset question",
+          "nextStep": "score"
+        }
+      }
+    },
+    "score": {
+      "user": "founder-women",
+      "screen": "W15",
+      "proposedAction": "See your score, then unlock the full report",
+      "infoPanel": [
+        {
+          "key": "preview.score",
+          "label": "Readiness score"
+        }
+      ],
+      "actions": {
+        "unlock": {
+          "performedText": "chose to unlock the full report",
+          "nextStep": "details"
+        }
+      }
+    },
+    "details": {
+      "user": "founder-women",
+      "screen": "W16",
+      "proposedAction": "Check your details and tap Register",
+      "actions": {
+        "register": {
+          "performedText": "registered with name, email and WhatsApp number",
+          "nextStep": "details-wa",
+          "stateChange": {
+            "contact.state": {
+              "set": "confirm"
+            }
+          }
+        }
+      }
+    },
+    "details-wa": {
+      "user": "founder-women",
+      "screen": "W16",
+      "proposedAction": "Continue to verify via WhatsApp",
+      "actions": {
+        "wa-continue": {
+          "performedText": "tapped Continue, sent the WhatsApp message and was verified",
+          "nextStep": "details-done",
+          "stateChange": {
+            "contact.state": {
+              "set": "registered"
+            }
+          }
+        }
+      }
+    },
+    "details-done": {
+      "user": "founder-women",
+      "screen": "W16",
+      "proposedAction": "You are registered. Choose a plan",
+      "actions": {
+        "choose-plan": {
+          "performedText": "moved on to choose a plan",
+          "nextStep": "plan"
+        }
+      }
+    },
+    "plan": {
+      "user": "founder-women",
+      "screen": "W17",
+      "proposedAction": "Check the chosen plan and continue",
+      "infoPanel": [
+        {
+          "key": "plan.name",
+          "label": "Plan"
+        },
+        {
+          "key": "plan.price",
+          "label": "Price (₹)"
+        }
+      ],
+      "actions": {
+        "continue": {
+          "performedText": "chose the {plan.name} plan",
+          "nextStep": "pay"
+        }
+      }
+    },
+    "pay": {
+      "user": "founder-women",
+      "screen": "W18",
+      "proposedAction": "Review the order and pay",
+      "actions": {
+        "pay": {
+          "performedText": "paid {plan.price|inr} through Razorpay",
+          "nextStep": "confirm",
+          "stateChange": {
+            "order.paid": {
+              "set": true
+            }
+          }
+        }
+      }
+    },
+    "confirm": {
+      "user": "founder-women",
+      "screen": "W19",
+      "proposedAction": "Review your details and generate the report",
+      "actions": {
+        "generate": {
+          "performedText": "confirmed the details and asked for the report",
+          "nextStep": "generating"
+        }
+      }
+    },
+    "generating": {
+      "user": "founder-women",
+      "screen": "W20",
+      "proposedAction": "Wait while the report is prepared",
+      "performedText": "waited while the report was created",
+      "nextStep": "ready",
+      "stateChange": {
+        "report.ready": {
+          "set": true
+        }
+      }
+    },
+    "ready": {
+      "user": "founder-women",
+      "screen": "W20",
+      "proposedAction": "Your report is ready. Open the dashboard",
+      "actions": {
+        "view-dashboard": {
+          "performedText": "opened the dashboard",
+          "nextStep": "dashboard"
+        }
+      }
+    },
+    "dashboard": {
+      "user": "founder-women",
+      "screen": "W21",
+      "proposedAction": "Open your new report",
+      "infoPanel": [
+        {
+          "key": "report.finalScore",
+          "label": "Final score"
+        },
+        {
+          "key": "report.finalBand",
+          "label": "Band"
+        }
+      ],
+      "actions": {
+        "open-report": {
+          "performedText": "opened the report preview",
+          "nextStep": "report"
+        }
+      }
+    },
+    "report": {
+      "user": "founder-women",
+      "screen": "W22",
+      "proposedAction": "Look through the report",
+      "performedText": "looked through the report preview",
+      "nextStep": null
+    }
+  }
+}

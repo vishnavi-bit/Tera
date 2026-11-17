@@ -1,0 +1,62 @@
+{
+  "_sample": "SAMPLE DATA. Dealer, MU, order, transaction ID, receipt file, dates, transport and bank details are invented for the walkthroughs.",
+  "dealer": { "id": "DLR-014", "name": "Sri Lakshmi EVs", "type": "District Dealer", "mu": "MU Hosur" },
+  "mu": { "name": "MU Hosur", "account": "Tera EV Pvt Ltd - A/C 5021 8890 1142", "ifsc": "HDFC0001234" },
+  "stock": {
+    "vehicle": { "finished": 0 },
+    "raw": { "chassis": 40, "motor": 40, "battery": 40, "controller": 40, "charger": 40, "tyre": 80 }
+  },
+  "bom": [
+    { "key": "chassis",    "item": "Chassis frame",   "perUnit": 1 },
+    { "key": "motor",      "item": "Hub motor",       "perUnit": 1 },
+    { "key": "battery",    "item": "Battery pack",    "perUnit": 1 },
+    { "key": "controller", "item": "Controller",      "perUnit": 1 },
+    { "key": "charger",    "item": "Charger",         "perUnit": 1 },
+    { "key": "tyre",       "item": "Tyre",            "perUnit": 2 }
+  ],
+  "orders": [
+    { "id": "PO-2026-0388", "date": "2026-08-14", "type": "Vehicle", "qty": 20, "amount": 1240000, "status": "Delivered" },
+    { "id": "PO-2026-0401", "date": "2026-09-30", "type": "Spares",  "qty": 12, "amount": 86400,   "status": "Dispatched" }
+  ],
+  "order": {
+    "id": "PO-2026-0412",
+    "date": "2026-10-25",
+    "type": "Vehicle",
+    "model": "Tera Zip 60V 30Ah",
+    "stockText": "no stock",
+    "status": "Not placed",
+    "lines": [
+      { "product": "Tera Zip", "variant": "60V 30Ah", "colour": "Matte Black", "qty": 10, "price": 62000, "inStock": 0 },
+      { "product": "Tera Zip", "variant": "60V 30Ah", "colour": "Pearl White", "qty": 6,  "price": 62000, "inStock": 0 }
+    ],
+    "qty": 16,
+    "total": 992000,
+    "advancePercent": 30,
+    "advanceDue": 297600,
+    "paid": 0,
+    "paymentStatus": "No payment",
+    "transactionId": "UTR882104517",
+    "receiptFile": "bank-receipt-UTR882104.jpg",
+    "receivedAmount": 297600,
+    "paymentDate": "2026-10-26",
+    "paymentSubmitted": "2026-10-26",
+    "note": "Advance payment",
+    "ledgerAmount": 0,
+    "expectedDispatch": "2026-11-12",
+    "productionDate": "2026-11-11",
+    "production": { "produced": 0, "status": "Not started" },
+    "shipment": {
+      "status": "Not dispatched",
+      "transportType": "By Truck",
+      "companyName": "Sample Transport Co",
+      "companyNumber": "9000000020",
+      "trackingId": "SAMPLE-TRK-0001",
+      "driverNumber": "9000000021",
+      "vehicleNo": "SAMPLE-TN-00-0001",
+      "transportDate": "2026-11-11",
+      "deliveryDate": "2026-11-12",
+      "paymentStatus": "Paid",
+      "shipped": 0
+    }
+  }
+}

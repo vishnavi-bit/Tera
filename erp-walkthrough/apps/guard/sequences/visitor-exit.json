@@ -1,0 +1,74 @@
+{
+  "id": "visitor-exit",
+  "title": "Visitor leaves, guard checks out",
+  "startStep": "home",
+  "completionMessage": "{exit.target} is checked out at {gate.name}; the visit is closed and the inside count dropped.",
+  "steps": {
+    "home": {
+      "user": "guard-gate1",
+      "screen": "S02",
+      "proposedAction": "Tap Check Out",
+      "infoPanel": [
+        {
+          "key": "counts.inside",
+          "label": "Visitors inside"
+        }
+      ],
+      "actions": {
+        "goto-S07": {
+          "performedText": "opened visitors inside",
+          "nextStep": "inside"
+        }
+      }
+    },
+    "inside": {
+      "user": "guard-gate1",
+      "screen": "S07",
+      "proposedAction": "Find the visitor and tap Check Out",
+      "actions": {
+        "check-out": {
+          "performedText": "started the check-out for {exit.target}",
+          "nextStep": "confirm",
+          "stateChange": {
+            "exit.confirming": {
+              "set": true
+            }
+          }
+        }
+      }
+    },
+    "confirm": {
+      "user": "guard-gate1",
+      "screen": "S07",
+      "proposedAction": "Confirm the check-out",
+      "actions": {
+        "confirm-check-out": {
+          "performedText": "confirmed the check-out",
+          "nextStep": "done",
+          "stateChange": {
+            "exit.confirming": {
+              "set": false
+            },
+            "exit.done": {
+              "set": true
+            },
+            "counts.inside": -1
+          }
+        }
+      }
+    },
+    "done": {
+      "user": "guard-gate1",
+      "screen": "S07",
+      "proposedAction": "Check the visit is closed",
+      "infoPanel": [
+        {
+          "key": "counts.inside",
+          "label": "Visitors inside"
+        }
+      ],
+      "performedText": "checked the visit is closed",
+      "nextStep": null
+    }
+  }
+}

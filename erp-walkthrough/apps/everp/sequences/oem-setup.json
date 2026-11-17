@@ -1,0 +1,191 @@
+{
+  "id": "oem-setup",
+  "title": "OEM setup",
+  "startStep": "oem-login",
+  "completionMessage": "The OEM is set up: company profile, operating states, regions and zones, a manufacturing unit, a vendor, OEM users, products and a ledger. Next in the flow: setting up a dealer.",
+  "steps": {
+    "oem-login": {
+      "user": "oem-super-admin",
+      "screen": "O01",
+      "proposedAction": "Sign in with the user ID and password",
+      "actions": {
+        "sign-in": { "performedText": "signed in", "nextStep": "oem-dashboard" }
+      }
+    },
+    "oem-dashboard": {
+      "user": "oem-super-admin",
+      "screen": "O03",
+      "proposedAction": "Open Settings from the sidebar",
+      "actions": {
+        "goto-O49": { "performedText": "opened Settings", "nextStep": "settings-profile" }
+      }
+    },
+    "settings-profile": {
+      "user": "oem-super-admin",
+      "screen": "O49",
+      "proposedAction": "Enter the approval admin email, then click save approval email",
+      "actions": {
+        "save-approval-email": { "performedText": "saved the approval admin email", "nextStep": "operating-states" }
+      }
+    },
+    "operating-states": {
+      "user": "oem-super-admin",
+      "screen": "O50",
+      "proposedAction": "Check the operating states, then click update states",
+      "actions": {
+        "update-states": { "performedText": "updated the operating states", "nextStep": "mu-list" }
+      }
+    },
+    "mu-list": {
+      "user": "oem-super-admin",
+      "screen": "O32",
+      "proposedAction": "Click new",
+      "actions": {
+        "new-mu": { "performedText": "clicked new", "nextStep": "mu-create" }
+      }
+    },
+    "mu-create": {
+      "user": "oem-super-admin",
+      "screen": "O33",
+      "proposedAction": "Check the unit details and click save",
+      "infoPanel": [{ "key": "manufacturingUnits.count", "label": "Manufacturing units" }],
+      "actions": {
+        "save-mu": {
+          "performedText": "clicked save",
+          "stateChange": {
+            "manufacturingUnits.count": 1,
+            "manufacturingUnits.created": { "set": true }
+          },
+          "nextStep": "users-list"
+        }
+      }
+    },
+    "users-list": {
+      "user": "oem-super-admin",
+      "screen": "O52",
+      "proposedAction": "Click create",
+      "infoPanel": [{ "key": "manufacturingUnits.count", "label": "Manufacturing units" }],
+      "actions": {
+        "create-user": { "performedText": "clicked create", "nextStep": "user-create" }
+      }
+    },
+    "user-create": {
+      "user": "oem-super-admin",
+      "screen": "O53",
+      "proposedAction": "Check the user details and click submit",
+      "infoPanel": [{ "key": "manufacturingUnits.count", "label": "Manufacturing units" }],
+      "actions": {
+        "submit-user": {
+          "performedText": "clicked submit",
+          "stateChange": { "oemUsers.created": { "set": true } },
+          "nextStep": "regions"
+        }
+      }
+    },
+    "regions": {
+      "user": "oem-super-admin",
+      "screen": "O51",
+      "proposedAction": "Enter the region and zone, then click create region & zone",
+      "infoPanel": [{ "key": "manufacturingUnits.count", "label": "Manufacturing units" }],
+      "actions": {
+        "save-region": {
+          "performedText": "clicked create region & zone",
+          "stateChange": {
+            "regions.count": 1,
+            "regions.created": { "set": true }
+          },
+          "nextStep": "vendor-create"
+        }
+      }
+    },
+    "vendor-create": {
+      "user": "oem-super-admin",
+      "screen": "O39",
+      "proposedAction": "Enter the vendor details and click add",
+      "infoPanel": [{ "key": "manufacturingUnits.count", "label": "Manufacturing units" }],
+      "actions": {
+        "add-vendor": {
+          "performedText": "added the vendor",
+          "stateChange": {
+            "vendors.count": 1,
+            "vendors.created": { "set": true }
+          },
+          "nextStep": "components-create"
+        }
+      }
+    },
+    "components-create": {
+      "user": "oem-super-admin",
+      "screen": "O28",
+      "proposedAction": "Check the motor details and click create",
+      "infoPanel": [{ "key": "products.count", "label": "Products" }],
+      "actions": {
+        "create-component": {
+          "performedText": "created the motor",
+          "stateChange": {
+            "products.count": 1,
+            "products.motor.created": { "set": true }
+          },
+          "nextStep": "vehicle-create"
+        }
+      }
+    },
+    "vehicle-create": {
+      "user": "oem-super-admin",
+      "screen": "O26",
+      "proposedAction": "Check the vehicle details and click create",
+      "infoPanel": [{ "key": "products.count", "label": "Products" }],
+      "actions": {
+        "create-vehicle": {
+          "performedText": "created the vehicle",
+          "stateChange": {
+            "products.count": 1,
+            "products.vehicle.created": { "set": true }
+          },
+          "nextStep": "spare-create"
+        }
+      }
+    },
+    "spare-create": {
+      "user": "oem-super-admin",
+      "screen": "O27",
+      "proposedAction": "Check the spare details and click create",
+      "infoPanel": [{ "key": "products.count", "label": "Products" }],
+      "actions": {
+        "create-spare": {
+          "performedText": "created the spare",
+          "stateChange": {
+            "products.count": 1,
+            "products.spare.created": { "set": true }
+          },
+          "nextStep": "ledger-list"
+        }
+      }
+    },
+    "ledger-list": {
+      "user": "oem-super-admin",
+      "screen": "O46",
+      "proposedAction": "Check the ledger name, then click new ledger",
+      "infoPanel": [{ "key": "ledgers.count", "label": "Ledgers" }],
+      "actions": {
+        "new-ledger": {
+          "performedText": "created the ledger",
+          "stateChange": {
+            "ledgers.count": 1,
+            "ledgers.created": { "set": true }
+          },
+          "nextStep": "ledger-detail"
+        }
+      }
+    },
+    "ledger-detail": {
+      "user": "oem-super-admin",
+      "screen": "O47",
+      "proposedAction": "Enter the amount, then click add credit",
+      "infoPanel": [{ "key": "ledgers.count", "label": "Ledgers" }],
+      "actions": {
+        "add-credit": { "performedText": "added the credit", "nextStep": null }
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "dealer-owner": {
+    "color": "#0f766e"
+  },
+  "dealer-sales": {
+    "color": "#0f766e"
+  },
+  "oem-accounts": {
+    "color": "#b45309"
+  },
+  "oem-super-admin": {
+    "color": "#7c3aed"
+  },
+  "oem-production-mgr": {
+    "color": "#be185d"
+  },
+  "dealer-service": {
+    "color": "#0e7490"
+  },
+  "oem-sales-head": {
+    "color": "#2563eb"
+  },
+  "oem-inventory-mgr": {
+    "color": "#4d7c0f"
+  },
+  "oem-logistics-mgr": {
+    "color": "#a21caf"
+  },
+  "oem-procurement-mgr": {
+    "color": "#0369a1"
+  }
+}

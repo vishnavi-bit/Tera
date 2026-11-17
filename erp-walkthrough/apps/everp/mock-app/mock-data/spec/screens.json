@@ -1,0 +1,2545 @@
+[
+  {
+    "code": "D00",
+    "name": "Header + Notifications Panel",
+    "app": "Dealer App",
+    "section": "Global",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "(global)",
+    "type": "Component",
+    "mode": "RO",
+    "roles": "D S V",
+    "buttons": "open (deep-link, deletes), mark all read, Add New (no effect), language",
+    "fields": "No dedicated input form — this is a component screen. Display/column content: Deep-link notifications, mark all read, language switch.",
+    "rules": [
+      "**R9** — Notifications per recipient org (`/notifications/dealer` vs `/notifications/oem`)",
+      "**Counterpart:** O00",
+      "**Dependency note:** notification entity; R9 per-recipient scoping"
+    ]
+  },
+  {
+    "code": "D01",
+    "name": "Login",
+    "app": "Dealer App",
+    "section": "Auth",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/login",
+    "type": "Form",
+    "mode": "Action",
+    "roles": "public",
+    "buttons": "sign in, remember me, forgot link",
+    "fields": "| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| User ID | userId | text | ✔ | alphanumeric, exactly 7 chars (placeholder \"eg. D001\") | dealer D000002; OEM OEM0001 |\n| Password | password | password | ✔ | show / hide toggle | — |\n| Remember me | rememberMe | checkbox | — | — | dealer app stores userId + **plaintext password** in localStorage; don't replicate |",
+    "rules": [
+      "**Counterpart:** O01 (same `/auth/login`)",
+      "**Dependency note:** Shared /auth/login with OEM"
+    ]
+  },
+  {
+    "code": "D02",
+    "name": "Forgot Password",
+    "app": "Dealer App",
+    "section": "Auth",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/forgot-password",
+    "type": "Static",
+    "mode": "—",
+    "roles": "public",
+    "buttons": "back to login (\"contact your OEM\")",
+    "fields": "No dedicated input form — this is a static screen. Display/column content: Static 'contact your OEM' message.",
+    "rules": [
+      "**Counterpart:** OEM resets via O05 / O53"
+    ]
+  },
+  {
+    "code": "D03",
+    "name": "Shop Location Prompt",
+    "app": "Dealer App",
+    "section": "Auth",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "after login",
+    "type": "Dialog",
+    "mode": "Update",
+    "roles": "D",
+    "buttons": "save current location, not now",
+    "fields": "| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| Latitude | latitude | number | — | from browser geolocation (\"Use my current location\") | `PUT /accounts/me/shop-location` |\n| Longitude | longitude | number | — | — | — |\n| Address | address | text | — | optional | — |",
+    "rules": [
+      "**F3** — Dealer profile (org, GST, bank, addresses, MU, region / zone, type) is OEM-owned and read-only to dealer. Dealer may edit only password, shop location, photo and business documents.",
+      "**Counterpart:** O05 shop location",
+      "**Dependency note:** dealer_profile.shop (F3 allowed field)"
+    ]
+  },
+  {
+    "code": "D04",
+    "name": "Dashboard",
+    "app": "Dealer App",
+    "section": "Dashboard",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/dashboard",
+    "type": "Dashboard",
+    "mode": "RO",
+    "roles": "D S V",
+    "buttons": "period filter, drill links",
+    "fields": "No dedicated input form — this is a dashboard screen. Display/column content: Aggregates: invoices, POs, service, warranty, follow-ups; period filter.",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**Counterpart:** O03 (all dealers), O06 header",
+      "**Dependency note:** R1 scoping"
+    ]
+  },
+  {
+    "code": "D05",
+    "name": "Announcements List",
+    "app": "Dealer App",
+    "section": "Announcements",
+    "priority": "P1",
+    "status": "Verified (reference app)",
+    "path": "/announcements",
+    "type": "List",
+    "mode": "Mirror",
+    "roles": "D S V",
+    "buttons": "view",
+    "fields": "No dedicated input form — this is a list screen. Display/column content: Read-only mirror of OEM announcements targeted to this MU.",
+    "rules": [
+      "**R5** — Dealer sees announcements targeted to **all MUs or its MU**",
+      "**Counterpart:** O15",
+      "**Dependency note:** R5; counterpart O15"
+    ]
+  },
+  {
+    "code": "D06",
+    "name": "Announcement View",
+    "app": "Dealer App",
+    "section": "Announcements",
+    "priority": "P1",
+    "status": "Verified (reference app)",
+    "path": "/announcements/:id",
+    "type": "Detail",
+    "mode": "Mirror",
+    "roles": "D S V",
+    "buttons": "full screen, download",
+    "fields": "No dedicated input form — this is a detail screen. Display/column content: Full view + download attachment.",
+    "rules": [
+      "**R5** — Dealer sees announcements targeted to **all MUs or its MU**",
+      "**Counterpart:** O16",
+      "**Dependency note:** counterpart O16"
+    ]
+  },
+  {
+    "code": "D07",
+    "name": "Sales Follow-ups (Enquiry List)",
+    "app": "Dealer App",
+    "section": "CRM / Enquiry",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/enquire/enquire-list",
+    "type": "List",
+    "mode": "RO",
+    "roles": "D S",
+    "buttons": "filter (all / today / week / month / date), new",
+    "fields": "No dedicated input form — this is a list screen. Display/column content: Filter all/today/week/month/date.",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**Counterpart:** O08 (mirror)",
+      "**Dependency note:** R1; counterpart O08 (OEM mirror)"
+    ]
+  },
+  {
+    "code": "D08",
+    "name": "Enquiry Add / Edit",
+    "app": "Dealer App",
+    "section": "CRM / Enquiry",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/enquire/new, in-place edit",
+    "type": "Form",
+    "mode": "CRUD",
+    "roles": "D S",
+    "buttons": "create, save, delete, convert to customer",
+    "fields": "| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| Enquiry Type | enquireType | radio | ✔ | HOT / COLD / WARM | — |\n| Customer Type | customerType | radio | ✔ | business / individual_customer | — |\n| Title | namePrefix | select | ✔ | Mr / Mrs / Miss / Dr | — |\n| First Name | firstName | text | ✔ | \"Please enter a First Name\" | — |\n| Last Name | lastName | text | ✔ | — | — |\n| Mobile Number | phone | tel | ✔ | `^[0-9]{10}$` | no mobile-prefix check |\n| WhatsApp | whatsappNumber | tel | — | 10 digits | — |\n| Alternate Phone | alternatePhone | tel | — | 10 digits | — |\n| Email | email | email | — | email format | — |\n| Location | location | text | ✔ | — | — |\n| Subject | subject | text | — | — | — |\n| Note | note | textarea | ? | validator present in module [C] | — |\n| Make Schedule For Call Back | makeSchedule | checkbox | — | reveals Schedule | — |\n| Schedule | schedule | datetime | ✔ if checked | — | creates the next follow-up |\n| (hidden) | followUpType, followUpDate | — | [C] | — | set by follow-up logic |\n\n**No vehicle-of-interest field.** The model is captured only through a quotation (D12).",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**Counterpart:** O08 (read)",
+      "**Dependency note:** R1"
+    ]
+  },
+  {
+    "code": "D09",
+    "name": "Enquiry Detail",
+    "app": "Dealer App",
+    "section": "CRM / Enquiry",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/enquire/:id",
+    "type": "Detail",
+    "mode": "RO",
+    "roles": "D S",
+    "buttons": "edit, delete, convert to customer (→ D16 with enquireId)",
+    "fields": "No dedicated input form — this is a detail screen. Display/column content: Edit, delete, convert to customer (→ D16).",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**Counterpart:** O08",
+      "**Dependency note:** R1"
+    ]
+  },
+  {
+    "code": "D10",
+    "name": "Enquiry Follow-up Log",
+    "app": "Dealer App",
+    "section": "CRM / Enquiry",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/enquire/:id/follow-up",
+    "type": "Detail + Dialog",
+    "mode": "CRUD",
+    "roles": "D S",
+    "buttons": "add, edit, close, reopen",
+    "fields": "| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| Subject | subject | text | ? | — | — |\n| Description | note | textarea | ? | — | — |\n| Called by | scheduledBy | text / select | ? | — | — |\n| Make Schedule For Call Back | makeSchedule | checkbox | — | — | — |\n| Schedule | schedule | datetime | ✔ if checked | — | — |\n\nActions: Close Follow Up, Reopen Follow Up.",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**Dependency note:** No OEM counterpart"
+    ]
+  },
+  {
+    "code": "D11",
+    "name": "Enquiry Quotations List",
+    "app": "Dealer App",
+    "section": "CRM / Enquiry",
+    "priority": "P1",
+    "status": "Verified (reference app)",
+    "path": "/enquire/:id/quotation",
+    "type": "List",
+    "mode": "RO",
+    "roles": "D S",
+    "buttons": "open, create",
+    "fields": "No dedicated input form — this is a list screen. Display/column content: Open, create.",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**Dependency note:** No OEM counterpart"
+    ]
+  },
+  {
+    "code": "D12",
+    "name": "Enquiry Quotation Create",
+    "app": "Dealer App",
+    "section": "CRM / Enquiry",
+    "priority": "P1",
+    "status": "Verified (reference app)",
+    "path": "/enquire/:id/quotation/new",
+    "type": "Form + Dialog",
+    "mode": "C+R",
+    "roles": "D S",
+    "buttons": "add products (picker), create, attach",
+    "fields": "| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| Customer Name | name | text | ? | prefilled | — |\n| Add GST | addGst | checkbox / toggle | — | — | — |\n| Quotation Date | quotationDate | date | ? | — | — |\n| Due / Expiry Date | expiryDate | date | ? | — | — |\n| Items → Add Products dialog | items[] | picker | ✔ | search name / part code; **variant ✔ and colour ✔ for vehicles** (\"Colour (dealer stock)\"); \"Select a colour for this panel spare\" | — |\n| per line: Rate / Quantity / Discount / Discount Amount / SGST / CGST / Total | items[].… | number / ro | — | discount % or ₹ | totals derived |\n| Adjustment | adjustment | number | — | — | — |\n| Terms & conditions | termsAndConditions | textarea | — | — | — |\n| Attach File(s) to Estimate | attachments | file | — | — | `PUT …/quotations/:id/attachments` |",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**F1** — Each variant has 5 prices: Distributor, Divisional Distributor, District Dealer, Area Dealer, Customer. A dealer sees only **its tier** (on PO) and **Customer** (on sale). Spares and components have Dealer + Customer price.",
+      "**Dependency note:** F1 customer price; no OEM counterpart"
+    ]
+  },
+  {
+    "code": "D13",
+    "name": "Service Follow-ups List",
+    "app": "Dealer App",
+    "section": "Service",
+    "priority": "P1",
+    "status": "Verified (reference app)",
+    "path": "/enquire/service-follow-up",
+    "type": "List",
+    "mode": "RO",
+    "roles": "D S",
+    "buttons": "filter, search by name / phone / email",
+    "fields": "No dedicated input form — this is a list screen. Display/column content: Filter, search by name/phone/email.",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**Dependency note:** No OEM counterpart"
+    ]
+  },
+  {
+    "code": "D14",
+    "name": "Service Follow-up Detail",
+    "app": "Dealer App",
+    "section": "Service",
+    "priority": "P1",
+    "status": "Verified (reference app)",
+    "path": "/enquire/:id/service-followup-detail",
+    "type": "Detail + Dialog",
+    "mode": "C+R",
+    "roles": "D S",
+    "buttons": "add follow-up",
+    "fields": "| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| Subject | subject | text | ? | \"Enter subject\" | — |\n| Note | note | textarea | ? | \"Enter note\" | — |\n| Next Follow-Up | schedule | datetime | ? | — | — |",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**Dependency note:** No OEM counterpart"
+    ]
+  },
+  {
+    "code": "D26",
+    "name": "Service Price List",
+    "app": "Dealer App",
+    "section": "Service",
+    "priority": "P1",
+    "status": "Verified (reference app)",
+    "path": "/inventory/service-price",
+    "type": "List + Dialog",
+    "mode": "CRUD",
+    "roles": "D S",
+    "buttons": "new, edit, delete",
+    "fields": "| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| Service Name | serviceName | text | ✔ | \"Service Name is required\" | — |\n| Price | price | number | ✔ | \"Price must be a number\" | — |\n| (ro) | createdBy, createdOn | ro | — | — | — |",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**Dependency note:** No OEM counterpart"
+    ]
+  },
+  {
+    "code": "D40",
+    "name": "Service List",
+    "app": "Dealer App",
+    "section": "Service",
+    "priority": "P1",
+    "status": "Verified (reference app)",
+    "path": "/service; tab /customer/:id/service",
+    "type": "List",
+    "mode": "RO",
+    "roles": "D V",
+    "buttons": "status filter, open, create",
+    "fields": "No dedicated input form — this is a list screen. Display/column content: Status filter, open, create.",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**Counterpart:** O07 service (mirror)",
+      "**Dependency note:** R1; counterpart O07 (mirror)"
+    ]
+  },
+  {
+    "code": "D41",
+    "name": "Service Create (Job Card)",
+    "app": "Dealer App",
+    "section": "Service",
+    "priority": "P1",
+    "status": "Verified (reference app)",
+    "path": "/customer/:id/service/new",
+    "type": "Form",
+    "mode": "Create",
+    "roles": "D V",
+    "buttons": "create service",
+    "fields": "| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| Product type | productType | radio | ✔ | Vehicle / Warranty products | — |\n| Select product | inventoryId | search | ✔ | \"Search vehicle name or chasis no\" | — |\n| Chasis Number | chasisNo | ro | — | — | — |\n| Type of service | — | ro | — | service number (auto) | — |\n| Meter Reading | meterReading | text | ✔ | — | — |\n| Job Type | job | select | ✔ | Maintenance / Repeated / Accident | — |\n| Service Type | isFreeService | select | ✔ | Paid Service / Free Service | — |\n| Customer Requirement | remark[] | text, repeatable | ✔ | \"+ Add Remarks\" | — |\n| Vehicle Condition | productCondition[] | file, drag-drop | — | images | — |\n| Customer Notes | customerNotes | textarea | ✔ | — | — |",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**Counterpart:** O07",
+      "**Dependency note:** R1"
+    ]
+  },
+  {
+    "code": "D42",
+    "name": "Job Card + Complete Service",
+    "app": "Dealer App",
+    "section": "Service",
+    "priority": "P1",
+    "status": "Verified (reference app)",
+    "path": "/customer/:id/service/:id",
+    "type": "Detail + Dialog",
+    "mode": "Action",
+    "roles": "D V",
+    "buttons": "complete service (→ D20 SERVICE invoice), download pdf, share, print",
+    "fields": "| Label | API field | Type | Req | Notes |\n|---|---|---|---|---|\n| Mileage up to | — | number | ? | — |\n| Job Type | — | select | ? | — |\n| RSA / On Site | — | select / checkbox | ? | — |\n| Service Type | — | select | ? | — |\n| Customer Notes | — | textarea | ? | — |\n| Requested Rectification | — | text, list | ? | — |\n| Additional Work (+ Add More) | — | text, list | ? | — |\n| Done | done | checkbox per line | — | — |\n\nOn success it opens D20 with `type=SERVICE`, priced from D26.",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**Counterpart:** O07 service/:id",
+      "**Dependency note:** counterpart O07 service/:id"
+    ]
+  },
+  {
+    "code": "D15",
+    "name": "Customers List",
+    "app": "Dealer App",
+    "section": "CRM / Customer",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/customer",
+    "type": "List",
+    "mode": "RO",
+    "roles": "D S V",
+    "buttons": "search (name / phone / email), create",
+    "fields": "No dedicated input form — this is a list screen. Display/column content: Search name/phone/email, create.",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**Counterpart:** O07 (mirror)",
+      "**Dependency note:** R1; counterpart O07 (mirror)"
+    ]
+  },
+  {
+    "code": "D16",
+    "name": "Customer Add / Edit",
+    "app": "Dealer App",
+    "section": "CRM / Customer",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/customer/new-customer, /customer/:id/edit",
+    "type": "Form",
+    "mode": "CRUD",
+    "roles": "D S V",
+    "buttons": "create, save, delete (menu)",
+    "fields": "| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| Customer Type | customerType | radio | ✔ | individual_customer / business | business reveals GST |\n| Title | namePrefix | select | ✔ | Mr / Miss / Mrs / Dr | — |\n| First Name | firstName | text | ✔ | — | `name` composed \"prefix first last\" |\n| Last Name | lastName | text | ✔ | — | — |\n| Customer Email | email | text | — | email format | — |\n| GST Number | gstNumber | text | — | business only | — |\n| Mobile | phone | text | ✔ | `^[0-9]{10}$` | — |\n| Work | workPhone | text | — | 10 digits | — |\n| WhatsApp | whatsappNumber | text | — | 10 digits | — |\n| Billing: Country | billingAddress.country | select | ✔ | India / Nepal | — |\n| Billing: State | billingAddress.state | select | ✔ | 36 states / UTs (`GET /general/states`) | — |\n| Billing: Address | billingAddress.address | textarea | ✔ | — | — |\n| Billing: City | billingAddress.city | text | ✔ | — | — |\n| Billing: Pincode | billingAddress.pincode | text | ✔ | `^[0-9]{6}$` | — |\n| Shipping (same 5 fields) | shippingAddress.* | — | ✔ | \"Copy Billing Address here\" | — |\n| PAN No + Upload Proof | documents[pan].documentNumber, file | text + file | ✔ **≥1 of 3** | file: PDF / image, drag-drop | \"Please provide at least one document: PAN, Aadhar, or Licence\" |\n| Aadhar No + Upload Proof | documents[aadhar].… | text + file | ✔ ≥1 of 3 | `^\\d{12}$` | — |\n| Licence No + Upload Proof | documents[licence].… | text + file | ✔ ≥1 of 3 | alphanumeric | — |\n| (hidden) | enquireId | number | — | set when converting from enquiry | — |",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**F9** — **Gap:** OEM sees customer PII (PAN / Aadhaar numbers, phone) unmasked",
+      "**Counterpart:** O07 (read)",
+      "**Dependency note:** R1, F9 (PII unmasked on OEM side — gap)"
+    ]
+  },
+  {
+    "code": "D17",
+    "name": "Customer Hub: Personal Details",
+    "app": "Dealer App",
+    "section": "CRM / Customer",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/customer/:id/personal-details",
+    "type": "Detail (6 tabs)",
+    "mode": "RO",
+    "roles": "D S V",
+    "buttons": "edit, delete, switch tab",
+    "fields": "No dedicated input form — this is a detail (6 tabs) screen. Display/column content: Tab shell for personal/vehicle/invoice/payment/service/warranty.",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**Counterpart:** O07 `/customers/:id/customer-personal-details`",
+      "**Dependency note:** R1; counterpart O07"
+    ]
+  },
+  {
+    "code": "D18",
+    "name": "Customer Products",
+    "app": "Dealer App",
+    "section": "CRM / Customer",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/customer/:id/vehicle-details/**",
+    "type": "List + Detail + Dialog",
+    "mode": "RO + update reg. no.",
+    "roles": "D S V",
+    "buttons": "tabs vehicle / motor / battery / charger / controller / spare & accessory; search chassis; update registration no.",
+    "fields": "| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| Registration Number | vehicleRegNumber | text | ✔ | alphabets + numbers only, max 13 | — |",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**Counterpart:** O07 customer-vehicle-details",
+      "**Dependency note:** R1; counterpart O07"
+    ]
+  },
+  {
+    "code": "D19",
+    "name": "Customer Invoices List",
+    "app": "Dealer App",
+    "section": "Sales / Invoice",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/customer/:id/invoice",
+    "type": "List",
+    "mode": "RO",
+    "roles": "D S V",
+    "buttons": "open, + new",
+    "fields": "No dedicated input form — this is a list screen. Display/column content: Open, + new.",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**Counterpart:** O07 customer-invoice",
+      "**Dependency note:** R1; counterpart O07"
+    ]
+  },
+  {
+    "code": "D20",
+    "name": "Sale Invoice Create",
+    "app": "Dealer App",
+    "section": "Sales / Invoice",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/customer/:id/invoice/new (also '?type=SERVICE&serviceId=')",
+    "type": "Form + Dialogs",
+    "mode": "C+R",
+    "roles": "D S V",
+    "buttons": "product picker (stock-checked), add vehicle serials, add payment (link), create",
+    "fields": "**Header:**\n\n| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| Customer Name | name | text | ✔ | prefilled | — |\n| Invoice Date | invoiceDate | date | ✔ | — | — |\n| Due Date | dueDate | date | ✔ | — | — |\n| (hidden) | invoiceType | — | ✔ | VEHICLE / SERVICE / … | SERVICE when opened from D42 with `serviceId` |\n| Adjustment | adjustment | number | — | — | — |\n| Terms & conditions | termsAndConditions | textarea | — | — | invoice prints EN + Marathi warranty T&C |\n| Attachments | attachments | file | — | — | — |\n| Payment Records → + Add Payment | payments[] | picker | — | lists **existing** customer payments to link | create payment first in D23 |\n\n**+ Add Item: \"Select Product\" dialog:**\n\n| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| Item type | itemType | radio | ✔ | Vehicle / Spare / Accessory / Motor / Battery / Controller / Charger | — |\n| Search product | — | text | — | — | — |\n| Product card → Add, qty ± | items[].productId, quantity | button / number | ✔ | shows colour, variant, net rate, GST %, incl. price | stock check: \"Insufficient Stock! Vehicle: n, Battery: n, Charger: n\", \"This variant/colour combination is not available in stock\" |\n\n**Per line:**\n\n| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| HSN, Rate | HSN, rate | ro | — | from product | — |\n| Discount | discount, discountType | number + toggle | — | % or ₹ | — |\n| Discount Amount, SGST %/amt, CGST %/amt, Amount | — | ro | — | derived | — |\n\n**Vehicle line → \"Add Vehicle Detail\" (serials):**\n\n| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| Chassis No | itemDetails.chasisNumber | text | ✔ | free text; **server validates** against dealer stock (\"Serial number error\" summary) | **this is where chassis is bound to customer** |\n| Motor No | motorNumber | text | ✔ | — | — |\n| Battery No 1..n | batteryNumbers[] | text | ✔ | count = variant batteryQuantity | — |\n| Controller No | controllerNumber | text | ✔ | — | — |\n| Charger No | chargerNumber | text | ✔ | — | — |\n| + Add Extra Field | customFields[{key, value}] | text pairs | — | defaults offered: Converter No, Colour, Product No, Part code | — |",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**F1** — Each variant has 5 prices: Distributor, Divisional Distributor, District Dealer, Area Dealer, Customer. A dealer sees only **its tier** (on PO) and **Customer** (on sale). Spares and components have Dealer + Customer price.",
+      "**Counterpart:** O48 Vehicle Sold; O09; O29 \"sold to customers\"",
+      "**Dependency note:** R1, F1; THIS IS WHERE CHASSIS BINDS TO CUSTOMER; counterpart O48/O09/O29"
+    ]
+  },
+  {
+    "code": "D21",
+    "name": "Invoice View",
+    "app": "Dealer App",
+    "section": "Sales / Invoice",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/customer/:id/invoice/:id",
+    "type": "Detail (document)",
+    "mode": "RO",
+    "roles": "D S V",
+    "buttons": "print",
+    "fields": "No dedicated input form — this is a detail (document) screen. Display/column content: Print.",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**Counterpart:** O07 invoice-receipt",
+      "**Dependency note:** counterpart O07 invoice-receipt"
+    ]
+  },
+  {
+    "code": "D22",
+    "name": "Customer Payments List",
+    "app": "Dealer App",
+    "section": "Sales / Payments",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/customer/:id/payment",
+    "type": "List",
+    "mode": "RO",
+    "roles": "D S V",
+    "buttons": "open receipt, + new",
+    "fields": "No dedicated input form — this is a list screen. Display/column content: Open receipt, + new.",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**Counterpart:** O07 customer-payment",
+      "**Dependency note:** R1; counterpart O07"
+    ]
+  },
+  {
+    "code": "D23",
+    "name": "Customer Payment Create",
+    "app": "Dealer App",
+    "section": "Sales / Payments",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/customer/:id/payment/new",
+    "type": "Form",
+    "mode": "C+R",
+    "roles": "D S V",
+    "buttons": "link invoice, create",
+    "fields": "| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| Payment Type | paymentType | select | ✔ | Advance / Invoice / Refund | Invoice reveals \"+ Link invoice\" |\n| Customer Name | customerName | text | ✔ | prefilled | — |\n| Payment Date | paymentDate | date | ✔ | — | — |\n| Payment Mode | paymentMode | select | ✔ | Cash / Card / Upi / Cheque / Net Banking | enum also has LEDGER (PO use) |\n| Amount | amount | text (number) | ✔ | — | — |\n| Bank Charges (%) | bankCharges | text (number) | ✔ | — | summary shows received / charges / total |\n| Transaction ID | transactionId | text | ✔ | — | required even for cash |\n| + Link invoice | invoiceIds[] | picker | ✔ if type = Invoice | — | — |\n| Refund link | refund ref | picker | ✔ if type = Refund [C] | — | — |\n| Notes | notes | textarea | — | \"Internal use. Not visible to customer\" (F5) | — |\n| Attachments | — | file | — | `PUT …/payments/:id/attachments` [C] | — |",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**F5** — Customer-payment Notes are \"internal use, not visible to customer\"; not printed",
+      "**Counterpart:** O07 (read)",
+      "**Dependency note:** R1, F5"
+    ]
+  },
+  {
+    "code": "D24",
+    "name": "Inventory: Vehicle Models",
+    "app": "Dealer App",
+    "section": "Inventory",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/inventory/vehicle-model → /inventory/vehicle/:id",
+    "type": "List",
+    "mode": "RO",
+    "roles": "D S",
+    "buttons": "available / sold filter, search",
+    "fields": "No dedicated input form — this is a list screen. Display/column content: Available/sold filter, search.",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**Counterpart:** O10 (+ manual add)",
+      "**Dependency note:** R1; counterpart O10"
+    ]
+  },
+  {
+    "code": "D25",
+    "name": "Inventory: Parts",
+    "app": "Dealer App",
+    "section": "Inventory",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/inventory/{spare-parts, accessory, battery, charger, motor, controller}",
+    "type": "List",
+    "mode": "RO",
+    "roles": "D S",
+    "buttons": "search",
+    "fields": "No dedicated input form — this is a list screen. Display/column content: Search, per product type tabs.",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**Counterpart:** O10",
+      "**Dependency note:** R1; counterpart O10"
+    ]
+  },
+  {
+    "code": "D27",
+    "name": "Inventory Issues",
+    "app": "Dealer App",
+    "section": "Inventory",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/inventory/issues",
+    "type": "List + Dialog",
+    "mode": "C+R",
+    "roles": "D S",
+    "buttons": "new issue",
+    "fields": "| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| Type | type | radio | ? | Spare / Accessory | — |\n| Select Spare | — | select | ? | Motor / Battery / Controller / Accessories | — |\n| Title | title | text | ? | — | — |\n| Description | description | textarea | ? | — | — |\n| File | — | file | — | preview | — |",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**Counterpart:** O42",
+      "**Dependency note:** R1; counterpart O42"
+    ]
+  },
+  {
+    "code": "D28",
+    "name": "Purchases List",
+    "app": "Dealer App",
+    "section": "Purchase",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/purchase/{all, vehicle, warranty, spares-accessories}",
+    "type": "List",
+    "mode": "RO",
+    "roles": "D",
+    "buttons": "filter (12 statuses), search, new",
+    "fields": "No dedicated input form — this is a list screen. Display/column content: 12-status filter, search, new.",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**R2** — Distributor also sees POs where it is **seller** (`sellerDealerId` = own) and its connected buyer dealers",
+      "**Counterpart:** O17 / O12",
+      "**Dependency note:** R1/R2; counterpart O17/O12"
+    ]
+  },
+  {
+    "code": "D29",
+    "name": "Purchase Create (Cart)",
+    "app": "Dealer App",
+    "section": "Purchase",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/purchase/new → /purchase/new/{vehicle, warranty, spares-accessories}; edit /purchase/edit-order/:poId",
+    "type": "Wizard",
+    "mode": "C+R (edit while editable)",
+    "roles": "D",
+    "buttons": "choose source, add to cart, qty ±, clear, review & place",
+    "fields": "| Step / label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| Purchase From (sheet) | sellerDealerId | radio | ✔ | Manufacturing Unit (= OEM, null) / higher-tier dealer (`/purchase-order/available-sellers`) | — |\n| Payee banner | — | ro | — | MU name, A/C no, IFSC | — |\n| Search | — | text | — | — | — |\n| Product card: variant chip | items[].variantId | chip | ✔ | e.g. WBC / 60V43AH | shows \"N in stock\" (F7) |\n| Product card: colour chip | items[].colour | chip | ✔ | \"Please select a colour for this item\"; \"No stock for this colour\" | — |\n| ADD / Add to Cart | items[] | button | — | stock check vs OEM / seller / per-colour frame stock | — |\n| Cart: quantity ± / ✕ / Clear | items[].quantity | number | ✔ | ≥ 1; ≤ available | — |\n| Cart totals | — | ro | — | product count, total qty, grand total | — |\n| **Order rule** | — | — | ✔ | total qty ∈ **{16, 20, 32, 40}**; non-vehicle orders need a minimum total price | — |\n| Review & Place Order dialog | — | confirm | — | line items + totals | — |\n| (derived) | POType | — | ✔ | vehicle / spare_accessory / warranty_products, from cart mix | — |\n| (fixed) | shipmentMode | — | — | \"full\" | — |",
+    "rules": [
+      "**R4** — Dealer catalogue shows only products **active for its MU**; \"Purchase limit\" shows selected dealer types only a share of stock",
+      "**F1** — Each variant has 5 prices: Distributor, Divisional Distributor, District Dealer, Area Dealer, Customer. A dealer sees only **its tier** (on PO) and **Customer** (on sale). Spares and components have Dealer + Customer price.",
+      "**F7** — Dealer sees OEM stock only as \"N in stock\" (availability check), reduced if Purchase limit applies",
+      "**Counterpart:** O20 order detail; O30 reserved stock; O18 / O19",
+      "**Dependency note:** R4, F1, F7; counterpart O20/O30"
+    ]
+  },
+  {
+    "code": "D30",
+    "name": "PO Detail (6 tabs)",
+    "app": "Dealer App",
+    "section": "Purchase",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/purchase/{vehicle, spare, accessory, warranty}/:id",
+    "type": "Detail",
+    "mode": "RO + Action",
+    "roles": "D",
+    "buttons": "pay, confirm / accept delivery, reject shipment, report issue, print / share quotation & invoice, print checklist",
+    "fields": "No dedicated input form — this is a detail screen. Display/column content: Pay, confirm/accept delivery, reject shipment, report issue, print quotation/invoice/checklist.",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**R2** — Distributor also sees POs where it is **seller** (`sellerDealerId` = own) and its connected buyer dealers",
+      "**F2** — OEM \"PO info note\" is internal: \"only OEM staff see this\"",
+      "**F8** — Issue review notes and OEM approval steps are shown to dealer only as **stage + outcome**",
+      "**Counterpart:** **O20** (same tabs + OEM actions)",
+      "**Dependency note:** R1/R2, F2, F8; counterpart O20 (same tabs + OEM actions)"
+    ]
+  },
+  {
+    "code": "D32",
+    "name": "Shipment Confirm / Reject / Report Issue",
+    "app": "Dealer App",
+    "section": "Purchase",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "(D30 dispatch tab)",
+    "type": "Dialog",
+    "mode": "Action + Create",
+    "roles": "D",
+    "buttons": "confirm delivery, reject (reason), report issue (submit & confirm)",
+    "fields": "**Report issue** → `POST /purchase-order/:id/issues`:\n\n| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| Product | POItemId, productId, productType | select | ✔ | shipment lines incl. \"Battery ·\" and \"Charger ·\" lines | — |\n| Serial / Chassis No | serial | text | — | — | — |\n| What is the issue? | description | textarea | ✔ | \"Describe the issue before submitting\" | — |\n| Photos or videos | media[] | file (image / *, video / *), multiple | — | — | — |\n\nButton \"Submit & confirm\" logs the issue **and** marks the shipment delivered.\n\n**Reject shipment** → `PUT /purchase-order/shipments/:id/reject`:\n\n| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| Reason | reason | textarea | ✔ | \"Rejection reason is required\" | re-opens for re-dispatch |\n\n**Confirm delivery:** `PUT /purchase-order/shipments/:id/deliver`, no fields.",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**Counterpart:** O22, O42",
+      "**Dependency note:** counterpart O22/O42"
+    ]
+  },
+  {
+    "code": "D31",
+    "name": "PO Payment Dialog",
+    "app": "Dealer App",
+    "section": "Purchase / Payments",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "(in D30)",
+    "type": "Dialog",
+    "mode": "Create",
+    "roles": "D",
+    "buttons": "upload receipt (OCR), manual entry, apply ledger, submit",
+    "fields": "**Tab \"Receipt\":**\n\n| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| Upload payment receipt | file → `/payments/scan` | file (image) | ✔ unless manual | OCR reads txn ID, amount, date | usage quota `/payments/scan/usage` |\n| Transaction ID (read) | transactionId | ro | ✔ | **locked** (F4) | — |\n| Amount (read) | receivedAmount | ro | ✔ | locked | — |\n| Payment date (read) | date | ro | — | locked | — |\n| \"Enter details manually\" → Transaction ID | transactionId | text | ✔ | \"Enter both the transaction ID and the amount\" | note auto-suffixed \"[Entered manually — receipt could not be read]\" |\n| Amount paid (₹) | receivedAmount | number | ✔ | — | — |\n| Use for this order (₹) | amount | number | ✔ | ≤ due; surplus → ledger after verification | — |\n| Note | note | text | — | \"(optional)\" | — |\n| (hidden) | atachment | url | — | scanned receipt URL | — |\n\n**Tab \"Ledger\":**\n\n| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| Amount to apply (₹) | poCreditApplied | number | ✔ | ≤ ledger balance | `amount: 0` |\n| Note | note | text | — | — | — |",
+    "rules": [
+      "**F4** — PO-payment values read by receipt OCR (txn ID, amount, date) are locked: \"cannot be edited\"",
+      "**Counterpart:** O45, O23",
+      "**Dependency note:** F4; counterpart O45/O23"
+    ]
+  },
+  {
+    "code": "D33",
+    "name": "Payment Ledger",
+    "app": "Dealer App",
+    "section": "Payments",
+    "priority": "P1",
+    "status": "Verified (reference app)",
+    "path": "/purchase/payment-ledger",
+    "type": "List",
+    "mode": "RO",
+    "roles": "D",
+    "buttons": "—",
+    "fields": "No dedicated input form — this is a list screen. Display/column content: View only.",
+    "rules": [
+      "**R3** — Dealer sees balance only of ledger(s) it is **attached to**; a ledger can be shared by several dealers",
+      "**Counterpart:** O46 / O47, O14",
+      "**Dependency note:** R3; counterpart O46/O47/O14"
+    ]
+  },
+  {
+    "code": "D34",
+    "name": "Ledger Advance",
+    "app": "Dealer App",
+    "section": "Payments",
+    "priority": "P1",
+    "status": "Verified (reference app)",
+    "path": "/purchase/ledger-advance",
+    "type": "Action page",
+    "mode": "Action",
+    "roles": "D",
+    "buttons": "select approved orders, pay from ledger",
+    "fields": "| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| Approved orders awaiting advance | orderIds[] | checkbox list | ✔ | — | shows ledger balance, selected advance, balance after |",
+    "rules": [
+      "**R3** — Dealer sees balance only of ledger(s) it is **attached to**; a ledger can be shared by several dealers",
+      "**Counterpart:** O47",
+      "**Dependency note:** R3; counterpart O47"
+    ]
+  },
+  {
+    "code": "D45",
+    "name": "Payments (2 tabs)",
+    "app": "Dealer App",
+    "section": "Payments",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/payments",
+    "type": "List (2 tabs)",
+    "mode": "RO",
+    "roles": "D",
+    "buttons": "search, status, date range, add payment, ledger history",
+    "fields": "No dedicated input form — this is a list (2 tabs) screen. Display/column content: Search, status, date range, ledger history.",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**R3** — Dealer sees balance only of ledger(s) it is **attached to**; a ledger can be shared by several dealers",
+      "**Counterpart:** O45, O47",
+      "**Dependency note:** R1/R3; counterpart O45/O47"
+    ]
+  },
+  {
+    "code": "D46",
+    "name": "Add Payment (Ledger Top-up)",
+    "app": "Dealer App",
+    "section": "Payments",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "(D45)",
+    "type": "Dialog",
+    "mode": "Create",
+    "roles": "D",
+    "buttons": "submit for verification",
+    "fields": "| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| Transaction ID | transactionId | text | ✔ | \"Exactly as it appears on your bank record\" | **no proof upload** |\n| Amount (₹) | amount | number | ✔ | — | — |\n| Payment Date | date | date | ✔ | — | — |\n| Note | note | text | — | \"Optional\" | — |",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**Counterpart:** O45 (verify)",
+      "**Dependency note:** counterpart O45 (verify)"
+    ]
+  },
+  {
+    "code": "D35",
+    "name": "Received Orders / Seller Mgmt",
+    "app": "Dealer App",
+    "section": "Dealers (seller)",
+    "priority": "P1",
+    "status": "Verified (reference app)",
+    "path": "/purchase/received-orders, /purchase/seller-management",
+    "type": "List",
+    "mode": "RO",
+    "roles": "D",
+    "buttons": "—",
+    "fields": "No dedicated input form — this is a list screen. Display/column content: View connected buyer dealers.",
+    "rules": [
+      "**R2** — Distributor also sees POs where it is **seller** (`sellerDealerId` = own) and its connected buyer dealers",
+      "**Counterpart:** O06 connections",
+      "**Dependency note:** R2; counterpart O06"
+    ]
+  },
+  {
+    "code": "D43",
+    "name": "Dealers (Sub-dealers)",
+    "app": "Dealer App",
+    "section": "Dealers (seller)",
+    "priority": "P1",
+    "status": "Verified (reference app)",
+    "path": "/dealers",
+    "type": "List",
+    "mode": "RO",
+    "roles": "D",
+    "buttons": "type filter, search",
+    "fields": "No dedicated input form — this is a list screen. Display/column content: Type filter, search.",
+    "rules": [
+      "**R2** — Distributor also sees POs where it is **seller** (`sellerDealerId` = own) and its connected buyer dealers",
+      "**Counterpart:** O04 (owner)",
+      "**Dependency note:** R2; counterpart O04 (owner)"
+    ]
+  },
+  {
+    "code": "D44",
+    "name": "Orders (as Seller)",
+    "app": "Dealer App",
+    "section": "Dealers (seller)",
+    "priority": "P1",
+    "status": "Verified (reference app)",
+    "path": "/orders (detail compiled)",
+    "type": "List + Detail",
+    "mode": "Action",
+    "roles": "D",
+    "buttons": "approve / reject, verify payment, quote, dispatch",
+    "fields": "No dedicated input form — this is a list + detail screen. Display/column content: Approve/reject, verify payment, quote, dispatch — same component family as OEM Orders.",
+    "rules": [
+      "**R2** — Distributor also sees POs where it is **seller** (`sellerDealerId` = own) and its connected buyer dealers",
+      "**Counterpart:** **same components as O17 / O20 / O22**",
+      "**Dependency note:** R2; reuses O17/O20/O22 patterns"
+    ]
+  },
+  {
+    "code": "D36",
+    "name": "Issues List",
+    "app": "Dealer App",
+    "section": "Issues",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/issues",
+    "type": "List",
+    "mode": "RO",
+    "roles": "D",
+    "buttons": "stage filter, search, open PO",
+    "fields": "No dedicated input form — this is a list screen. Display/column content: Stage filter, search, open PO.",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**F8** — Issue review notes and OEM approval steps are shown to dealer only as **stage + outcome**",
+      "**Counterpart:** O42",
+      "**Dependency note:** R1, F8; counterpart O42"
+    ]
+  },
+  {
+    "code": "D37",
+    "name": "Warranty List",
+    "app": "Dealer App",
+    "section": "Warranty",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/warranty; tab /customer/:id/warranty-claims",
+    "type": "List + Dialog",
+    "mode": "RO",
+    "roles": "D V",
+    "buttons": "search; + → select customer by chassis",
+    "fields": "No dedicated input form — this is a list + dialog screen. Display/column content: Search; new claim by selecting customer/chassis.",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**Counterpart:** O43, O11",
+      "**Dependency note:** R1; counterpart O43/O11"
+    ]
+  },
+  {
+    "code": "D38",
+    "name": "Warranty Claim Create",
+    "app": "Dealer App",
+    "section": "Warranty",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/customer/:id/warranty-claims/new",
+    "type": "Form",
+    "mode": "Create",
+    "roles": "D V",
+    "buttons": "claim warranty",
+    "fields": "| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| Raised to | raisedTo | radio | ✔ | OEM / Dealer (service team) | dealer path = dealer runs the workflow |\n| Product type | productType | radio | ✔ | Vehicle / Warranty products | — |\n| Customer Name | customerName | ro | — | — | — |\n| Select Vehicle | vehicleChasisNo → inventoryId, chasisNumber, vehicleId, variantId | select | ✔ | customer's **paid** invoices: \"model (variant) · chassis · colour\" | — |\n| Chassis, Variant, Colour, Motor no, Controller no, Charger no, Battery no(s) | — | ro | — | from invoice serials | — |\n| Select Spare | selectedVehicleSpare → itemDetails.spareType | select | ✔ | Battery / Controller / Motor / Charger | — |\n| Select serial number(s) | spareSerialSelector → itemDetails.itemNo | checkbox list | ✔ | serials already on an active claim are locked | \"No serial number found on the invoice…\" |\n| Issue | issue | select | ✔ | Not Working / Run Very slow / Other | — |\n| Still Warranty | itemDetails.warenty | ro date | ✔ | computed end date | — |\n| Remarks | remarks | textarea | ✔ | — | — |\n| Claim images | warrantyImages[] | file image / * | — | ≤ 10 files, ≤ 5 MB each; images only | — |\n| Warranty-products mode: search | productId, partCode | search | ✔ | name, part code, type, invoice # | — |",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**Counterpart:** O44",
+      "**Dependency note:** R1; counterpart O44"
+    ]
+  },
+  {
+    "code": "D39",
+    "name": "Warranty Claim Detail",
+    "app": "Dealer App",
+    "section": "Warranty",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/customer/:id/warranty-claims/:id",
+    "type": "Detail + Dialogs",
+    "mode": "RO + Action",
+    "roles": "D V",
+    "buttons": "mark in transit, pay service charge, confirm receipt, report post-receipt issue, print receipt",
+    "fields": "| Action | Fields | Req | Validation |\n|---|---|---|---|\n| Mark in transit (`PUT …/status/inTransit`) | company, contactNumber, trackingId | ✔ ✔ ✔ | contact = 10 digits, no letters |\n| Pay service charge (`POST /warranty/oem/:id/cost/payment`) | amount, transactionId, proof file [I] | ✔ | — |\n| Confirm received | — | — | sets dealer_received |\n| Report post-receipt issue (`POST /warranty/oem/:id/issue`) | description, media [I] | ✔ | — |",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**F8** — Issue review notes and OEM approval steps are shown to dealer only as **stage + outcome**",
+      "**Counterpart:** **O44**",
+      "**Dependency note:** R1, F8; counterpart O44"
+    ]
+  },
+  {
+    "code": "D47",
+    "name": "Settings: Profile",
+    "app": "Dealer App",
+    "section": "Settings",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/settings/profile",
+    "type": "Detail + Dialogs",
+    "mode": "RO + limited update",
+    "roles": "D S V",
+    "buttons": "change password, shop location save, upload documents, profile photo",
+    "fields": "| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| Latitude | latitude | number | — | from browser geolocation (\"Use my current location\") | `PUT /accounts/me/shop-location` |\n| Longitude | longitude | number | — | — | — |\n| Address | address | text | — | optional | — |\n\n| Section / label | API field | Type | Req | Notes |\n|---|---|---|---|---|\n| All org / address / bank / login fields | dealer_profile.* | ro | — | F3: \"contact OEM Admin\" |\n| Change password | password, confirmPassword | password | ✔ ✔ | must match; `PUT /accounts/users/:id/password` |\n| Shop location | latitude, longitude, address | number / text | — | \"Use my current location\" |\n| Documents: GST Certificate, PAN Card, Aadhaar, Dealership Agreement | attachments | file (PDF / image) | — | `PUT /accounts/dealers/:id/attachments` |\n| Profile photo | — | file | — | `app-profile-upload` |",
+    "rules": [
+      "**F3** — Dealer profile (org, GST, bank, addresses, MU, region / zone, type) is OEM-owned and read-only to dealer. Dealer may edit only password, shop location, photo and business documents.",
+      "**Counterpart:** O05 (owner)",
+      "**Dependency note:** F3; counterpart O05 (owner)"
+    ]
+  },
+  {
+    "code": "D48",
+    "name": "Settings: Users",
+    "app": "Dealer App",
+    "section": "Settings",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/settings/users",
+    "type": "List",
+    "mode": "RO",
+    "roles": "D",
+    "buttons": "search, create, edit",
+    "fields": "No dedicated input form — this is a list screen. Display/column content: Search, create, edit dealer staff.",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**Dependency note:** R1"
+    ]
+  },
+  {
+    "code": "D49",
+    "name": "User Add / Edit",
+    "app": "Dealer App",
+    "section": "Settings",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/settings/users/new, /settings/users/edit/:id",
+    "type": "Form",
+    "mode": "CRUD",
+    "roles": "D",
+    "buttons": "submit, change password",
+    "fields": "| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| User Role | role | select | ✔ | add: Sales Man / Service Man; **edit adds Dealer** | — |\n| First Name | firstName | text | ✔ | — | — |\n| Last Name | lastName | text | ✔ | — | — |\n| Email ID | email | email | ✔ | — | — |\n| Contact | phone | text | ✔ | — | — |\n| Password | password | password | ✔ (add) | — | — |\n| Confirm Password | confirmPassword | password | ✔ (add) | must match | — |\n| Status (edit) | isActive | select | ✔ | Active / InActive | — |\n| Change Password (edit) | — | button | — | — | — |",
+    "rules": [
+      "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+      "**F10** — Dealer staff edit form exposes a \"Dealer\" role option that the add form doesn't. Owner role is assignable only on edit.",
+      "**Dependency note:** R1, F10"
+    ]
+  },
+  {
+    "code": "D50",
+    "name": "Reports",
+    "app": "Dealer App",
+    "section": "Reports",
+    "priority": "P2",
+    "status": "Verified (reference app)",
+    "path": "/reports (URL only)",
+    "type": "Form",
+    "mode": "Action",
+    "roles": "D S V",
+    "buttons": "download",
+    "fields": "| Label | API field | Type | Req | Options |\n|---|---|---|---|---|\n| Select Dealer | dealerName | select | ? | hard-coded sample names |\n| Report Type | reportType | select | ? | Purchase Orders / Warranty Claim |\n| From Date / To Date | fromDate, toDate | date | ? | — |\n\n---",
+    "rules": []
+  },
+  {
+    "code": "D51",
+    "name": "E-Way Bill (mock in reference app)",
+    "app": "7. Field specifications: OEM app",
+    "section": "",
+    "priority": "P2",
+    "status": "Verified (reference app)",
+    "path": "/e-waybill, /new-e-waybill",
+    "type": "Mock",
+    "mode": "Mock",
+    "roles": "D",
+    "buttons": "—",
+    "fields": "No dedicated input form — this is a mock screen. Display/column content: Superseded — see new 'E-Way Bill (real build)' row; this was a non-functional stub in the reference app.",
+    "rules": [
+      "**Counterpart:** O56 mock",
+      "**Dependency note:** Superseded by new feature row"
+    ]
+  },
+  {
+    "code": "D52",
+    "name": "Delivery Challan (mock)",
+    "app": "7. Field specifications: OEM app",
+    "section": "",
+    "priority": "P2",
+    "status": "Verified (reference app)",
+    "path": "/delivery-challan, /new-delivery-challan",
+    "type": "Mock",
+    "mode": "Mock",
+    "roles": "D",
+    "buttons": "—",
+    "fields": "No dedicated input form — this is a mock screen. Display/column content: Static sample data only in reference app; not elaborated in new_features.md.",
+    "rules": [
+      "**Counterpart:** O56 mock"
+    ]
+  },
+  {
+    "code": "D53",
+    "name": "Legacy Dealers List (mock)",
+    "app": "7. Field specifications: OEM app",
+    "section": "",
+    "priority": "P2",
+    "status": "Verified (reference app)",
+    "path": "/dealer",
+    "type": "Mock",
+    "mode": "Mock",
+    "roles": "D",
+    "buttons": "—",
+    "fields": "No dedicated input form — this is a mock screen. Display/column content: Leftover legacy route; not a real screen.\n\n\n---",
+    "rules": []
+  },
+  {
+    "code": "O00",
+    "name": "Header + Notifications Panel",
+    "app": "OEM App",
+    "section": "Global",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "(global)",
+    "type": "Component",
+    "mode": "RO",
+    "roles": "all",
+    "buttons": "open (deep-link), mark all read",
+    "fields": "No dedicated input form — this is a component screen. Display/column content: Deep-link notifications, mark all read.",
+    "rules": [
+      "**R9** — Notifications per recipient org (`/notifications/dealer` vs `/notifications/oem`)",
+      "**Counterpart:** D00",
+      "**Dependency note:** R9"
+    ]
+  },
+  {
+    "code": "O01",
+    "name": "Login / Forgot Password",
+    "app": "OEM App",
+    "section": "Auth",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/login, /forgot-password",
+    "type": "Form / Static",
+    "mode": "Action",
+    "roles": "public",
+    "buttons": "sign in",
+    "fields": "| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| User ID | userId | text | ✔ | alphanumeric, exactly 7 chars (placeholder \"eg. D001\") | dealer D000002; OEM OEM0001 |\n| Password | password | password | ✔ | show / hide toggle | — |\n| Remember me | rememberMe | checkbox | — | — | dealer app stores userId + **plaintext password** in localStorage; don't replicate |",
+    "rules": [
+      "**Counterpart:** D01"
+    ]
+  },
+  {
+    "code": "O03",
+    "name": "Dashboard",
+    "app": "OEM App",
+    "section": "Dashboard",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/dashboard ('?unit=')",
+    "type": "Dashboard",
+    "mode": "RO + edit slogan",
+    "roles": "all but PH, PM",
+    "buttons": "period, state, unit filter, edit slogan",
+    "fields": "| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| Period | period / dateRange | select | — | This Day / This Month / This Year / Custom Date | — |\n| State | state | select | — | All States + operating states | — |\n| Unit | unit | select | — | All units / each MU | — |\n| Edit (slogan) | dashboardSlogan | text | — | — | `PATCH /accounts/oem/dashboard-slogan` |\n\n**KPIs:** no. of dealers, vehicles sold, vehicle stock, pending orders, PO by model, vehicle sales, warranty, top warranty dealers, top selling vehicle, top dealers by purchases.",
+    "rules": [
+      "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+      "**R7** — OEM sales user sees **only dealers ticked in \"Assigned Dealers\"** (their POs, payments, details); none ticked = no dealers",
+      "**Counterpart:** D04",
+      "**Dependency note:** R6/R7"
+    ]
+  },
+  {
+    "code": "O04",
+    "name": "Dealers List + Map",
+    "app": "OEM App",
+    "section": "Dealer Management",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/dealers",
+    "type": "List + map",
+    "mode": "RO",
+    "roles": "see DEALERS_LIST",
+    "buttons": "active / inactive, type / state / district filter, map, add, edit, unlock",
+    "fields": "No dedicated input form — this is a list + map screen. Display/column content: Active/inactive, type/state/district filter, map, add, edit, unlock.",
+    "rules": [
+      "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+      "**R7** — OEM sales user sees **only dealers ticked in \"Assigned Dealers\"** (their POs, payments, details); none ticked = no dealers",
+      "**R8** — Region / zone heads attached to regions / zones; dealers carry `regionId` / `zoneId`, so likely scoping for SRH / SZH",
+      "**Counterpart:** D43 (seller view), D47",
+      "**Dependency note:** R6/R7/R8"
+    ]
+  },
+  {
+    "code": "O05",
+    "name": "Add / Edit Dealer",
+    "app": "OEM App",
+    "section": "Dealer Management",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/dealers/new, /dealers/:id/edit",
+    "type": "Form",
+    "mode": "CRUD",
+    "roles": "ADM",
+    "buttons": "create new dealer, save",
+    "fields": "| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| User Type | dealerType | radio | ✔ | Distributor / Divisional Distributor / District Dealer / Area Dealer | sets price tier (F1) and seller |\n| Owner Name: title | namePrefix | select | ✔ | Mr. / Miss. / Mrs. | — |\n| Owner first / last name | firstName, lastName | text | ✔ | — | — |\n| Firm Name | orgName | text | ✔ | — | — |\n| GST No | gstNo | text | ✔ | — | — |\n| Org Email ID | orgEmail | text | ✔ | — | — |\n| Org Contact | contact | text | ✔ | — | — |\n| Joining Date | joiningDate | date | ✔ | — | — |\n| State | state | select | — | operating states | drives District |\n| District | district | select | — | \"Select a state first\" | — |\n| Area | area | text | — | — | — |\n| Select Region | regionId | select | ✔ | regions (O51) | — |\n| Select Zone | zoneId | select | ✔ | zones of region | — |\n| Manufacturing Unit | manufacturingUnitId | select | — | None / MU list | dealer's seller and letterhead |\n| Password | password | password | ✔ | — | creates dealer login (D00000n auto) |\n| Organization Logo | logo | file image / * | — | 240×240 px, ≤ 1 MB | shown on PDFs / emails |\n| Billing: Country, State, Address, City, Pincode | billingAddress.* | select / text | ✔ all | — | — |\n| Shipping: same (+ Copy Billing) | shippingAddress.* | — | ✔ all | — | — |\n| Shop Location: Latitude, Longitude, Address | latitude, longitude, address | number / textarea | — | — | — |\n| Bank: Account Type | bankDetails.accountType | radio | ✔ | Current / Saving | — |\n| Beneficiary Name | bankDetails.beneficiaryName | text | ✔ | — | — |\n| Bank Name | bankDetails.bankName | text | ✔ | — | — |\n| Account Number | bankDetails.accountNumber | text | ✔ | — | — |\n| Re-enter Account Number | bankDetails.confirmAccount | text | ✔ | must match | — |\n| IFSC | bankDetails.IFSC | text | ✔ | — | — |\n\n**Dealer list row actions:** Edit, Unlock Account (suspended).",
+    "rules": [
+      "**F3** — Dealer profile (org, GST, bank, addresses, MU, region / zone, type) is OEM-owned and read-only to dealer. Dealer may edit only password, shop location, photo and business documents.",
+      "**Counterpart:** D47 (read-only)",
+      "**Dependency note:** F3; creates dealer login"
+    ]
+  },
+  {
+    "code": "O06",
+    "name": "Dealer Detail (9 tabs)",
+    "app": "OEM App",
+    "section": "Dealer Management",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/dealers/:id/details",
+    "type": "Detail (9 tabs)",
+    "mode": "RO",
+    "roles": "see DEALER_DETAILS",
+    "buttons": "edit, switch tab",
+    "fields": "No dedicated input form — this is a detail (9 tabs) screen. Display/column content: Profile, connections, ledger top-ups tab shell.",
+    "rules": [
+      "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+      "**R7** — OEM sales user sees **only dealers ticked in \"Assigned Dealers\"** (their POs, payments, details); none ticked = no dealers",
+      "**Counterpart:** D47, D35",
+      "**Dependency note:** R6/R7"
+    ]
+  },
+  {
+    "code": "O07",
+    "name": "Dealer → Customers + Customer Mirror",
+    "app": "OEM App",
+    "section": "Sales (mirror)",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/dealers/:id/customer-detail; /customers/:id/*",
+    "type": "List + Detail (6 tabs)",
+    "mode": "**Mirror**",
+    "roles": "see DEALER_DETAILS_CUSTOMER_LIST",
+    "buttons": "search, open",
+    "fields": "No dedicated input form — this is a list + detail (6 tabs) screen. Display/column content: Read-only view of dealer-owned customer/invoice/payment/service/warranty data.",
+    "rules": [
+      "**R10** — OEM reads all dealer CRM data **read-only** through `?dealerProfileID=`",
+      "**F9** — **Gap:** OEM sees customer PII (PAN / Aadhaar numbers, phone) unmasked",
+      "**Counterpart:** D15–D23, D40–D42",
+      "**Dependency note:** R10, F9 (PII unmasked — gap); mirrors D15-D23, D40-D42"
+    ]
+  },
+  {
+    "code": "O08",
+    "name": "Dealer → Enquiries",
+    "app": "OEM App",
+    "section": "Sales (mirror)",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/dealers/:id/enquiry-list",
+    "type": "List",
+    "mode": "**Mirror**",
+    "roles": "see …_ENQUIRY_LIST",
+    "buttons": "—",
+    "fields": "No dedicated input form — this is a list screen. Display/column content: Read-only.",
+    "rules": [
+      "**R10** — OEM reads all dealer CRM data **read-only** through `?dealerProfileID=`",
+      "**Counterpart:** D07–D09",
+      "**Dependency note:** R10; mirrors D07-D09"
+    ]
+  },
+  {
+    "code": "O09",
+    "name": "Dealer → Vehicle Sold",
+    "app": "OEM App",
+    "section": "Sales (mirror)",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/dealers/:id/vehicle-sold",
+    "type": "List",
+    "mode": "**Mirror**",
+    "roles": "see …_VEHICLE_SOLD",
+    "buttons": "—",
+    "fields": "No dedicated input form — this is a list screen. Display/column content: Read-only.",
+    "rules": [
+      "**R10** — OEM reads all dealer CRM data **read-only** through `?dealerProfileID=`",
+      "**Counterpart:** D20 / D21",
+      "**Dependency note:** R10; mirrors D20/D21"
+    ]
+  },
+  {
+    "code": "O10",
+    "name": "Dealer → Vehicle Stock + Add Stock",
+    "app": "OEM App",
+    "section": "Sales (mirror)",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/dealers/:id/vehicle-stock",
+    "type": "List + Dialog",
+    "mode": "RO + Create",
+    "roles": "ADM SZH APM DH",
+    "buttons": "type tabs, **add stock to dealer**",
+    "fields": "| Label | API field | Type | Req | Options |\n|---|---|---|---|---|\n| Product type | productType | select | ✔ | Vehicle / Spare / Accessory / Battery / Charger / Motor / Controller |\n| Product | productId | select | ✔ | — |\n| Quantity | quantity | number | ✔ | — |",
+    "rules": [
+      "**R10** — OEM reads all dealer CRM data **read-only** through `?dealerProfileID=`",
+      "**Counterpart:** D24 / D25",
+      "**Dependency note:** R10; mirrors D24/D25"
+    ]
+  },
+  {
+    "code": "O11",
+    "name": "Dealer → Warranty Claims",
+    "app": "OEM App",
+    "section": "Sales (mirror)",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/dealers/:id/warranty-claim",
+    "type": "List + Report",
+    "mode": "Mirror",
+    "roles": "see …_WARRANTY_CLAIM",
+    "buttons": "period filter, claims by product",
+    "fields": "No dedicated input form — this is a list + report screen. Display/column content: Period filter, claims-by-product chart.",
+    "rules": [
+      "**R10** — OEM reads all dealer CRM data **read-only** through `?dealerProfileID=`",
+      "**Counterpart:** D37",
+      "**Dependency note:** R10; mirrors D37"
+    ]
+  },
+  {
+    "code": "O12",
+    "name": "Dealer → Purchase Orders",
+    "app": "OEM App",
+    "section": "Sales (mirror)",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/dealers/:id/purchase-order",
+    "type": "List",
+    "mode": "RO",
+    "roles": "see …_PO",
+    "buttons": "status / type filter",
+    "fields": "No dedicated input form — this is a list screen. Display/column content: Status/type filter.",
+    "rules": [
+      "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+      "**R7** — OEM sales user sees **only dealers ticked in \"Assigned Dealers\"** (their POs, payments, details); none ticked = no dealers",
+      "**Counterpart:** D28",
+      "**Dependency note:** R6/R7; mirrors D28"
+    ]
+  },
+  {
+    "code": "O13",
+    "name": "Dealer → Pending Stock",
+    "app": "OEM App",
+    "section": "Sales (mirror)",
+    "priority": "P1",
+    "status": "Verified (reference app)",
+    "path": "/dealers/:id/pending-stock",
+    "type": "Report",
+    "mode": "RO",
+    "roles": "see …_PO",
+    "buttons": "—",
+    "fields": "No dedicated input form — this is a report screen. Display/column content: Approved minus dispatched.",
+    "rules": [
+      "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+      "**R7** — OEM sales user sees **only dealers ticked in \"Assigned Dealers\"** (their POs, payments, details); none ticked = no dealers",
+      "**Counterpart:** D30 \"pending to dispatch\"",
+      "**Dependency note:** R6/R7; mirrors D30 'pending to dispatch'"
+    ]
+  },
+  {
+    "code": "O14",
+    "name": "Dealer → Payment History",
+    "app": "OEM App",
+    "section": "Sales (mirror)",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/dealers/:id/payment-history",
+    "type": "List",
+    "mode": "RO",
+    "roles": "see …_PAYMENT_HISTORY",
+    "buttons": "—",
+    "fields": "No dedicated input form — this is a list screen. Display/column content: PO credit balance, totals.",
+    "rules": [
+      "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+      "**R7** — OEM sales user sees **only dealers ticked in \"Assigned Dealers\"** (their POs, payments, details); none ticked = no dealers",
+      "**Counterpart:** D33 / D45",
+      "**Dependency note:** R6/R7; mirrors D33/D45"
+    ]
+  },
+  {
+    "code": "O15",
+    "name": "Announcements List",
+    "app": "OEM App",
+    "section": "Announcements",
+    "priority": "P1",
+    "status": "Verified (reference app)",
+    "path": "/announcements",
+    "type": "List",
+    "mode": "RO",
+    "roles": "(unkeyed)",
+    "buttons": "new, open",
+    "fields": "No dedicated input form — this is a list screen. Display/column content: New, open.",
+    "rules": [
+      "**Counterpart:** D05",
+      "**Dependency note:** Role not in permission map — confirm access"
+    ]
+  },
+  {
+    "code": "O16",
+    "name": "Announcement Create / Edit",
+    "app": "OEM App",
+    "section": "Announcements",
+    "priority": "P1",
+    "status": "Verified (reference app)",
+    "path": "/announcements/new, /announcements/:id/edit",
+    "type": "Form",
+    "mode": "CRUD",
+    "roles": "(unkeyed)",
+    "buttons": "create, edit, stop",
+    "fields": "| Label | API field | Type | Req | Options / validation |\n|---|---|---|---|---|\n| Title | title | text | ? | — |\n| Description | description | textarea | ? | — |\n| Attachment | attachmentType + file / table | radio + file / grid | — | None / File (Image / PDF / Video) / Table |\n| Target Dealers | targetType (+ muIds) | select | ? | All Manufacturing Units / Selected Manufacturing Unit |",
+    "rules": [
+      "**Counterpart:** D06",
+      "**Dependency note:** mirrors D05/D06"
+    ]
+  },
+  {
+    "code": "O17",
+    "name": "Orders List (+ sub-lists)",
+    "app": "OEM App",
+    "section": "Orders",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/orders, /orders/{full-payment-pending, partial-dispatch, dispatched, delivered, dispatched-delivered, advance-payment-pending}",
+    "type": "List",
+    "mode": "RO",
+    "roles": "see ORDERS_LIST_*",
+    "buttons": "type tabs, unit / date / status filter, print",
+    "fields": "No dedicated input form — this is a list screen. Display/column content: Type tabs, 7 status sub-lists, unit/date/status filter.",
+    "rules": [
+      "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+      "**R7** — OEM sales user sees **only dealers ticked in \"Assigned Dealers\"** (their POs, payments, details); none ticked = no dealers",
+      "**Counterpart:** D28",
+      "**Dependency note:** R6/R7; mirrors D28"
+    ]
+  },
+  {
+    "code": "O20",
+    "name": "Order Detail (6 tabs)",
+    "app": "OEM App",
+    "section": "Orders",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/orders/order-details/:productType/:id; edit /orders/edit-order/:poId",
+    "type": "Detail",
+    "mode": "Action",
+    "roles": "see ORDERS_DETAILS",
+    "buttons": "approve / reject, create quotation, edit items, assign, dispatch shipment, verify / reject payment, info note, expected dispatch date, revert cancel, print",
+    "fields": "| Label | API field | Type | Req | Notes |\n|---|---|---|---|---|\n| Add PO info note | infoNote | textarea | — | `PUT /purchase-order/:id/info`; OEM-only (F2) |\n| Expected dispatch date | expectedDispatchDate | date | — | `PUT /purchase-order/:id/expected-dispatch-date`; notifies dealer |\n| Edit items (edit order) | items[].approvedQty, properties | number | — | `PUT /purchase-order/:id/items`, `…/items/:itemId/properties` |\n| Create Quotation (seller tier, [C]) | dealer, due date, lines (qty, rate, discount, SGST / CGST), adjustment, T&C | form | — | `POST /purchase-order-quotations` |",
+    "rules": [
+      "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+      "**R7** — OEM sales user sees **only dealers ticked in \"Assigned Dealers\"** (their POs, payments, details); none ticked = no dealers",
+      "**F2** — OEM \"PO info note\" is internal: \"only OEM staff see this\"",
+      "**Counterpart:** **D30**",
+      "**Dependency note:** R6/R7, F2; counterpart D30"
+    ]
+  },
+  {
+    "code": "O21",
+    "name": "Assign Item",
+    "app": "OEM App",
+    "section": "Orders",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "(O20)",
+    "type": "Dialog",
+    "mode": "Action",
+    "roles": "ASSIGN roles",
+    "buttons": "assign",
+    "fields": "| Label | API field | Type | Req | Notes |\n|---|---|---|---|---|\n| Manufacturing Unit | manufacturingUnitId | select | ✔ | — |\n| (ro) Total qty, Approved qty, Vehicle, Variant, Colour | — | ro | — | mixed colour allowed |\n| Notes | remarks | textarea | — | — |\n\n**No chassis or serial entry at assignment.** Quantities only.",
+    "rules": [
+      "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+      "**Dependency note:** R6"
+    ]
+  },
+  {
+    "code": "O22",
+    "name": "Dispatch Shipment",
+    "app": "OEM App",
+    "section": "Orders",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "(O20)",
+    "type": "Dialog",
+    "mode": "Create",
+    "roles": "DISPATCH roles",
+    "buttons": "dispatch (n units), dispatch all remaining",
+    "fields": "| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| Dispatch from Manufacturing Unit | muId | select | ✔ | MU list | — |\n| Per line: Approved / Shipped / Remaining | — | ro | — | — | — |\n| Per line: Ship now | items[].quantity | number | ✔ (≥1 line) | ≤ remaining; \"Dispatch all remaining\" | button shows \"Dispatch (n units)\" |\n| Transport Type | transportType | radio | ? | By Truck / By Parcel (courier variant: By Courier) | — |\n| Transport Company Name | companyName | text | ? | — | — |\n| Company Number | companyNumber | text | ? | — | — |\n| Tracking ID | trackingId | text | ? | — | — |\n| Driver Number | driverNumber | text | ? | — | — |\n| Vehicle No | vehicleNo | text | ? | — | — |\n| Courier Name / Number / Parcel Tracking ID | courierName, courierNumber, parcelTrackingId | text | ? | courier variant [C] | — |\n| Transport Date | transportDate | date | ? | — | — |\n| Expected Dispatch / Delivery Date | deliveryDate | date | ? | — | — |\n| Payment Status | paymentStatus | select | ? | Paid / Unpaid [C] | — |\n\nBatteries and chargers travel with vehicles automatically.",
+    "rules": [
+      "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+      "**Counterpart:** D32 (confirm / reject)",
+      "**Dependency note:** counterpart D32 (confirm/reject)"
+    ]
+  },
+  {
+    "code": "O24",
+    "name": "PO Reject / Info Note / Expected Date",
+    "app": "OEM App",
+    "section": "Orders",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "(O20)",
+    "type": "Dialog / inline",
+    "mode": "Action",
+    "roles": "APPROVE roles",
+    "buttons": "reject (remarks), save note, save date",
+    "fields": "| Label | API field | Type | Req |\n|---|---|---|---|\n| Reason for Rejection → Remarks | note | textarea | ✔ [I] |\n| Approve | — | button | — |\n| Revert cancelled PO | — | button | — |",
+    "rules": [
+      "**F2** — OEM \"PO info note\" is internal: \"only OEM staff see this\"",
+      "**Counterpart:** D30"
+    ]
+  },
+  {
+    "code": "O18",
+    "name": "Production (Day-wise)",
+    "app": "OEM App",
+    "section": "Orders / Production",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/orders/production",
+    "type": "List + Action",
+    "mode": "Action",
+    "roles": "ORDERS_LIST_VEHICLE roles",
+    "buttons": "pick date / unit, update produced count",
+    "fields": "| Label | API field | Type | Req | Notes |\n|---|---|---|---|---|\n| Date | date | date picker | — | production date = expected dispatch − 1 day |\n| Unit | — | select | — | — |\n| Per PO: produced count / production status | progress | number / select | — | shows \"0 / 16 vehicles produced\" |",
+    "rules": [
+      "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+      "**F6** — OEM-only fields: ledger tally, reserved stock by dealer, production status / plan, MU stock register, dispatch batch / token, vendor data, audit trail (section 9)",
+      "**Counterpart:** D30 banner only",
+      "**Dependency note:** R6, F6"
+    ]
+  },
+  {
+    "code": "O19",
+    "name": "Dispatch Plan (Batches)",
+    "app": "OEM App",
+    "section": "Orders / Dispatch",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/orders/dispatch-plan, /orders/dispatch-batch/:batchId",
+    "type": "List + Action",
+    "mode": "Action",
+    "roles": "see ORDERS_LIST_DISPATCH",
+    "buttons": "combine paid POs into batch, revert, print",
+    "fields": "| Label | API field | Type | Req | Notes |\n|---|---|---|---|---|\n| Filters (unit, dates) | — | — | — | — |\n| Select paid POs | poIds[] | checkbox | ✔ | combine into dispatch batch |",
+    "rules": [
+      "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+      "**F6** — OEM-only fields: ledger tally, reserved stock by dealer, production status / plan, MU stock register, dispatch batch / token, vendor data, audit trail (section 9)",
+      "**Dependency note:** R6, F6"
+    ]
+  },
+  {
+    "code": "O23",
+    "name": "Payment Verify / Reject",
+    "app": "OEM App",
+    "section": "Orders / Payments",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "(O20 Payment tab, O45)",
+    "type": "Action",
+    "mode": "Action",
+    "roles": "(ORDERS_PAYMENT_VERIFY)",
+    "buttons": "verify, reject (reason)",
+    "fields": "| Action | Fields | Req | Notes |\n|---|---|---|---|\n| Verify | — | — | toast \"Payment of ₹X on PO verified — ₹Y credited to the dealer's ledger\" (surplus) |\n| Reject | reason | ✔ | dealer resubmits |\n| Ledger top-up verify | verified, note | — | `PUT /ledger-topups/:id/verify` |\n\n**Payments list columns:** order, dealer, transaction ID, used for order, received, payment date, submitted, note, receipt (image), status, action.",
+    "rules": [
+      "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+      "**R7** — OEM sales user sees **only dealers ticked in \"Assigned Dealers\"** (their POs, payments, details); none ticked = no dealers",
+      "**Counterpart:** D31",
+      "**Dependency note:** R6/R7; counterpart D31"
+    ]
+  },
+  {
+    "code": "O25",
+    "name": "Products List",
+    "app": "OEM App",
+    "section": "Products",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/products/{vehicle, spare, accessory, battery, charger, motor, controller}",
+    "type": "List",
+    "mode": "RO",
+    "roles": "ADM",
+    "buttons": "status filter, add, edit, delete",
+    "fields": "No dedicated input form — this is a list screen. Display/column content: Status filter, add/edit/delete, 7 product-type tabs.",
+    "rules": [
+      "**Counterpart:** D29 catalogue",
+      "**Dependency note:** ADM only"
+    ]
+  },
+  {
+    "code": "O26",
+    "name": "Product Create / Edit: Vehicle",
+    "app": "OEM App",
+    "section": "Products",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/products/vehicle/new, /products/vehicle/:id/edit",
+    "type": "Form",
+    "mode": "CRUD",
+    "roles": "ADM",
+    "buttons": "add colour, add variant, add spec, create",
+    "fields": "| Section / label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| Vehicle Model | productName | text | ✔ | — | — |\n| Type | wheels | select | ✔ | 2 Wheeler / 3 Wheeler / 4 Wheeler | — |\n| Motor | motorId | select | — | motor products | — |\n| Controller | controllerId | select | — | controller products | — |\n| Registration | isRegistrationVehicle | select | ✔ | Yes / No | — |\n| HSN No | HSN | text | ✔ | — | — |\n| CGST (%) | cgst | text | ✔ | — | — |\n| SGST (%) | sgst | text | ✔ | — | — |\n| Product Image | images | file image / * | — | 240×240 preferred, ≤ 5 MB | — |\n| Colour: Name + Code (repeat) | colourName, colourCode | text + colour picker | — | \"Add Colour\" | — |\n| Variant (repeat): Name | variants[].name | text | ✔ | \"+ Add Variant\" | — |\n| Without Battery & Charger (WBC) | isWBC | checkbox | — | — | — |\n| Charger | chargerProductId | select | — | hidden if WBC | — |\n| Battery | batteryProductId | select | — | — | — |\n| Battery Qty | batteryQuantity | number | — | — | — |\n| Price: Distributor | price.distributor | text ₹ | ✔ | — | F1 |\n| Price: Divisional Distributor | price.divisionalDistributor | text ₹ | ✔ | — | — |\n| Price: District Dealer | price.districtDealer | text ₹ | ✔ | — | — |\n| Price: Area Dealer | price.areaDealer | text ₹ | ✔ | — | — |\n| Price: Customer Price | price.customer | text ₹ | ✔ | — | MRP on sale invoice |\n| Technical Specs (+ Add Field) | specs[{key, value}] | text pairs | — | — | — |\n| Available from: per MU | activeUnits[] | checkbox per MU | — | — | R4 |\n| Purchase limit | purchaseLimit | checkbox + dealer types / share | — | \"Show selected dealer types only a share of the available stock\" | — |",
+    "rules": [
+      "**F1** — Each variant has 5 prices: Distributor, Divisional Distributor, District Dealer, Area Dealer, Customer. A dealer sees only **its tier** (on PO) and **Customer** (on sale). Spares and components have Dealer + Customer price.",
+      "**Counterpart:** D29, D20 picker",
+      "**Dependency note:** F1 (5-tier pricing)"
+    ]
+  },
+  {
+    "code": "O27",
+    "name": "Product Create / Edit: Spare, Accessory",
+    "app": "OEM App",
+    "section": "Products",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/products/{spare, accessory}/new, edit",
+    "type": "Form",
+    "mode": "CRUD",
+    "roles": "ADM",
+    "buttons": "create",
+    "fields": "| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| Vehicle | vehicleId | select | ✔ | vehicle products | compatibility |\n| Spare Name / Accessory Name | spareName / productName | text | ✔ | — | — |\n| Is Panel / Painted Part? (spare) | isPanel | checkbox | — | creates one spare per colour of the model | — |\n| Parts Code | partCode | text | — | — | — |\n| Vendor / Supplier (spare) | vendorId | select | — | None / vendors | links to O40 procurement |\n| Category, Brand (accessory) [C] | category, brand | text / select | — | — | — |\n| HSN Code | HSN | text | ✔ | — | — |\n| CGST / SGST | cgst, sgst | text | — | — | — |\n| Dealer Price | dealerPrice | text ₹ | — | single dealer price (not tiered) | — |\n| Customer Price | customerPrice | text ₹ | — | — | — |\n| Image | images | file | — | — | — |\n| Additional specs | specs[] | key / value | — | — | — |\n| Available from per MU, Purchase limit | — | checkbox | — | as 7.12 | — |",
+    "rules": [
+      "**F1** — Each variant has 5 prices: Distributor, Divisional Distributor, District Dealer, Area Dealer, Customer. A dealer sees only **its tier** (on PO) and **Customer** (on sale). Spares and components have Dealer + Customer price.",
+      "**Counterpart:** D29 (spares), D20"
+    ]
+  },
+  {
+    "code": "O28",
+    "name": "Product Create / Edit: Battery/Charger/Motor/Controller",
+    "app": "OEM App",
+    "section": "Products",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/products/{battery, charger, motor, controller}/new, edit",
+    "type": "Form",
+    "mode": "CRUD",
+    "roles": "ADM",
+    "buttons": "create",
+    "fields": "| Label | API field | Type | Req | Notes |\n|---|---|---|---|---|\n| {Battery / Charger / Motor / Controller} Name | productName | text | ✔ | — |\n| HSN No | HSN | text | ✔ | — |\n| Vendor / Supplier | vendorId | select | — | — |\n| CGST / SGST | cgst, sgst | text | — | — |\n| Dealer Price / Customer Price | dealerPrice, customerPrice | text ₹ | — | — |\n| Image | images | file | — | — |\n| Additional specs | specs[{key, value}] | text pairs | — | voltage, capacity, warranty km / months / type as custom fields [I]; dealer screens show Motor Type, Voltage, Capacity, Warranty (KM / M / Type), Battery Type, Life Cycle |\n| Available from per MU, Purchase limit | — | checkbox | — | — |",
+    "rules": [
+      "**F1** — Each variant has 5 prices: Distributor, Divisional Distributor, District Dealer, Area Dealer, Customer. A dealer sees only **its tier** (on PO) and **Customer** (on sale). Spares and components have Dealer + Customer price.",
+      "**Counterpart:** D29 (warranty products)"
+    ]
+  },
+  {
+    "code": "O29",
+    "name": "Product Detail + Dashboard",
+    "app": "OEM App",
+    "section": "Products",
+    "priority": "P1",
+    "status": "Verified (reference app)",
+    "path": "/products/vehicle-details/:id",
+    "type": "Detail + Report",
+    "mode": "RO",
+    "roles": "ADM",
+    "buttons": "week / month / year, purchased vs sold",
+    "fields": "No dedicated input form — this is a detail + report screen. Display/column content: Per-model rollup: stock, sales, warranty, issues; stock-by-MU; price matrix.",
+    "rules": [
+      "**Dependency note:** Rolls up Inventory/Orders/Sales/Warranty/Issues"
+    ]
+  },
+  {
+    "code": "O30",
+    "name": "Inventory (OEM Stock)",
+    "app": "OEM App",
+    "section": "Inventory",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/inventory/stock (+ stock history, reserved stock)",
+    "type": "List (9 tabs)",
+    "mode": "RO",
+    "roles": "see INVENTORY_*",
+    "buttons": "unit / stock filter, search",
+    "fields": "No dedicated input form — this is a list (9 tabs) screen. Display/column content: Unit/stock filter, search, stock history, reserved stock tabs.",
+    "rules": [
+      "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+      "**F6** — OEM-only fields: ledger tally, reserved stock by dealer, production status / plan, MU stock register, dispatch batch / token, vendor data, audit trail (section 9)",
+      "**Counterpart:** D29 \"N in stock\"",
+      "**Dependency note:** R6, F6"
+    ]
+  },
+  {
+    "code": "O31",
+    "name": "Inventory List per Product",
+    "app": "OEM App",
+    "section": "Inventory",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/inventory/list/{vehicles, spare, accessory}/…",
+    "type": "List",
+    "mode": "RO + add",
+    "roles": "ADM APM DH DM",
+    "buttons": "status (available / locked / delivered / draft), unit, add stock (→ O35)",
+    "fields": "No dedicated input form — this is a list screen. Display/column content: Status (available/locked/delivered/draft), unit filter, add stock link.",
+    "rules": [
+      "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+      "**Dependency note:** R6"
+    ]
+  },
+  {
+    "code": "O32",
+    "name": "Manufacturing Units List",
+    "app": "OEM App",
+    "section": "Manufacturing Unit",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/manufacturing-unit",
+    "type": "List",
+    "mode": "RO",
+    "roles": "ADM DH DM",
+    "buttons": "new, view",
+    "fields": "No dedicated input form — this is a list screen. Display/column content: New, view.",
+    "rules": [
+      "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+      "**Dependency note:** R6"
+    ]
+  },
+  {
+    "code": "O33",
+    "name": "MU Create / Edit",
+    "app": "OEM App",
+    "section": "Manufacturing Unit",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/manufacturing-unit/new, /manufacturing-unit/edit/:id",
+    "type": "Form",
+    "mode": "CRUD",
+    "roles": "ADM",
+    "buttons": "create, save, use current location",
+    "fields": "| Label | API field | Type | Req | Options / validation |\n|---|---|---|---|---|\n| Unit Name | unitName | text | ✔ | — |\n| State | state | select | ✔ | 36 states / UTs + Nepal |\n| Production Unit Head | userID | select | — | OEM_PRODUCTION_HEAD users (\"No unit head\") |\n| Address | address | textarea | ✔ | — |\n| GST No | gstNo | text | ✔ | — |\n| Account No | accountNumber | text | ✔ | — |\n| IFSC Code | ifscCode | text | — | — |\n| A/c Holder Name | accountHolderName | text | — | — |\n| Bank Branch | bankBranch | text | — | — |\n| Phone No | phoneNo | text | ✔ | — |\n| City | city | text | ✔ | — |\n| Email | email | email | ✔ | — |\n| Pincode | pincode | text | ✔ | — |\n| Latitude / Longitude | latitude, longitude | number | — | \"Use my current location\" |\n\n**Capacity and working calendar (separate):** `GET/PUT /manufacturing_unit/oem/:id/capacity`, `/working-calendar` [C].",
+    "rules": [
+      "**Counterpart:** D30 quotation letterhead",
+      "**Dependency note:** counterpart D30 quotation letterhead"
+    ]
+  },
+  {
+    "code": "O34",
+    "name": "MU View",
+    "app": "OEM App",
+    "section": "Manufacturing Unit",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/manufacturing-unit/view/:id",
+    "type": "Detail",
+    "mode": "RO + Action",
+    "roles": "ADM DH DM",
+    "buttons": "edit, MU stock, dispatch plan, load plan, containers, production, **connect a dealer**",
+    "fields": "| Label | API field | Type | Req | Notes |\n|---|---|---|---|---|\n| Search any dealer | dealerId | search / select | ✔ | moves the dealer to this unit; already-connected ones are flagged |",
+    "rules": [
+      "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+      "**Dependency note:** R6"
+    ]
+  },
+  {
+    "code": "O35",
+    "name": "MU Stock",
+    "app": "OEM App",
+    "section": "Manufacturing Unit",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/inventory/mu-stock/:unitId",
+    "type": "Report + Dialogs",
+    "mode": "RO + Create",
+    "roles": "ADM APM DH DM",
+    "buttons": "date, daily register, in-transit (add, edit, receive), components needed, reduce stock",
+    "fields": "**Add In-Transit Shipment** → `POST /manufacturing_unit/oem/:id/in-transit`:\n\n| Label | API field | Type | Req | Notes |\n|---|---|---|---|---|\n| Product | productId | select | ✔ | — |\n| Dispatch Date | dispatchDate | date | ? | — |\n| Colors Breakdown (+ Add Color) | colours[{colour, qty}] | select + number, repeat | ? | — |\n| Notes | notes | textarea | — | — |\n\n**Other MU stock actions:**\n- **Receive:** `PUT …/in-transit/:id/receive`, with received colours.\n- **Reduce Stock:** `POST …/reduce-stock`; fields not captured [C].\n\n**Daily Stock Register:** model, opening, dispatched, reserved, received, closing, in transit. Auto-computed; clicking Reserved shows a dealer breakdown.",
+    "rules": [
+      "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+      "**F6** — OEM-only fields: ledger tally, reserved stock by dealer, production status / plan, MU stock register, dispatch batch / token, vendor data, audit trail (section 9)",
+      "**Dependency note:** R6, F6"
+    ]
+  },
+  {
+    "code": "O36",
+    "name": "MU Dispatch Plan (ETA)",
+    "app": "OEM App",
+    "section": "Manufacturing Unit",
+    "priority": "P1",
+    "status": "Verified (reference app)",
+    "path": "/manufacturing-unit/dispatch-plan/:id",
+    "type": "Report (calendar)",
+    "mode": "RO",
+    "roles": "ADM DH DM",
+    "buttons": "month navigation",
+    "fields": "No dedicated input form — this is a report (calendar) screen. Display/column content: Month calendar of dispatch/build/component-short markers.",
+    "rules": [
+      "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+      "**Dependency note:** R6"
+    ]
+  },
+  {
+    "code": "O37",
+    "name": "Load Plan",
+    "app": "OEM App",
+    "section": "Manufacturing Unit",
+    "priority": "P2",
+    "status": "Verified (reference app)",
+    "path": "/manufacturing-unit/load-plan/:id",
+    "type": "Report",
+    "mode": "RO",
+    "roles": "ADM DH DM",
+    "buttons": "radius km, recompute",
+    "fields": "| Label | API field | Type | Req |\n|---|---|---|---|\n| Radius km | radiusKm | number | — |\n| Recompute | — | button | — |",
+    "rules": [
+      "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+      "**Dependency note:** R6"
+    ]
+  },
+  {
+    "code": "O38",
+    "name": "Containers",
+    "app": "OEM App",
+    "section": "Manufacturing Unit",
+    "priority": "P2",
+    "status": "Verified (reference app)",
+    "path": "/manufacturing-unit/containers(/:id)",
+    "type": "List + Dialog",
+    "mode": "CRUD",
+    "roles": "ADM DH DM",
+    "buttons": "new, edit, delete",
+    "fields": "| Label | API field | Type | Req | Notes |\n|---|---|---|---|---|\n| Name | name | text | ? | e.g. \"Truck 20ft\" |\n| Manufacturing Unit ID | manufacturingUnitId | number | — | blank = OEM-wide |\n| Min Load Qty | minLoad | number | ? | — |\n| Max Load Qty | maxLoad | number | ? | — |",
+    "rules": [
+      "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\""
+    ]
+  },
+  {
+    "code": "O39",
+    "name": "Vendors",
+    "app": "OEM App",
+    "section": "Vendors",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/vendors",
+    "type": "List + Dialog",
+    "mode": "CRUD",
+    "roles": "(unkeyed)",
+    "buttons": "add, edit, delete, procurement",
+    "fields": "| Label | API field | Type | Req |\n|---|---|---|---|\n| Name | name | text | ✔ |\n| Contact Person | contactPerson | text | — |\n| Phone | phone | text | — |\n| Email | email | text | — |\n| GST No | gstNo | text | — |\n| Address | address | text | — |\n| City | city | text | — |\n| State | state | text | — |\n| Pincode | pincode | text | — |\n| Active | isActive | checkbox | — |\n| Notes | notes | textarea | — |",
+    "rules": [
+      "**Dependency note:** Role not keyed — confirm access"
+    ]
+  },
+  {
+    "code": "O40",
+    "name": "Vendor Procurement",
+    "app": "OEM App",
+    "section": "Vendors",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/vendors/:id/procurement",
+    "type": "Form",
+    "mode": "Create",
+    "roles": "(unkeyed)",
+    "buttons": "set order qty / rate, create PO",
+    "fields": "| Column / field | API field | Type | Req | Notes |\n|---|---|---|---|---|\n| Product, Type, Needed, In stock, Net | — | ro | — | needed = from dispatch list demand |\n| Order Qty | lines[].orderQty | number | ✔ for PO lines | — |\n| Rate | lines[].rate | number | ✔ | — |\n| Amount | — | ro | — | — |\n| MU | muId | select | ? | — |\n| Create PO (n) | — | button | — | creates vendor_purchase_order (pending approval) |",
+    "rules": [
+      "**Dependency note:** Where vendor POs are actually raised"
+    ]
+  },
+  {
+    "code": "O41",
+    "name": "Vendor POs",
+    "app": "OEM App",
+    "section": "Vendor POs",
+    "priority": "P1",
+    "status": "Verified (reference app)",
+    "path": "/vendor-pos",
+    "type": "List + Dialog",
+    "mode": "C+R + approval",
+    "roles": "(unkeyed)",
+    "buttons": "create (choose vendor → O40), filter, view",
+    "fields": "| Label | API field | Type | Req | Notes |\n|---|---|---|---|---|\n| Choose vendor | vendorId | select | ✔ | \"You'll be taken to the vendor's procurement view\" (→ 7.21) |\n\nApproval is by the OEM approval admin, via email (7.27).",
+    "rules": [
+      "**Dependency note:** Role not keyed — confirm access"
+    ]
+  },
+  {
+    "code": "O42",
+    "name": "Issues",
+    "app": "OEM App",
+    "section": "Issues",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/issues",
+    "type": "List + Actions",
+    "mode": "Action",
+    "roles": "IM SVH ADM",
+    "buttons": "stage tabs, approve / decline (manager), approve / decline (OEM), settle with money, replace → mark dispatched",
+    "fields": "| Action | Endpoint | Fields | Req |\n|---|---|---|---|\n| Manager approve / decline | `PUT /purchase-order/issues/:id/manager-review` | decision, note (decline reason) | reason ✔ on decline |\n| OEM approve / decline | `PUT /purchase-order/issues/:id/oem-review` | decision, reason | reason ✔ on decline |\n| Settle with money | `PUT /purchase-order/issues/:id/resolution {type:\"money\", amount, transactionId}` | Compensation amount (₹), Transaction ID | ✔ ✔ |\n| Replace | `…/resolution {type:\"replacement\"}` | — | — |\n| Mark replacement dispatched | `PUT /purchase-order/issues/:id/replacement-dispatch` | — | — |\n| Mark resolved / reject claim | `PUT /purchase-order/issues/:id/resolve`, `/purchase-order/:id/issue/reject` | reason | ✔ on reject |\n\n**Issues list columns:** order, dealer, product, serial / chassis, issue, media, stage, reported, action.",
+    "rules": [
+      "**F8** — Issue review notes and OEM approval steps are shown to dealer only as **stage + outcome**",
+      "**Counterpart:** D36, D32",
+      "**Dependency note:** F8; counterpart D36/D32"
+    ]
+  },
+  {
+    "code": "O43",
+    "name": "Warranty (Received)",
+    "app": "OEM App",
+    "section": "Warranty",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/warranty (raisedTo = oem)",
+    "type": "List",
+    "mode": "RO",
+    "roles": "WARRANTY roles",
+    "buttons": "status filter",
+    "fields": "No dedicated input form — this is a list screen. Display/column content: Status filter; raisedTo=oem queue.",
+    "rules": [
+      "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+      "**R7** — OEM sales user sees **only dealers ticked in \"Assigned Dealers\"** (their POs, payments, details); none ticked = no dealers",
+      "**Counterpart:** D37",
+      "**Dependency note:** R6/R7"
+    ]
+  },
+  {
+    "code": "O44",
+    "name": "Warranty Claim Page",
+    "app": "OEM App",
+    "section": "Warranty",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/warranty/warranty-receipt/:id",
+    "type": "Detail + Dialogs",
+    "mode": "Action",
+    "roles": "WARRANTY roles",
+    "buttons": "verify / reject, inspection report, service or replacement, request / edit / waive service charge, verify / reject dealer payment, return details",
+    "fields": "**Claim page sections:**\n- **Dealer & summary:** dealer ID, name, model / variant, claim received, warranty until.\n- **OEM review.**\n- **Workflow:** verify, inspect, service, return.\n- **Customer & claim.**\n- **Claimed item:** spare, brand, item no.\n- **Issue & coverage.**\n- **Dealer claim photos.**\n- **Replacement details:** warranty type, product name / no., replacement ID (OEM / dealer), inventory source, claimed date.\n- **Dealer issue report (post-receipt).**\n\n| Dialog | Fields | Req | Options / validation |\n|---|---|---|---|\n| Verify / Reject | reason (on reject) | ✔ on reject | \"Please provide a reason for rejection\" |\n| Inspection | inspection report (file / notes) | ? | \"Inspection Reports\" |\n| Service / Replacement | service (radio Service / Replacement), remark, item_id (replacement stock line), replacement serial / product #, serviceOn (date) | ✔ choice | replacement blocked if stock unavailable (\"Switch to Service\"); replacement qty deducted at Returning |\n| Ask cost from dealer | amount (₹), notes for dealer | ✔ amount | blocks service / replacement until dealer pays and OEM verifies |\n| Service charge controls | edit amount, waive charge, verify payment, reject payment (reason) | reason ✔ on reject | shows dealer transaction ID + amount |\n| Return / complete | company, contactNumber, transport, trackingNo, payment, date, attachments | ✔ company, ✔ contact, ✔ tracking | contact = 10 digits, no letters; transport Road / Water / Air Wave / Train; payment Paid / Unpaid; file ≤ 5 MB |\n| Post-receipt issue: accept | — | — | \"Accepting will ask the dealer to send the product back for re-service\" |",
+    "rules": [
+      "**Counterpart:** **D39**",
+      "**Dependency note:** counterpart D39"
+    ]
+  },
+  {
+    "code": "O45",
+    "name": "Payments (All Dealers)",
+    "app": "OEM App",
+    "section": "Payments",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/payments",
+    "type": "List + Action",
+    "mode": "Action",
+    "roles": "(unkeyed)",
+    "buttons": "search, status, date range, view receipt, verify / reject",
+    "fields": "| Action | Fields | Req | Notes |\n|---|---|---|---|\n| Verify | — | — | toast \"Payment of ₹X on PO verified — ₹Y credited to the dealer's ledger\" (surplus) |\n| Reject | reason | ✔ | dealer resubmits |\n| Ledger top-up verify | verified, note | — | `PUT /ledger-topups/:id/verify` |\n\n**Payments list columns:** order, dealer, transaction ID, used for order, received, payment date, submitted, note, receipt (image), status, action.",
+    "rules": [
+      "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+      "**R7** — OEM sales user sees **only dealers ticked in \"Assigned Dealers\"** (their POs, payments, details); none ticked = no dealers",
+      "**Counterpart:** D31, D46",
+      "**Dependency note:** R6/R7; Role not keyed — confirm access; counterpart D31/D46"
+    ]
+  },
+  {
+    "code": "O46",
+    "name": "Ledgers",
+    "app": "OEM App",
+    "section": "Ledger",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/ledgers",
+    "type": "List + Dialog",
+    "mode": "CRUD",
+    "roles": "(unkeyed)",
+    "buttons": "new ledger, search",
+    "fields": "| Label | API field | Type | Req | Notes |\n|---|---|---|---|---|\n| Name | name | text | ✔ | \"Ledger name is required\"; e.g. \"South Region Pool\" |\n| Note | note | textarea | — | optional |\n\n**List columns:** name, members, balance, tally; header total held + tally.",
+    "rules": [
+      "**F6** — OEM-only fields: ledger tally, reserved stock by dealer, production status / plan, MU stock register, dispatch batch / token, vendor data, audit trail (section 9)",
+      "**Counterpart:** D33 / D45 balance",
+      "**Dependency note:** F6; Role not keyed — confirm access"
+    ]
+  },
+  {
+    "code": "O47",
+    "name": "Ledger Detail",
+    "app": "OEM App",
+    "section": "Ledger",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/ledgers/:id",
+    "type": "Detail + Dialogs",
+    "mode": "Action",
+    "roles": "(unkeyed)",
+    "buttons": "edit, add credit, add debit, connect / remove dealer",
+    "fields": "| Action | Fields | Req | Notes |\n|---|---|---|---|\n| Edit | name, note | ✔ name | — |\n| Add credit | amount, note, supporting document | ✔ amount | doc: PDF / image / doc ≤ 25 MB; \"Every connected dealer can spend what you add\" |\n| Add debit | amount, note, document | ✔ amount | \"That is more than this ledger holds\" |\n| Connect / remove dealer | dealerId | ✔ | — |\n\n**Ledger detail sections:**\n- **Open purchase orders:** order, dealer, status, ledger used.\n- **Connected dealers.**\n- **History:** type, date, dealer, user, reference, ± amount, balance after.",
+    "rules": [
+      "**F6** — OEM-only fields: ledger tally, reserved stock by dealer, production status / plan, MU stock register, dispatch batch / token, vendor data, audit trail (section 9)",
+      "**Counterpart:** D45 ledger history",
+      "**Dependency note:** F6; counterpart D45 ledger history"
+    ]
+  },
+  {
+    "code": "O48",
+    "name": "Vehicle Sold",
+    "app": "OEM App",
+    "section": "Reports",
+    "priority": "P1",
+    "status": "Verified (reference app)",
+    "path": "/vehicle-sold",
+    "type": "Report",
+    "mode": "**Mirror**",
+    "roles": "(unkeyed)",
+    "buttons": "search, period (today / month / year / custom)",
+    "fields": "No dedicated input form — this is a report screen. Display/column content: Search, period filter.",
+    "rules": [
+      "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+      "**R7** — OEM sales user sees **only dealers ticked in \"Assigned Dealers\"** (their POs, payments, details); none ticked = no dealers",
+      "**Counterpart:** D20",
+      "**Dependency note:** R6/R7; Role not keyed; mirrors D20"
+    ]
+  },
+  {
+    "code": "O56",
+    "name": "Reports / Warranty-claim / Challan / E-way bill (mocks)",
+    "app": "OEM App",
+    "section": "Reports",
+    "priority": "P2",
+    "status": "Verified (reference app)",
+    "path": "/reports, /warranty-claim, /delivery-challan, /e-waybill",
+    "type": "Static / Mock",
+    "mode": "Mock",
+    "roles": "—",
+    "buttons": "—",
+    "fields": "No dedicated input form — this is a static / mock screen. Display/column content: Non-functional stubs in the reference app.",
+    "rules": [
+      "**Counterpart:** D50–D52",
+      "**Dependency note:** Superseded for E-Way Bill by new feature row"
+    ]
+  },
+  {
+    "code": "O49",
+    "name": "Settings: Profile",
+    "app": "OEM App",
+    "section": "Settings",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/settings/profile",
+    "type": "Detail + Form",
+    "mode": "Update (ADM)",
+    "roles": "PROFILE",
+    "buttons": "save approval email, GST toggle, change password",
+    "fields": "| Label | API field | Type | Req | Notes |\n|---|---|---|---|---|\n| Is GST Needed? | isGstNeeded | toggle | — | ADM only (GST_BUTTON) |\n| Approval Admin Email | approvalAdminEmail | email | ? | vendor-PO approvals emailed here; only OEM admin can change |\n| Org, GST, created, country, state, location, address, currency, tax ID, language, time zone | — | ro | — | \"contact DMS Admin\" |\n| Change Password | password, confirmPassword | password | ✔ | — |",
+    "rules": []
+  },
+  {
+    "code": "O50",
+    "name": "Settings: Operating States",
+    "app": "OEM App",
+    "section": "Settings",
+    "priority": "P1",
+    "status": "Verified (reference app)",
+    "path": "/settings/operating-states",
+    "type": "Form",
+    "mode": "CRUD",
+    "roles": "ADM",
+    "buttons": "add state, update states",
+    "fields": "| Label | API field | Type | Req |\n|---|---|---|---|\n| State (repeat, + Add State) | state[] | select | ✔ ≥1 |",
+    "rules": []
+  },
+  {
+    "code": "O51",
+    "name": "Settings: Regions & Zones",
+    "app": "OEM App",
+    "section": "Settings",
+    "priority": "P1",
+    "status": "Verified (reference app)",
+    "path": "/settings/regions, /settings/regions/new, /settings/regions/:id",
+    "type": "List + Form",
+    "mode": "CRUD",
+    "roles": "ADM",
+    "buttons": "create region & zone, add zone, edit, delete",
+    "fields": "| Label | API field | Type | Req | Notes |\n|---|---|---|---|---|\n| Region Name | regionName | text | ✔ | — |\n| Region Head | managerId | select | — | OEM users |\n| Zone Name (repeat, \"+ One More Zone\") | zones[].name | text | ✔ | — |\n| Zone Head | zones[].managerId | select (\"Select Manager\") | — | — |\n\n**List columns:** region ID, name, head, zones, dealers, created on, status.",
+    "rules": [
+      "**R8** — Region / zone heads attached to regions / zones; dealers carry `regionId` / `zoneId`, so likely scoping for SRH / SZH",
+      "**Dependency note:** R8 (region/zone scoping for SRH/SZH not fully confirmed — spec §12)"
+    ]
+  },
+  {
+    "code": "O52",
+    "name": "Settings: Users",
+    "app": "OEM App",
+    "section": "Settings",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "/settings/users",
+    "type": "List",
+    "mode": "RO",
+    "roles": "ADM",
+    "buttons": "search, create, edit, unlock account",
+    "fields": "No dedicated input form — this is a list screen. Display/column content: Search, create, edit, unlock account.",
+    "rules": [
+      "**Dependency note:** ADM only"
+    ]
+  },
+  {
+    "code": "O53",
+    "name": "OEM User Add / Edit",
+    "app": "OEM App",
+    "section": "Settings",
+    "priority": "P0",
+    "status": "Verified (reference app)",
+    "path": "(O52)",
+    "type": "Form / Dialog",
+    "mode": "CRUD",
+    "roles": "ADM",
+    "buttons": "create, submit, change password, sign out devices, assign dealers",
+    "fields": "| Label | API field | Type | Req | Options / validation | Notes |\n|---|---|---|---|---|---|\n| User Role | role | select | ✔ | 15 OEM roles (section 2.1) | — |\n| Manufacturing Unit | manufacturingUnitId | select | — | \"All units (global)\" or one MU | R6 |\n| First Name | firstName | text | ✔ | 3–30 chars | — |\n| Last Name | lastName | text | ✔ | ≥ 1 char | — |\n| Email ID | email | email | ✔ | valid email | — |\n| Contact | phone | text | ✔ | 10 digits | — |\n| Password / Confirm (add) | password, confirmPassword | password | ✔ | must match | — |\n| Status (edit) | isActive | select | ✔ | Active / InActive | — |\n| Assigned Dealers (sales roles, edit) | dealerIds[] | multi-select checklist | — | \"This sales user can view ONLY the dealers ticked here… With none selected the user sees no dealers\" | R7 |\n| Device limit (edit) | deviceLimit | number | — | blank = OEM default; 0 = unlimited | — |\n| Devices & sessions (edit) | — | table + action | — | device, IP, last active, signed in; sign out | — |\n\n**List columns:** user ID, name, role, role category, contact, email, failed login attempts, status, action (unlock account).",
+    "rules": [
+      "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+      "**R7** — OEM sales user sees **only dealers ticked in \"Assigned Dealers\"** (their POs, payments, details); none ticked = no dealers",
+      "**Dependency note:** R6/R7 (verbatim 'none ticked = sees no dealers' rule)"
+    ]
+  },
+  {
+    "code": "O54",
+    "name": "Settings: Audit Logs",
+    "app": "OEM App",
+    "section": "Settings",
+    "priority": "P1",
+    "status": "Verified (reference app)",
+    "path": "/settings/audit-logs",
+    "type": "List",
+    "mode": "RO",
+    "roles": "ADM",
+    "buttons": "feature / action / date filters, expand diff",
+    "fields": "No dedicated input form — this is a list screen. Display/column content: Feature/action/date filters, expandable field diff.",
+    "rules": [
+      "**Dependency note:** See also new Purge/Export rows below"
+    ]
+  },
+  {
+    "code": "O55",
+    "name": "Settings: Security",
+    "app": "OEM App",
+    "section": "Settings",
+    "priority": "P1",
+    "status": "Verified (reference app)",
+    "path": "/settings/security",
+    "type": "Detail + Form",
+    "mode": "Action",
+    "roles": "ADM (others: own devices)",
+    "buttons": "sign out other devices / everywhere, default device limit",
+    "fields": "| Label | API field | Type | Req | Notes |\n|---|---|---|---|---|\n| My devices | — | list | — | sign out other devices / everywhere |\n| Default device limit | deviceLimit | number | — | ADM; logged-in accounts table: account, role, devices, limit, last active |\n\n---\n\n\n---",
+    "rules": []
+  },
+  {
+    "code": "N01",
+    "name": "GST Lookup / Auto-fetch from GST Portal",
+    "app": "New Features (not in the reference app)",
+    "section": "Vendors",
+    "priority": "P1",
+    "status": "New requirement",
+    "path": "—",
+    "type": "Form enhancement",
+    "mode": "Enhancement",
+    "roles": "",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Entering a GSTIN auto-fills supplier/vendor (and dealer onboarding) details from the GST portal, instead of manual entry.",
+    "fields": "*Not yet speced — proposed scope only:* Entering a GSTIN auto-fills supplier/vendor (and dealer onboarding) details from the GST portal, instead of manual entry.",
+    "rules": [
+      "**Depends on / extends:** Extends O39/O40 (Vendor) and O05 (Dealer onboarding)",
+      "**Open question:** Which GST-portal API/provider? Needs an external integration partner."
+    ]
+  },
+  {
+    "code": "N23",
+    "name": "Vendor — Extended Profile (bank, contacts, status, payment terms, warranty)",
+    "app": "New Features (not in the reference app)",
+    "section": "Vendors",
+    "priority": "P1",
+    "status": "New requirement",
+    "path": "—",
+    "type": "Form enhancement",
+    "mode": "Enhancement",
+    "roles": "",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Bank account details, multiple contact persons (repeatable grid), Website, Status Active/Inactive/Blocked (+reason, admin unblock), Payment Mode options, parts-warranty duration tiers (15/18/24 months) + Product Warranty List, Freight Incl/Excl pricing.",
+    "fields": "*Not yet speced — proposed scope only:* Bank account details, multiple contact persons (repeatable grid), Website, Status Active/Inactive/Blocked (+reason, admin unblock), Payment Mode options, parts-warranty duration tiers (15/18/24 months) + Product Warranty List, Freight Incl/Excl pricing.",
+    "rules": [
+      "**Depends on / extends:** Extends O39",
+      "**Note:** From ERP_changes_ceo.pptx slide 16. Bundles several related fields into one form enhancement rather than splitting into many tiny rows."
+    ]
+  },
+  {
+    "code": "N02",
+    "name": "Material Inward — Receiving & QC Check",
+    "app": "New Features (not in the reference app)",
+    "section": "Material Inward",
+    "priority": "P0",
+    "status": "New requirement",
+    "path": "—",
+    "type": "Form / Action",
+    "mode": "NEW",
+    "roles": "",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Inventory Executive role. Check received count against PO, report shortfall, QC-check each item (pass/fail), mark scrap. Substantially more granular than the reference app's flat 'Receive' step.",
+    "fields": "*Not yet speced — proposed scope only:* Inventory Executive role. Check received count against PO, report shortfall, QC-check each item (pass/fail), mark scrap. Substantially more granular than the reference app's flat 'Receive' step.",
+    "rules": [
+      "**Depends on / extends:** Extends O35 MU Stock receiving; Material Inward entity is new"
+    ]
+  },
+  {
+    "code": "N03",
+    "name": "Material Requisition (Against Order / Forecast / Damage)",
+    "app": "New Features (not in the reference app)",
+    "section": "Production",
+    "priority": "P0",
+    "status": "New requirement",
+    "path": "—",
+    "type": "Form",
+    "mode": "NEW",
+    "roles": "",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Production Head role requests materials from Inventory for: (1) an order, (2) a forecast, (3) loss/damage replacement.",
+    "fields": "*Not yet speced — proposed scope only:* Production Head role requests materials from Inventory for: (1) an order, (2) a forecast, (3) loss/damage replacement.",
+    "rules": [
+      "**Depends on / extends:** Depends on BOM (N08) to know required parts per model"
+    ]
+  },
+  {
+    "code": "N04",
+    "name": "Production Completion & Handover",
+    "app": "New Features (not in the reference app)",
+    "section": "Production",
+    "priority": "P0",
+    "status": "New requirement",
+    "path": "—",
+    "type": "Form / Action",
+    "mode": "NEW",
+    "roles": "",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: On completing production, capture finished-unit identifiers (chassis, motor, controller, battery) and hand the inventory over. Resolves the 'no screen binds a chassis to a vehicle' gap (spec §8/§11).",
+    "fields": "*Not yet speced — proposed scope only:* On completing production, capture finished-unit identifiers (chassis, motor, controller, battery) and hand the inventory over. Resolves the 'no screen binds a chassis to a vehicle' gap (spec §8/§11).",
+    "rules": [
+      "**Depends on / extends:** Feeds Inventory (O30/O31) and QC (N05)"
+    ]
+  },
+  {
+    "code": "N05",
+    "name": "QC Inspection Checklist",
+    "app": "New Features (not in the reference app)",
+    "section": "QC",
+    "priority": "P0",
+    "status": "New requirement",
+    "path": "—",
+    "type": "Form",
+    "mode": "NEW",
+    "roles": "",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Yes/No checklist per finished unit before release.",
+    "fields": "*Not yet speced — proposed scope only:* Yes/No checklist per finished unit before release.",
+    "rules": [
+      "**Depends on / extends:** Gated after Production Completion (N04)"
+    ]
+  },
+  {
+    "code": "N06",
+    "name": "QC Branding / Packaging Requisition",
+    "app": "New Features (not in the reference app)",
+    "section": "QC",
+    "priority": "P1",
+    "status": "New requirement",
+    "path": "—",
+    "type": "Form / Action",
+    "mode": "NEW",
+    "roles": "",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: QC requests branding/packaging materials from Inventory against a specific finished product; sourced from the BOM.",
+    "fields": "*Not yet speced — proposed scope only:* QC requests branding/packaging materials from Inventory against a specific finished product; sourced from the BOM.",
+    "rules": [
+      "**Depends on / extends:** Depends on BOM (N08) for branding/packaging line items"
+    ]
+  },
+  {
+    "code": "N07",
+    "name": "Despatch — Chassis Validation Gate",
+    "app": "New Features (not in the reference app)",
+    "section": "Orders",
+    "priority": "P0",
+    "status": "New requirement",
+    "path": "—",
+    "type": "Action",
+    "mode": "Enhancement",
+    "roles": "",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Despatch starts from the invoice; validates the correct chassis number and all identifiers before assigning for dispatch.",
+    "fields": "*Not yet speced — proposed scope only:* Despatch starts from the invoice; validates the correct chassis number and all identifiers before assigning for dispatch.",
+    "rules": [
+      "**Depends on / extends:** Extends O20/O21/O22; ties to the item-identifier gap"
+    ]
+  },
+  {
+    "code": "N10",
+    "name": "E-Way Bill (real build)",
+    "app": "New Features (not in the reference app)",
+    "section": "Orders",
+    "priority": "P1",
+    "status": "New requirement",
+    "path": "/e-waybill",
+    "type": "Form",
+    "mode": "NEW",
+    "roles": "",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Full GST-compliant e-way bill generation, replacing the reference app's non-functional mock (D51/O56).",
+    "fields": "*Not yet speced — proposed scope only:* Full GST-compliant e-way bill generation, replacing the reference app's non-functional mock (D51/O56).",
+    "rules": [
+      "**Depends on / extends:** Supersedes D51/O56"
+    ]
+  },
+  {
+    "code": "N26",
+    "name": "Accounts — 'OK to Bill' Gate",
+    "app": "New Features (not in the reference app)",
+    "section": "Orders",
+    "priority": "P1",
+    "status": "New requirement",
+    "path": "—",
+    "type": "Action enhancement",
+    "mode": "Enhancement",
+    "roles": "",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Explicit two-step gate: Accounts must confirm billing before Dispatch can release a unit, instead of dispatch proceeding right after payment verification (O23).",
+    "fields": "*Not yet speced — proposed scope only:* Explicit two-step gate: Accounts must confirm billing before Dispatch can release a unit, instead of dispatch proceeding right after payment verification (O23).",
+    "rules": [
+      "**Depends on / extends:** Extends O20/O23",
+      "**Note:** From ERP_changes_ceo.pptx slide 36."
+    ]
+  },
+  {
+    "code": "N27",
+    "name": "PDI (Pre-Delivery Inspection) Checklist",
+    "app": "New Features (not in the reference app)",
+    "section": "Orders",
+    "priority": "P0",
+    "status": "New requirement",
+    "path": "—",
+    "type": "Form",
+    "mode": "NEW",
+    "roles": "",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Structured pre-delivery inspection checklist at dispatch — verifies PDI parts/packing before a unit ships. Distinct from the QC Inspection Checklist (N05), which gates production completion, not dispatch.",
+    "fields": "*Not yet speced — proposed scope only:* Structured pre-delivery inspection checklist at dispatch — verifies PDI parts/packing before a unit ships. Distinct from the QC Inspection Checklist (N05), which gates production completion, not dispatch.",
+    "rules": [
+      "**Depends on / extends:** Extends N07 Despatch Chassis Validation Gate",
+      "**Note:** From ERP_changes_ceo.pptx slide 36."
+    ]
+  },
+  {
+    "code": "N08",
+    "name": "BOM Create / Edit",
+    "app": "New Features (not in the reference app)",
+    "section": "Production / BOM",
+    "priority": "P0",
+    "status": "New requirement",
+    "path": "—",
+    "type": "Form",
+    "mode": "NEW",
+    "roles": "",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Bill of Materials per vehicle model: parts, quantities, images, landing price to OEM.",
+    "fields": "*Not yet speced — proposed scope only:* Bill of Materials per vehicle model: parts, quantities, images, landing price to OEM.",
+    "rules": [
+      "**Depends on / extends:** Prerequisite for N03, N06, N09"
+    ]
+  },
+  {
+    "code": "N09",
+    "name": "BOM Versioning & Approval Workflow",
+    "app": "New Features (not in the reference app)",
+    "section": "Production / BOM",
+    "priority": "P1",
+    "status": "New requirement",
+    "path": "—",
+    "type": "Form / Action",
+    "mode": "NEW",
+    "roles": "",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Version history for BOM changes with an approval gate before a new version takes effect.",
+    "fields": "*Not yet speced — proposed scope only:* Version history for BOM changes with an approval gate before a new version takes effect.",
+    "rules": [
+      "**Depends on / extends:** Depends on N08",
+      "**Open question:** Does every BOM change need versioning, or only material changes? Who is the approver — Production Head, QC, or OEM Admin?"
+    ]
+  },
+  {
+    "code": "N11",
+    "name": "RBAC — Dealer & Sub-dealer Role Assignment",
+    "app": "New Features (not in the reference app)",
+    "section": "Dealer Management",
+    "priority": "P1",
+    "status": "New requirement",
+    "path": "—",
+    "type": "Form enhancement",
+    "mode": "Enhancement",
+    "roles": "",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Formalizes assigning roles to a dealer and its connected sub-dealers (distributor → sub-dealer hierarchy already exists via R2/dealer_connection; this makes role assignment explicit and manageable).",
+    "fields": "*Not yet speced — proposed scope only:* Formalizes assigning roles to a dealer and its connected sub-dealers (distributor → sub-dealer hierarchy already exists via R2/dealer_connection; this makes role assignment explicit and manageable).",
+    "rules": [
+      "**Depends on / extends:** Extends O05 (Add/Edit Dealer) and O53 (user roles); builds on R2/R7"
+    ]
+  },
+  {
+    "code": "N12",
+    "name": "Warehouse Location Master",
+    "app": "New Features (not in the reference app)",
+    "section": "Warehouse",
+    "priority": "P1",
+    "status": "New requirement",
+    "path": "—",
+    "type": "Form / List",
+    "mode": "NEW",
+    "roles": "",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Define bin/rack/zone locations per manufacturing unit.",
+    "fields": "*Not yet speced — proposed scope only:* Define bin/rack/zone locations per manufacturing unit.",
+    "rules": [
+      "**Depends on / extends:** Prerequisite for N13"
+    ]
+  },
+  {
+    "code": "N13",
+    "name": "FIFO Stock Issuance & Location Report",
+    "app": "New Features (not in the reference app)",
+    "section": "Warehouse",
+    "priority": "P1",
+    "status": "New requirement",
+    "path": "—",
+    "type": "Report / Action",
+    "mode": "NEW",
+    "roles": "",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Stock issued from the correct (oldest-first) location; current stock-by-location report. Touches core inventory issuance logic across O30/O31/O35.",
+    "fields": "*Not yet speced — proposed scope only:* Stock issued from the correct (oldest-first) location; current stock-by-location report. Touches core inventory issuance logic across O30/O31/O35.",
+    "rules": [
+      "**Depends on / extends:** Depends on N12; significant change to existing Inventory issuance"
+    ]
+  },
+  {
+    "code": "N14",
+    "name": "Inventory Type Flag (Internal-use vs Saleable)",
+    "app": "New Features (not in the reference app)",
+    "section": "Products",
+    "priority": "P1",
+    "status": "New requirement",
+    "path": "—",
+    "type": "Form enhancement",
+    "mode": "Enhancement",
+    "roles": "",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: New field + filter logic: internal-use items are excluded from sales/dealer-facing inventory.",
+    "fields": "*Not yet speced — proposed scope only:* New field + filter logic: internal-use items are excluded from sales/dealer-facing inventory.",
+    "rules": [
+      "**Depends on / extends:** Extends O25-O28 (Products) and O30/O31 (Inventory)",
+      "**Open question:** Terminology to be finalized — client flagged the current naming as a placeholder."
+    ]
+  },
+  {
+    "code": "N24",
+    "name": "Spare Part — Extended Fields (UoM, weight, material, multi-model, purchase cost, price history)",
+    "app": "New Features (not in the reference app)",
+    "section": "Products",
+    "priority": "P1",
+    "status": "New requirement",
+    "path": "—",
+    "type": "Form enhancement",
+    "mode": "Enhancement",
+    "roles": "",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Supplier Part Number, UoM, Product Weight, Product Type/Material (Metal/Mixed Metal/Plastic/ABS), multi-vehicle-model applicability (O27 currently ties a spare to one vehicle only), Purchase Cost excl. GST kept separate from sale pricing, Freight Incl/Excl, price-change history with proof attachment tracking the last 10 revisions.",
+    "fields": "*Not yet speced — proposed scope only:* Supplier Part Number, UoM, Product Weight, Product Type/Material (Metal/Mixed Metal/Plastic/ABS), multi-vehicle-model applicability (O27 currently ties a spare to one vehicle only), Purchase Cost excl. GST kept separate from sale pricing, Freight Incl/Excl, price-change history with proof attachment tracking the last 10 revisions.",
+    "rules": [
+      "**Depends on / extends:** Extends O27",
+      "**Note:** From ERP_changes_ceo.pptx slide 23."
+    ]
+  },
+  {
+    "code": "N15",
+    "name": "Audit Log — Purge / Retention Policy",
+    "app": "New Features (not in the reference app)",
+    "section": "Settings",
+    "priority": "P1",
+    "status": "New requirement",
+    "path": "—",
+    "type": "Form / Action enhancement",
+    "mode": "Enhancement",
+    "roles": "",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Super-admin-only feature to purge audit log records beyond a configurable retention date.",
+    "fields": "*Not yet speced — proposed scope only:* Super-admin-only feature to purge audit log records beyond a configurable retention date.",
+    "rules": [
+      "**Depends on / extends:** Extends O54"
+    ]
+  },
+  {
+    "code": "N16",
+    "name": "Audit Log — Customer Export / Download",
+    "app": "New Features (not in the reference app)",
+    "section": "Settings",
+    "priority": "P1",
+    "status": "New requirement",
+    "path": "—",
+    "type": "Action enhancement",
+    "mode": "Enhancement",
+    "roles": "",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Customer-facing export/download of their own audit trail.",
+    "fields": "*Not yet speced — proposed scope only:* Customer-facing export/download of their own audit trail.",
+    "rules": [
+      "**Depends on / extends:** Extends O54"
+    ]
+  },
+  {
+    "code": "N22",
+    "name": "OEM Profile — Compliance Fields & Edit",
+    "app": "New Features (not in the reference app)",
+    "section": "Settings",
+    "priority": "P1",
+    "status": "New requirement",
+    "path": "—",
+    "type": "Form enhancement",
+    "mode": "Enhancement",
+    "roles": "",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Add CIN, TAN, PAN, MSME, IEC, Directors Details; make the profile genuinely editable beyond the approval-email field (O49 is currently mostly read-only, 'contact DMS Admin').",
+    "fields": "*Not yet speced — proposed scope only:* Add CIN, TAN, PAN, MSME, IEC, Directors Details; make the profile genuinely editable beyond the approval-email field (O49 is currently mostly read-only, 'contact DMS Admin').",
+    "rules": [
+      "**Depends on / extends:** Extends O49",
+      "**Note:** From ERP_changes_ceo.pptx slide 4."
+    ]
+  },
+  {
+    "code": "N28",
+    "name": "Expanded OEM Role Taxonomy (Procurement/Inventory Manager, National/Area Sales)",
+    "app": "New Features (not in the reference app)",
+    "section": "Settings",
+    "priority": "P1",
+    "status": "New requirement",
+    "path": "—",
+    "type": "Form enhancement",
+    "mode": "Enhancement",
+    "roles": "",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Add Procurement Manager and Inventory Manager as a new role category; add National Sales Head and Area Sales Manager tiers to the existing Sales Head/Regional Head/Zonal Head hierarchy.",
+    "fields": "*Not yet speced — proposed scope only:* Add Procurement Manager and Inventory Manager as a new role category; add National Sales Head and Area Sales Manager tiers to the existing Sales Head/Regional Head/Zonal Head hierarchy.",
+    "rules": [
+      "**Depends on / extends:** Extends O53 role list",
+      "**Note:** From ERP_changes_ceo.pptx slide 4."
+    ]
+  },
+  {
+    "code": "N17",
+    "name": "Auto-email PO to Vendor on Approval",
+    "app": "New Features (not in the reference app)",
+    "section": "Vendor POs",
+    "priority": "P1",
+    "status": "New requirement",
+    "path": "—",
+    "type": "Action enhancement",
+    "mode": "Enhancement",
+    "roles": "",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Once a vendor PO is approved, automatically email it to the vendor/supplier.",
+    "fields": "*Not yet speced — proposed scope only:* Once a vendor PO is approved, automatically email it to the vendor/supplier.",
+    "rules": [
+      "**Depends on / extends:** Extends O41; distinct from the existing internal approval-admin email",
+      "**Open question:** What happens if the PO is changed after approval and re-approved — does the vendor get a revised email automatically?"
+    ]
+  },
+  {
+    "code": "N25",
+    "name": "Min-Stock / Sales-Forecast Triggered Reorder",
+    "app": "New Features (not in the reference app)",
+    "section": "Vendor POs",
+    "priority": "P1",
+    "status": "New requirement",
+    "path": "—",
+    "type": "Report / Action",
+    "mode": "NEW",
+    "roles": "",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Flags reorder need against a configurable minimum stock level or a sales forecast, feeding into Vendor Procurement (O40) instead of relying purely on manual review.",
+    "fields": "*Not yet speced — proposed scope only:* Flags reorder need against a configurable minimum stock level or a sales forecast, feeding into Vendor Procurement (O40) instead of relying purely on manual review.",
+    "rules": [
+      "**Depends on / extends:** Extends O40; the min-stock trigger is independent of AI demand forecasting (deferred)",
+      "**Note:** From ERP_changes_ceo.pptx slide 26. Keep the simple min-stock-threshold version in scope even though full demand forecasting is deferred."
+    ]
+  },
+  {
+    "code": "N18",
+    "name": "Backdated Data Entry Support (PO, Material Inward)",
+    "app": "New Features (not in the reference app)",
+    "section": "Orders / Material Inward",
+    "priority": "P1",
+    "status": "New requirement",
+    "path": "—",
+    "type": "Enhancement",
+    "mode": "Enhancement",
+    "roles": "",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Allow historical-dated record creation on Purchase Orders and Material Inward, for migrating old/catch-up data.",
+    "fields": "*Not yet speced — proposed scope only:* Allow historical-dated record creation on Purchase Orders and Material Inward, for migrating old/catch-up data.",
+    "rules": [
+      "**Depends on / extends:** Extends O20/O17 and N02"
+    ]
+  },
+  {
+    "code": "N19",
+    "name": "WhatsApp — Order / Delivery / Due Notifications (Dealer)",
+    "app": "New Features (not in the reference app)",
+    "section": "Communications",
+    "priority": "P0",
+    "status": "New requirement",
+    "path": "—",
+    "type": "Integration",
+    "mode": "NEW",
+    "roles": "",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Dealer gets a WhatsApp message when an order is accepted or delivered, and for outstanding dues.",
+    "fields": "*Not yet speced — proposed scope only:* Dealer gets a WhatsApp message when an order is accepted or delivered, and for outstanding dues.",
+    "rules": [
+      "**Depends on / extends:** Confirmed in scope in the client quotation (TCO includes 20k WhatsApp credits)"
+    ]
+  },
+  {
+    "code": "N20",
+    "name": "WhatsApp — Employee Broadcast",
+    "app": "New Features (not in the reference app)",
+    "section": "Communications",
+    "priority": "P1",
+    "status": "New requirement",
+    "path": "—",
+    "type": "Integration",
+    "mode": "NEW",
+    "roles": "",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Send important operational info to employees via WhatsApp.",
+    "fields": "*Not yet speced — proposed scope only:* Send important operational info to employees via WhatsApp.",
+    "rules": [
+      "**Depends on / extends:** Same WhatsApp integration as N19"
+    ]
+  },
+  {
+    "code": "N21",
+    "name": "Unit Asset Register (Fixed/Movable)",
+    "app": "New Features (not in the reference app)",
+    "section": "Manufacturing Unit",
+    "priority": "P1",
+    "status": "New requirement",
+    "path": "—",
+    "type": "Form / List",
+    "mode": "NEW",
+    "roles": "",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Define and track fixed/movable assets per manufacturing unit, with admin-extensible asset-type dropdown.",
+    "fields": "*Not yet speced — proposed scope only:* Define and track fixed/movable assets per manufacturing unit, with admin-extensible asset-type dropdown.",
+    "rules": [
+      "**Depends on / extends:** Extends O32-O34",
+      "**Note:** From ERP_changes_ceo.pptx slide 2 — missed in the first new_features.md-based pass, added on verification."
+    ]
+  }
+]

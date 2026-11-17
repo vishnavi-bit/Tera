@@ -1,0 +1,3648 @@
+{
+ "generated": "2026-10-29",
+ "sources": [
+  "apps/everp/sequences/*.json (17 tours)",
+  "apps/everp/mock-app/screens/*/*.js",
+  "apps/everp/gaps/*.md",
+  "docs/screen_details.md",
+  "Firebase RTDB /apps/EVERP/walkthroughFeedback (7 items)",
+  "docs/EV_App_Screens_Estimation.xlsx (Screens sheet)"
+ ],
+ "screens": [
+  {
+   "code": "D04",
+   "name": "Dashboard",
+   "walkthroughs": [
+    "dealer-setup"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 0,
+    "requiredUnknown": 0,
+    "noForm": true,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "screen control",
+     "text": "${esc(\n      `The value and drill link for '${t}' are not defined in screen_details.md (D04).`\n    )}"
+    },
+    {
+     "where": "screen control",
+     "text": "The period filter options are not defined in screen_details.md (D04)."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "dealer-setup",
+     "no": "7",
+     "text": "**D04 dashboard content.** The aggregates (invoices, POs, service, warranty, follow-ups) have no defined values, layout or drill targets. Shown as \"Not defined\"."
+    },
+    {
+     "walkthrough": "dealer-setup",
+     "no": "17",
+     "text": "**D04 period options and drill links.** The period filter options and the drill-link targets are not defined."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "M",
+    "estDays": "2.5",
+    "notes": "Aggregates: invoices, POs, service, warranty, follow-ups; period filter.",
+    "dependencies": "R1 scoping",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "list only, no fields"
+  },
+  {
+   "code": "D13",
+   "name": "Service Follow-ups List",
+   "walkthroughs": [
+    "service-to-job-card"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 0,
+    "requiredUnknown": 0,
+    "noForm": true,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "screen control",
+     "text": "The filter options for this screen are not in screen_details.md."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "service-to-job-card",
+     "no": "1",
+     "text": "**What a service follow-up is.** D13 and D14 exist in the spec, but no rule says how a service follow-up is created or when one is due (for example a free-service reminder). The sample rows give invented reasons (\"First free service due\", \""
+    },
+    {
+     "walkthrough": "service-to-job-card",
+     "no": "2",
+     "text": "**D13 columns and filter.** The spec gives \"filter, search by name / phone / email\" with no filter options and no columns. The filter shows a \"Not defined\" alert. Columns are the walkthrough's own."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P1",
+    "complexity": "S",
+    "estDays": "1.5",
+    "notes": "Filter, search by name/phone/email.",
+    "dependencies": "No OEM counterpart",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "list only, no fields"
+  },
+  {
+   "code": "D16",
+   "name": "Customer Add / Edit",
+   "walkthroughs": [
+    "enquiry-to-invoice"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 19,
+    "requiredUnknown": 0,
+    "noForm": false,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "screen control",
+     "text": "The state list (36 states / union territories) is not in screen_details.md, only its source API."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "enquiry-to-invoice",
+     "no": "16",
+     "text": "**D16 State options.** The spec gives \"36 states / UTs\" from an API, not a list. The State select shows the sample state only, with a \"Not defined\" alert."
+    },
+    {
+     "walkthrough": "enquiry-to-invoice",
+     "no": "17",
+     "text": "**D16 conversion landing (assumption).** D09 says convert goes to D16 with enquireId. After create, the walkthrough goes to D17, the customer hub. The spec does not say where create goes."
+    },
+    {
+     "walkthrough": "enquiry-to-invoice",
+     "no": "18",
+     "text": "**D16 documents.** At least one of PAN, Aadhar, Licence is required. Only PAN is filled in the sample. Upload controls show a toast."
+    },
+    {
+     "walkthrough": "enquiry-to-invoice",
+     "no": "19",
+     "text": "**D17 fields.** The Personal details tab has no field list. The D16 fields are shown read only. Only the payment tab is wired. Other tabs show toasts."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "L",
+    "estDays": "3",
+    "notes": "Type, name, GST (business), phone/WhatsApp/work, billing+shipping address, PAN/Aadhaar/Licence (>=1 of 3 required with file upload).",
+    "dependencies": "R1, F9 (PII unmasked on OEM side — gap)",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "has fields"
+  },
+  {
+   "code": "D27",
+   "name": "Inventory Issues",
+   "walkthroughs": [
+    "dealer-stock-and-issues"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 5,
+    "requiredUnknown": 4,
+    "noForm": false,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "dealer-stock-and-issues",
+     "step": "dealer-new-issue",
+     "text": "Not defined in screen_details.md: the dialog has no submit control and no link to the OEM issues list (O42). The fields are shown, but an issue cannot be saved from this dialog."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "dealer-stock-and-issues",
+     "no": "1",
+     "text": "**D27 has no submit control and no link to O42.** The spec gives only the \"new issue\" button and the field table. The walkthrough shows the \"Not defined\" alert on arrival at D27 (step 1). It does not invent a button or a link."
+    },
+    {
+     "walkthrough": "dealer-stock-and-issues",
+     "no": "2",
+     "text": "**D27 required marks are \"?\".** Type, Select Spare, Title and Description are marked \"?\" in the spec. None is shown as required."
+    },
+    {
+     "walkthrough": "dealer-stock-and-issues",
+     "no": "3",
+     "text": "**D27 list columns are not defined.** The screen shows the \"New issue\" button and the dialog only. No list is shown."
+    },
+    {
+     "walkthrough": "dealer-stock-and-issues",
+     "no": "4",
+     "text": "**D27 and O42 may or may not be the same list.** The spec lists O42 as a counterpart of D27 but does not say they share data. The walkthrough does not connect them."
+    },
+    {
+     "walkthrough": "dealer-stock-and-issues",
+     "no": "5",
+     "text": "**D27 Select Spare options** are Motor, Battery, Controller and Accessories. The spec does not say how they depend on the Type radio (Spare or Accessory)."
+    },
+    {
+     "walkthrough": "dealer-stock-and-issues",
+     "no": "19",
+     "text": "**D27 file preview** is not defined beyond \"preview\". The walkthrough shows a file input that shows a toast."
+    },
+    {
+     "walkthrough": "dealer-stock-and-issues",
+     "no": "21",
+     "text": "**D27 to D30 move** (step 1 to step 2): the spec has no link from the new issue dialog to a delivered PO. The walkthrough moves the dealer there as a walkthrough choice."
+    },
+    {
+     "walkthrough": "oem-monitor-dealer",
+     "no": "14",
+     "text": "**O10 add stock to dealer has no stated effect**, no submit control, and no Product options. Step 7 is a pass-through with the \"Not defined\" alert, as on D27. Product type options are from the spec. Type tabs have no names beyond the produc"
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "M",
+    "estDays": "2",
+    "notes": "New issue (type, select spare, title, description, file).",
+    "dependencies": "R1; counterpart O42",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "has fields"
+  },
+  {
+   "code": "D30",
+   "name": "PO Detail (6 tabs)",
+   "walkthroughs": [
+    "dealer-stock-and-issues",
+    "order-to-production",
+    "po-exceptions"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 0,
+    "requiredUnknown": 0,
+    "noForm": true,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "po-exceptions",
+     "step": "dealer-sees-rejection",
+     "text": "Not defined in screen_details.md, so the stage and outcome the dealer sees after a rejection cannot be shown. F8 says the dealer sees stage and outcome only."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "dealer-stock-and-issues",
+     "no": "15",
+     "text": "**D36 \"open PO\" has no stated target.** The walkthrough assumes D30. It shows a toast only."
+    },
+    {
+     "walkthrough": "dealer-stock-and-issues",
+     "no": "21",
+     "text": "**D27 to D30 move** (step 1 to step 2): the spec has no link from the new issue dialog to a delivered PO. The walkthrough moves the dealer there as a walkthrough choice."
+    },
+    {
+     "walkthrough": "dealer-stock-and-issues",
+     "no": "26",
+     "text": "**\"Open PO\" goes to D30.**"
+    },
+    {
+     "walkthrough": "order-to-production",
+     "no": "24",
+     "text": "**D30 tab names are not in the spec.** D30 (PO Detail) is listed as \"6 tabs\" with no names. Only the Dispatch tab is referred to (step 17), and its fields are not defined beyond O22's transport fields."
+    },
+    {
+     "walkthrough": "order-to-production",
+     "no": "32",
+     "text": "**Step 5 (view the new PO) has no button.** The spec gives D30 no \"view\" action. The step advances on its own after \"opened purchase order\"."
+    },
+    {
+     "walkthrough": "po-exceptions",
+     "no": "7",
+     "text": "**The dealer's view after a rejection.** F8 says the dealer sees stage and outcome only. The spec does not say which stage and outcome labels appear after a rejection. This is the card on step 4 (D30)."
+    },
+    {
+     "walkthrough": "po-exceptions",
+     "no": "20",
+     "text": "**The 14 steps** are in the approved order: O24 note, date, reject; D30 dealer view (card); O24 revert; O20 approve; O23 verify; O23 N26 card; O22 N10 card; O22 dispatch; D32 reject shipment; O22 N27 card; O22 dispatch again; D32 confirm de"
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "XL",
+    "estDays": "5",
+    "notes": "Pay, confirm/accept delivery, reject shipment, report issue, print quotation/invoice/checklist.",
+    "dependencies": "R1/R2, F2, F8; counterpart O20 (same tabs + OEM actions)",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "list only, no fields"
+  },
+  {
+   "code": "D37",
+   "name": "Warranty List",
+   "walkthroughs": [
+    "service-warranty-claim"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 0,
+    "requiredUnknown": 0,
+    "noForm": true,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "service-warranty-claim",
+     "step": "s06-warranty-list",
+     "text": "The select customer by chassis dialog (opened by + on the Warranty List) is not defined in screen_details.md. The walkthrough goes straight to Warranty Claim Create for the customer."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "service-warranty-claim",
+     "no": "12",
+     "text": "**No link from D42 or D20 to a claim.** After the SERVICE invoice is created, the walkthrough goes to D37 directly. This is a walkthrough transition, not a spec link. \"+\" (D37) then raises the claim."
+    },
+    {
+     "walkthrough": "service-warranty-claim",
+     "no": "13",
+     "text": "**\"Select customer by chassis\" dialog has no field table.** The D37 step shows the \"Not defined\" alert and goes straight to D38."
+    },
+    {
+     "walkthrough": "service-warranty-claim",
+     "no": "31",
+     "text": "**D37 list columns and search.** Claim ID, Customer and Status are assumed columns. The search input has no label in the spec, so it has none in the walkthrough."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "M",
+    "estDays": "2",
+    "notes": "Search; new claim by selecting customer/chassis.",
+    "dependencies": "R1; counterpart O43/O11",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "list only, no fields"
+  },
+  {
+   "code": "D38",
+   "name": "Warranty Claim Create",
+   "walkthroughs": [
+    "service-warranty-claim"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 12,
+    "requiredUnknown": 0,
+    "noForm": false,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [],
+   "gaps": [
+    {
+     "walkthrough": "service-warranty-claim",
+     "no": "13",
+     "text": "**\"Select customer by chassis\" dialog has no field table.** The D37 step shows the \"Not defined\" alert and goes straight to D38."
+    },
+    {
+     "walkthrough": "service-warranty-claim",
+     "no": "14",
+     "text": "**Claim status values are not defined in full.** In order, the floater shows: \"—\" until the claim is raised (not a spec value); \"Raised to OEM\" (from the D38 \"Raised to\" option OEM and the \"claim warranty\" button); \"inTransit\" (spec); \"veri"
+    },
+    {
+     "walkthrough": "service-warranty-claim",
+     "no": "32",
+     "text": "**D38 warranty products search.** The spec says \"Warranty-products mode: search\" with no label. The label \"Search\" and the placeholder from the spec are used. The mode is not reachable in this walkthrough."
+    },
+    {
+     "walkthrough": "service-warranty-claim",
+     "no": "33",
+     "text": "**D38 Select Vehicle.** The spec lists the customer's paid invoices. The walkthrough has one sample option built from the seed (model, variant, chassis, colour)."
+    }
+   ],
+   "feedback": [
+    {
+     "by": "Vishnavi",
+     "text": "more items to add in  warranty list in future",
+     "walkthrough": "service-warranty-claim"
+    }
+   ],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "L",
+    "estDays": "3",
+    "notes": "Raised to OEM or dealer service team; select vehicle/spare/serial, issue, remarks, up to 10 images.",
+    "dependencies": "R1; counterpart O44",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "has fields"
+  },
+  {
+   "code": "D39",
+   "name": "Warranty Claim Detail",
+   "walkthroughs": [
+    "service-warranty-claim"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 5,
+    "requiredUnknown": 0,
+    "noForm": false,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "screen control",
+     "text": "${esc(NOT_DEFINED_DETAIL)}"
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "service-warranty-claim",
+     "no": "14",
+     "text": "**Claim status values are not defined in full.** In order, the floater shows: \"—\" until the claim is raised (not a spec value); \"Raised to OEM\" (from the D38 \"Raised to\" option OEM and the \"claim warranty\" button); \"inTransit\" (spec); \"veri"
+    },
+    {
+     "walkthrough": "service-warranty-claim",
+     "no": "15",
+     "text": "**Reject branch is not built.** The \"verify / reject\" card has a reason field, and \"reject payment\" shows a toast. The claim rejection (\"D39 Claim Rejected\", workflow) is not in the walkthrough."
+    },
+    {
+     "walkthrough": "service-warranty-claim",
+     "no": "24",
+     "text": "**D39 \"Claim details\".** No fields are defined in the spec, so the heading shows the \"Not defined\" alert."
+    },
+    {
+     "walkthrough": "service-warranty-claim",
+     "no": "25",
+     "text": "**D39 field labels.** The spec gives \"company\", \"contactNumber\", \"trackingId\", \"amount\", \"transactionId\", \"proof file\", \"description\" and \"media\" as field names. Shown as written. Amount and transactionId are marked required (assumption fro"
+    },
+    {
+     "walkthrough": "service-warranty-claim",
+     "no": "26",
+     "text": "**D39 button label versus card title.** The button is \"confirm receipt\" (from the spec button list). The card title is \"Confirm received\" (from the spec table). Both are used as written."
+    },
+    {
+     "walkthrough": "service-warranty-claim",
+     "no": "27",
+     "text": "**\"[I]\" marker has no legend.** It appears on \"proof file\" and \"media\" (D39). The marker is not shown. The file fields are shown without it."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "L",
+    "estDays": "3.5",
+    "notes": "Mark in transit, pay service charge, confirm receipt, report post-receipt issue.",
+    "dependencies": "R1, F8; counterpart O44",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "has fields"
+  },
+  {
+   "code": "D40",
+   "name": "Service List",
+   "walkthroughs": [
+    "service-to-job-card"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 0,
+    "requiredUnknown": 0,
+    "noForm": true,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "screen control",
+     "text": "The status filter options for this screen are not in screen_details.md."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "service-to-job-card",
+     "no": "6",
+     "text": "**D26 reached from the tour (assumption).** The spec path is `/inventory/service-price` under Inventory. The tour goes D14 → D26 → D40 as the flow doc says the price list feeds the SERVICE invoice. No spec control links D14 to D26."
+    },
+    {
+     "walkthrough": "service-to-job-card",
+     "no": "9",
+     "text": "**D40 filter and columns.** The status options are not defined (alert). Columns are the walkthrough's own. \"open\" is not wired."
+    },
+    {
+     "walkthrough": "service-to-job-card",
+     "no": "10",
+     "text": "**D40 roles.** The spec lists D and V, not S. The walkthrough uses Latha (Service), who is also used on D41, as in the earlier service walkthrough."
+    },
+    {
+     "walkthrough": "service-to-job-card",
+     "no": "11",
+     "text": "**D41 reached from D40.** The spec path for D41 is under the customer (`/customer/:id/service/new`). The tour reaches it from D40 \"create\", which is listed in the spec."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P1",
+    "complexity": "S",
+    "estDays": "1.5",
+    "notes": "Status filter, open, create.",
+    "dependencies": "R1; counterpart O07 (mirror)",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "list only, no fields"
+  },
+  {
+   "code": "D45",
+   "name": "Payments (2 tabs)",
+   "walkthroughs": [
+    "dealer-payments-ledger"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 0,
+    "requiredUnknown": 0,
+    "noForm": true,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "screen control",
+     "text": "The status options are not in screen_details.md."
+    },
+    {
+     "where": "screen control",
+     "text": "The spec says D45 has 2 tabs but does not name them or describe the second tab."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "dealer-payments-ledger",
+     "no": "1",
+     "text": "**D45 tabs.** The spec says \"2 tabs\" and names neither. The first is shown as \"payments\". The second shows a \"Not defined\" alert."
+    },
+    {
+     "walkthrough": "dealer-payments-ledger",
+     "no": "2",
+     "text": "**D45 \"ledger history\".** Listed as a button. The spec does not say whether it opens a screen, a tab or a dialog. Toast only."
+    },
+    {
+     "walkthrough": "dealer-payments-ledger",
+     "no": "3",
+     "text": "**D45 columns and filters.** No columns, no status options and no date-range detail. Columns are the walkthrough's own, from D46 and O45 fields. The status filter shows a \"Not defined\" alert."
+    },
+    {
+     "walkthrough": "dealer-payments-ledger",
+     "no": "4",
+     "text": "**D46 shown as a card.** The spec calls it a dialog on D45. It is shown as a page."
+    },
+    {
+     "walkthrough": "dealer-payments-ledger",
+     "no": "16",
+     "text": "**O14 counterpart.** The spec says D33 / D45 mirror O14. Which of the two (or both) is not defined."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "M",
+    "estDays": "2",
+    "notes": "Search, status, date range, ledger history.",
+    "dependencies": "R1/R3; counterpart O45/O47",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "list only, no fields"
+  },
+  {
+   "code": "D47",
+   "name": "Settings: Profile",
+   "walkthroughs": [
+    "dealer-settings-users"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 9,
+    "requiredUnknown": 0,
+    "noForm": false,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "dealer-settings-users",
+     "step": "dealer-profile",
+     "text": "Not defined in screen_details.md, so the effects of the shop location save, document upload and profile photo cannot be shown. The other dealer_profile fields are read-only, and their labels are not listed in the spec."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "dealer-settings-users",
+     "no": "1",
+     "text": "**The dealer roles (D, S, V) are not in `docs/people.md`.** D47 to D49 allow D, S and V. Ravi Kumar (`dealer-owner`) is the actor, as an assumption. Swati (`dealer-sales`) is the new staff user."
+    },
+    {
+     "walkthrough": "dealer-settings-users",
+     "no": "2",
+     "text": "**D47 has two field tables, and shop location appears in both.** It is shown once, as the Latitude, Longitude and Address fields (decision A)."
+    },
+    {
+     "walkthrough": "dealer-settings-users",
+     "no": "3",
+     "text": "**D47 read-only dealer profile.** The spec says all org, address, bank and login fields are read-only (F3, `dealer_profile.*`), but it does not list their labels. Only Firm Name is shown, with the note \"contact OEM Admin\". The other fields "
+    },
+    {
+     "walkthrough": "dealer-settings-users",
+     "no": "4",
+     "text": "**D47 Save shop location has no stated effect on the screen.** The spec gives the endpoint only. It shows a toast. The card on step 1 says so."
+    },
+    {
+     "walkthrough": "dealer-settings-users",
+     "no": "5",
+     "text": "**D47 document upload has no stated effect on the screen.** The four spec labels (GST Certificate, PAN Card, Aadhaar, Dealership Agreement) are shown as file fields. Upload shows a toast. The card on step 1 says so."
+    },
+    {
+     "walkthrough": "dealer-settings-users",
+     "no": "6",
+     "text": "**D47 profile photo has no stated effect.** It shows a toast."
+    },
+    {
+     "walkthrough": "dealer-settings-users",
+     "no": "7",
+     "text": "**D47 \"Use my current location\"** comes from the spec note on Latitude (\"from browser geolocation\"). The spec does not give it as a button, so it is shown as a toast control. The spec does not say what the browser location fills in beyond L"
+    },
+    {
+     "walkthrough": "dealer-settings-users",
+     "no": "8",
+     "text": "**D47 change password.** Password and Confirm password are required and must match (spec). They are shown as required, with no validation. The dealer-setup gap list says the change is optional on first sign-in, and the spec does not force a"
+    },
+    {
+     "walkthrough": "dealer-settings-users",
+     "no": "20",
+     "text": "**The existing D47 screen did not match the spec** (it showed Firm Name, two password fields and a single shop location block, and it had no document rows or current-location control). It has been rebuilt from the spec (decision A). D47 is "
+    },
+    {
+     "walkthrough": "dealer-settings-users",
+     "no": "21",
+     "text": "**Actor: Ravi Kumar (dealer-owner).** Decision: D47 to D49 are shown as the dealer owner, as the approved proposal says."
+    },
+    {
+     "walkthrough": "dealer-settings-users",
+     "no": "24",
+     "text": "**The five steps:** D47 (card), D48 list (card), D48 click create (action), D49 submit (action, no card), D48 with the new row and the N11 card (end). A step with a card carries no action."
+    },
+    {
+     "walkthrough": "dealer-setup",
+     "no": "4",
+     "text": "**First login.** The spec does not require a password change on first sign-in. D47 \"change password\" is an optional control only. D47 is built and registered, but the flow does not reach it."
+    },
+    {
+     "walkthrough": "dealer-setup",
+     "no": "19",
+     "text": "**D47 password labels.** The spec gives \"Change password\" with fields password and confirmPassword. The labels \"Password\" and \"Confirm password\" are the walkthrough's own."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "M",
+    "estDays": "2",
+    "notes": "Org/bank/address fields read-only (F3); dealer may edit password, shop location, documents, photo.",
+    "dependencies": "F3; counterpart O05 (owner)",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "has fields"
+  },
+  {
+   "code": "D48",
+   "name": "Settings: Users",
+   "walkthroughs": [
+    "dealer-settings-users"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 0,
+    "requiredUnknown": 0,
+    "noForm": true,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "dealer-settings-users",
+     "step": "dealer-users-list",
+     "text": "Not defined in screen_details.md, so the list columns cannot be taken from the spec. The columns shown are the O52 labels (assumption)."
+    },
+    {
+     "where": "tour step",
+     "walkthrough": "dealer-settings-users",
+     "step": "dealer-users-after",
+     "text": "Not defined in screen_details.md, so the N11 role assignment for a dealer and its connected sub-dealers cannot be shown. It depends on the sub-dealer clarification document, which is not in the repo yet."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "dealer-settings-users",
+     "no": "9",
+     "text": "**D48 has no column list.** The columns are User ID, Name, Role, Contact, Email and Status, taken from the O52 labels (assumption). An unlabelled action column holds the edit button. The card on step 2 says so."
+    },
+    {
+     "walkthrough": "dealer-settings-users",
+     "no": "10",
+     "text": "**D48 search has no stated target.** It shows a toast."
+    },
+    {
+     "walkthrough": "dealer-settings-users",
+     "no": "11",
+     "text": "**D48 edit has no stated target on this tour.** It shows a toast that names D49."
+    },
+    {
+     "walkthrough": "dealer-settings-users",
+     "no": "16",
+     "text": "**D49 submit has no stated effect beyond adding.** The new user appears in the D48 list and the Staff users count goes up by one (walkthrough choice, decision B). The count and the new row change together, through the submit step's stateCha"
+    },
+    {
+     "walkthrough": "dealer-settings-users",
+     "no": "23",
+     "text": "**Staff users floater** (decision B). The count changes only through the submit step's stateChange (`staff.count` +1, `staff.created` true). The D48 row and the count change together."
+    },
+    {
+     "walkthrough": "dealer-settings-users",
+     "no": "24",
+     "text": "**The five steps:** D47 (card), D48 list (card), D48 click create (action), D49 submit (action, no card), D48 with the new row and the N11 card (end). A step with a card carries no action."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "S",
+    "estDays": "1",
+    "notes": "Search, create, edit dealer staff.",
+    "dependencies": "R1",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "list only, no fields"
+  },
+  {
+   "code": "O01",
+   "name": "Login / Forgot Password",
+   "walkthroughs": [
+    "oem-setup"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 3,
+    "requiredUnknown": 0,
+    "noForm": false,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "screen control",
+     "text": "Forgot Password has no fields or actions in screen_details.md (O01). It appears only in the screen name."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "oem-setup",
+     "no": "6",
+     "text": "**O01 Forgot Password.** The screen name includes it, but the spec gives no fields or actions. Shown as \"Not defined\"."
+    },
+    {
+     "walkthrough": "oem-setup",
+     "no": "7",
+     "text": "**O01 Remember me.** The spec says not to copy the dealer app's plaintext password storage. The OEM rule is not defined. The control shows a toast only."
+    },
+    {
+     "walkthrough": "oem-setup",
+     "no": "8",
+     "text": "**O01 placeholder.** The spec's placeholder for User ID is \"eg. D001\", which is a dealer-style example. Shown as written."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "S",
+    "estDays": "1.5",
+    "notes": "Shared /auth/login with dealer app.",
+    "dependencies": "",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "has fields"
+  },
+  {
+   "code": "O03",
+   "name": "Dashboard",
+   "walkthroughs": [
+    "dealer-setup",
+    "oem-setup"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 4,
+    "requiredUnknown": 0,
+    "noForm": false,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "screen control",
+     "text": "${esc(\n          `The value and layout of the KPI '${name}' are not defined in screen_details.md (O03).`\n        )}"
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "dealer-setup",
+     "no": "12",
+     "text": "**Sidebar link O03 to O04 (assumption).** O03 has no link to the dealers list. The walkthrough uses the sidebar item \"Dealers\" as the way to reach O04."
+    },
+    {
+     "walkthrough": "dealer-setup",
+     "no": "16",
+     "text": "**O03 KPI values.** The spec names ten KPIs. Only \"no. of dealers\" has a value in this walkthrough. The other nine show \"Not defined\"."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "L",
+    "estDays": "4",
+    "notes": "KPI tiles + widgets; period/state/unit filter; editable slogan.",
+    "dependencies": "R6/R7",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "has fields"
+  },
+  {
+   "code": "O05",
+   "name": "Add / Edit Dealer",
+   "walkthroughs": [
+    "dealer-setup"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 25,
+    "requiredUnknown": 0,
+    "noForm": false,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "screen control",
+     "text": "The Country options are not defined in screen_details.md."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "dealer-setup",
+     "no": "1",
+     "text": "**Landing after save (assumption).** O05 does not say where Save goes. The walkthrough goes to O04, where the new row and the count are visible, then opens O06."
+    },
+    {
+     "walkthrough": "dealer-setup",
+     "no": "2",
+     "text": "**Dealer ID format.** O05 says \"D00000n auto\". D01 gives the example \"D000002\" (7 characters). D01's placeholder \"eg. D001\" is 6 characters. The walkthrough uses the 7-character form from the sample data and shows the placeholder as written"
+    },
+    {
+     "walkthrough": "dealer-setup",
+     "no": "11",
+     "text": "**User Type (O05).** F1 is defined: five price tiers, and a dealer sees its own tier on a PO. In this walkthrough the User Type control shows with no visible effect, as the rules require."
+    },
+    {
+     "walkthrough": "dealer-setup",
+     "no": "14",
+     "text": "**O04 column set.** The spec gives no columns for O04. The columns used are Dealer ID, Firm, User type, State, District and Status, taken from O05 field names."
+    },
+    {
+     "walkthrough": "dealer-setup",
+     "no": "15",
+     "text": "**O06 Profile fields.** The spec does not list the Profile tab's fields. The walkthrough shows the O05 fields, read only."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "XL",
+    "estDays": "5",
+    "notes": "Full onboarding: type, owner, firm, GST, region/zone, MU, password, billing+shipping address, shop location, bank details, logo.",
+    "dependencies": "F3; creates dealer login",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "has fields"
+  },
+  {
+   "code": "O06",
+   "name": "Dealer Detail (9 tabs)",
+   "walkthroughs": [
+    "dealer-setup",
+    "oem-monitor-dealer"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 0,
+    "requiredUnknown": 0,
+    "noForm": true,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "dealer-setup",
+     "step": "dealer-detail",
+     "text": "How the dealer's login details are handed over is not defined in screen_details.md. No screen or rule covers this step."
+    },
+    {
+     "where": "tour step",
+     "walkthrough": "oem-monitor-dealer",
+     "step": "oem-dealer-detail",
+     "text": "The spec does not say how the dealer detail (O06) leads to the mirror screens. Only the Profile, Connections and Ledger top-ups tab names are given, and no tab links to the mirrors."
+    },
+    {
+     "where": "screen control",
+     "text": "The Connections tab content is not defined in screen_details.md."
+    },
+    {
+     "where": "screen control",
+     "text": "The Ledger top-ups tab content is not defined in screen_details.md."
+    },
+    {
+     "where": "screen control",
+     "text": "This tab name and content are not defined in screen_details.md."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "dealer-setup",
+     "no": "1",
+     "text": "**Landing after save (assumption).** O05 does not say where Save goes. The walkthrough goes to O04, where the new row and the count are visible, then opens O06."
+    },
+    {
+     "walkthrough": "dealer-setup",
+     "no": "3",
+     "text": "**Credential hand-over.** No screen or rule says how the user ID and password reach the dealer. Shown as the \"Not defined\" alert on the O06 step. No email, SMS or WhatsApp screen was added."
+    },
+    {
+     "walkthrough": "dealer-setup",
+     "no": "8",
+     "text": "**O06 tabs.** The spec names three tabs: Profile, Connections, Ledger top-ups. The other six have no name. The Connections and Ledger top-ups contents are not defined. Only Profile shows content."
+    },
+    {
+     "walkthrough": "dealer-setup",
+     "no": "13",
+     "text": "**Firm name link O04 to O06 (assumption).** O04 lists only edit and unlock as row actions. The walkthrough makes the new dealer's firm name a link to O06. The existing rows have no link."
+    },
+    {
+     "walkthrough": "dealer-setup",
+     "no": "15",
+     "text": "**O06 Profile fields.** The spec does not list the Profile tab's fields. The walkthrough shows the O05 fields, read only."
+    },
+    {
+     "walkthrough": "oem-monitor-dealer",
+     "no": "3",
+     "text": "**O06 names three tabs only**: Profile, Connections and Ledger top-ups. The other six have no names and no content. The O06 screen is unchanged and shows \"Not defined\" for them."
+    },
+    {
+     "walkthrough": "oem-monitor-dealer",
+     "no": "4",
+     "text": "**O06 does not say how it leads to the mirrors.** No tab, button or link is defined for it. Step 2 shows the \"Not defined\" alert."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "L",
+    "estDays": "3",
+    "notes": "Profile, connections, ledger top-ups tab shell.",
+    "dependencies": "R6/R7",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "list only, no fields"
+  },
+  {
+   "code": "O07",
+   "name": "Dealer → Customers + Customer Mirror",
+   "walkthroughs": [
+    "oem-monitor-dealer"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 0,
+    "requiredUnknown": 0,
+    "noForm": true,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "screen control",
+     "text": "The ${esc(t)} tab content is not defined in screen_details.md (D17 shows the tab shell only)."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "oem-monitor-dealer",
+     "no": "1",
+     "text": "**OEM roles are not keyed.** O07 to O13 say \"see …\" (for example \"see DEALER_DETAILS\"), and O48 says \"(unkeyed)\". `docs/people.md` has no role codes. Charan (Super Admin, `oem-super-admin`) is the one actor."
+    },
+    {
+     "walkthrough": "oem-monitor-dealer",
+     "no": "9",
+     "text": "**O07 has six tabs but no names.** The names are taken from D17: personal, vehicle, invoice, payment, service and warranty (an assumption). The tab content, apart from personal details, is not defined and shows the \"Not defined\" alert."
+    },
+    {
+     "walkthrough": "oem-monitor-dealer",
+     "no": "10",
+     "text": "**O07 list columns are not defined.** Customer ID, Name, Phone, Email and Status are an assumption (based on the D15 approach)."
+    },
+    {
+     "walkthrough": "oem-monitor-dealer",
+     "no": "11",
+     "text": "**O07 \"open\" has no stated target** beyond the customer mirror. It shows the customer's detail below the list."
+    },
+    {
+     "walkthrough": "oem-monitor-dealer",
+     "no": "28",
+     "text": "**Customer IDs, chassis numbers, invoice numbers and transaction IDs match** across O07, O08, O09, O10, O11, O12, O13 and O48."
+    }
+   ],
+   "feedback": [
+    {
+     "by": "Vishnavi",
+     "text": "customers list export into excel sheet \" admin only access\"",
+     "walkthrough": "oem-monitor-dealer"
+    }
+   ],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "M",
+    "estDays": "2",
+    "notes": "Read-only view of dealer-owned customer/invoice/payment/service/warranty data.",
+    "dependencies": "R10, F9 (PII unmasked — gap); mirrors D15-D23, D40-D42",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "list only, no fields"
+  },
+  {
+   "code": "O10",
+   "name": "Dealer → Vehicle Stock + Add Stock",
+   "walkthroughs": [
+    "oem-monitor-dealer"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 3,
+    "requiredUnknown": 0,
+    "noForm": false,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "oem-monitor-dealer",
+     "step": "oem-vehicle-stock",
+     "text": "The spec gives no effect and no submit control for add stock to dealer, and no options for Product. The dialog shows its fields only."
+    },
+    {
+     "where": "screen control",
+     "text": "The spec gives no options for Product in the add stock dialog."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "oem-monitor-dealer",
+     "no": "2",
+     "text": "**O10 roles are ADM, SZH, APM and DH.** I read ADM as Super Admin (an assumption). SZH, APM and DH are not used."
+    },
+    {
+     "walkthrough": "oem-monitor-dealer",
+     "no": "14",
+     "text": "**O10 add stock to dealer has no stated effect**, no submit control, and no Product options. Step 7 is a pass-through with the \"Not defined\" alert, as on D27. Product type options are from the spec. Type tabs have no names beyond the produc"
+    },
+    {
+     "walkthrough": "oem-monitor-dealer",
+     "no": "22",
+     "text": "**Chassis TZ-SAMPLE-0301 shows \"Sold\"** in O10 stock, because the invoice exists. The other stock rows are copied from the enquiry-to-invoice seed. The available count is 2 in the new seed (the enquiry seed says 3)."
+    },
+    {
+     "walkthrough": "oem-monitor-dealer",
+     "no": "28",
+     "text": "**Customer IDs, chassis numbers, invoice numbers and transaction IDs match** across O07, O08, O09, O10, O11, O12, O13 and O48."
+    },
+    {
+     "walkthrough": "oem-warehouse-products",
+     "no": "8",
+     "text": "**O29 report content** (per-model rollup, stock by MU and the price matrix) is not defined. Stock by MU shows the seed values, with the columns Manufacturing Unit, Quantity and Product (assumption, from the O10 and O21 labels)."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "M",
+    "estDays": "2",
+    "notes": "Type tabs; 'Add stock to dealer' (product type, product, qty) — OEM pushes stock without a PO.",
+    "dependencies": "R10; mirrors D24/D25",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "has fields"
+  },
+  {
+   "code": "O11",
+   "name": "Dealer → Warranty Claims",
+   "walkthroughs": [
+    "oem-monitor-dealer"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 0,
+    "requiredUnknown": 0,
+    "noForm": true,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "screen control",
+     "text": "The period filter options are not defined in screen_details.md."
+    },
+    {
+     "where": "screen control",
+     "text": "The claims-by-product chart is not defined in screen_details.md. The table below is the walkthrough's own view of the same data."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "oem-monitor-dealer",
+     "no": "15",
+     "text": "**O11 claims-by-product chart is not defined**, and neither are the period filter options. The walkthrough shows the claims by product as a table, as its own view of the data (an assumption). The chart shows the \"Not defined\" alert."
+    },
+    {
+     "walkthrough": "oem-monitor-dealer",
+     "no": "28",
+     "text": "**Customer IDs, chassis numbers, invoice numbers and transaction IDs match** across O07, O08, O09, O10, O11, O12, O13 and O48."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "S",
+    "estDays": "1.5",
+    "notes": "Period filter, claims-by-product chart.",
+    "dependencies": "R10; mirrors D37",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "list only, no fields"
+  },
+  {
+   "code": "O12",
+   "name": "Dealer → Purchase Orders",
+   "walkthroughs": [
+    "oem-monitor-dealer"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 0,
+    "requiredUnknown": 0,
+    "noForm": true,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "screen control",
+     "text": "The status filter options are not defined in screen_details.md."
+    },
+    {
+     "where": "screen control",
+     "text": "The type filter options are not defined in screen_details.md."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "oem-monitor-dealer",
+     "no": "16",
+     "text": "**O12 status and type filter options are not defined**, and no columns are given. The columns are the D28 shape (an assumption)."
+    },
+    {
+     "walkthrough": "oem-monitor-dealer",
+     "no": "28",
+     "text": "**Customer IDs, chassis numbers, invoice numbers and transaction IDs match** across O07, O08, O09, O10, O11, O12, O13 and O48."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "S",
+    "estDays": "1.5",
+    "notes": "Status/type filter.",
+    "dependencies": "R6/R7; mirrors D28",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "list only, no fields"
+  },
+  {
+   "code": "O15",
+   "name": "Announcements List",
+   "walkthroughs": [
+    "announcements"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 0,
+    "requiredUnknown": 0,
+    "noForm": true,
+    "notYetSpeced": false,
+    "roleKeyed": false
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "announcements",
+     "step": "oem-list-after-create",
+     "text": "Not defined in screen_details.md, so the WhatsApp employee broadcast (N20) cannot be shown."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "announcements",
+     "no": "1",
+     "text": "**O15 and O16 roles are unkeyed.** The spec says \"Role not in permission map — confirm access\". Charan (Super Admin, `oem-super-admin`) is the one actor."
+    },
+    {
+     "walkthrough": "announcements",
+     "no": "6",
+     "text": "**O15 \"open\" has no stated target.** It shows a toast."
+    },
+    {
+     "walkthrough": "announcements",
+     "no": "7",
+     "text": "**O15 and D05 list columns are not defined.** Title, Target Dealers and Attachment are used (see assumptions)."
+    },
+    {
+     "walkthrough": "announcements",
+     "no": "11",
+     "text": "**N20 (WhatsApp employee broadcast) has no screen.** It is shown on the O15 step as a \"Not defined\" card, with the heading \"O15: Announcements List\" (see walkthrough notes)."
+    },
+    {
+     "walkthrough": "announcements",
+     "no": "12",
+     "text": "**O15 and D05 columns: Title, Target Dealers, Attachment.** These labels come from O16 (Title, Target Dealers, Attachment). O15 also shows an \"open\" button in the Action column."
+    },
+    {
+     "walkthrough": "announcements",
+     "no": "14",
+     "text": "**The \"open\" button on O15 and the \"view\" button on D05** are walkthrough moves (D05 view leads to D06)."
+    },
+    {
+     "walkthrough": "announcements",
+     "no": "15",
+     "text": "**O15 \"new\" leads to O16** (the spec's new button)."
+    },
+    {
+     "walkthrough": "announcements",
+     "no": "17",
+     "text": "**The O15 list-column card is not shown.** A step can carry only one card, and the N20 card takes that step (approved)."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P1",
+    "complexity": "S",
+    "estDays": "1",
+    "notes": "New, open.",
+    "dependencies": "Role not in permission map — confirm access",
+    "openQuestion": "Which OEM roles can view/send announcements? Not in the 73-entry role map.",
+    "nextSteps": ""
+   },
+   "specDetail": "list only, no fields"
+  },
+  {
+   "code": "O16",
+   "name": "Announcement Create / Edit",
+   "walkthroughs": [
+    "announcements"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 4,
+    "requiredUnknown": 3,
+    "noForm": false,
+    "notYetSpeced": false,
+    "roleKeyed": false
+   },
+   "flags": [],
+   "gaps": [
+    {
+     "walkthrough": "announcements",
+     "no": "1",
+     "text": "**O15 and O16 roles are unkeyed.** The spec says \"Role not in permission map — confirm access\". Charan (Super Admin, `oem-super-admin`) is the one actor."
+    },
+    {
+     "walkthrough": "announcements",
+     "no": "2",
+     "text": "**O16 required marks are \"?\"** for Title, Description and Target Dealers. Shown without a required mark."
+    },
+    {
+     "walkthrough": "announcements",
+     "no": "3",
+     "text": "**O16 Target Dealers: the MU picker (muIds) has no label.** The select shows the two spec options, with \"Selected Manufacturing Unit\" chosen, and the MU name from the seed shown below it."
+    },
+    {
+     "walkthrough": "announcements",
+     "no": "12",
+     "text": "**O15 and D05 columns: Title, Target Dealers, Attachment.** These labels come from O16 (Title, Target Dealers, Attachment). O15 also shows an \"open\" button in the Action column."
+    },
+    {
+     "walkthrough": "announcements",
+     "no": "15",
+     "text": "**O15 \"new\" leads to O16** (the spec's new button)."
+    }
+   ],
+   "feedback": [
+    {
+     "by": "Vishnavi",
+     "text": "add high priority , medium, general .\n based  on message",
+     "walkthrough": "announcements"
+    }
+   ],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P1",
+    "complexity": "M",
+    "estDays": "2.5",
+    "notes": "Title, description, attachment (file/table), target (all/selected MU).",
+    "dependencies": "mirrors D05/D06",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "has fields"
+  },
+  {
+   "code": "O20",
+   "name": "Order Detail (6 tabs)",
+   "walkthroughs": [
+    "order-to-production",
+    "po-exceptions"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 4,
+    "requiredUnknown": 0,
+    "noForm": false,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [],
+   "gaps": [
+    {
+     "walkthrough": "order-to-production",
+     "no": "1",
+     "text": "**O20 `reject-order` has no rule.** Warning from step `oem-approve`. The reject button on O20 is an existing control that this walkthrough does not use. It shows a hint if clicked."
+    },
+    {
+     "walkthrough": "order-to-production",
+     "no": "12",
+     "text": "**Sales Head (Anita Rao) is not in docs/people.md.** She is used as an OEM sales role for O20. The user is `oem-sales-head` in `users.json`, with the role badge \"Sales Head\" and the colour in `roles.json`."
+    },
+    {
+     "walkthrough": "order-to-production",
+     "no": "14",
+     "text": "**O20 side.** Anita Rao is an OEM user, so the sidebar shows the OEM menu on O20, as for other OEM screens."
+    },
+    {
+     "walkthrough": "order-to-production",
+     "no": "23",
+     "text": "**No row action on O17.** The spec gives O17 type tabs, filters and print only. Nothing defines how a PO is opened from the list, but step 6 needs it. Until the spec says otherwise, the PO number cell links to O20."
+    },
+    {
+     "walkthrough": "order-to-production",
+     "no": "25",
+     "text": "**O20 tab names are not in the spec.** O20 is also \"6 tabs\" with no names. The current mock uses Summary, Items, Payments, Production, Dispatch and History, which were invented. They need confirming."
+    },
+    {
+     "walkthrough": "order-to-production",
+     "no": "39",
+     "text": "**O20 and O23 show the spec's fields only.** O23 also shows the ledger top-up fields from the spec. Neither screen has tabs, because the spec names none (gaps 24 and 25)."
+    },
+    {
+     "walkthrough": "po-exceptions",
+     "no": "1",
+     "text": "**The OEM actor for O20 and O24.** The Dealer order to dealer delivery walkthrough shows Anita Rao (Sales Head) on O20. Anita Rao is not in `docs/people.md`, and `docs/people.md` has no Sales Head. This tour uses Charan (Super Admin) on O20"
+    },
+    {
+     "walkthrough": "po-exceptions",
+     "no": "9",
+     "text": "**The O20 info note is OEM-only (F2).** It is shown on O24 only, and no dealer screen in this tour shows it."
+    },
+    {
+     "walkthrough": "po-exceptions",
+     "no": "12",
+     "text": "**N26 \"OK to Bill\" gate** has no screen. It extends O20 and O23. The card on step 8 (O23) says so. The spec says it replaces dispatch proceeding right after payment verification."
+    },
+    {
+     "walkthrough": "po-exceptions",
+     "no": "16",
+     "text": "**The O24 Approve button is not used.** It shows a toast. Step 6 uses O20's Approve."
+    },
+    {
+     "walkthrough": "po-exceptions",
+     "no": "17",
+     "text": "**The info note and expected dispatch date fields** are in O20's field table, not O24's. They are shown on O24 with the O20 labels (assumption)."
+    },
+    {
+     "walkthrough": "po-exceptions",
+     "no": "18",
+     "text": "**The spec describes O24 as a dialog or inline part of O20.** It is shown here as its own screen (assumption). O20 is unchanged."
+    },
+    {
+     "walkthrough": "po-exceptions",
+     "no": "20",
+     "text": "**The 14 steps** are in the approved order: O24 note, date, reject; D30 dealer view (card); O24 revert; O20 approve; O23 verify; O23 N26 card; O22 N10 card; O22 dispatch; D32 reject shipment; O22 N27 card; O22 dispatch again; D32 confirm de"
+    },
+    {
+     "walkthrough": "po-exceptions",
+     "no": "21",
+     "text": "**Decision A:** Charan (Super Admin) on O20 and O24 (gap 1)."
+    }
+   ],
+   "feedback": [
+    {
+     "by": "Roopesh Kumar Tayaloor Prasad",
+     "text": "Test -",
+     "walkthrough": "order-to-production"
+    }
+   ],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "XL",
+    "estDays": "6",
+    "notes": "Approve/reject, quotation, edit items, assign, dispatch shipment, verify/reject payment, info note, expected date, revert cancel — the hub that ties Orders/Payments/Inventory/Ledger/Issues together.",
+    "dependencies": "R6/R7, F2; counterpart D30",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "has fields"
+  },
+  {
+   "code": "O22",
+   "name": "Dispatch Shipment",
+   "walkthroughs": [
+    "order-to-production",
+    "po-exceptions"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 13,
+    "requiredUnknown": 10,
+    "noForm": false,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "po-exceptions",
+     "step": "eway-bill",
+     "text": "Not defined in screen_details.md, so the e-way bill (N10) cannot be shown. N10 replaces the reference app's mock (D51 and O56)."
+    },
+    {
+     "where": "tour step",
+     "walkthrough": "po-exceptions",
+     "step": "pdi-check",
+     "text": "Not defined in screen_details.md, so the PDI checklist (N27) cannot be shown. N27 extends N07 and sits before a unit ships, so it comes before the re-dispatch."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "order-to-production",
+     "no": "17",
+     "text": "**No chassis binding before dispatch.** O21 (Assign Item) takes quantities only, and O22 (Dispatch Shipment) has no chassis or serial field. Nothing in the spec ties a chassis number to a vehicle before it ships. N04 and N07 would do this b"
+    },
+    {
+     "walkthrough": "order-to-production",
+     "no": "18",
+     "text": "**Advance versus full payment is unconfirmed.** O22 has \"Payment Status: Paid / Unpaid [C]\" and O19 combines \"paid POs\", but the spec does not say whether the 30% advance (step 10) is enough to dispatch, or whether full payment is needed fi"
+    },
+    {
+     "walkthrough": "order-to-production",
+     "no": "24",
+     "text": "**D30 tab names are not in the spec.** D30 (PO Detail) is listed as \"6 tabs\" with no names. Only the Dispatch tab is referred to (step 17), and its fields are not defined beyond O22's transport fields."
+    },
+    {
+     "walkthrough": "order-to-production",
+     "no": "26",
+     "text": "**Input controls have no spec action.** The spec defines buttons only. Text, select, radio, date and checkbox controls (for example O19 \"Select paid POs\", O22 \"Ship now\" quantity and D29 quantity ±) have no action, so the rule \"each control"
+    },
+    {
+     "walkthrough": "order-to-production",
+     "no": "37",
+     "text": "**Courier transport is not shown.** O22 offers By Truck and By Parcel only. The spec's \"By Courier\" variant and its courier fields are left out, as the variant is not in the walkthrough."
+    },
+    {
+     "walkthrough": "po-exceptions",
+     "no": "11",
+     "text": "**The re-dispatch quantities** are not defined. The O22 table shows Approved, Shipped and Remaining from the seed, and \"Dispatch all remaining\" shows a toast. The re-dispatch does not change the shipped count."
+    },
+    {
+     "walkthrough": "po-exceptions",
+     "no": "13",
+     "text": "**N10 e-way bill** has no screen. It supersedes D51 and O56. The card on step 9 (O22) says so."
+    },
+    {
+     "walkthrough": "po-exceptions",
+     "no": "14",
+     "text": "**N27 PDI checklist** has no screen. It extends N07 and sits before a unit ships. The card on step 12 (O22) says so. It is placed before the re-dispatch, as the spec says (decision C)."
+    },
+    {
+     "walkthrough": "po-exceptions",
+     "no": "20",
+     "text": "**The 14 steps** are in the approved order: O24 note, date, reject; D30 dealer view (card); O24 revert; O20 approve; O23 verify; O23 N26 card; O22 N10 card; O22 dispatch; D32 reject shipment; O22 N27 card; O22 dispatch again; D32 confirm de"
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "L",
+    "estDays": "3",
+    "notes": "Dispatch from MU, per-line ship quantity, transport details.",
+    "dependencies": "counterpart D32 (confirm/reject)",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "has fields"
+  },
+  {
+   "code": "O23",
+   "name": "Payment Verify / Reject",
+   "walkthroughs": [
+    "order-to-production",
+    "po-exceptions"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 4,
+    "requiredUnknown": 0,
+    "noForm": false,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "po-exceptions",
+     "step": "accounts-gate",
+     "text": "Not defined in screen_details.md, so the Accounts OK to Bill gate (N26) cannot be shown. N26 extends O20 and O23, and replaces dispatch proceeding right after payment verification."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "dealer-payments-ledger",
+     "no": "7",
+     "text": "**O45 Verify on the row.** The spec lists \"verify / reject\" and, for ledger top-ups, \"verified, note\". The walkthrough uses the ledger top-up card (verified, note) to verify. The row's \"verify\" button shows a toast, as on the earlier O23 sc"
+    },
+    {
+     "walkthrough": "order-to-production",
+     "no": "2",
+     "text": "**O23 `reject-payment` has no rule.** Warning from step `oem-verify`. The reject button on O23 is an existing control that this walkthrough does not use. It shows a hint if clicked."
+    },
+    {
+     "walkthrough": "order-to-production",
+     "no": "3",
+     "text": "**O23 transaction ID and receipt file: fixed.** The transaction ID and receipt name were in `payment-verify.js`. They now come from `order.transactionId` and `order.receiptFile` in `default.json`. The \"at least 30%\" note now reads the advan"
+    },
+    {
+     "walkthrough": "order-to-production",
+     "no": "8",
+     "text": "**Same receipt across screens.** D31 and O23 show the same transaction ID and receipt. The seed holds one set of values for both."
+    },
+    {
+     "walkthrough": "order-to-production",
+     "no": "9",
+     "text": "**Verifying an advance of at least the advance percentage allows production.** The O23 note says this. The walkthrough does not check the amount entered."
+    },
+    {
+     "walkthrough": "order-to-production",
+     "no": "39",
+     "text": "**O20 and O23 show the spec's fields only.** O23 also shows the ledger top-up fields from the spec. Neither screen has tabs, because the spec names none (gaps 24 and 25)."
+    },
+    {
+     "walkthrough": "po-exceptions",
+     "no": "12",
+     "text": "**N26 \"OK to Bill\" gate** has no screen. It extends O20 and O23. The card on step 8 (O23) says so. The spec says it replaces dispatch proceeding right after payment verification."
+    },
+    {
+     "walkthrough": "po-exceptions",
+     "no": "20",
+     "text": "**The 14 steps** are in the approved order: O24 note, date, reject; D30 dealer view (card); O24 revert; O20 approve; O23 verify; O23 N26 card; O22 N10 card; O22 dispatch; D32 reject shipment; O22 N27 card; O22 dispatch again; D32 confirm de"
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "S",
+    "estDays": "1.5",
+    "notes": "Verify (surplus credited to ledger) or reject with reason.",
+    "dependencies": "R6/R7; counterpart D31",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "has fields"
+  },
+  {
+   "code": "O25",
+   "name": "Products List",
+   "walkthroughs": [
+    "oem-warehouse-products"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 0,
+    "requiredUnknown": 0,
+    "noForm": true,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "oem-warehouse-products",
+     "step": "oem-products-list",
+     "text": "Not defined in screen_details.md, so the list columns and the status filter values for the products list cannot be shown. The columns shown are Vehicle, Variant, Colour and Status."
+    },
+    {
+     "where": "screen control",
+     "text": "The status filter values are not defined in screen_details.md."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "oem-warehouse-products",
+     "no": "1",
+     "text": "**ADM is not in `docs/people.md`.** O25 and O29 are limited to ADM. Charan (`oem-super-admin`) is used, as an assumption."
+    },
+    {
+     "walkthrough": "oem-warehouse-products",
+     "no": "3",
+     "text": "**O25 has no field table.** Its list columns are not defined. Vehicle, Variant, Colour and Status are used, taken from the D29 and O31 labels (assumption)."
+    },
+    {
+     "walkthrough": "oem-warehouse-products",
+     "no": "4",
+     "text": "**O25 status filter values** are not defined. The filter shows the \"Not defined\" card."
+    },
+    {
+     "walkthrough": "oem-warehouse-products",
+     "no": "5",
+     "text": "**O25 add, edit and delete** have no stated effect or target. They show toasts."
+    },
+    {
+     "walkthrough": "oem-warehouse-products",
+     "no": "6",
+     "text": "**O25 product-type tabs** (vehicle, spare, accessory, battery, charger, motor, controller) come from the O25 path. Only the vehicle tab shows rows. The others show toasts."
+    },
+    {
+     "walkthrough": "oem-warehouse-products",
+     "no": "25",
+     "text": "**O25 to O29 has no spec link.** The walkthrough moves to the product detail as a walkthrough move. The spec names no row link."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "M",
+    "estDays": "2",
+    "notes": "Status filter, add/edit/delete, 7 product-type tabs.",
+    "dependencies": "ADM only",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "list only, no fields"
+  },
+  {
+   "code": "O26",
+   "name": "Product Create / Edit: Vehicle",
+   "walkthroughs": [
+    "oem-setup",
+    "procurement-to-material-inward"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 24,
+    "requiredUnknown": 0,
+    "noForm": false,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "procurement-to-material-inward",
+     "step": "bom-card",
+     "text": "Not defined in screen_details.md, so the bill of materials per vehicle model (N08) and its versioning and approval (N09) cannot be shown."
+    },
+    {
+     "where": "screen control",
+     "text": "The dealer types and the share of stock for Purchase limit are not defined in screen_details.md (O26)."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "oem-setup",
+     "no": "16",
+     "text": "**O26 Purchase limit.** The dealer types and share of stock are not defined. Shown as \"Not defined\"."
+    },
+    {
+     "walkthrough": "oem-setup",
+     "no": "17",
+     "text": "**O26 charger and WBC.** The spec says the Charger field is hidden if WBC is ticked. The charger is always shown, as decided."
+    },
+    {
+     "walkthrough": "oem-setup",
+     "no": "18",
+     "text": "**O26 component options.** The spec gives Motor, Controller, Battery and Charger as product lists. This walkthrough creates one component (the motor). The Controller, Battery and Charger selects use sample option lists from the seed."
+    },
+    {
+     "walkthrough": "procurement-to-material-inward",
+     "no": "11",
+     "text": "**N08 content** (parts, quantities, images, landing price per vehicle model) has no screen. The walkthrough shows the N08 card on O26."
+    },
+    {
+     "walkthrough": "procurement-to-material-inward",
+     "no": "18",
+     "text": "**Start at O39 and skip O28.** The vendor and components already exist from OEM setup. O26 appears only as the screen behind the N08 and N09 card."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "XL",
+    "estDays": "5",
+    "notes": "Model, type, motor/controller links, HSN/GST, colours, embedded variant details with 5-tier price matrix, tech specs, per-MU availability, purchase limit.",
+    "dependencies": "F1 (5-tier pricing)",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "has fields"
+  },
+  {
+   "code": "O27",
+   "name": "Product Create / Edit: Spare, Accessory",
+   "walkthroughs": [
+    "oem-setup",
+    "oem-warehouse-products"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 13,
+    "requiredUnknown": 0,
+    "noForm": false,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "oem-warehouse-products",
+     "step": "spare-form",
+     "text": "Not defined in screen_details.md, so the inventory type flag (N14) and the spare part extended fields (N24) cannot be shown on this form."
+    },
+    {
+     "where": "screen control",
+     "text": "Category and Brand (accessory) have a \"text / select\" type but no option list in screen_details.md (O27)."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "oem-setup",
+     "no": "19",
+     "text": "**O27 Category, Brand (accessory).** The spec says \"text / select\" with no option list. Shown as \"Not defined\"."
+    },
+    {
+     "walkthrough": "oem-setup",
+     "no": "20",
+     "text": "**O27 Available from per MU, Purchase limit.** The spec says \"as 7.12\". Section 7.12 is not in `screen_details.md`."
+    },
+    {
+     "walkthrough": "oem-setup",
+     "no": "21",
+     "text": "**O27 Is Panel / Painted Part?.** The spec says it creates one spare per colour of the model. The walkthrough does not create those records. The toast is neutral, as decided."
+    },
+    {
+     "walkthrough": "oem-warehouse-products",
+     "no": "23",
+     "text": "**N14 Inventory Type Flag**: the requirement is a new field and a filter, so internal-use items are excluded from dealer-facing inventory. Its terminology is an open question, since the client flagged the current naming as a placeholder. Th"
+    },
+    {
+     "walkthrough": "oem-warehouse-products",
+     "no": "24",
+     "text": "**N24 Spare Part Extended Fields**: the requirement is UoM, weight, material, multi-model applicability, purchase cost and price history. The source is the CEO deck (slide 23). The card sits on O27."
+    },
+    {
+     "walkthrough": "oem-warehouse-products",
+     "no": "30",
+     "text": "**The N14 and N24 cards sit on the O27 spare product form** (approved). O27 is reused unchanged."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "M",
+    "estDays": "2.5",
+    "notes": "Vehicle link, vendor/supplier, HSN/GST, dealer+customer price, images, specs, per-MU availability.",
+    "dependencies": "",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "has fields"
+  },
+  {
+   "code": "O29",
+   "name": "Product Detail + Dashboard",
+   "walkthroughs": [
+    "oem-warehouse-products"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 0,
+    "requiredUnknown": 0,
+    "noForm": true,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "oem-warehouse-products",
+     "step": "oem-product-detail",
+     "text": "Not defined in screen_details.md, so the week, month and year options and the report content (per-model rollup, stock by manufacturing unit and the price matrix) cannot be shown for …."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "oem-warehouse-products",
+     "no": "1",
+     "text": "**ADM is not in `docs/people.md`.** O25 and O29 are limited to ADM. Charan (`oem-super-admin`) is used, as an assumption."
+    },
+    {
+     "walkthrough": "oem-warehouse-products",
+     "no": "7",
+     "text": "**O29 week, month and year** options are not defined. They show toasts."
+    },
+    {
+     "walkthrough": "oem-warehouse-products",
+     "no": "8",
+     "text": "**O29 report content** (per-model rollup, stock by MU and the price matrix) is not defined. Stock by MU shows the seed values, with the columns Manufacturing Unit, Quantity and Product (assumption, from the O10 and O21 labels)."
+    },
+    {
+     "walkthrough": "oem-warehouse-products",
+     "no": "9",
+     "text": "**O29 \"purchased vs sold\"** has no stated content. Purchased and Sold are shown as sample counts from the seed."
+    },
+    {
+     "walkthrough": "oem-warehouse-products",
+     "no": "25",
+     "text": "**O25 to O29 has no spec link.** The walkthrough moves to the product detail as a walkthrough move. The spec names no row link."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P1",
+    "complexity": "XL",
+    "estDays": "5",
+    "notes": "Per-model rollup: stock, sales, warranty, issues; stock-by-MU; price matrix.",
+    "dependencies": "Rolls up Inventory/Orders/Sales/Warranty/Issues",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "list only, no fields"
+  },
+  {
+   "code": "O30",
+   "name": "Inventory (OEM Stock)",
+   "walkthroughs": [
+    "oem-warehouse-products"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 0,
+    "requiredUnknown": 0,
+    "noForm": true,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "oem-warehouse-products",
+     "step": "oem-stock-tabs",
+     "text": "Not defined in screen_details.md, so the names of the nine tabs and the unit and stock filter values cannot be shown. Only stock history and reserved stock are named."
+    },
+    {
+     "where": "screen control",
+     "text": "The stock filter values are not defined in screen_details.md."
+    },
+    {
+     "where": "screen control",
+     "text": "This tab name and content are not defined in screen_details.md."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "oem-warehouse-products",
+     "no": "2",
+     "text": "**The inventory roles are not in `docs/people.md`.** O30 says \"see INVENTORY_*\", and O31 allows ADM, APM, DH and DM. Ruby (`oem-inventory-mgr`) is used, as an assumption."
+    },
+    {
+     "walkthrough": "oem-warehouse-products",
+     "no": "10",
+     "text": "**O30 names only two of its nine tabs**: stock history and reserved stock. The seven others are shown as \"Not defined\" tabs."
+    },
+    {
+     "walkthrough": "oem-warehouse-products",
+     "no": "11",
+     "text": "**O30 unit and stock filter values** are not defined. The unit filter uses the MU name from the seed (assumption)."
+    },
+    {
+     "walkthrough": "oem-warehouse-products",
+     "no": "12",
+     "text": "**O30 columns** are not defined. Product, Quantity and Status are used (assumption, from the O31 labels)."
+    },
+    {
+     "walkthrough": "oem-warehouse-products",
+     "no": "13",
+     "text": "**O30 search target** is not defined. It shows a toast."
+    },
+    {
+     "walkthrough": "oem-warehouse-products",
+     "no": "20",
+     "text": "**The O35 relation to O30 and O31** is only the add stock link. O35 is MU-level, and the spec does not link it to O30."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "L",
+    "estDays": "3",
+    "notes": "Unit/stock filter, search, stock history, reserved stock tabs.",
+    "dependencies": "R6, F6",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "list only, no fields"
+  },
+  {
+   "code": "O33",
+   "name": "MU Create / Edit",
+   "walkthroughs": [
+    "oem-setup"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 14,
+    "requiredUnknown": 0,
+    "noForm": false,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "screen control",
+     "text": "Capacity and working calendar are a separate screen detail. screen_details.md gives only the endpoints for them."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "manufacturing-unit-operations",
+     "no": "3",
+     "text": "**The O34 layout is not defined.** The walkthrough shows the O33 fields as an assumption, with the O33 labels as the source. Card on step 1."
+    },
+    {
+     "walkthrough": "manufacturing-unit-operations",
+     "no": "17",
+     "text": "**O32 and O33 are not used as screens here.** O33 supplies the field labels for O34. O32 is not part of the flow, which starts at O34."
+    },
+    {
+     "walkthrough": "manufacturing-unit-operations",
+     "no": "19",
+     "text": "**The start is O34.** The flow does not need O32 or O33, since the MU is already in the seed."
+    },
+    {
+     "walkthrough": "oem-setup",
+     "no": "4",
+     "text": "**O33 Production Unit Head.** The spec says OEM_PRODUCTION_HEAD users, but no such users are created in this walkthrough. Only \"No unit head\" is offered. The spec does not say how a head is assigned after the unit is created."
+    },
+    {
+     "walkthrough": "oem-setup",
+     "no": "13",
+     "text": "**O32 columns.** The spec gives no list columns. The empty list shows no columns for rows. If a row is added later, it uses the O33 field labels (see A4)."
+    },
+    {
+     "walkthrough": "oem-setup",
+     "no": "31",
+     "text": "**O33 Capacity and working calendar.** The spec gives endpoints only, not a screen detail. Shown as \"Not defined\"."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "M",
+    "estDays": "2.5",
+    "notes": "Name, address, GST, bank details, phone, city, email, lat/long.",
+    "dependencies": "counterpart D30 quotation letterhead",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "has fields"
+  },
+  {
+   "code": "O34",
+   "name": "MU View",
+   "walkthroughs": [
+    "manufacturing-unit-operations"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 1,
+    "requiredUnknown": 0,
+    "noForm": false,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "manufacturing-unit-operations",
+     "step": "oem-mu-view",
+     "text": "Not defined in screen_details.md, so the MU View layout cannot be shown. The details shown are the O33 fields for …. What the edit, production, load plan and containers buttons lead to is not defined."
+    },
+    {
+     "where": "tour step",
+     "walkthrough": "manufacturing-unit-operations",
+     "step": "oem-n21",
+     "text": "Not defined in screen_details.md, so the Unit Asset Register (N21) cannot be shown. N21 defines and tracks fixed and movable assets per manufacturing unit."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "manufacturing-unit-operations",
+     "no": "1",
+     "text": "**The MU roles are not in `docs/people.md`.** O34 says ADM, DH and DM. Charan (`oem-super-admin`) is used, as an assumption."
+    },
+    {
+     "walkthrough": "manufacturing-unit-operations",
+     "no": "3",
+     "text": "**The O34 layout is not defined.** The walkthrough shows the O33 fields as an assumption, with the O33 labels as the source. Card on step 1."
+    },
+    {
+     "walkthrough": "manufacturing-unit-operations",
+     "no": "4",
+     "text": "**The O34 buttons have no stated targets.** edit has no target. MU stock goes to O35 and dispatch plan goes to O36, both by name. load plan and containers are deferred to O37 and O38 and show toasts. production has no target and shows a toa"
+    },
+    {
+     "walkthrough": "manufacturing-unit-operations",
+     "no": "15",
+     "text": "**N21 Unit Asset Register** has no screen. It is \"define and track fixed/movable assets per manufacturing unit, with admin-extensible asset-type dropdown\". It extends O32 to O34. Card on step 7 (on O34)."
+    },
+    {
+     "walkthrough": "manufacturing-unit-operations",
+     "no": "16",
+     "text": "**O37 Load Plan and O38 Containers are deferred (P2).** Their O34 buttons show toasts. Recorded here as the deferral."
+    },
+    {
+     "walkthrough": "manufacturing-unit-operations",
+     "no": "17",
+     "text": "**O32 and O33 are not used as screens here.** O33 supplies the field labels for O34. O32 is not part of the flow, which starts at O34."
+    },
+    {
+     "walkthrough": "manufacturing-unit-operations",
+     "no": "19",
+     "text": "**The start is O34.** The flow does not need O32 or O33, since the MU is already in the seed."
+    },
+    {
+     "walkthrough": "manufacturing-unit-operations",
+     "no": "21",
+     "text": "**Step 1 card on O34** (decision B). The screen stays visible behind the card."
+    },
+    {
+     "walkthrough": "manufacturing-unit-operations",
+     "no": "23",
+     "text": "**The 7 steps:** O34 card, O34 click MU stock, O35, O34 click dispatch plan, O36, O34 connect a dealer, O34 with the N21 card. A step with a card cannot also carry an action, so the clicks are their own steps."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "L",
+    "estDays": "3",
+    "notes": "Unit details, connect a dealer, right-hand nav to stock/dispatch-plan/load-plan/containers/production.",
+    "dependencies": "R6",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "has fields"
+  },
+  {
+   "code": "O35",
+   "name": "MU Stock",
+   "walkthroughs": [
+    "manufacturing-unit-operations",
+    "oem-warehouse-products",
+    "procurement-to-material-inward"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 4,
+    "requiredUnknown": 2,
+    "noForm": false,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "manufacturing-unit-operations",
+     "step": "oem-mu-stock",
+     "text": "Not defined in screen_details.md, so the fields for Reduce Stock cannot be shown. The spec does not capture them."
+    },
+    {
+     "where": "tour step",
+     "walkthrough": "oem-warehouse-products",
+     "step": "oem-mu-stock",
+     "text": "Not defined in screen_details.md, so the warehouse locations cannot be shown. N12 Warehouse Location Master defines bin, rack and zone locations per manufacturing unit."
+    },
+    {
+     "where": "tour step",
+     "walkthrough": "procurement-to-material-inward",
+     "step": "inward-card",
+     "text": "Not defined in screen_details.md, so material inward receiving and quality check (N02) cannot be shown. The received count, shortfall, pass or fail per item and scrap are not defined."
+    },
+    {
+     "where": "tour step",
+     "walkthrough": "procurement-to-material-inward",
+     "step": "inward-backdated",
+     "text": "Not defined in screen_details.md, so backdated data entry for purchase orders and material inward (N18) cannot be shown."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "manufacturing-unit-operations",
+     "no": "4",
+     "text": "**The O34 buttons have no stated targets.** edit has no target. MU stock goes to O35 and dispatch plan goes to O36, both by name. load plan and containers are deferred to O37 and O38 and show toasts. production has no target and shows a toa"
+    },
+    {
+     "walkthrough": "manufacturing-unit-operations",
+     "no": "7",
+     "text": "**O35 Reduce Stock fields are not captured** in the spec. The card on step 3 says so."
+    },
+    {
+     "walkthrough": "manufacturing-unit-operations",
+     "no": "8",
+     "text": "**O35 spelling.** The spec gives \"Colors Breakdown (+ Add Color)\", and that spelling is kept here."
+    },
+    {
+     "walkthrough": "manufacturing-unit-operations",
+     "no": "9",
+     "text": "**The O35 daily register** shows the seven spec columns (model, opening, dispatched, reserved, received, closing, in transit) with seed values only. Reserved is a toast, as on the procurement walkthrough."
+    },
+    {
+     "walkthrough": "manufacturing-unit-operations",
+     "no": "20",
+     "text": "**O35 is one step, reused unchanged** (decision A). It carries the card on Reduce Stock."
+    },
+    {
+     "walkthrough": "manufacturing-unit-operations",
+     "no": "23",
+     "text": "**The 7 steps:** O34 card, O34 click MU stock, O35, O34 click dispatch plan, O36, O34 connect a dealer, O34 with the N21 card. A step with a card cannot also carry an action, so the clicks are their own steps."
+    },
+    {
+     "walkthrough": "oem-warehouse-products",
+     "no": "19",
+     "text": "**\"Add stock\" leads to O35.** The spec gives the link only. It doesn't say what carries over to O35, so O35 is shown as the reused MU stock screen."
+    },
+    {
+     "walkthrough": "oem-warehouse-products",
+     "no": "20",
+     "text": "**The O35 relation to O30 and O31** is only the add stock link. O35 is MU-level, and the spec does not link it to O30."
+    },
+    {
+     "walkthrough": "oem-warehouse-products",
+     "no": "21",
+     "text": "**N12 Warehouse Location Master** has no screen. Its requirement is \"define bin, rack or zone locations per manufacturing unit\". Its card sits on O35."
+    },
+    {
+     "walkthrough": "oem-warehouse-products",
+     "no": "27",
+     "text": "**The O35 screen is reused unchanged** from the procurement walkthrough. Its seven register columns (model, opening, dispatched, reserved, received, closing, in transit) are the same here."
+    },
+    {
+     "walkthrough": "oem-warehouse-products",
+     "no": "29",
+     "text": "**The N12 card sits on O35** (approved)."
+    },
+    {
+     "walkthrough": "procurement-to-material-inward",
+     "no": "7",
+     "text": "**No spec link connects a vendor PO to material inward or to an in-transit shipment.** O35 in-transit shipments have no vendor PO field."
+    },
+    {
+     "walkthrough": "procurement-to-material-inward",
+     "no": "8",
+     "text": "**O35 in-transit receive and N02 material inward are two receiving paths.** The spec says N02 extends O35 receiving, but does not say how the two relate."
+    },
+    {
+     "walkthrough": "procurement-to-material-inward",
+     "no": "16",
+     "text": "**N18 backdated entry** has no screen. The card sits on O35."
+    },
+    {
+     "walkthrough": "procurement-to-material-inward",
+     "no": "19",
+     "text": "**O35 MU Stock is a new screen** and carries the N02 and N18 cards. Its daily register shows all seven spec columns (model, opening, dispatched, reserved, received, closing, in transit), with seed values only, not calculated. Clicking Reser"
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "XL",
+    "estDays": "5",
+    "notes": "Daily stock register, in-transit shipments (add/receive), components needed, reduce stock. The only way stock enters the system.",
+    "dependencies": "R6, F6",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "has fields"
+  },
+  {
+   "code": "O36",
+   "name": "MU Dispatch Plan (ETA)",
+   "walkthroughs": [
+    "manufacturing-unit-operations"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 0,
+    "requiredUnknown": 0,
+    "noForm": true,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "manufacturing-unit-operations",
+     "step": "oem-dispatch-plan",
+     "text": "Not defined in screen_details.md, so the meaning of the dispatch, build and component-short markers and the date range cannot be shown."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "manufacturing-unit-operations",
+     "no": "2",
+     "text": "**The O36 roles are ADM, DH and DM.** `docs/people.md` does not say what DH and DM mean. Dhivyesh (`oem-logistics-mgr`) is used for O36, as an assumption."
+    },
+    {
+     "walkthrough": "manufacturing-unit-operations",
+     "no": "4",
+     "text": "**The O34 buttons have no stated targets.** edit has no target. MU stock goes to O35 and dispatch plan goes to O36, both by name. load plan and containers are deferred to O37 and O38 and show toasts. production has no target and shows a toa"
+    },
+    {
+     "walkthrough": "manufacturing-unit-operations",
+     "no": "11",
+     "text": "**O36 marker meanings and date range are not defined.** The calendar shows the seed month. Markers are the spec's dispatch, build and component-short, and no dates or markers are calculated. Card on step 5."
+    },
+    {
+     "walkthrough": "manufacturing-unit-operations",
+     "no": "12",
+     "text": "**O36 month navigation** has no labels in the spec. The \"month navigation\" control shows a toast."
+    },
+    {
+     "walkthrough": "manufacturing-unit-operations",
+     "no": "13",
+     "text": "**O36 weekday headings** (Sun to Sat) are the walkthrough's own, since the spec gives no calendar layout."
+    },
+    {
+     "walkthrough": "manufacturing-unit-operations",
+     "no": "23",
+     "text": "**The 7 steps:** O34 card, O34 click MU stock, O35, O34 click dispatch plan, O36, O34 connect a dealer, O34 with the N21 card. A step with a card cannot also carry an action, so the clicks are their own steps."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P1",
+    "complexity": "L",
+    "estDays": "3.5",
+    "notes": "Month calendar of dispatch/build/component-short markers.",
+    "dependencies": "R6",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "list only, no fields"
+  },
+  {
+   "code": "O39",
+   "name": "Vendors",
+   "walkthroughs": [
+    "oem-setup",
+    "procurement-to-material-inward"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 11,
+    "requiredUnknown": 0,
+    "noForm": false,
+    "notYetSpeced": false,
+    "roleKeyed": false
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "procurement-to-material-inward",
+     "step": "suresh-vendors",
+     "text": "Not defined in screen_details.md, so the GST lookup (N01) and the extended vendor profile (N23) for … cannot be shown."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "oem-setup",
+     "no": "11",
+     "text": "**O51 row actions.** \"edit\" and \"delete\" belong to list rows. The walkthrough creates the first region from an empty list, so those controls do not appear. Same for O39 (edit, delete) and O32 (view)."
+    },
+    {
+     "walkthrough": "oem-setup",
+     "no": "24",
+     "text": "**O39 procurement.** It leads to O40, which this walkthrough does not show. Toast only, as decided."
+    },
+    {
+     "walkthrough": "oem-setup",
+     "no": "25",
+     "text": "**Access on O39, O46, O47.** The spec says \"Role not keyed — confirm access\". Charan (Super Admin) is used."
+    },
+    {
+     "walkthrough": "oem-setup",
+     "no": "26",
+     "text": "**O39 list.** No list columns are defined. The list is empty in this walkthrough."
+    },
+    {
+     "walkthrough": "procurement-to-material-inward",
+     "no": "1",
+     "text": "**Vendor roles are unkeyed.** O39, O40 and O41 say \"(unkeyed)\" or \"Role not keyed — confirm access\". Suresh (`oem-procurement-mgr`) is used."
+    },
+    {
+     "walkthrough": "procurement-to-material-inward",
+     "no": "18",
+     "text": "**Start at O39 and skip O28.** The vendor and components already exist from OEM setup. O26 appears only as the screen behind the N08 and N09 card."
+    },
+    {
+     "walkthrough": "procurement-to-material-inward",
+     "no": "22",
+     "text": "**The procurement button on O39 is a walkthrough action.** It was a toast. Changing it to an action shows a hint in the OEM setup walkthrough, which also uses O39 (see walkthrough notes)."
+    }
+   ],
+   "feedback": [
+    {
+     "by": "Vishnavi",
+     "text": "provide option add bank details filed for vendor \n\nprovide options to have multiple phone numbers , designation , email , name \n\nprovide filed has active inactive blocked\n\nvendor code should be added and auto generated\n\nprovide description filed to the vendor \"what is going to supply\"",
+     "walkthrough": "procurement-to-material-inward"
+    }
+   ],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "S",
+    "estDays": "1.5",
+    "notes": "Name, contact, phone, email, GST, address, active flag, notes.",
+    "dependencies": "Role not keyed — confirm access",
+    "openQuestion": "Which OEM roles can manage vendors? Not in the role map.",
+    "nextSteps": ""
+   },
+   "specDetail": "has fields"
+  },
+  {
+   "code": "O40",
+   "name": "Vendor Procurement",
+   "walkthroughs": [
+    "procurement-to-material-inward"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 7,
+    "requiredUnknown": 1,
+    "noForm": false,
+    "notYetSpeced": false,
+    "roleKeyed": false
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "procurement-to-material-inward",
+     "step": "procurement-lines",
+     "text": "Not defined in screen_details.md, so the minimum-stock and sales-forecast reorder (N25) that feeds this screen cannot be shown."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "oem-setup",
+     "no": "24",
+     "text": "**O39 procurement.** It leads to O40, which this walkthrough does not show. Toast only, as decided."
+    },
+    {
+     "walkthrough": "procurement-to-material-inward",
+     "no": "1",
+     "text": "**Vendor roles are unkeyed.** O39, O40 and O41 say \"(unkeyed)\" or \"Role not keyed — confirm access\". Suresh (`oem-procurement-mgr`) is used."
+    },
+    {
+     "walkthrough": "procurement-to-material-inward",
+     "no": "6",
+     "text": "**The O41 \"choose vendor\" view** refers to a section that is not in `screen_details.md`. The walkthrough shows the vendor's procurement view (O40) through the create button, as a toast."
+    },
+    {
+     "walkthrough": "procurement-to-material-inward",
+     "no": "13",
+     "text": "**O40 \"Needed\" comes from a dispatch list demand** that no screen shows. The walkthrough shows the seed values without calculation. Net and Amount are not calculated."
+    },
+    {
+     "walkthrough": "procurement-to-material-inward",
+     "no": "14",
+     "text": "**O40 \"Create PO (n)\"**: the spec does not say what n is. The walkthrough reads it from the seed (lineCount)."
+    },
+    {
+     "walkthrough": "procurement-to-material-inward",
+     "no": "15",
+     "text": "**N25 feeds O40**, but the spec does not say how the reorder reaches the screen."
+    },
+    {
+     "walkthrough": "procurement-to-material-inward",
+     "no": "20",
+     "text": "**O41 columns: Type, Amount, MU and Action.** Type, Amount and MU come from the O40 labels, which is an assumption, because O41 names no columns. The row shows once the PO is created."
+    }
+   ],
+   "feedback": [
+    {
+     "by": "Vishnavi",
+     "text": "check if the reorder qty is included in \"Needed\"",
+     "walkthrough": "procurement-to-material-inward"
+    }
+   ],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "L",
+    "estDays": "3",
+    "notes": "Needed-vs-in-stock from dispatch demand, order qty/rate input, create PO.",
+    "dependencies": "Where vendor POs are actually raised",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "has fields"
+  },
+  {
+   "code": "O41",
+   "name": "Vendor POs",
+   "walkthroughs": [
+    "procurement-to-material-inward"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 1,
+    "requiredUnknown": 0,
+    "noForm": false,
+    "notYetSpeced": false,
+    "roleKeyed": false
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "procurement-to-material-inward",
+     "step": "approval-card",
+     "text": "Not defined in screen_details.md, so the approval by the OEM approval admin, via email, cannot be shown. No approval screen is defined."
+    },
+    {
+     "where": "tour step",
+     "walkthrough": "procurement-to-material-inward",
+     "step": "approve-po",
+     "text": "Not defined in screen_details.md, so the automatic email of the approved PO to … (N17) cannot be shown."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "procurement-to-material-inward",
+     "no": "1",
+     "text": "**Vendor roles are unkeyed.** O39, O40 and O41 say \"(unkeyed)\" or \"Role not keyed — confirm access\". Suresh (`oem-procurement-mgr`) is used."
+    },
+    {
+     "walkthrough": "procurement-to-material-inward",
+     "no": "3",
+     "text": "**The PO approval is by email**, \"by the OEM approval admin, via email\" (O41). The spec's section reference for it is not in `screen_details.md`. No approval screen exists. The approval is a card step."
+    },
+    {
+     "walkthrough": "procurement-to-material-inward",
+     "no": "6",
+     "text": "**The O41 \"choose vendor\" view** refers to a section that is not in `screen_details.md`. The walkthrough shows the vendor's procurement view (O40) through the create button, as a toast."
+    },
+    {
+     "walkthrough": "procurement-to-material-inward",
+     "no": "20",
+     "text": "**O41 columns: Type, Amount, MU and Action.** Type, Amount and MU come from the O40 labels, which is an assumption, because O41 names no columns. The row shows once the PO is created."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P1",
+    "complexity": "M",
+    "estDays": "2",
+    "notes": "Create (choose vendor → O40), filter, view. Approval is by email to the OEM approval admin.",
+    "dependencies": "Role not keyed — confirm access",
+    "openQuestion": "Does the PO document itself get emailed to the vendor, or only the internal approval request?",
+    "nextSteps": ""
+   },
+   "specDetail": "has fields"
+  },
+  {
+   "code": "O42",
+   "name": "Issues",
+   "walkthroughs": [
+    "dealer-stock-and-issues"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 7,
+    "requiredUnknown": 0,
+    "noForm": false,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [],
+   "gaps": [
+    {
+     "walkthrough": "dealer-stock-and-issues",
+     "no": "1",
+     "text": "**D27 has no submit control and no link to O42.** The spec gives only the \"new issue\" button and the field table. The walkthrough shows the \"Not defined\" alert on arrival at D27 (step 1). It does not invent a button or a link."
+    },
+    {
+     "walkthrough": "dealer-stock-and-issues",
+     "no": "4",
+     "text": "**D27 and O42 may or may not be the same list.** The spec lists O42 as a counterpart of D27 but does not say they share data. The walkthrough does not connect them."
+    },
+    {
+     "walkthrough": "dealer-stock-and-issues",
+     "no": "6",
+     "text": "**O42 stage names are not defined.** The spec has \"stage tabs\" and a stage column but no names."
+    },
+    {
+     "walkthrough": "dealer-stock-and-issues",
+     "no": "7",
+     "text": "**O42 roles are IM, SVH and ADM**, but `docs/people.md` has no role codes."
+    },
+    {
+     "walkthrough": "dealer-stock-and-issues",
+     "no": "14",
+     "text": "**D36 list columns are not defined.** The walkthrough uses the O42 list columns (order, dealer, product, serial or chassis, issue, media, stage, reported, action) as an assumption, with an Outcome column added for F8."
+    },
+    {
+     "walkthrough": "dealer-stock-and-issues",
+     "no": "20",
+     "text": "**D32 photos or videos and O42 media** have no preview defined. The walkthrough shows the media file name only."
+    },
+    {
+     "walkthrough": "dealer-stock-and-issues",
+     "no": "25",
+     "text": "**D36 uses the O42 list columns**, with the outcome column added for F8."
+    }
+   ],
+   "feedback": [
+    {
+     "by": "Vishnavi",
+     "text": "change the button name \" settle with credit note\"",
+     "walkthrough": "dealer-stock-and-issues"
+    }
+   ],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "M",
+    "estDays": "2.5",
+    "notes": "Stage tabs; manager approve/decline; OEM approve/decline; settle with money or replace → mark dispatched.",
+    "dependencies": "F8; counterpart D36/D32",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "has fields"
+  },
+  {
+   "code": "O43",
+   "name": "Warranty (Received)",
+   "walkthroughs": [
+    "service-warranty-claim"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 0,
+    "requiredUnknown": 0,
+    "noForm": true,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "screen control",
+     "text": "The status filter options are not defined in screen_details.md."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "service-warranty-claim",
+     "no": "1",
+     "text": "**WARRANTY role is not defined.** O43 and O44 say \"WARRANTY roles\", and `docs/people.md` has no such role. Charan is used as Super Admin (`oem-super-admin`) for both screens, as approved. Add the WARRANTY role to `docs/people.md`."
+    },
+    {
+     "walkthrough": "service-warranty-claim",
+     "no": "39",
+     "text": "**O43 status filter.** The spec gives no options. The select shows the \"Not defined\" alert on click. Columns Claim ID, Dealer, Raised to and Status are assumed. The claim ID is a link (assumption)."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "M",
+    "estDays": "2",
+    "notes": "Status filter; raisedTo=oem queue.",
+    "dependencies": "R6/R7",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "list only, no fields"
+  },
+  {
+   "code": "O44",
+   "name": "Warranty Claim Page",
+   "walkthroughs": [
+    "service-warranty-claim"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 8,
+    "requiredUnknown": 0,
+    "noForm": false,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "screen control",
+     "text": "${esc(NOT_DEFINED(title))}"
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "service-warranty-claim",
+     "no": "1",
+     "text": "**WARRANTY role is not defined.** O43 and O44 say \"WARRANTY roles\", and `docs/people.md` has no such role. Charan is used as Super Admin (`oem-super-admin`) for both screens, as approved. Add the WARRANTY role to `docs/people.md`."
+    },
+    {
+     "walkthrough": "service-warranty-claim",
+     "no": "7",
+     "text": "**Service before ask cost (spec order, decision 5), which conflicts with the spec.** The chosen order puts O44 \"service or replacement\" before \"Ask cost from dealer\". The spec's O44 row says ask cost \"blocks service / replacement until deal"
+    },
+    {
+     "walkthrough": "service-warranty-claim",
+     "no": "14",
+     "text": "**Claim status values are not defined in full.** In order, the floater shows: \"—\" until the claim is raised (not a spec value); \"Raised to OEM\" (from the D38 \"Raised to\" option OEM and the \"claim warranty\" button); \"inTransit\" (spec); \"veri"
+    },
+    {
+     "walkthrough": "service-warranty-claim",
+     "no": "18",
+     "text": "**O44 sections with no field table.** These show the \"Not defined\" alert on their headings: OEM review., Customer & claim., Issue & coverage., Dealer claim photos., Dealer issue report (post-receipt). \"Dealer & summary\", \"Claimed item\" and "
+    },
+    {
+     "walkthrough": "service-warranty-claim",
+     "no": "19",
+     "text": "**O44 dialog labels.** The spec gives API-style names for some fields: \"company\", \"contactNumber\", \"trackingNo\", \"serviceOn\", \"item_id\", \"transport\", \"payment\", \"date\", \"attachments\". These are shown as written, with the case of the spec. \""
+    },
+    {
+     "walkthrough": "service-warranty-claim",
+     "no": "20",
+     "text": "**O44 Service charge controls.** The spec says \"shows dealer transaction ID + amount\" with no labels. \"dealer transaction ID\" and \"amount\" are used as labels (assumption). \"reason\" is the spec's own wording."
+    },
+    {
+     "walkthrough": "service-warranty-claim",
+     "no": "21",
+     "text": "**O44 Ask cost from dealer.** \"notes for dealer\" is the spec's own wording. The spec does not say what sends the cost request. Its button is \"request / edit / waive service charge\" (button label), so that button carries the step."
+    },
+    {
+     "walkthrough": "service-warranty-claim",
+     "no": "22",
+     "text": "**O44 \"Inspection Reports\" text.** The spec's validation text is not used, since it is not a rule the walkthrough runs."
+    },
+    {
+     "walkthrough": "service-warranty-claim",
+     "no": "23",
+     "text": "**O44 \"Service or replacement\" fields.** The \"service\" radio label and \"remark\" are the spec's own wording. \"replacement serial / product #\" is shown as written. Replacement shows the toast described in gap 16."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "XL",
+    "estDays": "5",
+    "notes": "Verify/reject, inspection report, service-or-replacement (stock-checked), service charge request/edit/waive/verify, return logistics.",
+    "dependencies": "counterpart D39",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "has fields"
+  },
+  {
+   "code": "O45",
+   "name": "Payments (All Dealers)",
+   "walkthroughs": [
+    "dealer-payments-ledger"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 4,
+    "requiredUnknown": 0,
+    "noForm": false,
+    "notYetSpeced": false,
+    "roleKeyed": false
+   },
+   "flags": [
+    {
+     "where": "screen control",
+     "text": "The status options are not in screen_details.md."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "dealer-payments-ledger",
+     "no": "3",
+     "text": "**D45 columns and filters.** No columns, no status options and no date-range detail. Columns are the walkthrough's own, from D46 and O45 fields. The status filter shows a \"Not defined\" alert."
+    },
+    {
+     "walkthrough": "dealer-payments-ledger",
+     "no": "7",
+     "text": "**O45 Verify on the row.** The spec lists \"verify / reject\" and, for ledger top-ups, \"verified, note\". The walkthrough uses the ledger top-up card (verified, note) to verify. The row's \"verify\" button shows a toast, as on the earlier O23 sc"
+    },
+    {
+     "walkthrough": "dealer-payments-ledger",
+     "no": "8",
+     "text": "**O45 role.** The spec says \"Role not keyed — confirm access\". Charan (Accounts Manager) is used."
+    },
+    {
+     "walkthrough": "dealer-payments-ledger",
+     "no": "9",
+     "text": "**O45 columns.** The spec lists \"submitted\" and \"received\" separately. The sample has no separate submitted date, so the payment date is repeated. The receipt is a text placeholder."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "M",
+    "estDays": "2",
+    "notes": "Search, status, date range, view receipt, verify/reject.",
+    "dependencies": "R6/R7; Role not keyed — confirm access; counterpart D31/D46",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "has fields"
+  },
+  {
+   "code": "O49",
+   "name": "Settings: Profile",
+   "walkthroughs": [
+    "oem-security-audit",
+    "oem-setup"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 4,
+    "requiredUnknown": 1,
+    "noForm": false,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "oem-security-audit",
+     "step": "oem-profile",
+     "text": "Not defined in screen_details.md, so the compliance fields (CIN, TAN, PAN, MSME, IEC and Directors Details) cannot be shown. N22 extends O49, which is shown unchanged."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "oem-security-audit",
+     "no": "1",
+     "text": "**ADM is not in `docs/people.md`.** O54, O55 and O49 are ADM in the spec. Charan (`oem-super-admin`) is the actor, as an assumption."
+    },
+    {
+     "walkthrough": "oem-security-audit",
+     "no": "11",
+     "text": "**N22 OEM compliance fields** (CIN, TAN, PAN, MSME, IEC, Directors Details) have no screen. The card sits on the O49 step (O49 is reused unchanged)."
+    },
+    {
+     "walkthrough": "oem-security-audit",
+     "no": "13",
+     "text": "**O49 and O53 are shared with the OEM setup walkthrough.** Both are reused unchanged, so their behaviour does not change. The O49 save approval email button has no rule in this tour, which the validator reports as an expected warning."
+    },
+    {
+     "walkthrough": "oem-security-audit",
+     "no": "14",
+     "text": "**The five steps:** O54 click expand diff (action), O54 with the N15 and N16 card, O55 with its card, O49 with the N22 card, O53 with the N28 card (end). A step with a card carries no action, so the expand click has its own step."
+    },
+    {
+     "walkthrough": "oem-setup",
+     "no": "5",
+     "text": "**O49 Approval Admin Email.** The spec marks the requirement as \"?\". It is shown without the required marker."
+    },
+    {
+     "walkthrough": "procurement-to-material-inward",
+     "no": "4",
+     "text": "**O49's Approval Admin Email is shown with no required mark, because the spec marks it '?'.**"
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "S",
+    "estDays": "1.5",
+    "notes": "Approval admin email (editable), GST toggle; org details read-only.",
+    "dependencies": "",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "has fields"
+  },
+  {
+   "code": "O52",
+   "name": "Settings: Users",
+   "walkthroughs": [
+    "oem-setup"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 0,
+    "requiredUnknown": 0,
+    "noForm": true,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "screen control",
+     "text": "${esc(`${label} is not defined in screen_details.md (O52).`)}"
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "dealer-settings-users",
+     "no": "9",
+     "text": "**D48 has no column list.** The columns are User ID, Name, Role, Contact, Email and Status, taken from the O52 labels (assumption). An unlabelled action column holds the edit button. The card on step 2 says so."
+    },
+    {
+     "walkthrough": "oem-setup",
+     "no": "2",
+     "text": "**O53 User Role.** The spec says \"15 OEM roles (section 2.1)\". Section 2.1 is not in `screen_details.md`. The select has no options and shows the \"Not defined\" alert. The new user's role is therefore not set, and O52 shows \"Not defined\" in "
+    },
+    {
+     "walkthrough": "oem-setup",
+     "no": "3",
+     "text": "**O53 role category.** O52 has a \"role category\" column with no definition. Shown as \"Not defined\"."
+    },
+    {
+     "walkthrough": "oem-setup",
+     "no": "14",
+     "text": "**O52 user ID.** The spec does not say how a user ID is generated. The new user is shown as OEM0002 (sample)."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "S",
+    "estDays": "1.5",
+    "notes": "Search, create, edit, unlock account.",
+    "dependencies": "ADM only",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "list only, no fields"
+  },
+  {
+   "code": "O53",
+   "name": "OEM User Add / Edit",
+   "walkthroughs": [
+    "oem-security-audit",
+    "oem-setup"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 11,
+    "requiredUnknown": 0,
+    "noForm": false,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "oem-security-audit",
+     "step": "oem-users-roles",
+     "text": "Not defined in screen_details.md, so the expanded role list cannot be shown. N28 adds Procurement Manager, Inventory Manager, National Sales Head and Area Sales Manager. O53 is shown unchanged."
+    },
+    {
+     "where": "screen control",
+     "text": "The 15 OEM roles are referenced as section 2.1 in screen_details.md (O53), which is not in the file."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "oem-security-audit",
+     "no": "12",
+     "text": "**N28 expanded role taxonomy** (Procurement Manager, Inventory Manager, National Sales Head, Area Sales Manager) has no screen. The card sits on the O53 step (O53 is reused unchanged). O53 already shows its own \"Not defined\" alert on User R"
+    },
+    {
+     "walkthrough": "oem-security-audit",
+     "no": "13",
+     "text": "**O49 and O53 are shared with the OEM setup walkthrough.** Both are reused unchanged, so their behaviour does not change. The O49 save approval email button has no rule in this tour, which the validator reports as an expected warning."
+    },
+    {
+     "walkthrough": "oem-security-audit",
+     "no": "14",
+     "text": "**The five steps:** O54 click expand diff (action), O54 with the N15 and N16 card, O55 with its card, O49 with the N22 card, O53 with the N28 card (end). A step with a card carries no action, so the expand click has its own step."
+    },
+    {
+     "walkthrough": "oem-setup",
+     "no": "2",
+     "text": "**O53 User Role.** The spec says \"15 OEM roles (section 2.1)\". Section 2.1 is not in `screen_details.md`. The select has no options and shows the \"Not defined\" alert. The new user's role is therefore not set, and O52 shows \"Not defined\" in "
+    },
+    {
+     "walkthrough": "oem-setup",
+     "no": "3",
+     "text": "**O53 role category.** O52 has a \"role category\" column with no definition. Shown as \"Not defined\"."
+    },
+    {
+     "walkthrough": "oem-setup",
+     "no": "15",
+     "text": "**O53 edit-only controls.** Status (edit), Assigned Dealers (sales roles, edit), Device limit (edit) and Devices & sessions (edit) belong to edit mode. The walkthrough is an add form, but the controls are shown with toasts so every control "
+    },
+    {
+     "walkthrough": "oem-setup",
+     "no": "32",
+     "text": "**O53 create and submit.** The spec lists both buttons. \"submit\" saves and moves on. \"create\" shows a toast."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P0",
+    "complexity": "L",
+    "estDays": "3",
+    "notes": "15 OEM roles, MU scope, Assigned Dealers (sales roles), device limit, sessions.",
+    "dependencies": "R6/R7 (verbatim 'none ticked = sees no dealers' rule)",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "has fields"
+  },
+  {
+   "code": "O54",
+   "name": "Settings: Audit Logs",
+   "walkthroughs": [
+    "oem-security-audit"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 0,
+    "requiredUnknown": 0,
+    "noForm": true,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "oem-security-audit",
+     "step": "oem-audit-card",
+     "text": "Not defined in screen_details.md, so the audit purge (N15, super admin only) and the customer export (N16) cannot be shown. Both extend O54. The diff content and the columns are not defined either."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "oem-security-audit",
+     "no": "1",
+     "text": "**ADM is not in `docs/people.md`.** O54, O55 and O49 are ADM in the spec. Charan (`oem-super-admin`) is the actor, as an assumption."
+    },
+    {
+     "walkthrough": "oem-security-audit",
+     "no": "2",
+     "text": "**O54 has no column list.** The spec gives no audit log columns. The three columns shown are Feature, Action and Date, taken from the filter labels (assumption)."
+    },
+    {
+     "walkthrough": "oem-security-audit",
+     "no": "3",
+     "text": "**O54 filter values are not defined.** Each filter (Feature, Action, Date) shows only \"All\"."
+    },
+    {
+     "walkthrough": "oem-security-audit",
+     "no": "4",
+     "text": "**O54 diff content is not defined.** The expand diff step records the click. No diff is shown."
+    },
+    {
+     "walkthrough": "oem-security-audit",
+     "no": "5",
+     "text": "**N15 audit purge** is super admin only, with a configurable retention date. It has no screen. The card on step 2 (on O54) says so."
+    },
+    {
+     "walkthrough": "oem-security-audit",
+     "no": "6",
+     "text": "**N16 audit export** is customer-facing. It has no screen. The card on step 2 (on O54) says so."
+    },
+    {
+     "walkthrough": "oem-security-audit",
+     "no": "14",
+     "text": "**The five steps:** O54 click expand diff (action), O54 with the N15 and N16 card, O55 with its card, O49 with the N22 card, O53 with the N28 card (end). A step with a card carries no action, so the expand click has its own step."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P1",
+    "complexity": "L",
+    "estDays": "3",
+    "notes": "Feature/action/date filters, expandable field diff.",
+    "dependencies": "See also new Purge/Export rows below",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "list only, no fields"
+  },
+  {
+   "code": "O55",
+   "name": "Settings: Security",
+   "walkthroughs": [
+    "oem-security-audit"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 2,
+    "requiredUnknown": 0,
+    "noForm": false,
+    "notYetSpeced": false,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "oem-security-audit",
+     "step": "oem-security",
+     "text": "Not defined in screen_details.md, so the My devices columns and what sign out does cannot be shown. The default device limit and the accounts table are shown with sample values."
+    },
+    {
+     "where": "screen control",
+     "text": "My devices columns and device data are not defined in screen_details.md (O55)."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "oem-security-audit",
+     "no": "1",
+     "text": "**ADM is not in `docs/people.md`.** O54, O55 and O49 are ADM in the spec. Charan (`oem-super-admin`) is the actor, as an assumption."
+    },
+    {
+     "walkthrough": "oem-security-audit",
+     "no": "7",
+     "text": "**O55 My devices columns and device data are not defined.** The card on step 3 says so. No device list is shown."
+    },
+    {
+     "walkthrough": "oem-security-audit",
+     "no": "8",
+     "text": "**O55 sign out other devices and sign out everywhere have no stated effect.** Each shows a toast saying that no device is signed out."
+    },
+    {
+     "walkthrough": "oem-security-audit",
+     "no": "9",
+     "text": "**O55 Default device limit (deviceLimit)** is a number field. The effect is not defined. It shows the sample value."
+    },
+    {
+     "walkthrough": "oem-security-audit",
+     "no": "10",
+     "text": "**O55 accounts table** uses the spec columns: account, role, devices, limit, last active. The values are sample data."
+    },
+    {
+     "walkthrough": "oem-security-audit",
+     "no": "14",
+     "text": "**The five steps:** O54 click expand diff (action), O54 with the N15 and N16 card, O55 with its card, O49 with the N22 card, O53 with the N28 card (end). A step with a card carries no action, so the expand click has its own step."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "Verified",
+    "priority": "P1",
+    "complexity": "M",
+    "estDays": "2",
+    "notes": "My devices, logged-in accounts, default device limit, sign-out.",
+    "dependencies": "",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "has fields"
+  },
+  {
+   "code": "N03",
+   "name": "Material Requisition (Against Order / Forecast / Damage)",
+   "walkthroughs": [
+    "order-to-production"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 0,
+    "requiredUnknown": 0,
+    "noForm": false,
+    "notYetSpeced": true,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "order-to-production",
+     "step": "prod-requisition",
+     "text": "Not defined in screen_details.md, so these stages cannot be shown. N03 Material Requisition (raised by …) and N13 FIFO Stock Issuance & Location Report (issued by …)."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "order-to-production",
+     "no": "5",
+     "text": "**N03 (Material Requisition) product name: fixed.** The model field now reads `order.model` (\"Tera Zip 60V 30Ah\") from `default.json`."
+    },
+    {
+     "walkthrough": "order-to-production",
+     "no": "16",
+     "text": "**Six new features have no screen in the spec.** N03 Material Requisition, N04 Production Completion & Handover, N05 QC Inspection Checklist, N06 QC Branding / Packaging Requisition, N07 Despatch Chassis Validation Gate and N13 FIFO Stock I"
+    },
+    {
+     "walkthrough": "order-to-production",
+     "no": "21",
+     "text": "**Step 11 has two people and two screens.** Resolved for the build: the step user is Ganesh and screen N03. Ruby (N13) is named in the \"Not defined\" alert only, so she is not the acting user (gap 30)."
+    },
+    {
+     "walkthrough": "order-to-production",
+     "no": "27",
+     "text": "**Stock deduction at step 11: removed.** The -16 and -32 change to raw stock was taken out of the requisition step, because N03 is \"Not defined\" and the spec has no quantity rule. The seed stock is unchanged and not used by any step now."
+    },
+    {
+     "walkthrough": "qc-and-packaging",
+     "no": "10",
+     "text": "**Ruby (Inventory Manager)** is named in the N06 card text only, read from the user data, as the N03 card does."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "New Requirement",
+    "priority": "P0",
+    "complexity": "L",
+    "estDays": "3.5",
+    "notes": "Production Head role requests materials from Inventory for: (1) an order, (2) a forecast, (3) loss/damage replacement.",
+    "dependencies": "Depends on BOM (N08) to know required parts per model",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "none (one-line requirement only)"
+  },
+  {
+   "code": "N04",
+   "name": "Production Completion & Handover",
+   "walkthroughs": [
+    "order-to-production",
+    "qc-and-packaging"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 0,
+    "requiredUnknown": 0,
+    "noForm": false,
+    "notYetSpeced": true,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "order-to-production",
+     "step": "prod-complete",
+     "text": "Not defined in screen_details.md, so these stages cannot be shown. N04 Production Completion & Handover, N05 QC Inspection Checklist and N06 QC Branding / Packaging Requisition (all by …)."
+    },
+    {
+     "where": "tour step",
+     "walkthrough": "qc-and-packaging",
+     "step": "production-completion",
+     "text": "Not defined in screen_details.md, so this stage cannot be shown. N04 Production Completion & Handover (by …) captures the chassis, motor, controller and battery of … and hands the inventory over."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "order-to-production",
+     "no": "16",
+     "text": "**Six new features have no screen in the spec.** N03 Material Requisition, N04 Production Completion & Handover, N05 QC Inspection Checklist, N06 QC Branding / Packaging Requisition, N07 Despatch Chassis Validation Gate and N13 FIFO Stock I"
+    },
+    {
+     "walkthrough": "order-to-production",
+     "no": "17",
+     "text": "**No chassis binding before dispatch.** O21 (Assign Item) takes quantities only, and O22 (Dispatch Shipment) has no chassis or serial field. Nothing in the spec ties a chassis number to a vehicle before it ships. N04 and N07 would do this b"
+    },
+    {
+     "walkthrough": "order-to-production",
+     "no": "33",
+     "text": "**Step 13 changes the status with no screen action.** The status \"Ready for Dispatch\" is set when the \"Not defined\" alert for N04, N05 and N06 is dismissed. No button is defined for this stage in the spec."
+    },
+    {
+     "walkthrough": "qc-and-packaging",
+     "no": "1",
+     "text": "**N04, N05, N06 and N07 have no screens.** Each step shows its heading over an empty frame, with a Not defined card on top."
+    },
+    {
+     "walkthrough": "qc-and-packaging",
+     "no": "2",
+     "text": "**N04 identifiers.** The spec gives no fields for the chassis, motor, controller and battery capture. The seed chassis number is fake sample data."
+    },
+    {
+     "walkthrough": "qc-and-packaging",
+     "no": "5",
+     "text": "**QC ownership.** `docs/people.md` lists Ganesh as Production Manager, Quality Control Manager and PDI Manager. The spec has no role codes for these. Ganesh (`oem-production-mgr`) is used for N04, N05 and N06, as an assumption. Dhivyesh (`o"
+    },
+    {
+     "walkthrough": "qc-and-packaging",
+     "no": "7",
+     "text": "**\"Ready for Dispatch\" is not defined in the spec.** The order walkthrough sets this status at N04. This tour shows no floater and no status."
+    },
+    {
+     "walkthrough": "qc-and-packaging",
+     "no": "9",
+     "text": "**The order walkthrough shows N04, N05 and N06 as one combined card.** This tour shows them as three separate cards, with the same card wording as the combined card. The duplication is on purpose."
+    },
+    {
+     "walkthrough": "qc-and-packaging",
+     "no": "13",
+     "text": "**Separate tour, four steps.** N04 (Ganesh), N05 (Ganesh), N06 (Ganesh, with Ruby named in the text), N07 (Dhivyesh, end). No step has an action, so each card is its own step."
+    },
+    {
+     "walkthrough": "qc-and-packaging",
+     "no": "15",
+     "text": "**Ganesh for N04, N05 and N06** (assumption, decision 3)."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "New Requirement",
+    "priority": "P0",
+    "complexity": "L",
+    "estDays": "3.5",
+    "notes": "On completing production, capture finished-unit identifiers (chassis, motor, controller, battery) and hand the inventory over. Resolves the 'no screen binds a chassis to a vehicle' gap (spec §8/§11).",
+    "dependencies": "Feeds Inventory (O30/O31) and QC (N05)",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "none (one-line requirement only)"
+  },
+  {
+   "code": "N05",
+   "name": "QC Inspection Checklist",
+   "walkthroughs": [
+    "qc-and-packaging"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 0,
+    "requiredUnknown": 0,
+    "noForm": false,
+    "notYetSpeced": true,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "qc-and-packaging",
+     "step": "qc-checklist",
+     "text": "Not defined in screen_details.md, so this stage cannot be shown. N05 QC Inspection Checklist (by …) is a Yes/No checklist per finished unit of … before release."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "order-to-production",
+     "no": "16",
+     "text": "**Six new features have no screen in the spec.** N03 Material Requisition, N04 Production Completion & Handover, N05 QC Inspection Checklist, N06 QC Branding / Packaging Requisition, N07 Despatch Chassis Validation Gate and N13 FIFO Stock I"
+    },
+    {
+     "walkthrough": "order-to-production",
+     "no": "33",
+     "text": "**Step 13 changes the status with no screen action.** The status \"Ready for Dispatch\" is set when the \"Not defined\" alert for N04, N05 and N06 is dismissed. No button is defined for this stage in the spec."
+    },
+    {
+     "walkthrough": "qc-and-packaging",
+     "no": "1",
+     "text": "**N04, N05, N06 and N07 have no screens.** Each step shows its heading over an empty frame, with a Not defined card on top."
+    },
+    {
+     "walkthrough": "qc-and-packaging",
+     "no": "3",
+     "text": "**N05 checklist.** The spec gives no items. It says only \"Yes/No checklist per finished unit before release\". No items are shown."
+    },
+    {
+     "walkthrough": "qc-and-packaging",
+     "no": "5",
+     "text": "**QC ownership.** `docs/people.md` lists Ganesh as Production Manager, Quality Control Manager and PDI Manager. The spec has no role codes for these. Ganesh (`oem-production-mgr`) is used for N04, N05 and N06, as an assumption. Dhivyesh (`o"
+    },
+    {
+     "walkthrough": "qc-and-packaging",
+     "no": "9",
+     "text": "**The order walkthrough shows N04, N05 and N06 as one combined card.** This tour shows them as three separate cards, with the same card wording as the combined card. The duplication is on purpose."
+    },
+    {
+     "walkthrough": "qc-and-packaging",
+     "no": "13",
+     "text": "**Separate tour, four steps.** N04 (Ganesh), N05 (Ganesh), N06 (Ganesh, with Ruby named in the text), N07 (Dhivyesh, end). No step has an action, so each card is its own step."
+    },
+    {
+     "walkthrough": "qc-and-packaging",
+     "no": "15",
+     "text": "**Ganesh for N04, N05 and N06** (assumption, decision 3)."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "New Requirement",
+    "priority": "P0",
+    "complexity": "M",
+    "estDays": "2.5",
+    "notes": "Yes/No checklist per finished unit before release.",
+    "dependencies": "Gated after Production Completion (N04)",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "none (one-line requirement only)"
+  },
+  {
+   "code": "N06",
+   "name": "QC Branding / Packaging Requisition",
+   "walkthroughs": [
+    "qc-and-packaging"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 0,
+    "requiredUnknown": 0,
+    "noForm": false,
+    "notYetSpeced": true,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "qc-and-packaging",
+     "step": "qc-branding",
+     "text": "Not defined in screen_details.md, so this stage cannot be shown. N06 QC Branding / Packaging Requisition (by …) requests branding and packaging materials from … against …, sourced from the BOM (N08)."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "order-to-production",
+     "no": "16",
+     "text": "**Six new features have no screen in the spec.** N03 Material Requisition, N04 Production Completion & Handover, N05 QC Inspection Checklist, N06 QC Branding / Packaging Requisition, N07 Despatch Chassis Validation Gate and N13 FIFO Stock I"
+    },
+    {
+     "walkthrough": "order-to-production",
+     "no": "33",
+     "text": "**Step 13 changes the status with no screen action.** The status \"Ready for Dispatch\" is set when the \"Not defined\" alert for N04, N05 and N06 is dismissed. No button is defined for this stage in the spec."
+    },
+    {
+     "walkthrough": "qc-and-packaging",
+     "no": "1",
+     "text": "**N04, N05, N06 and N07 have no screens.** Each step shows its heading over an empty frame, with a Not defined card on top."
+    },
+    {
+     "walkthrough": "qc-and-packaging",
+     "no": "4",
+     "text": "**N06 requests.** The spec gives no material list. N06 is \"sourced from the BOM\", and the BOM (N08) has no screen. The card names the BOM only."
+    },
+    {
+     "walkthrough": "qc-and-packaging",
+     "no": "5",
+     "text": "**QC ownership.** `docs/people.md` lists Ganesh as Production Manager, Quality Control Manager and PDI Manager. The spec has no role codes for these. Ganesh (`oem-production-mgr`) is used for N04, N05 and N06, as an assumption. Dhivyesh (`o"
+    },
+    {
+     "walkthrough": "qc-and-packaging",
+     "no": "9",
+     "text": "**The order walkthrough shows N04, N05 and N06 as one combined card.** This tour shows them as three separate cards, with the same card wording as the combined card. The duplication is on purpose."
+    },
+    {
+     "walkthrough": "qc-and-packaging",
+     "no": "10",
+     "text": "**Ruby (Inventory Manager)** is named in the N06 card text only, read from the user data, as the N03 card does."
+    },
+    {
+     "walkthrough": "qc-and-packaging",
+     "no": "13",
+     "text": "**Separate tour, four steps.** N04 (Ganesh), N05 (Ganesh), N06 (Ganesh, with Ruby named in the text), N07 (Dhivyesh, end). No step has an action, so each card is its own step."
+    },
+    {
+     "walkthrough": "qc-and-packaging",
+     "no": "15",
+     "text": "**Ganesh for N04, N05 and N06** (assumption, decision 3)."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "New Requirement",
+    "priority": "P1",
+    "complexity": "M",
+    "estDays": "2",
+    "notes": "QC requests branding/packaging materials from Inventory against a specific finished product; sourced from the BOM.",
+    "dependencies": "Depends on BOM (N08) for branding/packaging line items",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "none (one-line requirement only)"
+  },
+  {
+   "code": "N07",
+   "name": "Despatch — Chassis Validation Gate",
+   "walkthroughs": [
+    "order-to-production",
+    "qc-and-packaging"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 0,
+    "requiredUnknown": 0,
+    "noForm": false,
+    "notYetSpeced": true,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "order-to-production",
+     "step": "dispatch-check",
+     "text": "Not defined in screen_details.md, so this stage cannot be shown. N07 Despatch - Chassis Validation Gate (by …)."
+    },
+    {
+     "where": "tour step",
+     "walkthrough": "qc-and-packaging",
+     "step": "despatch-gate",
+     "text": "Not defined in screen_details.md, so this stage cannot be shown. N07 Despatch - Chassis Validation Gate (by …) validates the chassis and identifiers of … before dispatch."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "order-to-production",
+     "no": "16",
+     "text": "**Six new features have no screen in the spec.** N03 Material Requisition, N04 Production Completion & Handover, N05 QC Inspection Checklist, N06 QC Branding / Packaging Requisition, N07 Despatch Chassis Validation Gate and N13 FIFO Stock I"
+    },
+    {
+     "walkthrough": "order-to-production",
+     "no": "17",
+     "text": "**No chassis binding before dispatch.** O21 (Assign Item) takes quantities only, and O22 (Dispatch Shipment) has no chassis or serial field. Nothing in the spec ties a chassis number to a vehicle before it ships. N04 and N07 would do this b"
+    },
+    {
+     "walkthrough": "po-exceptions",
+     "no": "14",
+     "text": "**N27 PDI checklist** has no screen. It extends N07 and sits before a unit ships. The card on step 12 (O22) says so. It is placed before the re-dispatch, as the spec says (decision C)."
+    },
+    {
+     "walkthrough": "qc-and-packaging",
+     "no": "1",
+     "text": "**N04, N05, N06 and N07 have no screens.** Each step shows its heading over an empty frame, with a Not defined card on top."
+    },
+    {
+     "walkthrough": "qc-and-packaging",
+     "no": "5",
+     "text": "**QC ownership.** `docs/people.md` lists Ganesh as Production Manager, Quality Control Manager and PDI Manager. The spec has no role codes for these. Ganesh (`oem-production-mgr`) is used for N04, N05 and N06, as an assumption. Dhivyesh (`o"
+    },
+    {
+     "walkthrough": "qc-and-packaging",
+     "no": "6",
+     "text": "**O21 placement conflict.** `docs/workflows/flow_first_order.md` puts O21 Assign Item after QC and before N07. The order walkthrough (Dealer order to dealer delivery) puts O21 before production. This tour ends at N07 and does not include O2"
+    },
+    {
+     "walkthrough": "qc-and-packaging",
+     "no": "11",
+     "text": "**Screen name spelling.** The N07 heading reads \"Despatch - Chassis Validation Gate\", with a hyphen. The spec reads \"Despatch — Chassis Validation Gate\", with a dash. The heading comes from the existing N07 module, which the order walkthrou"
+    },
+    {
+     "walkthrough": "qc-and-packaging",
+     "no": "13",
+     "text": "**Separate tour, four steps.** N04 (Ganesh), N05 (Ganesh), N06 (Ganesh, with Ruby named in the text), N07 (Dhivyesh, end). No step has an action, so each card is its own step."
+    },
+    {
+     "walkthrough": "qc-and-packaging",
+     "no": "14",
+     "text": "**End at N07** (decision 1). O21 is not included."
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "New Requirement",
+    "priority": "P0",
+    "complexity": "M",
+    "estDays": "2",
+    "notes": "Despatch starts from the invoice; validates the correct chassis number and all identifiers before assigning for dispatch.",
+    "dependencies": "Extends O20/O21/O22; ties to the item-identifier gap",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "none (one-line requirement only)"
+  },
+  {
+   "code": "N13",
+   "name": "FIFO Stock Issuance & Location Report",
+   "walkthroughs": [
+    "oem-warehouse-products"
+   ],
+   "spec": {
+    "inSpec": true,
+    "fieldRows": 0,
+    "requiredUnknown": 0,
+    "noForm": false,
+    "notYetSpeced": true,
+    "roleKeyed": true
+   },
+   "flags": [
+    {
+     "where": "tour step",
+     "walkthrough": "oem-warehouse-products",
+     "step": "fifo-issuance",
+     "text": "Not defined in screen_details.md, so the FIFO stock issue (oldest first) and the stock-by-location report (N13) cannot be shown."
+    }
+   ],
+   "gaps": [
+    {
+     "walkthrough": "oem-warehouse-products",
+     "no": "22",
+     "text": "**N13 FIFO Stock Issuance & Location Report** has no fields, buttons or rules. Its requirement is \"stock issued from the correct (oldest-first) location; current stock-by-location report\". The N13 mock is registered and is in no sequence. I"
+    },
+    {
+     "walkthrough": "oem-warehouse-products",
+     "no": "28",
+     "text": "**The N13 mock is the host** for the N13 card (approved). It has only its heading, so no fields, buttons or columns outside the spec are shown."
+    },
+    {
+     "walkthrough": "order-to-production",
+     "no": "16",
+     "text": "**Six new features have no screen in the spec.** N03 Material Requisition, N04 Production Completion & Handover, N05 QC Inspection Checklist, N06 QC Branding / Packaging Requisition, N07 Despatch Chassis Validation Gate and N13 FIFO Stock I"
+    },
+    {
+     "walkthrough": "order-to-production",
+     "no": "21",
+     "text": "**Step 11 has two people and two screens.** Resolved for the build: the step user is Ganesh and screen N03. Ruby (N13) is named in the \"Not defined\" alert only, so she is not the acting user (gap 30)."
+    },
+    {
+     "walkthrough": "order-to-production",
+     "no": "30",
+     "text": "**Ruby is named in the step 11 alert, not the acting user.** The step user is Ganesh (`oem-production-mgr`) and the alert lists N13 for Ruby (`oem-inventory-mgr`). The alert names her from users.json. The spec owner should confirm whether R"
+    }
+   ],
+   "feedback": [],
+   "workbook": {
+    "status": "New Requirement",
+    "priority": "P1",
+    "complexity": "XL",
+    "estDays": "5",
+    "notes": "Stock issued from the correct (oldest-first) location; current stock-by-location report. Touches core inventory issuance logic across O30/O31/O35.",
+    "dependencies": "Depends on N12; significant change to existing Inventory issuance",
+    "openQuestion": "",
+    "nextSteps": ""
+   },
+   "specDetail": "none (one-line requirement only)"
+  }
+ ]
+}

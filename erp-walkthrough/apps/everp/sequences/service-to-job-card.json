@@ -1,0 +1,118 @@
+{
+  "id": "service-to-job-card",
+  "title": "Service request to job card",
+  "startStep": "followups",
+  "completionMessage": "The service reminder was followed up, the service price was added to the price list, and the job card was created for the customer's vehicle. Next in the real flow: complete the service and raise the SERVICE invoice, priced from the price list (see Service to warranty claim).",
+  "steps": {
+    "followups": {
+      "user": "dealer-service",
+      "screen": "D13",
+      "proposedAction": "Open the service follow-up for the customer",
+      "infoPanel": [
+        {
+          "key": "counts.followUps",
+          "label": "Follow-ups logged"
+        }
+      ],
+      "actions": {
+        "open-followup": {
+          "performedText": "opened the service follow-up",
+          "nextStep": "followup-detail"
+        }
+      }
+    },
+    "followup-detail": {
+      "user": "dealer-service",
+      "screen": "D14",
+      "proposedAction": "Add a follow-up",
+      "infoPanel": [
+        {
+          "key": "counts.followUps",
+          "label": "Follow-ups logged"
+        }
+      ],
+      "actions": {
+        "add-followup": {
+          "performedText": "added a follow-up",
+          "nextStep": "price-list",
+          "stateChange": {
+            "counts.followUps": 1
+          }
+        }
+      }
+    },
+    "price-list": {
+      "user": "dealer-service",
+      "screen": "D26",
+      "proposedAction": "Add the service to the price list",
+      "infoPanel": [
+        {
+          "key": "counts.prices",
+          "label": "Services in price list"
+        }
+      ],
+      "actions": {
+        "save-price": {
+          "performedText": "saved the service price",
+          "nextStep": "service-list",
+          "stateChange": {
+            "counts.prices": 1
+          }
+        }
+      }
+    },
+    "service-list": {
+      "user": "dealer-service",
+      "screen": "D40",
+      "proposedAction": "Click create to start the job card",
+      "infoPanel": [
+        {
+          "key": "counts.services",
+          "label": "Services"
+        }
+      ],
+      "actions": {
+        "create-service": {
+          "performedText": "clicked create",
+          "nextStep": "service-create"
+        }
+      }
+    },
+    "service-create": {
+      "user": "dealer-service",
+      "screen": "D41",
+      "proposedAction": "Check the vehicle and customer requirement, then create the service",
+      "infoPanel": [
+        {
+          "key": "counts.services",
+          "label": "Services"
+        }
+      ],
+      "actions": {
+        "create-service": {
+          "performedText": "created the service",
+          "nextStep": "job-card",
+          "stateChange": {
+            "counts.services": 1,
+            "service.status": {
+              "set": "Open"
+            }
+          }
+        }
+      }
+    },
+    "job-card": {
+      "user": "dealer-service",
+      "screen": "D42",
+      "proposedAction": "Check the job card",
+      "infoPanel": [
+        {
+          "key": "service.status",
+          "label": "Service status"
+        }
+      ],
+      "performedText": "checked the job card",
+      "nextStep": null
+    }
+  }
+}

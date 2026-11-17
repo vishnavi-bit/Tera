@@ -1,0 +1,57 @@
+{
+  "id": "dealer-settings-users",
+  "title": "Dealer settings and users",
+  "startStep": "dealer-profile",
+  "completionMessage": "{dealer.firm} profile is shown. The staff user list now shows {staff.count} staff users, including {staff.newUser.firstName} as {staff.newUser.role}. The N11 role assignment for a dealer and its sub-dealers is not defined yet.",
+  "steps": {
+    "dealer-profile": {
+      "user": "dealer-owner",
+      "screen": "D47",
+      "proposedAction": "Read the dealer profile and the settings",
+      "infoPanel": [{ "key": "staff.count", "label": "Staff users" }],
+      "notDefined": "Not defined in screen_details.md, so the effects of the shop location save, document upload and profile photo cannot be shown. The other dealer_profile fields are read-only, and their labels are not listed in the spec.",
+      "performedText": "read the profile of {dealer.firm}",
+      "nextStep": "dealer-users-list"
+    },
+    "dealer-users-list": {
+      "user": "dealer-owner",
+      "screen": "D48",
+      "proposedAction": "Read the staff user list",
+      "infoPanel": [{ "key": "staff.count", "label": "Staff users" }],
+      "notDefined": "Not defined in screen_details.md, so the list columns cannot be taken from the spec. The columns shown are the O52 labels (assumption).",
+      "performedText": "read the staff users list",
+      "nextStep": "dealer-click-create"
+    },
+    "dealer-click-create": {
+      "user": "dealer-owner",
+      "screen": "D48",
+      "proposedAction": "Click create",
+      "infoPanel": [{ "key": "staff.count", "label": "Staff users" }],
+      "actions": {
+        "create-user": { "performedText": "clicked create", "nextStep": "dealer-add-user" }
+      }
+    },
+    "dealer-add-user": {
+      "user": "dealer-owner",
+      "screen": "D49",
+      "proposedAction": "Add {staff.newUser.firstName} as a {staff.newUser.role} and submit",
+      "infoPanel": [{ "key": "staff.count", "label": "Staff users" }],
+      "actions": {
+        "submit-user": {
+          "performedText": "added {staff.newUser.firstName} as a {staff.newUser.role} and submitted",
+          "nextStep": "dealer-users-after",
+          "stateChange": { "staff.created": { "set": true }, "staff.count": 1 }
+        }
+      }
+    },
+    "dealer-users-after": {
+      "user": "dealer-owner",
+      "screen": "D48",
+      "proposedAction": "Read the staff user list after the submit",
+      "infoPanel": [{ "key": "staff.count", "label": "Staff users" }],
+      "notDefined": "Not defined in screen_details.md, so the N11 role assignment for a dealer and its connected sub-dealers cannot be shown. It depends on the sub-dealer clarification document, which is not in the repo yet.",
+      "performedText": "read the staff users list, now with {staff.newUser.firstName}",
+      "nextStep": null
+    }
+  }
+}

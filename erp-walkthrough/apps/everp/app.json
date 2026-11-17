@@ -1,0 +1,127 @@
+{
+  "name": "everp",
+  "title": "EV ERP",
+  "spec": "docs/screen_details.md",
+  "feedbackApp": "EVERP",
+  "walkthroughs": [
+    {
+      "id": "order-to-production",
+      "title": "Dealer order to dealer delivery",
+      "description": "Dealer places a vehicle order, OEM approves it and verifies the advance, Production builds it, Logistics dispatches it, and the dealer confirms delivery.",
+      "sequenceFile": "sequences/order-to-production.json",
+      "seedData": "mock-app/mock-data/seeds/default.json"
+    },
+    {
+      "id": "oem-setup",
+      "title": "OEM setup",
+      "description": "Super Admin sets up the OEM before any dealer is onboarded: company profile, operating states, manufacturing unit, users, regions and zones, vendor, products and a ledger.",
+      "sequenceFile": "sequences/oem-setup.json",
+      "seedData": "mock-app/mock-data/seeds/oem-setup.json"
+    },
+    {
+      "id": "dealer-setup",
+      "title": "Setting up dealer",
+      "description": "Super Admin creates a new dealer, then the dealer owner signs in for the first time.",
+      "sequenceFile": "sequences/dealer-setup.json",
+      "seedData": "mock-app/mock-data/seeds/dealer-setup.json"
+    },
+    {
+      "id": "service-warranty-claim",
+      "title": "Service to warranty claim",
+      "description": "Dealer service team completes a service job, finds a faulty part and raises a warranty claim to the OEM. The OEM verifies, inspects, asks for a service charge and returns the item, and the dealer confirms receipt.",
+      "sequenceFile": "sequences/service-warranty-claim.json",
+      "seedData": "mock-app/mock-data/seeds/service-warranty.json"
+    },
+    {
+      "id": "enquiry-to-invoice",
+      "title": "Enquiry to invoice",
+      "description": "Dealer sales logs an enquiry, follows up, quotes, converts the enquiry to a customer, takes a booking advance, checks stock and invoices the vehicle.",
+      "sequenceFile": "sequences/enquiry-to-invoice.json",
+      "seedData": "mock-app/mock-data/seeds/enquiry-to-invoice.json"
+    },
+    {
+      "id": "service-to-job-card",
+      "title": "Service request to job card",
+      "description": "Dealer service follows up a service reminder, adds a service to the price list and creates the job card.",
+      "sequenceFile": "sequences/service-to-job-card.json",
+      "seedData": "mock-app/mock-data/seeds/service-to-job-card.json"
+    },
+    {
+      "id": "dealer-payments-ledger",
+      "title": "Dealer payments and ledger",
+      "description": "The dealer tops up a ledger, accounts verifies it, and the dealer pays an order advance from the ledger. The OEM checks the payment history.",
+      "sequenceFile": "sequences/dealer-payments-ledger.json",
+      "seedData": "mock-app/mock-data/seeds/dealer-payments-ledger.json"
+    },
+    {
+      "id": "dealer-stock-and-issues",
+      "title": "Dealer stock and issues",
+      "description": "The dealer reports an issue on a delivered shipment, the OEM reviews it in two stages and settles it with money, and the dealer sees the stage and outcome.",
+      "sequenceFile": "sequences/dealer-stock-and-issues.json",
+      "seedData": "mock-app/mock-data/seeds/dealer-stock-and-issues.json"
+    },
+    {
+      "id": "oem-monitor-dealer",
+      "title": "OEM monitors a dealer (mirror views)",
+      "description": "The OEM opens one dealer and views its customers, enquiries, vehicles sold, vehicle stock, warranty claims, purchase orders and pending stock in read-only mirror screens.",
+      "sequenceFile": "sequences/oem-monitor-dealer.json",
+      "seedData": "mock-app/mock-data/seeds/oem-monitor-dealer.json"
+    },
+    {
+      "id": "announcements",
+      "title": "Announcements",
+      "description": "The OEM creates an announcement for dealers, and the dealer sees it on the Announcements List and opens it.",
+      "sequenceFile": "sequences/announcements.json",
+      "seedData": "mock-app/mock-data/seeds/announcements.json"
+    },
+    {
+      "id": "procurement-to-material-inward",
+      "title": "Procurement to material inward",
+      "description": "The company raises a purchase order to a vendor for raw material, the PO is approved, the material arrives, and the Inventory Manager receives it and checks its quality.",
+      "sequenceFile": "sequences/procurement-to-material-inward.json",
+      "seedData": "mock-app/mock-data/seeds/procurement-to-material-inward.json"
+    },
+    {
+      "id": "oem-warehouse-products",
+      "title": "OEM warehouse and products",
+      "description": "The OEM reviews its products, checks the stock of each product in the warehouse, and sees where the spec has no detail yet for warehouse locations, FIFO stock issue, the inventory type flag and extended spare part fields.",
+      "sequenceFile": "sequences/oem-warehouse-products.json",
+      "seedData": "mock-app/mock-data/seeds/oem-warehouse-products.json"
+    },
+    {
+      "id": "manufacturing-unit-operations",
+      "title": "Manufacturing unit operations",
+      "description": "The OEM opens a manufacturing unit, sees its stock and in-transit material, checks its dispatch plan, connects a dealer to the unit, and sees where the spec has no detail yet for the unit asset register.",
+      "sequenceFile": "sequences/manufacturing-unit-operations.json",
+      "seedData": "mock-app/mock-data/seeds/manufacturing-unit-operations.json"
+    },
+    {
+      "id": "dealer-settings-users",
+      "title": "Dealer settings and users",
+      "description": "The dealer owner reviews the dealer profile (read only except password, shop location, photo and business documents), lists the dealer staff, and adds a sales user.",
+      "sequenceFile": "sequences/dealer-settings-users.json",
+      "seedData": "mock-app/mock-data/seeds/dealer-settings-users.json"
+    },
+    {
+      "id": "oem-security-audit",
+      "title": "OEM security and audit",
+      "description": "The OEM admin reviews the audit logs, the security settings and the OEM profile and user roles, and sees where the spec has no detail yet for audit purge, audit export, OEM compliance fields and the expanded role list.",
+      "sequenceFile": "sequences/oem-security-audit.json",
+      "seedData": "mock-app/mock-data/seeds/oem-security-audit.json"
+    },
+    {
+      "id": "po-exceptions",
+      "title": "PO exceptions and dispatch documents",
+      "description": "The OEM adds a note and an expected date to a PO, rejects it and reverts the rejection, then approves it. The payment is verified and the shipment is dispatched. The dealer rejects the shipment and it is dispatched again, then delivered. The billing gate, e-way bill and PDI checklist are shown where the spec has no detail yet.",
+      "sequenceFile": "sequences/po-exceptions.json",
+      "seedData": "mock-app/mock-data/seeds/po-exceptions.json"
+    },
+    {
+      "id": "qc-and-packaging",
+      "title": "QC and packaging",
+      "description": "After production, the finished vehicle is captured, checked by QC, packaged, and checked at the despatch gate before dispatch. The spec has no screens for these stages, so each one shows where the spec has no detail yet.",
+      "sequenceFile": "sequences/qc-and-packaging.json",
+      "seedData": "mock-app/mock-data/seeds/qc-and-packaging.json"
+    }
+  ]
+}

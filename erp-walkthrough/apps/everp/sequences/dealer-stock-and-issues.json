@@ -1,0 +1,130 @@
+{
+  "id": "dealer-stock-and-issues",
+  "title": "Dealer stock and issues",
+  "startStep": "dealer-new-issue",
+  "completionMessage": "The issue on {order.id} is resolved: {issue.outcome}, {issue.compensation|inr}. {users.dealer-owner.name} sees the stage and outcome on the Issues List.",
+  "steps": {
+    "dealer-new-issue": {
+      "user": "dealer-owner",
+      "screen": "D27",
+      "proposedAction": "Click new issue",
+      "infoPanel": [
+        { "key": "issue.status", "label": "Issue status" }
+      ],
+      "performedText": "opened the new issue dialog",
+      "notDefined": "Not defined in screen_details.md: the dialog has no submit control and no link to the OEM issues list (O42). The fields are shown, but an issue cannot be saved from this dialog.",
+      "nextStep": "dealer-delivered-po"
+    },
+    "dealer-delivered-po": {
+      "user": "dealer-owner",
+      "screen": "D30",
+      "proposedAction": "Open the delivered PO and click report issue",
+      "infoPanel": [
+        { "key": "issue.status", "label": "Issue status" },
+        { "key": "order.status", "label": "Order status" }
+      ],
+      "actions": {
+        "report-issue": { "performedText": "opened report issue on {order.id}", "nextStep": "dealer-report-issue" }
+      }
+    },
+    "dealer-report-issue": {
+      "user": "dealer-owner",
+      "screen": "D32",
+      "proposedAction": "Pick the line, describe the issue and click Submit & confirm",
+      "infoPanel": [
+        { "key": "issue.status", "label": "Issue status" }
+      ],
+      "actions": {
+        "submit-issue": {
+          "performedText": "reported an issue on {issue.product} ({issue.serial})",
+          "stateChange": {
+            "issue.status": { "set": "Issue raised" },
+            "issue.stage": { "set": "Manager review" }
+          },
+          "nextStep": "dealer-sees-stage"
+        }
+      }
+    },
+    "dealer-sees-stage": {
+      "user": "dealer-owner",
+      "screen": "D36",
+      "proposedAction": "See the issue at stage Manager review",
+      "infoPanel": [
+        { "key": "issue.status", "label": "Issue status" },
+        { "key": "issue.stage", "label": "Stage" }
+      ],
+      "performedText": "saw the issue at stage {issue.stage}",
+      "stateChange": { "issue.status": { "set": "Manager review" } },
+      "nextStep": "manager-review"
+    },
+    "manager-review": {
+      "user": "oem-inventory-mgr",
+      "screen": "O42",
+      "proposedAction": "Approve the issue at manager review",
+      "infoPanel": [
+        { "key": "issue.status", "label": "Issue status" },
+        { "key": "issue.stage", "label": "Stage" }
+      ],
+      "actions": {
+        "manager-approve": {
+          "performedText": "approved the issue at manager review",
+          "stateChange": {
+            "issue.status": { "set": "OEM review" },
+            "issue.stage": { "set": "OEM review" }
+          },
+          "nextStep": "oem-review"
+        }
+      }
+    },
+    "oem-review": {
+      "user": "oem-super-admin",
+      "screen": "O42",
+      "proposedAction": "Approve the issue at OEM review",
+      "infoPanel": [
+        { "key": "issue.status", "label": "Issue status" },
+        { "key": "issue.stage", "label": "Stage" }
+      ],
+      "actions": {
+        "oem-approve": {
+          "performedText": "approved the issue at OEM review",
+          "stateChange": {
+            "issue.status": { "set": "Settlement" },
+            "issue.stage": { "set": "Settlement" }
+          },
+          "nextStep": "settlement"
+        }
+      }
+    },
+    "settlement": {
+      "user": "oem-super-admin",
+      "screen": "O42",
+      "proposedAction": "Settle with money: enter the compensation amount and transaction ID",
+      "infoPanel": [
+        { "key": "issue.status", "label": "Issue status" },
+        { "key": "issue.compensation", "label": "Compensation amount", "format": "inr" }
+      ],
+      "actions": {
+        "settle-money": {
+          "performedText": "settled the issue with money: {issue.compensation|inr}",
+          "stateChange": {
+            "issue.status": { "set": "Resolved" },
+            "issue.stage": { "set": "Resolved" },
+            "issue.outcome": { "set": "Settled with money" }
+          },
+          "nextStep": "dealer-sees-outcome"
+        }
+      }
+    },
+    "dealer-sees-outcome": {
+      "user": "dealer-owner",
+      "screen": "D36",
+      "proposedAction": "See the stage and outcome on the Issues List",
+      "infoPanel": [
+        { "key": "issue.status", "label": "Issue status" },
+        { "key": "issue.outcome", "label": "Outcome" }
+      ],
+      "performedText": "saw the outcome: {issue.outcome}",
+      "nextStep": null
+    }
+  }
+}

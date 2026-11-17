@@ -1,0 +1,107 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "apps": {
+      "$app": {
+        ".validate": "$app.matches(/^[A-Za-z0-9_-]{1,30}$/)",
+        "walkthroughFeedback": {
+          ".read": "auth != null",
+          ".indexOn": [
+            "createdAt"
+          ],
+          "$id": {
+            ".write": "auth != null && (auth.token.email === 'roopesht@gmail.com' && auth.token.email_verified === true || (!data.exists() && newData.child('uid').val() === auth.uid) || (data.exists() && data.child('uid').val() === auth.uid && data.child('status').val() === 'open' && (!newData.exists() || (newData.child('uid').val() === data.child('uid').val() && newData.child('createdAt').val() === data.child('createdAt').val() && newData.child('status').val() === 'open'))))",
+            ".validate": "newData.hasChildren(['type', 'title', 'text', 'uid', 'status', 'createdAt']) && (data.exists() || (newData.child('status').val() === 'open' && newData.child('createdAt').val() === now && newData.child('uid').val() === auth.uid))",
+            "type": {
+              ".validate": "newData.val() === 'screen' || newData.val() === 'transition' || newData.val() === 'generic'"
+            },
+            "title": {
+              ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 100"
+            },
+            "text": {
+              ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 2000"
+            },
+            "walkthrough": {
+              ".validate": "newData.isString() && newData.val().length <= 100"
+            },
+            "stepId": {
+              ".validate": "newData.isString() && newData.val().length <= 100"
+            },
+            "stepNo": {
+              ".validate": "newData.isNumber()"
+            },
+            "stepTotal": {
+              ".validate": "newData.isNumber()"
+            },
+            "screen": {
+              "code": {
+                ".validate": "newData.isString() && newData.val().length <= 20"
+              },
+              "name": {
+                ".validate": "newData.isString() && newData.val().length <= 200"
+              },
+              "$o": {
+                ".validate": false
+              }
+            },
+            "from": {
+              "code": {
+                ".validate": "newData.isString() && newData.val().length <= 20"
+              },
+              "name": {
+                ".validate": "newData.isString() && newData.val().length <= 200"
+              },
+              "$o": {
+                ".validate": false
+              }
+            },
+            "to": {
+              "code": {
+                ".validate": "newData.isString() && newData.val().length <= 20"
+              },
+              "name": {
+                ".validate": "newData.isString() && newData.val().length <= 200"
+              },
+              "$o": {
+                ".validate": false
+              }
+            },
+            "uid": {
+              ".validate": "newData.isString()"
+            },
+            "authorName": {
+              ".validate": "newData.isString() && newData.val().length <= 200"
+            },
+            "authorEmail": {
+              ".validate": "newData.isString() && newData.val().length <= 200"
+            },
+            "viewport": {
+              "w": {
+                ".validate": "newData.isNumber()"
+              },
+              "h": {
+                ".validate": "newData.isNumber()"
+              },
+              "$o": {
+                ".validate": false
+              }
+            },
+            "status": {
+              ".validate": "newData.val() === 'open' || newData.val() === 'accepted' || newData.val() === 'rejected' || newData.val() === 'done'"
+            },
+            "createdAt": {
+              ".validate": "newData.isNumber()"
+            },
+            "updatedAt": {
+              ".validate": "newData.isNumber()"
+            },
+            "$other": {
+              ".validate": false
+            }
+          }
+        }
+      }
+    }
+  }
+}

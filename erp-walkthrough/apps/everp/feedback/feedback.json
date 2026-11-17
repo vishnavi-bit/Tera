@@ -1,0 +1,354 @@
+{
+  "feedback": [
+    {
+      "id": "D30-3",
+      "screen": "D30 PO Detail (6 tabs)",
+      "question": "Is there a way to open a PO from the list, and what does \"view\" do on D30?",
+      "suggestion": "The PO number on the list (D28) opens D30. No separate view button.",
+      "comment": "From PO List (D28",
+      "updatedAt": "2026-10-29T07:28:33.782Z"
+    },
+    {
+      "id": "O23-1",
+      "screen": "O23 Payment Verify / Reject",
+      "question": "What is the \"OK to Bill\" gate (N26), and who gives it?",
+      "suggestion": "After the advance is verified, Accounts ticks \"OK to Bill\" on the order. Dispatch stays blocked until then.",
+      "comment": "Accountant will give this. He will open the PO, and clear the gate.",
+      "updatedAt": "2026-10-29T07:45:27.453Z"
+    },
+    {
+      "id": "O23-2",
+      "screen": "O23 Payment Verify / Reject",
+      "question": "Is the 30% advance counted from submitted or verified payment?",
+      "suggestion": "Verified payment only.",
+      "comment": "Verified payments are flagged as \"Verified\"",
+      "updatedAt": "2026-10-29T07:41:17.108Z"
+    },
+    {
+      "id": "O23-3",
+      "screen": "O23 Payment Verify / Reject",
+      "question": "For a ledger top-up, what amount is credited when verified?",
+      "suggestion": "The amount the dealer entered, unless the verifier edits it with a reason.",
+      "comment": "The dealer initiates the payment (mode:  Ledge Topup/Balance)\nThe amount is deducted when payment is approved at the OEM",
+      "updatedAt": "2026-10-29T07:43:53.799Z"
+    },
+    {
+      "id": "N03-1",
+      "screen": "N03 Material Requisition (Against Order / Forecast / Damage)",
+      "question": "What fields does the requisition have, and where do the quantities come from?",
+      "suggestion": "Reason, order or forecast reference, product, parts and quantities filled from the BOM, needed-on date. Damage requests require a note and a photo.",
+      "comment": "This is only for damage (not forecast)",
+      "updatedAt": "2026-10-29T08:16:02.160Z"
+    },
+    {
+      "id": "N03-2",
+      "screen": "N03 Material Requisition (Against Order / Forecast / Damage)",
+      "question": "Who approves a requisition, and what happens to stock?",
+      "suggestion": "The Inventory Manager approves. Stock is reserved on approval and deducted when issued.",
+      "comment": "Inventory will approve this (only damages)",
+      "updatedAt": "2026-10-29T08:16:10.911Z"
+    },
+    {
+      "id": "N03-3",
+      "screen": "N03 Material Requisition (Against Order / Forecast / Damage)",
+      "question": "Which roles raise and handle it?",
+      "suggestion": "Production Head raises. Inventory Manager handles.",
+      "comment": "Production manager will raise\nInventory approves",
+      "updatedAt": "2026-10-29T08:16:24.181Z"
+    },
+    {
+      "id": "O22-1",
+      "screen": "O22 Dispatch Shipment",
+      "question": "Which transport fields are required?",
+      "suggestion": "Required: unit, ship-now quantity, transport type, company, vehicle number and expected delivery date. The rest optional.",
+      "comment": "new field: insurance (transit insurance) details. This is not charged to dealer.",
+      "updatedAt": "2026-10-29T10:17:39.002Z"
+    },
+    {
+      "id": "O22-2",
+      "screen": "O22 Dispatch Shipment",
+      "question": "When are chassis numbers tied to the shipment?",
+      "suggestion": "Bind chassis numbers at the despatch gate (N07) and show them read-only here. Block dispatch if any unit has none.",
+      "comment": "After QC, before invoice",
+      "updatedAt": "2026-10-29T10:18:11.193Z"
+    },
+    {
+      "id": "O22-3",
+      "screen": "O22 Dispatch Shipment",
+      "question": "How should the e-way bill (N10) and the pre-delivery inspection (N27) fit in?",
+      "suggestion": "N27 PDI must pass before \"Dispatch\" is enabled. N10 is generated on dispatch for shipments above the GST limit.",
+      "comment": "N27 PDI must pass before \"Dispatch\" is enabled.\nGST is not applicable only for few items. this is handled for certain items only, where the whole thing is handled in cash (It has a different ownership, but that is added here), TERA EV can prepare only GST invoices",
+      "updatedAt": "2026-10-29T10:21:43.317Z"
+    },
+    {
+      "id": "O22-4",
+      "screen": "O22 Dispatch Shipment",
+      "question": "Is the 30% advance enough to dispatch, or must the full payment be in?",
+      "suggestion": "Advance (30%) allows production. Dispatch needs Accounts to mark \"OK to Bill\" (N26).",
+      "comment": "OK to bill supersedes. \nIf there is no ok to bill, then 100% payment must be satisfied.",
+      "updatedAt": "2026-10-29T10:24:12.598Z"
+    }
+  ],
+  "screens": [
+    {
+      "code": "D30",
+      "name": "PO Detail (6 tabs)",
+      "finalized": true
+    },
+    {
+      "code": "O20",
+      "name": "Order Detail (6 tabs)",
+      "finalized": false
+    },
+    {
+      "code": "O23",
+      "name": "Payment Verify / Reject",
+      "finalized": true
+    },
+    {
+      "code": "N03",
+      "name": "Material Requisition (Against Order / Forecast / Damage)",
+      "finalized": true
+    },
+    {
+      "code": "N04",
+      "name": "Production Completion & Handover",
+      "finalized": false
+    },
+    {
+      "code": "N07",
+      "name": "Despatch — Chassis Validation Gate",
+      "finalized": false
+    },
+    {
+      "code": "O22",
+      "name": "Dispatch Shipment",
+      "finalized": true
+    },
+    {
+      "code": "O01",
+      "name": "Login / Forgot Password",
+      "finalized": false
+    },
+    {
+      "code": "O03",
+      "name": "Dashboard",
+      "finalized": false
+    },
+    {
+      "code": "O49",
+      "name": "Settings: Profile",
+      "finalized": false
+    },
+    {
+      "code": "O33",
+      "name": "MU Create / Edit",
+      "finalized": false
+    },
+    {
+      "code": "O52",
+      "name": "Settings: Users",
+      "finalized": false
+    },
+    {
+      "code": "O53",
+      "name": "OEM User Add / Edit",
+      "finalized": false
+    },
+    {
+      "code": "O39",
+      "name": "Vendors",
+      "finalized": false
+    },
+    {
+      "code": "O26",
+      "name": "Product Create / Edit: Vehicle",
+      "finalized": false
+    },
+    {
+      "code": "O27",
+      "name": "Product Create / Edit: Spare, Accessory",
+      "finalized": false
+    },
+    {
+      "code": "O05",
+      "name": "Add / Edit Dealer",
+      "finalized": false
+    },
+    {
+      "code": "O06",
+      "name": "Dealer Detail (9 tabs)",
+      "finalized": false
+    },
+    {
+      "code": "D04",
+      "name": "Dashboard",
+      "finalized": false
+    },
+    {
+      "code": "D37",
+      "name": "Warranty List",
+      "finalized": false
+    },
+    {
+      "code": "D38",
+      "name": "Warranty Claim Create",
+      "finalized": false
+    },
+    {
+      "code": "D39",
+      "name": "Warranty Claim Detail",
+      "finalized": false
+    },
+    {
+      "code": "O43",
+      "name": "Warranty (Received)",
+      "finalized": false
+    },
+    {
+      "code": "O44",
+      "name": "Warranty Claim Page",
+      "finalized": false
+    },
+    {
+      "code": "D16",
+      "name": "Customer Add / Edit",
+      "finalized": false
+    },
+    {
+      "code": "D13",
+      "name": "Service Follow-ups List",
+      "finalized": false
+    },
+    {
+      "code": "D40",
+      "name": "Service List",
+      "finalized": false
+    },
+    {
+      "code": "D45",
+      "name": "Payments (2 tabs)",
+      "finalized": false
+    },
+    {
+      "code": "O45",
+      "name": "Payments (All Dealers)",
+      "finalized": false
+    },
+    {
+      "code": "D27",
+      "name": "Inventory Issues",
+      "finalized": false
+    },
+    {
+      "code": "O42",
+      "name": "Issues",
+      "finalized": false
+    },
+    {
+      "code": "O07",
+      "name": "Dealer → Customers + Customer Mirror",
+      "finalized": false
+    },
+    {
+      "code": "O10",
+      "name": "Dealer → Vehicle Stock + Add Stock",
+      "finalized": false
+    },
+    {
+      "code": "O11",
+      "name": "Dealer → Warranty Claims",
+      "finalized": false
+    },
+    {
+      "code": "O12",
+      "name": "Dealer → Purchase Orders",
+      "finalized": false
+    },
+    {
+      "code": "O15",
+      "name": "Announcements List",
+      "finalized": false
+    },
+    {
+      "code": "O16",
+      "name": "Announcement Create / Edit",
+      "finalized": false
+    },
+    {
+      "code": "O40",
+      "name": "Vendor Procurement",
+      "finalized": false
+    },
+    {
+      "code": "O41",
+      "name": "Vendor POs",
+      "finalized": false
+    },
+    {
+      "code": "O35",
+      "name": "MU Stock",
+      "finalized": false
+    },
+    {
+      "code": "O25",
+      "name": "Products List",
+      "finalized": false
+    },
+    {
+      "code": "O29",
+      "name": "Product Detail + Dashboard",
+      "finalized": false
+    },
+    {
+      "code": "O30",
+      "name": "Inventory (OEM Stock)",
+      "finalized": false
+    },
+    {
+      "code": "N13",
+      "name": "FIFO Stock Issuance & Location Report",
+      "finalized": false
+    },
+    {
+      "code": "O34",
+      "name": "MU View",
+      "finalized": false
+    },
+    {
+      "code": "O36",
+      "name": "MU Dispatch Plan (ETA)",
+      "finalized": false
+    },
+    {
+      "code": "D47",
+      "name": "Settings: Profile",
+      "finalized": false
+    },
+    {
+      "code": "D48",
+      "name": "Settings: Users",
+      "finalized": false
+    },
+    {
+      "code": "O54",
+      "name": "Settings: Audit Logs",
+      "finalized": false
+    },
+    {
+      "code": "O55",
+      "name": "Settings: Security",
+      "finalized": false
+    },
+    {
+      "code": "N05",
+      "name": "QC Inspection Checklist",
+      "finalized": false
+    },
+    {
+      "code": "N06",
+      "name": "QC Branding / Packaging Requisition",
+      "finalized": false
+    }
+  ]
+}

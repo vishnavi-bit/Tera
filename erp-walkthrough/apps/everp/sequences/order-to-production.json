@@ -1,0 +1,258 @@
+{
+  "id": "order-to-production",
+  "startStep": "dealer-new-purchase",
+  "completionMessage": "{order.id} is delivered and confirmed by {users.dealer-owner.name}.",
+  "steps": {
+    "dealer-new-purchase": {
+      "user": "dealer-owner",
+      "screen": "D28",
+      "proposedAction": "Start a new purchase order",
+      "infoPanel": [
+        { "key": "order.status", "label": "Order status" },
+        { "key": "stock.vehicle.finished", "label": "{order.model} in stock at {mu.name}" }
+      ],
+      "actions": {
+        "new-purchase": { "performedText": "started a new purchase order", "nextStep": "dealer-choose-mu" }
+      }
+    },
+    "dealer-choose-mu": {
+      "user": "dealer-owner",
+      "screen": "D29",
+      "proposedAction": "Choose the manufacturing unit as the seller",
+      "infoPanel": [
+        { "key": "order.status", "label": "Order status" },
+        { "key": "mu.name", "label": "Manufacturing unit" }
+      ],
+      "performedText": "chose {mu.name} as the seller",
+      "nextStep": "dealer-cart"
+    },
+    "dealer-cart": {
+      "user": "dealer-owner",
+      "screen": "D29",
+      "proposedAction": "Pick the variant and colour, then add to cart",
+      "infoPanel": [
+        { "key": "order.status", "label": "Order status" },
+        { "key": "stock.vehicle.finished", "label": "{order.model} in stock at {mu.name}" }
+      ],
+      "actions": {
+        "add-to-cart": { "performedText": "added {order.qty} units to the cart", "nextStep": "dealer-place-order" }
+      }
+    },
+    "dealer-place-order": {
+      "user": "dealer-owner",
+      "screen": "D29",
+      "proposedAction": "Review and place the order",
+      "infoPanel": [
+        { "key": "order.status", "label": "Order status" },
+        { "key": "order.qty", "label": "Total quantity" }
+      ],
+      "actions": {
+        "place-order": {
+          "performedText": "placed purchase order {order.id} for {order.qty} units",
+          "stateChange": { "order.status": { "set": "Pending" } },
+          "nextStep": "dealer-po-detail"
+        }
+      }
+    },
+    "dealer-po-detail": {
+      "user": "dealer-owner",
+      "screen": "D30",
+      "proposedAction": "View the new purchase order",
+      "infoPanel": [
+        { "key": "order.status", "label": "Order status" }
+      ],
+      "performedText": "opened purchase order {order.id}",
+      "nextStep": "oem-open-order"
+    },
+    "oem-open-order": {
+      "user": "oem-sales-head",
+      "screen": "O17",
+      "proposedAction": "Open the purchase order from the list",
+      "infoPanel": [
+        { "key": "order.status", "label": "Order status" }
+      ],
+      "actions": {
+        "open-po": { "performedText": "opened {order.id} from the orders list", "nextStep": "oem-approve" }
+      }
+    },
+    "oem-approve": {
+      "user": "oem-sales-head",
+      "screen": "O20",
+      "proposedAction": "Review the order and approve it",
+      "infoPanel": [
+        { "key": "order.status", "label": "Order status" },
+        { "key": "stock.vehicle.finished", "label": "{order.model} in stock at {mu.name}" }
+      ],
+      "actions": {
+        "approve-order": {
+          "performedText": "approved the order",
+          "stateChange": { "order.status": { "set": "Approved" } },
+          "nextStep": "oem-assign"
+        }
+      }
+    },
+    "oem-assign": {
+      "user": "oem-sales-head",
+      "screen": "O21",
+      "proposedAction": "Choose the manufacturing unit and assign the order",
+      "infoPanel": [
+        { "key": "order.status", "label": "Order status" },
+        { "key": "mu.name", "label": "Manufacturing unit" }
+      ],
+      "actions": {
+        "assign": { "performedText": "assigned {order.id} to {mu.name}", "nextStep": "dealer-pay" }
+      }
+    },
+    "dealer-pay": {
+      "user": "dealer-owner",
+      "screen": "D31",
+      "proposedAction": "Pay the {order.advancePercent}% advance and submit the payment",
+      "infoPanel": [
+        { "key": "order.status", "label": "Order status" },
+        { "key": "order.paid", "label": "Paid so far", "format": "inr" }
+      ],
+      "actions": {
+        "submit-payment": {
+          "performedText": "submitted the {order.advancePercent}% advance payment of {order.advanceDue|inr}",
+          "stateChange": { "order.paymentStatus": { "set": "Submitted - awaiting verification" } },
+          "nextStep": "oem-verify"
+        }
+      }
+    },
+    "oem-verify": {
+      "user": "oem-accounts",
+      "screen": "O23",
+      "proposedAction": "Check the receipt and verify the advance payment",
+      "infoPanel": [
+        { "key": "order.status", "label": "Order status" },
+        { "key": "order.paid", "label": "Paid so far", "format": "inr" }
+      ],
+      "actions": {
+        "verify-payment": {
+          "performedText": "verified the advance payment",
+          "stateChange": {
+            "order.paid": { "copy": "order.advanceDue" },
+            "order.paymentStatus": { "set": "Verified" },
+            "order.status": { "set": "Payment verified" }
+          },
+          "nextStep": "prod-requisition"
+        }
+      }
+    },
+    "prod-requisition": {
+      "user": "oem-production-mgr",
+      "screen": "N03",
+      "proposedAction": "Raise the material requisition for this order",
+      "infoPanel": [
+        { "key": "order.status", "label": "Order status" }
+      ],
+      "performedText": "reached the material requisition stage for {order.qty} units",
+      "notDefined": "Not defined in screen_details.md, so these stages cannot be shown. N03 Material Requisition (raised by {users.oem-production-mgr.name}) and N13 FIFO Stock Issuance & Location Report (issued by {users.oem-inventory-mgr.name}).",
+      "nextStep": "prod-start"
+    },
+    "prod-start": {
+      "user": "oem-production-mgr",
+      "screen": "O18",
+      "proposedAction": "Build the vehicles and update the produced count",
+      "infoPanel": [
+        { "key": "order.status", "label": "Order status" },
+        { "key": "order.production.status", "label": "Production status" }
+      ],
+      "actions": {
+        "update-produced-count": {
+          "performedText": "started building {order.qty} units and updated the produced count",
+          "stateChange": {
+            "order.status": { "set": "In production" },
+            "order.production.status": { "set": "In production" }
+          },
+          "nextStep": "prod-complete"
+        }
+      }
+    },
+    "prod-complete": {
+      "user": "oem-production-mgr",
+      "screen": "N04",
+      "proposedAction": "Complete production and hand over the finished units",
+      "infoPanel": [
+        { "key": "order.status", "label": "Order status" }
+      ],
+      "performedText": "reached the production completion stage for {order.id}",
+      "stateChange": { "order.status": { "set": "Ready for Dispatch" } },
+      "notDefined": "Not defined in screen_details.md, so these stages cannot be shown. N04 Production Completion & Handover, N05 QC Inspection Checklist and N06 QC Branding / Packaging Requisition (all by {users.oem-production-mgr.name}).",
+      "nextStep": "dispatch-check"
+    },
+    "dispatch-check": {
+      "user": "oem-logistics-mgr",
+      "screen": "N07",
+      "proposedAction": "Validate the chassis, invoice and manufacturing unit before dispatch",
+      "infoPanel": [
+        { "key": "order.status", "label": "Order status" }
+      ],
+      "performedText": "reached the chassis validation stage for {order.id}",
+      "notDefined": "Not defined in screen_details.md, so this stage cannot be shown. N07 Despatch - Chassis Validation Gate (by {users.oem-logistics-mgr.name}).",
+      "nextStep": "dispatch-plan"
+    },
+    "dispatch-plan": {
+      "user": "oem-logistics-mgr",
+      "screen": "O19",
+      "proposedAction": "Combine the paid orders into a dispatch batch",
+      "infoPanel": [
+        { "key": "order.status", "label": "Order status" },
+        { "key": "order.paymentStatus", "label": "Payment status" }
+      ],
+      "actions": {
+        "combine-batch": { "performedText": "combined paid order {order.id} into a dispatch batch", "nextStep": "dispatch-shipment" }
+      }
+    },
+    "dispatch-shipment": {
+      "user": "oem-logistics-mgr",
+      "screen": "O22",
+      "proposedAction": "Fill in the transport details and dispatch the shipment",
+      "infoPanel": [
+        { "key": "order.status", "label": "Order status" },
+        { "key": "order.shipment.status", "label": "Shipment status" }
+      ],
+      "actions": {
+        "dispatch": {
+          "performedText": "dispatched {order.qty} units on {order.id}",
+          "stateChange": {
+            "order.status": { "set": "Dispatched" },
+            "order.shipment.status": { "set": "Dispatched" }
+          },
+          "nextStep": "dealer-shipment"
+        }
+      }
+    },
+    "dealer-shipment": {
+      "user": "dealer-owner",
+      "screen": "D30",
+      "proposedAction": "See the shipment details on the Dispatch tab",
+      "infoPanel": [
+        { "key": "order.status", "label": "Order status" },
+        { "key": "order.shipment.status", "label": "Shipment status" }
+      ],
+      "actions": {
+        "accept-delivery": { "performedText": "opened the shipment of {order.id} to confirm delivery", "nextStep": "dealer-confirm" }
+      }
+    },
+    "dealer-confirm": {
+      "user": "dealer-owner",
+      "screen": "D32",
+      "proposedAction": "Confirm delivery of the shipment",
+      "infoPanel": [
+        { "key": "order.status", "label": "Order status" },
+        { "key": "order.shipment.status", "label": "Shipment status" }
+      ],
+      "actions": {
+        "confirm-delivery": {
+          "performedText": "confirmed delivery of {order.id}",
+          "stateChange": {
+            "order.status": { "set": "Delivered" },
+            "order.shipment.status": { "set": "Delivered" }
+          },
+          "nextStep": null
+        }
+      }
+    }
+  }
+}

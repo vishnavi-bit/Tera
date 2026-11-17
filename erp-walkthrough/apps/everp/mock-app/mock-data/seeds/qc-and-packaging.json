@@ -1,0 +1,14 @@
+{
+  "_sample": "SAMPLE DATA for the QC and packaging walkthrough. The PO, model, quantity and MU are copied from the Dealer order to dealer delivery sample. The chassis number TZ-SAMPLE-0401 is fake.",
+  "order": {
+    "id": "PO-2026-0412",
+    "model": "Tera Zip 60V 30Ah",
+    "qty": 16,
+    "chassis": "TZ-SAMPLE-0401"
+  },
+  "mu": {
+    "name": "MU Hosur",
+    "account": "Tera EV Pvt Ltd - A/C 5021 8890 1142",
+    "ifsc": "HDFC0001234"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "apps": [
+    {
+      "name": "everp",
+      "title": "EV ERP",
+      "platform": "desktop"
+    },
+    {
+      "name": "guard",
+      "title": "Residents - Guard",
+      "platform": "mobile"
+    },
+    {
+      "name": "resident",
+      "title": "Residents - Resident App",
+      "platform": "mobile"
+    },
+    {
+      "name": "startup-star",
+      "title": "Startup Star",
+      "platform": "desktop"
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "id": "unlisted-visitor-approved",
+  "title": "Unlisted visitor: guard asks, resident approves",
+  "startStep": "g-home",
+  "completionMessage": "{visit.visitor} was registered at the gate, approved on the resident's phone, and checked in at {gate.name}.",
+  "steps": {
+    "g-home": {
+      "user": "guard-gate1",
+      "screen": "S02",
+      "proposedAction": "Tap Register Visitor",
+      "infoPanel": [
+        {
+          "key": "counts.pending",
+          "label": "Pending approvals"
+        }
+      ],
+      "actions": {
+        "goto-S04": {
+          "performedText": "opened visitor registration",
+          "nextStep": "g-register"
+        }
+      }
+    },
+    "g-register": {
+      "user": "guard-gate1",
+      "screen": "S04",
+      "proposedAction": "Check the visitor details and save",
+      "actions": {
+        "save-visitor": {
+          "performedText": "saved the visitor details",
+          "nextStep": "g-draft"
+        }
+      }
+    },
+    "g-draft": {
+      "user": "guard-gate1",
+      "screen": "S05",
+      "proposedAction": "Send the approval request",
+      "actions": {
+        "send-request": {
+          "performedText": "sent the approval request to {visit.resident}",
+          "nextStep": "r-home",
+          "stateChange": {
+            "counts.pending": 1,
+            "visit.status": {
+              "set": "pending"
+            }
+          }
+        }
+      }
+    },
+    "r-home": {
+      "user": "resident-a1204",
+      "screen": "R01",
+      "proposedAction": "Now on the resident's phone: tap Approvals",
+      "infoPanel": [
+        {
+          "key": "counts.pending",
+          "label": "Pending approvals"
+        }
+      ],
+      "actions": {
+        "goto-R02": {
+          "performedText": "opened Approvals",
+          "nextStep": "r-approvals"
+        }
+      }
+    },
+    "r-approvals": {
+      "user": "resident-a1204",
+      "screen": "R02",
+      "proposedAction": "Review the visitor's request",
+      "actions": {
+        "open-request": {
+          "performedText": "opened the request from {visit.visitor}",
+          "nextStep": "r-request"
+        }
+      }
+    },
+    "r-request": {
+      "user": "resident-a1204",
+      "screen": "R03",
+      "proposedAction": "Approve the visitor",
+      "actions": {
+        "approve-visitor": {
+          "performedText": "approved {visit.visitor}",
+          "nextStep": "g-decision",
+          "stateChange": {
+            "visit.status": {
+              "set": "approved"
+            },
+            "counts.pending": -1
+          }
+        }
+      }
+    },
+    "g-decision": {
+      "user": "guard-gate1",
+      "screen": "S05",
+      "proposedAction": "Back at the gate: the resident's answer has arrived. Continue",
+      "actions": {
+        "continue-entry": {
+          "performedText": "saw the resident's answer",
+          "nextStep": "g-entry"
+        }
+      }
+    },
+    "g-entry": {
+      "user": "guard-gate1",
+      "screen": "S06",
+      "proposedAction": "Confirm entry",
+      "actions": {
+        "confirm-entry": {
+          "performedText": "confirmed entry for {visit.visitor}",
+          "nextStep": "g-inside",
+          "stateChange": {
+            "counts.inside": 1,
+            "entry.done": {
+              "set": true
+            }
+          }
+        }
+      }
+    },
+    "g-inside": {
+      "user": "guard-gate1",
+      "screen": "S07",
+      "proposedAction": "Check the visitor is in the inside list",
+      "infoPanel": [
+        {
+          "key": "counts.inside",
+          "label": "Visitors inside"
+        }
+      ],
+      "performedText": "checked the visitors-inside list",
+      "nextStep": null
+    }
+  }
+}

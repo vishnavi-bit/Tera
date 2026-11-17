@@ -1,0 +1,94 @@
+{
+  "id": "pre-approved-visitor",
+  "title": "Pre-approved visitor at the gate",
+  "startStep": "home",
+  "completionMessage": "{pass.visitor} is recorded as checked in at {gate.name} and shows in the visitors-inside list. Next in the real flow: the visitor leaves and the guard checks them out.",
+  "steps": {
+    "home": {
+      "user": "guard-gate1",
+      "screen": "S02",
+      "proposedAction": "Tap Scan Pass",
+      "infoPanel": [
+        {
+          "key": "counts.inside",
+          "label": "Visitors inside"
+        }
+      ],
+      "actions": {
+        "goto-S03": {
+          "performedText": "opened the pass scanner",
+          "nextStep": "scan"
+        }
+      }
+    },
+    "scan": {
+      "user": "guard-gate1",
+      "screen": "S03",
+      "proposedAction": "Scan the visitor's pass",
+      "actions": {
+        "scan-demo-pass": {
+          "performedText": "scanned the visitor's pass",
+          "stateChange": {
+            "scan.result": {
+              "set": "valid"
+            }
+          },
+          "nextStep": "scan-valid"
+        }
+      }
+    },
+    "scan-valid": {
+      "user": "guard-gate1",
+      "screen": "S03",
+      "proposedAction": "Check the pass details, then continue",
+      "infoPanel": [
+        {
+          "key": "pass.validity",
+          "label": "Pass"
+        }
+      ],
+      "actions": {
+        "continue-entry": {
+          "performedText": "checked the pass details",
+          "nextStep": "entry-decision"
+        }
+      }
+    },
+    "entry-decision": {
+      "user": "guard-gate1",
+      "screen": "S06",
+      "proposedAction": "Confirm entry",
+      "infoPanel": [
+        {
+          "key": "counts.inside",
+          "label": "Visitors inside"
+        }
+      ],
+      "actions": {
+        "confirm-entry": {
+          "performedText": "confirmed entry for {pass.visitor}",
+          "stateChange": {
+            "counts.inside": 1,
+            "entry.done": {
+              "set": true
+            }
+          },
+          "nextStep": "inside"
+        }
+      }
+    },
+    "inside": {
+      "user": "guard-gate1",
+      "screen": "S07",
+      "proposedAction": "Check the visitor is in the inside list",
+      "infoPanel": [
+        {
+          "key": "counts.inside",
+          "label": "Visitors inside"
+        }
+      ],
+      "performedText": "checked the visitors-inside list",
+      "nextStep": null
+    }
+  }
+}

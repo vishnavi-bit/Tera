@@ -1,0 +1,43 @@
+{
+  "id": "pre-approve-guest",
+  "title": "Pre-approve a guest",
+  "startStep": "home",
+  "completionMessage": "A pass for {guest.name} ({guest.passId}) is created. The guest shows it at the gate and the guard scans it.",
+  "steps": {
+    "home": {
+      "user": "resident-a1204",
+      "screen": "R01",
+      "proposedAction": "Tap Pre-approve a guest",
+      "actions": {
+        "goto-R04": {
+          "performedText": "opened Pre-approve a guest",
+          "nextStep": "form"
+        }
+      }
+    },
+    "form": {
+      "user": "resident-a1204",
+      "screen": "R04",
+      "proposedAction": "Check the guest details and create the pass",
+      "actions": {
+        "create-pass": {
+          "performedText": "created a pass for {guest.name}",
+          "nextStep": "pass",
+          "stateChange": {
+            "guest.created": {
+              "set": true
+            }
+          }
+        }
+      }
+    },
+    "pass": {
+      "user": "resident-a1204",
+      "screen": "R05",
+      "proposedAction": "Look at the pass you can share",
+      "performedText": "looked at the guest pass",
+      "nextStep": null,
+      "notDefined": "How the pass reaches the guest (WhatsApp or another channel) is named in the requirements but not designed."
+    }
+  }
+}

@@ -1,0 +1,204 @@
+{
+  "id": "service-warranty-claim",
+  "title": "Service to warranty claim",
+  "startStep": "s01-customers",
+  "completionMessage": "The faulty part is replaced under warranty and the claim is confirmed received. The SERVICE invoice was created before the claim, in spec order. Next in the real flow: the dealer pays the invoice and it is viewed.",
+  "steps": {
+    "s01-customers": {
+      "user": "dealer-service",
+      "screen": "D15",
+      "proposedAction": "Open the customer from the customers list",
+      "infoPanel": [{ "key": "claim.status", "label": "Claim status" }],
+      "actions": {
+        "open-customer": { "performedText": "opened the customer from the customers list", "nextStep": "s02-vehicle" }
+      }
+    },
+    "s02-vehicle": {
+      "user": "dealer-service",
+      "screen": "D18",
+      "proposedAction": "Open the vehicle tab to see the product",
+      "infoPanel": [{ "key": "claim.status", "label": "Claim status" }],
+      "actions": {
+        "open-vehicle-tab": { "performedText": "opened the vehicle tab", "nextStep": "s03-service-create" }
+      }
+    },
+    "s03-service-create": {
+      "user": "dealer-service",
+      "screen": "D41",
+      "proposedAction": "Create the service job card",
+      "infoPanel": [{ "key": "claim.status", "label": "Claim status" }],
+      "actions": {
+        "create-service": { "performedText": "created the service job card", "nextStep": "s04-job-card" }
+      }
+    },
+    "s04-job-card": {
+      "user": "dealer-service",
+      "screen": "D42",
+      "proposedAction": "Complete the service",
+      "infoPanel": [{ "key": "claim.status", "label": "Claim status" }],
+      "actions": {
+        "complete-service": { "performedText": "completed the service", "nextStep": "s05-invoice" }
+      }
+    },
+    "s05-invoice": {
+      "user": "dealer-service",
+      "screen": "D20",
+      "proposedAction": "Create the SERVICE invoice",
+      "infoPanel": [{ "key": "claim.status", "label": "Claim status" }],
+      "actions": {
+        "create-invoice": { "performedText": "created the SERVICE invoice", "nextStep": "s06-warranty-list" }
+      }
+    },
+    "s06-warranty-list": {
+      "user": "dealer-service",
+      "screen": "D37",
+      "proposedAction": "Click + to raise a warranty claim",
+      "infoPanel": [{ "key": "claim.status", "label": "Claim status" }],
+      "notDefined": "The select customer by chassis dialog (opened by + on the Warranty List) is not defined in screen_details.md. The walkthrough goes straight to Warranty Claim Create for the customer.",
+      "performedText": "clicked + on the Warranty List",
+      "nextStep": "s07-claim-create"
+    },
+    "s07-claim-create": {
+      "user": "dealer-service",
+      "screen": "D38",
+      "proposedAction": "Check the vehicle, spare and serial, then claim warranty",
+      "infoPanel": [{ "key": "claim.status", "label": "Claim status" }],
+      "actions": {
+        "claim-warranty": {
+          "performedText": "raised the warranty claim to OEM",
+          "stateChange": {
+            "claim.raised": { "set": true },
+            "claim.status": { "set": "Raised to OEM" }
+          },
+          "nextStep": "s08-transit"
+        }
+      }
+    },
+    "s08-transit": {
+      "user": "dealer-service",
+      "screen": "D39",
+      "proposedAction": "Mark the claim in transit",
+      "infoPanel": [{ "key": "claim.status", "label": "Claim status" }],
+      "actions": {
+        "mark-in-transit": {
+          "performedText": "marked the claim in transit",
+          "stateChange": { "claim.status": { "set": "inTransit" } },
+          "nextStep": "s09-oem-received"
+        }
+      }
+    },
+    "s09-oem-received": {
+      "user": "oem-super-admin",
+      "screen": "O43",
+      "proposedAction": "Open the claim from the Warranty (Received) queue",
+      "infoPanel": [{ "key": "claim.status", "label": "Claim status" }],
+      "actions": {
+        "open-claim": { "performedText": "opened the claim from the Warranty (Received) queue", "nextStep": "s10-verify" }
+      }
+    },
+    "s10-verify": {
+      "user": "oem-super-admin",
+      "screen": "O44",
+      "proposedAction": "Verify the claim",
+      "infoPanel": [{ "key": "claim.status", "label": "Claim status" }],
+      "actions": {
+        "verify": {
+          "performedText": "verified the claim",
+          "stateChange": { "claim.status": { "set": "verify" } },
+          "nextStep": "s11-inspect"
+        }
+      }
+    },
+    "s11-inspect": {
+      "user": "oem-super-admin",
+      "screen": "O44",
+      "proposedAction": "Add the inspection report",
+      "infoPanel": [{ "key": "claim.status", "label": "Claim status" }],
+      "actions": {
+        "inspection": {
+          "performedText": "added the inspection report",
+          "stateChange": { "claim.status": { "set": "inspect" } },
+          "nextStep": "s12-service"
+        }
+      }
+    },
+    "s12-service": {
+      "user": "oem-super-admin",
+      "screen": "O44",
+      "proposedAction": "Choose Service for the claim",
+      "infoPanel": [{ "key": "claim.status", "label": "Claim status" }],
+      "actions": {
+        "service": {
+          "performedText": "chose service for the claim",
+          "stateChange": { "claim.status": { "set": "service" } },
+          "nextStep": "s13-ask-cost"
+        }
+      }
+    },
+    "s13-ask-cost": {
+      "user": "oem-super-admin",
+      "screen": "O44",
+      "proposedAction": "Ask the dealer for the service charge",
+      "infoPanel": [{ "key": "claim.status", "label": "Claim status" }],
+      "actions": {
+        "request-cost": {
+          "performedText": "asked the dealer for the service charge",
+          "stateChange": { "claim.status": { "set": "request service charge" } },
+          "nextStep": "s14-pay-charge"
+        }
+      }
+    },
+    "s14-pay-charge": {
+      "user": "dealer-service",
+      "screen": "D39",
+      "proposedAction": "Pay the service charge and enter the transaction details",
+      "infoPanel": [{ "key": "claim.status", "label": "Claim status" }],
+      "actions": {
+        "pay-service-charge": {
+          "performedText": "paid the service charge",
+          "stateChange": { "claim.status": { "set": "pay service charge" } },
+          "nextStep": "s15-verify-payment"
+        }
+      }
+    },
+    "s15-verify-payment": {
+      "user": "oem-super-admin",
+      "screen": "O44",
+      "proposedAction": "Verify the dealer's payment",
+      "infoPanel": [{ "key": "claim.status", "label": "Claim status" }],
+      "actions": {
+        "verify-payment": {
+          "performedText": "verified the dealer's payment",
+          "stateChange": { "claim.status": { "set": "verify payment" } },
+          "nextStep": "s16-return"
+        }
+      }
+    },
+    "s16-return": {
+      "user": "oem-super-admin",
+      "screen": "O44",
+      "proposedAction": "Enter the return details",
+      "infoPanel": [{ "key": "claim.status", "label": "Claim status" }],
+      "actions": {
+        "return": {
+          "performedText": "entered the return details",
+          "stateChange": { "claim.status": { "set": "return" } },
+          "nextStep": "s17-confirm"
+        }
+      }
+    },
+    "s17-confirm": {
+      "user": "dealer-service",
+      "screen": "D39",
+      "proposedAction": "Confirm receipt of the returned item",
+      "infoPanel": [{ "key": "claim.status", "label": "Claim status" }],
+      "actions": {
+        "confirm-receipt": {
+          "performedText": "confirmed receipt of the item",
+          "stateChange": { "claim.status": { "set": "dealer_received" } },
+          "nextStep": null
+        }
+      }
+    }
+  }
+}

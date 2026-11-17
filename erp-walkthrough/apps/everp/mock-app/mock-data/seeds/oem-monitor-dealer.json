@@ -1,0 +1,285 @@
+{
+  "_sample": "SAMPLE DATA for the OEM monitors a dealer (mirror views) walkthrough. Dealer, customer, enquiry, invoice, chassis, transaction IDs, PO numbers, quantities, claims and amounts are invented or copied from the other walkthrough seeds. PAN and Aadhaar are obviously fake placeholders.",
+  "dealer": {
+    "id": "DLR-014",
+    "name": "Sri Lakshmi EVs",
+    "type": "District Dealer",
+    "mu": "MU Hosur",
+    "owner": "Ravi Kumar"
+  },
+  "newDealer": {
+    "created": true,
+    "id": "DLR-014",
+    "status": "Active",
+    "dealerType": "District Dealer",
+    "namePrefix": "Mr.",
+    "ownerFirstName": "Ravi",
+    "ownerLastName": "Kumar",
+    "firm": "Sri Lakshmi EVs",
+    "gstNo": "33SAMPL0000A1Z5",
+    "orgEmail": "sample.srilakshmi@example.com",
+    "contact": "9000000001",
+    "joiningDate": "2026-10-25",
+    "state": "Tamil Nadu",
+    "district": "Hosur",
+    "area": "Sample area",
+    "region": "South",
+    "zone": "Zone 1",
+    "mu": "MU Hosur",
+    "billing": {
+      "country": "India",
+      "state": "Tamil Nadu",
+      "address": "12 Sample Street",
+      "city": "Hosur",
+      "pincode": "635109"
+    },
+    "shipping": {
+      "country": "India",
+      "state": "Tamil Nadu",
+      "address": "12 Sample Street",
+      "city": "Hosur",
+      "pincode": "635109"
+    },
+    "shop": {
+      "latitude": 12.7409,
+      "longitude": 77.8253,
+      "address": "Sample shop, Hosur"
+    },
+    "bank": {
+      "accountType": "Current",
+      "beneficiaryName": "Ravi Kumar",
+      "bankName": "Sample Bank",
+      "accountNumber": "0000000000",
+      "confirmAccount": "0000000000",
+      "ifsc": "SAMP0000001"
+    }
+  },
+  "lists": {
+    "_note": "Sample option lists for dropdowns. Their values are not defined in screen_details.md.",
+    "states": [
+      "Tamil Nadu",
+      "Karnataka"
+    ],
+    "districts": {
+      "Tamil Nadu": [
+        "Coimbatore",
+        "Chennai",
+        "Madurai"
+      ],
+      "Karnataka": [
+        "Mysuru"
+      ]
+    },
+    "regions": [
+      "South"
+    ],
+    "zones": [
+      "Zone 1"
+    ],
+    "mus": [
+      "MU Hosur"
+    ]
+  },
+  "dealers": {
+    "count": 1,
+    "list": []
+  },
+  "customers": [
+    {
+      "id": "CUS-0103",
+      "name": "Kavya Sample",
+      "phone": "9000000301",
+      "email": "kavya.sample@example.com",
+      "type": "Individual",
+      "status": "Created"
+    },
+    {
+      "id": "CUS-0101",
+      "name": "Meena Sample",
+      "phone": "9000000101",
+      "email": "meena.sample@example.com",
+      "type": "Individual",
+      "status": "Created"
+    },
+    {
+      "id": "CUS-0102",
+      "name": "Arun Sample",
+      "phone": "9000000102",
+      "email": "arun.sample@example.com",
+      "type": "Individual",
+      "status": "Created"
+    }
+  ],
+  "customer": {
+    "id": "CUS-0103",
+    "name": "Kavya Sample",
+    "prefix": "Ms",
+    "firstName": "Kavya",
+    "lastName": "Sample",
+    "phone": "9000000301",
+    "email": "kavya.sample@example.com",
+    "billing": {
+      "country": "India",
+      "state": "Tamil Nadu",
+      "address": "12 Sample Street",
+      "city": "Hosur",
+      "pincode": "635109"
+    },
+    "pan": "XXXXX0000X",
+    "aadhaar": "0000 0000 0000",
+    "payment": {
+      "id": "PAY-SAMPLE-0001",
+      "type": "Advance",
+      "date": "2026-10-27",
+      "mode": "Upi",
+      "amount": 5000,
+      "transactionId": "UTR-SAMPLE-0301",
+      "notes": "Booking advance (sample)."
+    }
+  },
+  "enquiries": [
+    {
+      "id": "ENQ-SAMPLE-0003",
+      "name": "Kavya Sample",
+      "type": "HOT",
+      "phone": "9000000301",
+      "location": "Hosur",
+      "nextFollowUp": "2026-10-29",
+      "status": "Converted",
+      "subject": "Interested in a 60V scooter"
+    },
+    {
+      "id": "ENQ-SAMPLE-0001",
+      "name": "Meena Sample",
+      "type": "WARM",
+      "phone": "9000000101",
+      "location": "Hosur",
+      "nextFollowUp": "2026-10-28",
+      "status": "Open",
+      "subject": "Sample enquiry"
+    },
+    {
+      "id": "ENQ-SAMPLE-0002",
+      "name": "Arun Sample",
+      "type": "COLD",
+      "phone": "9000000102",
+      "location": "Krishnagiri",
+      "nextFollowUp": "2026-11-02",
+      "status": "Open",
+      "subject": "Sample enquiry"
+    }
+  ],
+  "vehiclesSold": [
+    {
+      "invoice": "INV-SAMPLE-0001",
+      "customer": "Kavya Sample",
+      "product": "Tera Zip",
+      "variant": "60V 30Ah",
+      "colour": "Matte Black",
+      "chassis": "TZ-SAMPLE-0301",
+      "amount": 65100,
+      "date": "2026-10-27"
+    }
+  ],
+  "invoice": {
+    "id": "INV-SAMPLE-0001",
+    "status": "Created",
+    "total": 65100,
+    "date": "2026-10-27"
+  },
+  "stock": {
+    "available": 2,
+    "vehicles": [
+      {
+        "model": "Tera Zip",
+        "variant": "60V 30Ah",
+        "colour": "Matte Black",
+        "chassis": "TZ-SAMPLE-0301",
+        "status": "Sold"
+      },
+      {
+        "model": "Tera Zip",
+        "variant": "60V 30Ah",
+        "colour": "Pearl White",
+        "chassis": "TZ-SAMPLE-0302",
+        "status": "Available"
+      },
+      {
+        "model": "Tera Zip",
+        "variant": "48V 20Ah",
+        "colour": "Matte Black",
+        "chassis": "TZ-SAMPLE-0303",
+        "status": "Available"
+      },
+      {
+        "model": "Tera Zip",
+        "variant": "60V 30Ah",
+        "colour": "Matte Black",
+        "chassis": "TZ-SAMPLE-0299",
+        "status": "Sold"
+      }
+    ]
+  },
+  "warrantyClaims": [
+    {
+      "id": "CLM-SAMPLE-0001",
+      "customer": "Kavya Sample",
+      "chassis": "TZ-SAMPLE-0301",
+      "product": "Tera Zip 60V 30Ah",
+      "raisedOn": "2026-10-27",
+      "status": "Open"
+    }
+  ],
+  "claimsByProduct": [
+    {
+      "product": "Tera Zip 60V 30Ah",
+      "count": 1
+    }
+  ],
+  "purchaseOrders": [
+    {
+      "id": "PO-2026-0388",
+      "date": "2026-08-14",
+      "type": "Vehicle",
+      "qty": 20,
+      "amount": 1240000,
+      "status": "Delivered"
+    },
+    {
+      "id": "PO-2026-0401",
+      "date": "2026-09-30",
+      "type": "Spares",
+      "qty": 12,
+      "amount": 86400,
+      "status": "Dispatched"
+    },
+    {
+      "id": "PO-2026-0412",
+      "date": "2026-10-25",
+      "type": "Vehicle",
+      "qty": 16,
+      "amount": 992000,
+      "status": "Delivered"
+    }
+  ],
+  "pendingStock": [
+    {
+      "po": "PO-2026-0388",
+      "approved": 20,
+      "dispatched": 20,
+      "pending": 0
+    },
+    {
+      "po": "PO-2026-0401",
+      "approved": 12,
+      "dispatched": 8,
+      "pending": 4
+    },
+    {
+      "po": "PO-2026-0412",
+      "approved": 16,
+      "dispatched": 16,
+      "pending": 0
+    }
+  ]
+}

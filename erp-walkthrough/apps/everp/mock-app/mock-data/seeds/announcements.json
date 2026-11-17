@@ -1,0 +1,14 @@
+{
+  "_sample": "SAMPLE DATA for the Announcements walkthrough. The title, description, PDF file name, dealer and MU names are invented or reused from the other walkthrough seeds.",
+  "dealer": { "id": "DLR-014", "name": "Sri Lakshmi EVs", "mu": "MU Hosur", "owner": "Ravi Kumar" },
+  "mu": { "name": "MU Hosur" },
+  "announcements": { "count": 0 },
+  "announcement": {
+    "title": "Sample dealer announcement",
+    "description": "Sample announcement text for dealers in MU Hosur.",
+    "attachmentType": "File",
+    "attachmentFile": "sample-announcement.pdf",
+    "target": "Selected Manufacturing Unit",
+    "muName": "MU Hosur"
+  }
+}

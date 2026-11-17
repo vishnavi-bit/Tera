@@ -1,0 +1,6811 @@
+{
+ "title": "EV ERP: open questions, one slide per screen",
+ "generated": "2026-10-29",
+ "specSource": "docs/screen_details.md",
+ "slides": [
+  {
+   "code": "D30",
+   "name": "PO Detail (6 tabs)",
+   "tours": [
+    "dealer-stock-and-issues",
+    "order-to-production",
+    "po-exceptions"
+   ],
+   "priority": "P0",
+   "estDays": "5",
+   "purpose": "Dealer-side view of one purchase order: items, payments, production and dispatch, with actions to pay, confirm or reject delivery, and report an issue.",
+   "spec": {
+    "code": "D30",
+    "name": "PO Detail (6 tabs)",
+    "path": "/purchase/{vehicle, spare, accessory, warranty}/:id",
+    "type": "Detail",
+    "mode": "RO + Action",
+    "roles": "D",
+    "priority": "P0",
+    "buttons": "pay, confirm / accept delivery, reject shipment, report issue, print / share quotation & invoice, print checklist",
+    "fields": [],
+    "note": "No dedicated input form — this is a detail screen. Display/column content: Pay, confirm/accept delivery, reject shipment, report issue, print quotation/invoice/checklist.",
+    "rules": [
+     "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+     "**R2** — Distributor also sees POs where it is **seller** (`sellerDealerId` = own) and its connected buyer dealers",
+     "**F2** — OEM \"PO info note\" is internal: \"only OEM staff see this\"",
+     "**F8** — Issue review notes and OEM approval steps are shown to dealer only as **stage + outcome**",
+     "**Counterpart:** **O20** (same tabs + OEM actions)",
+     "**Dependency note:** R1/R2, F2, F8; counterpart O20 (same tabs + OEM actions)"
+    ]
+   },
+   "workbook": {
+    "notes": "Pay, confirm/accept delivery, reject shipment, report issue, print quotation/invoice/checklist.",
+    "dependencies": "R1/R2, F2, F8; counterpart O20 (same tabs + OEM actions)",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so the stage and outcome the dealer sees after a rejection cannot be shown. F8 says the dealer sees stage and outcome only."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "detail",
+     "title": "Purchase order PO-1001",
+     "tabs": [
+      "~Summary",
+      "~Items",
+      "~Payments",
+      "~Production",
+      "~Dispatch",
+      "~History"
+     ],
+     "kv": [
+      [
+       "Status",
+       "Dispatched"
+      ],
+      [
+       "Seller",
+       "MU Hosur"
+      ],
+      [
+       "Total",
+       "₹9,92,000"
+      ],
+      [
+       "Paid",
+       "₹2,97,600"
+      ]
+     ],
+     "actions": [
+      "Pay",
+      "Confirm delivery",
+      "Reject shipment",
+      "Report issue",
+      "Print / share"
+     ]
+    }
+   ],
+   "questions": [
+    {
+     "id": "D30-1",
+     "question": "What are the six tabs, and what does each show?",
+     "why": "The spec says \"6 tabs\" and names none. The tour used Summary, Items, Payments, Production, Dispatch and History as its own guess.",
+     "suggestion": "Summary, Items, Payments, Production, Dispatch, History.",
+     "raised": [
+      "Feedback/assumption.md #14 (status lists)"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "D30-2",
+     "question": "After the OEM rejects a PO, what stage and outcome does the dealer see?",
+     "why": "Rule F8 says the dealer sees \"stage and outcome only\", but no stage or outcome names exist for a rejection. The tour shows \"Not defined\".",
+     "suggestion": "Stage \"Rejected\". Outcome \"Closed, no order\". A \"Request again\" button opens a new cart.",
+     "raised": [
+      "Feedback/assumption.md #14",
+      "issues_to_fix/pending_definitions.md (status lifecycles)"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "D30-3",
+     "question": "Is there a way to open a PO from the list, and what does \"view\" do on D30?",
+     "why": "The spec gives D30 no \"view\" or open action, but the tour needs one.",
+     "suggestion": "The PO number on the list (D28) opens D30. No separate view button.",
+     "raised": [],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O20",
+   "name": "Order Detail (6 tabs)",
+   "tours": [
+    "order-to-production",
+    "po-exceptions"
+   ],
+   "priority": "P0",
+   "estDays": "6",
+   "purpose": "The OEM page for one dealer order: approve or reject it, verify payment, assign stock and dispatch.",
+   "spec": {
+    "code": "O20",
+    "name": "Order Detail (6 tabs)",
+    "path": "/orders/order-details/:productType/:id; edit /orders/edit-order/:poId",
+    "type": "Detail",
+    "mode": "Action",
+    "roles": "see ORDERS_DETAILS",
+    "priority": "P0",
+    "buttons": "approve / reject, create quotation, edit items, assign, dispatch shipment, verify / reject payment, info note, expected dispatch date, revert cancel, print",
+    "fields": [
+     [
+      "Add PO info note",
+      "infoNote",
+      "textarea",
+      "—",
+      "`PUT /purchase-order/:id/info`; OEM-only (F2)"
+     ],
+     [
+      "Expected dispatch date",
+      "expectedDispatchDate",
+      "date",
+      "—",
+      "`PUT /purchase-order/:id/expected-dispatch-date`; notifies dealer"
+     ],
+     [
+      "Edit items (edit order)",
+      "items[].approvedQty, properties",
+      "number",
+      "—",
+      "`PUT /purchase-order/:id/items`, `…/items/:itemId/properties`"
+     ],
+     [
+      "Create Quotation (seller tier, [C])",
+      "dealer, due date, lines (qty, rate, discount, SGST / CGST), adjustment, T&C",
+      "form",
+      "—",
+      "`POST /purchase-order-quotations`"
+     ]
+    ],
+    "note": "",
+    "rules": [
+     "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+     "**R7** — OEM sales user sees **only dealers ticked in \"Assigned Dealers\"** (their POs, payments, details); none ticked = no dealers",
+     "**F2** — OEM \"PO info note\" is internal: \"only OEM staff see this\"",
+     "**Counterpart:** **D30**",
+     "**Dependency note:** R6/R7, F2; counterpart D30"
+    ]
+   },
+   "workbook": {
+    "notes": "Approve/reject, quotation, edit items, assign, dispatch shipment, verify/reject payment, info note, expected date, revert cancel — the hub that ties Orders/Payments/Inventory/Ledger/Issues together.",
+    "dependencies": "R6/R7, F2; counterpart D30",
+    "openQuestion": ""
+   },
+   "guesses": [],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "detail",
+     "title": "Order PO-1001",
+     "tabs": [
+      "~Summary",
+      "~Items",
+      "~Payments",
+      "~Production",
+      "~Dispatch",
+      "~History"
+     ],
+     "kv": [
+      [
+       "Status",
+       "Approved"
+      ],
+      [
+       "Dealer",
+       "Sri Lakshmi EVs"
+      ],
+      [
+       "Total",
+       "₹9,92,000"
+      ],
+      [
+       "Advance due",
+       "₹2,97,600"
+      ]
+     ],
+     "actions": [
+      "Approve",
+      "Reject",
+      "Create quotation",
+      "Edit items",
+      "Assign",
+      "Dispatch shipment",
+      "Verify / reject"
+     ]
+    }
+   ],
+   "questions": [
+    {
+     "id": "O20-1",
+     "question": "Who approves a PO: Sales Head or Super Admin? Can more than one approval be needed?",
+     "why": "The order tour uses the Sales Head (not in people.md); the exceptions tour uses the Super Admin on the same screen.",
+     "suggestion": "One approver: the Sales Head, with the Super Admin as backup. One approval is enough.",
+     "raised": [
+      "Feedback/assumption.md #5"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O20-2",
+     "question": "What are the six tabs?",
+     "why": "The spec says \"6 tabs\" and names none. The tour invented Summary, Items, Payments, Production, Dispatch, History.",
+     "suggestion": "Use those six names.",
+     "raised": [
+      "Feedback/assumption.md #14"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O20-3",
+     "question": "After a rejection, what status is set, and how is a rejected PO reopened (\"revert\")?",
+     "why": "The spec gives a revert button for a cancelled PO but does not say a rejection cancels the PO.",
+     "suggestion": "Rejection sets \"Rejected\". \"Revert\" returns it to \"Pending\" and notifies the dealer.",
+     "raised": [
+      "Feedback/assumption.md #7, #14"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O20-4",
+     "question": "Where do the \"info note\" and \"expected dispatch date\" belong?",
+     "why": "They are in O20's field table, but the tour shows them on a separate rejection/info dialog (O24).",
+     "suggestion": "Keep both on O20 as a small dialog. Notify the dealer when the date is saved.",
+     "raised": [],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O23",
+   "name": "Payment Verify / Reject",
+   "tours": [
+    "order-to-production",
+    "po-exceptions"
+   ],
+   "priority": "P0",
+   "estDays": "1.5",
+   "purpose": "The OEM verifies or rejects a dealer's payment, or a ledger top-up.",
+   "spec": {
+    "code": "O23",
+    "name": "Payment Verify / Reject",
+    "path": "(O20 Payment tab, O45)",
+    "type": "Action",
+    "mode": "Action",
+    "roles": "(ORDERS_PAYMENT_VERIFY)",
+    "priority": "P0",
+    "buttons": "verify, reject (reason)",
+    "fields": [],
+    "note": "",
+    "rules": [
+     "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+     "**R7** — OEM sales user sees **only dealers ticked in \"Assigned Dealers\"** (their POs, payments, details); none ticked = no dealers",
+     "**Counterpart:** D31",
+     "**Dependency note:** R6/R7; counterpart D31"
+    ]
+   },
+   "workbook": {
+    "notes": "Verify (surplus credited to ledger) or reject with reason.",
+    "dependencies": "R6/R7; counterpart D31",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so the Accounts OK to Bill gate (N26) cannot be shown. N26 extends O20 and O23, and replaces dispatch proceeding right after payment verification."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "detail",
+     "title": "Verify payment",
+     "tabs": [
+      "Order payment",
+      "Ledger top-up"
+     ],
+     "kv": [
+      [
+       "Order",
+       "PO-1001"
+      ],
+      [
+       "Transaction ID",
+       "UTR4471…"
+      ],
+      [
+       "Amount",
+       "₹2,97,600"
+      ],
+      [
+       "Receipt",
+       "receipt.pdf"
+      ]
+     ],
+     "actions": [
+      "Verify",
+      "Reject (reason)",
+      "~OK to Bill"
+     ]
+    }
+   ],
+   "questions": [
+    {
+     "id": "O23-1",
+     "question": "What is the \"OK to Bill\" gate (N26), and who gives it?",
+     "why": "N26 replaces dispatch right after payment verification, but has no screen. The tour shows a card.",
+     "suggestion": "After the advance is verified, Accounts ticks \"OK to Bill\" on the order. Dispatch stays blocked until then.",
+     "raised": [
+      "Feedback/assumption.md #4, #6"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O23-2",
+     "question": "Is the 30% advance counted from submitted or verified payment?",
+     "why": "The rules say production starts at 30% paid and that the OEM verifies payments.",
+     "suggestion": "Verified payment only.",
+     "raised": [
+      "Feedback/assumption.md #3"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O23-3",
+     "question": "For a ledger top-up, what amount is credited when verified?",
+     "why": "The spec says \"ledger top-up verify\" with a note, but not what is credited.",
+     "suggestion": "The amount the dealer entered, unless the verifier edits it with a reason.",
+     "raised": [
+      "Feedback/assumption.md #17, #18"
+     ],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "N03",
+   "name": "Material Requisition (Against Order / Forecast / Damage)",
+   "tours": [
+    "order-to-production"
+   ],
+   "priority": "P0",
+   "estDays": "3.5",
+   "purpose": "The Production Head asks Inventory for materials: for an order, for a forecast, or to replace lost or damaged parts.",
+   "spec": {
+    "code": "N03",
+    "name": "Material Requisition (Against Order / Forecast / Damage)",
+    "path": "—",
+    "type": "Form",
+    "mode": "NEW",
+    "roles": "",
+    "priority": "P0",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Production Head role requests materials from Inventory for: (1) an order, (2) a forecast, (3) loss/damage replacement.",
+    "fields": [],
+    "note": "*Not yet speced — proposed scope only:* Production Head role requests materials from Inventory for: (1) an order, (2) a forecast, (3) loss/damage replacement.",
+    "rules": [
+     "**Depends on / extends:** Depends on BOM (N08) to know required parts per model"
+    ]
+   },
+   "workbook": {
+    "notes": "Production Head role requests materials from Inventory for: (1) an order, (2) a forecast, (3) loss/damage replacement.",
+    "dependencies": "Depends on BOM (N08) to know required parts per model",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so these stages cannot be shown. N03 Material Requisition (raised by …) and N13 FIFO Stock Issuance & Location Report (issued by …)."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "form",
+     "title": "Material requisition (proposed)",
+     "fields": [
+      [
+       "~Reason*",
+       "~Against order ▾ (Order / Forecast / Damage)"
+      ],
+      [
+       "~Order or forecast",
+       "~PO-1001"
+      ],
+      [
+       "~Product",
+       "~Tera Zip 60V 30Ah"
+      ],
+      [
+       "~Parts needed",
+       "~from the BOM (N08)"
+      ],
+      [
+       "~Requested by",
+       "~Production Head"
+      ],
+      [
+       "~Needed on",
+       "~…"
+      ]
+     ],
+     "actions": [
+      "~Submit request",
+      "~Cancel"
+     ],
+     "dialog": false
+    }
+   ],
+   "questions": [
+    {
+     "id": "N03-1",
+     "question": "What fields does the requisition have, and where do the quantities come from?",
+     "why": "Spec: \"Not yet speced in the reference app\". The workbook line says three reasons (order, forecast, damage) and that it depends on the bill of materials (N08).",
+     "suggestion": "Reason, order or forecast reference, product, parts and quantities filled from the BOM, needed-on date. Damage requests require a note and a photo.",
+     "raised": [
+      "EV_App_Screens_Estimation.xlsx row N03"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "N03-2",
+     "question": "Who approves a requisition, and what happens to stock?",
+     "why": "Not stated. The tour removed an earlier stock deduction because there was no rule.",
+     "suggestion": "The Inventory Manager approves. Stock is reserved on approval and deducted when issued.",
+     "raised": [
+      "Feedback/assumption.md #10, #11"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "N03-3",
+     "question": "Which roles raise and handle it?",
+     "why": "The workbook says \"Production Head role\" to Inventory. The tour used Ganesh (Production Manager).",
+     "suggestion": "Production Head raises. Inventory Manager handles.",
+     "raised": [
+      "Feedback/assumption.md #20"
+     ],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "N04",
+   "name": "Production Completion & Handover",
+   "tours": [
+    "order-to-production",
+    "qc-and-packaging"
+   ],
+   "priority": "P0",
+   "estDays": "3.5",
+   "purpose": "When production finishes, record the finished unit's identifiers and hand it over to inventory and QC.",
+   "spec": {
+    "code": "N04",
+    "name": "Production Completion & Handover",
+    "path": "—",
+    "type": "Form / Action",
+    "mode": "NEW",
+    "roles": "",
+    "priority": "P0",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: On completing production, capture finished-unit identifiers (chassis, motor, controller, battery) and hand the inventory over. Resolves the 'no screen binds a chassis to a vehicle' gap (spec §8/§11).",
+    "fields": [],
+    "note": "*Not yet speced — proposed scope only:* On completing production, capture finished-unit identifiers (chassis, motor, controller, battery) and hand the inventory over. Resolves the 'no screen binds a chassis to a vehicle' gap (spec §8/§11).",
+    "rules": [
+     "**Depends on / extends:** Feeds Inventory (O30/O31) and QC (N05)"
+    ]
+   },
+   "workbook": {
+    "notes": "On completing production, capture finished-unit identifiers (chassis, motor, controller, battery) and hand the inventory over. Resolves the 'no screen binds a chassis to a vehicle' gap (spec §8/§11).",
+    "dependencies": "Feeds Inventory (O30/O31) and QC (N05)",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so these stages cannot be shown. N04 Production Completion & Handover, N05 QC Inspection Checklist and N06 QC Branding / Packaging Requisition (all by …)."
+    },
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so this stage cannot be shown. N04 Production Completion & Handover (by …) captures the chassis, motor, controller and battery of … and hands the inventory over."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "form",
+     "title": "Production completion (proposed)",
+     "fields": [
+      [
+       "~Order / batch",
+       "~PO-1001"
+      ],
+      [
+       "~Chassis no.*",
+       "~CH-1042"
+      ],
+      [
+       "~Motor no.*",
+       "~M-5521"
+      ],
+      [
+       "~Controller no.*",
+       "~C-3310"
+      ],
+      [
+       "~Battery no.*",
+       "~B-8841"
+      ],
+      [
+       "~Completed on",
+       "~…"
+      ]
+     ],
+     "actions": [
+      "~Hand over to QC",
+      "~Save"
+     ],
+     "dialog": false
+    }
+   ],
+   "questions": [
+    {
+     "id": "N04-1",
+     "question": "Which identifiers are mandatory for each vehicle variant?",
+     "why": "The workbook line lists chassis, motor, controller and battery. This is the step that \"resolves the gap that no screen binds a chassis to a vehicle\". No fields or rules are given.",
+     "suggestion": "All four mandatory for vehicles. Chassis unique across the system. Batteries may be several per vehicle.",
+     "raised": [
+      "Feedback/assumption.md #12",
+      "EV_App_Screens_Estimation.xlsx row N04"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "N04-2",
+     "question": "What if a number is missing, duplicated or does not match?",
+     "why": "Not defined.",
+     "suggestion": "Block handover with a message naming the clash. Allow a Production Head override only with a reason.",
+     "raised": [
+      "Feedback/assumption.md #12"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "N04-3",
+     "question": "Is this a per-unit entry or a per-batch entry?",
+     "why": "Not stated.",
+     "suggestion": "Per unit, with a batch scan or paste option for 16 to 40 units.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "N04-4",
+     "question": "Does production completion change the order status?",
+     "why": "The order tour sets \"Ready for Dispatch\" here, but the status is not defined in the spec.",
+     "suggestion": "Set \"Ready for Dispatch\" only after QC (N05) passes.",
+     "raised": [
+      "Feedback/assumption.md #14"
+     ],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "N07",
+   "name": "Despatch — Chassis Validation Gate",
+   "tours": [
+    "order-to-production",
+    "qc-and-packaging"
+   ],
+   "priority": "P0",
+   "estDays": "2",
+   "purpose": "The last check before dispatch: the system confirms the chassis number and all identifiers match what was recorded at production.",
+   "spec": {
+    "code": "N07",
+    "name": "Despatch — Chassis Validation Gate",
+    "path": "—",
+    "type": "Action",
+    "mode": "Enhancement",
+    "roles": "",
+    "priority": "P0",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Despatch starts from the invoice; validates the correct chassis number and all identifiers before assigning for dispatch.",
+    "fields": [],
+    "note": "*Not yet speced — proposed scope only:* Despatch starts from the invoice; validates the correct chassis number and all identifiers before assigning for dispatch.",
+    "rules": [
+     "**Depends on / extends:** Extends O20/O21/O22; ties to the item-identifier gap"
+    ]
+   },
+   "workbook": {
+    "notes": "Despatch starts from the invoice; validates the correct chassis number and all identifiers before assigning for dispatch.",
+    "dependencies": "Extends O20/O21/O22; ties to the item-identifier gap",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so this stage cannot be shown. N07 Despatch - Chassis Validation Gate (by …)."
+    },
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so this stage cannot be shown. N07 Despatch - Chassis Validation Gate (by …) validates the chassis and identifiers of … before dispatch."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "form",
+     "title": "Despatch validation (proposed)",
+     "fields": [
+      [
+       "~Invoice / order",
+       "~INV-2001 · PO-1001"
+      ],
+      [
+       "~Chassis no.",
+       "~CH-1042 (scan or type)"
+      ],
+      [
+       "~Motor / controller / battery",
+       "~match ✓"
+      ],
+      [
+       "~Result",
+       "~Valid"
+      ]
+     ],
+     "actions": [
+      "~Assign for dispatch",
+      "~Reject"
+     ],
+     "dialog": false
+    }
+   ],
+   "questions": [
+    {
+     "id": "N07-1",
+     "question": "How does the gate work: scan, type, or pick?",
+     "why": "The workbook says despatch \"starts from the invoice\" and validates the chassis and all identifiers. Nothing says how the user enters them.",
+     "suggestion": "Scan or type the chassis; the system shows the stored motor, controller and battery for a visual check, then assigns the unit to the shipment.",
+     "raised": [
+      "Feedback/assumption.md #12"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "N07-2",
+     "question": "What if the number is wrong or the unit is already assigned?",
+     "why": "Not defined.",
+     "suggestion": "Block with a clear message. Only Logistics Manager can release a unit from another shipment, with a reason.",
+     "raised": [
+      "Feedback/assumption.md #12"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "N07-3",
+     "question": "Does O21 Assign Item happen before or after this gate?",
+     "why": "The flow document puts O21 after QC and before N07; the order tour puts it before production.",
+     "suggestion": "Reserve at O21 when the order is approved. N07 binds the actual units just before dispatch.",
+     "raised": [
+      "Feedback/assumption.md #10"
+     ],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O22",
+   "name": "Dispatch Shipment",
+   "tours": [
+    "order-to-production",
+    "po-exceptions"
+   ],
+   "priority": "P0",
+   "estDays": "3",
+   "purpose": "The OEM dispatches a shipment against an approved order: which unit it leaves from, how much ships now, and the transport details.",
+   "spec": {
+    "code": "O22",
+    "name": "Dispatch Shipment",
+    "path": "(O20)",
+    "type": "Dialog",
+    "mode": "Create",
+    "roles": "DISPATCH roles",
+    "priority": "P0",
+    "buttons": "dispatch (n units), dispatch all remaining",
+    "fields": [
+     [
+      "Dispatch from Manufacturing Unit",
+      "muId",
+      "select",
+      "✔",
+      "MU list",
+      "—"
+     ],
+     [
+      "Per line: Approved / Shipped / Remaining",
+      "—",
+      "ro",
+      "—",
+      "—",
+      "—"
+     ],
+     [
+      "Per line: Ship now",
+      "items[].quantity",
+      "number",
+      "✔ (≥1 line)",
+      "≤ remaining; \"Dispatch all remaining\"",
+      "button shows \"Dispatch (n units)\""
+     ],
+     [
+      "Transport Type",
+      "transportType",
+      "radio",
+      "?",
+      "By Truck / By Parcel (courier variant: By Courier)",
+      "—"
+     ],
+     [
+      "Transport Company Name",
+      "companyName",
+      "text",
+      "?",
+      "—",
+      "—"
+     ],
+     [
+      "Company Number",
+      "companyNumber",
+      "text",
+      "?",
+      "—",
+      "—"
+     ],
+     [
+      "Tracking ID",
+      "trackingId",
+      "text",
+      "?",
+      "—",
+      "—"
+     ],
+     [
+      "Driver Number",
+      "driverNumber",
+      "text",
+      "?",
+      "—",
+      "—"
+     ],
+     [
+      "Vehicle No",
+      "vehicleNo",
+      "text",
+      "?",
+      "—",
+      "—"
+     ],
+     [
+      "Courier Name / Number / Parcel Tracking ID",
+      "courierName, courierNumber, parcelTrackingId",
+      "text",
+      "?",
+      "courier variant [C]",
+      "—"
+     ],
+     [
+      "Transport Date",
+      "transportDate",
+      "date",
+      "?",
+      "—",
+      "—"
+     ],
+     [
+      "Expected Dispatch / Delivery Date",
+      "deliveryDate",
+      "date",
+      "?",
+      "—",
+      "—"
+     ],
+     [
+      "Payment Status",
+      "paymentStatus",
+      "select",
+      "?",
+      "Paid / Unpaid [C]",
+      "—"
+     ]
+    ],
+    "note": "",
+    "rules": [
+     "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+     "**Counterpart:** D32 (confirm / reject)",
+     "**Dependency note:** counterpart D32 (confirm/reject)"
+    ]
+   },
+   "workbook": {
+    "notes": "Dispatch from MU, per-line ship quantity, transport details.",
+    "dependencies": "counterpart D32 (confirm/reject)",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so the e-way bill (N10) cannot be shown. N10 replaces the reference app's mock (D51 and O56)."
+    },
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so the PDI checklist (N27) cannot be shown. N27 extends N07 and sits before a unit ships, so it comes before the re-dispatch."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "form",
+     "title": "Dispatch shipment",
+     "fields": [
+      [
+       "Dispatch from Manufacturing Unit*",
+       "MU Hosur ▾"
+      ],
+      [
+       "Approved / Shipped / Remaining",
+       "16 / 0 / 16"
+      ],
+      [
+       "Ship now*",
+       "16"
+      ],
+      [
+       "~Chassis numbers",
+       "~CH-1042 … CH-1057"
+      ],
+      [
+       "Transport Type?",
+       "By Truck ▾"
+      ],
+      [
+       "Transport Company Name?",
+       "Sample Logistics"
+      ],
+      [
+       "Vehicle No?",
+       "TS 09 AB 0000"
+      ],
+      [
+       "Expected Delivery Date?",
+       "30 Oct"
+      ],
+      [
+       "Payment Status?",
+       "Paid ▾"
+      ]
+     ],
+     "actions": [
+      "Dispatch (16 units)",
+      "Dispatch all remaining"
+     ],
+     "dialog": true
+    }
+   ],
+   "questions": [
+    {
+     "id": "O22-1",
+     "question": "Which transport fields are required?",
+     "why": "Ten fields (transport type, company, number, tracking, driver, vehicle, courier, dates, payment status) are all marked \"?\".",
+     "suggestion": "Required: unit, ship-now quantity, transport type, company, vehicle number and expected delivery date. The rest optional.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O22-2",
+     "question": "When are chassis numbers tied to the shipment?",
+     "why": "O22 has no chassis field. No screen binds a chassis to a vehicle before it ships.",
+     "suggestion": "Bind chassis numbers at the despatch gate (N07) and show them read-only here. Block dispatch if any unit has none.",
+     "raised": [
+      "Feedback/assumption.md #12",
+      "EV_App_Screens_Estimation.xlsx N04 and N07"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O22-3",
+     "question": "How should the e-way bill (N10) and the pre-delivery inspection (N27) fit in?",
+     "why": "Both are new requirements with no screen. N10 replaces the mock e-way bill in the reference app; N27 comes before a unit ships.",
+     "suggestion": "N27 PDI must pass before \"Dispatch\" is enabled. N10 is generated on dispatch for shipments above the GST limit.",
+     "raised": [
+      "Feedback/assumption.md #26"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O22-4",
+     "question": "Is the 30% advance enough to dispatch, or must the full payment be in?",
+     "why": "O22 shows \"Payment Status: Paid / Unpaid\" and the spec does not say what blocks dispatch.",
+     "suggestion": "Advance (30%) allows production. Dispatch needs Accounts to mark \"OK to Bill\" (N26).",
+     "raised": [
+      "Feedback/assumption.md #3, #4"
+     ],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O01",
+   "name": "Login / Forgot Password",
+   "tours": [
+    "oem-setup"
+   ],
+   "priority": "P0",
+   "estDays": "1.5",
+   "purpose": "OEM staff sign-in, with a \"forgot password\" link.",
+   "spec": {
+    "code": "O01",
+    "name": "Login / Forgot Password",
+    "path": "/login, /forgot-password",
+    "type": "Form / Static",
+    "mode": "Action",
+    "roles": "public",
+    "priority": "P0",
+    "buttons": "sign in",
+    "fields": [
+     [
+      "User ID",
+      "userId",
+      "text",
+      "✔",
+      "alphanumeric, exactly 7 chars (placeholder \"eg. D001\")",
+      "dealer D000002; OEM OEM0001"
+     ],
+     [
+      "Password",
+      "password",
+      "password",
+      "✔",
+      "show / hide toggle",
+      "—"
+     ],
+     [
+      "Remember me",
+      "rememberMe",
+      "checkbox",
+      "—",
+      "—",
+      "dealer app stores userId + **plaintext password** in localStorage; don't replicate"
+     ]
+    ],
+    "note": "",
+    "rules": [
+     "**Counterpart:** D01"
+    ]
+   },
+   "workbook": {
+    "notes": "Shared /auth/login with dealer app.",
+    "dependencies": "",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "screen control",
+     "text": "Forgot Password has no fields or actions in screen_details.md (O01). It appears only in the screen name."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "form",
+     "title": "OEM sign in",
+     "fields": [
+      [
+       "User ID*",
+       "OEM0001"
+      ],
+      [
+       "Password*",
+       "••••••••"
+      ],
+      [
+       "Remember me",
+       "☐"
+      ]
+     ],
+     "actions": [
+      "Sign in",
+      "~Forgot password"
+     ],
+     "dialog": false
+    }
+   ],
+   "questions": [
+    {
+     "id": "O01-1",
+     "question": "What does \"Forgot password\" do?",
+     "why": "The screen name includes it, but the spec gives no fields or actions. The tour shows \"Not defined\".",
+     "suggestion": "The user enters their User ID or email; a reset link is sent to the registered email, valid 30 minutes.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O01-2",
+     "question": "Is \"Remember me\" allowed for OEM users?",
+     "why": "The spec says not to copy the dealer app's plain-text password storage, but gives no OEM rule. The control shows a message only.",
+     "suggestion": "Remove the option. Keep users signed in with a secure session for 8 hours.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O01-3",
+     "question": "After how many wrong passwords is an account locked, and who unlocks it?",
+     "why": "The OEM users list has \"unlock account\" but no threshold is stated.",
+     "suggestion": "Lock after 5 failed attempts. An administrator unlocks it on the Users screen (O52).",
+     "raised": [],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O03",
+   "name": "Dashboard",
+   "tours": [
+    "dealer-setup",
+    "oem-setup"
+   ],
+   "priority": "P0",
+   "estDays": "4",
+   "purpose": "The OEM home page: company-wide numbers, with filters for period, state and manufacturing unit.",
+   "spec": {
+    "code": "O03",
+    "name": "Dashboard",
+    "path": "/dashboard ('?unit=')",
+    "type": "Dashboard",
+    "mode": "RO + edit slogan",
+    "roles": "all but PH, PM",
+    "priority": "P0",
+    "buttons": "period, state, unit filter, edit slogan",
+    "fields": [
+     [
+      "Period",
+      "period / dateRange",
+      "select",
+      "—",
+      "This Day / This Month / This Year / Custom Date",
+      "—"
+     ],
+     [
+      "State",
+      "state",
+      "select",
+      "—",
+      "All States + operating states",
+      "—"
+     ],
+     [
+      "Unit",
+      "unit",
+      "select",
+      "—",
+      "All units / each MU",
+      "—"
+     ],
+     [
+      "Edit (slogan)",
+      "dashboardSlogan",
+      "text",
+      "—",
+      "—",
+      "`PATCH /accounts/oem/dashboard-slogan`"
+     ]
+    ],
+    "note": "",
+    "rules": [
+     "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+     "**R7** — OEM sales user sees **only dealers ticked in \"Assigned Dealers\"** (their POs, payments, details); none ticked = no dealers",
+     "**Counterpart:** D04",
+     "**Dependency note:** R6/R7"
+    ]
+   },
+   "workbook": {
+    "notes": "KPI tiles + widgets; period/state/unit filter; editable slogan.",
+    "dependencies": "R6/R7",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "screen control",
+     "text": "$…' are not defined in screen_details.md (O03).`\n        )}"
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "dash",
+     "title": "OEM dashboard",
+     "tiles": [
+      [
+       "Dealers",
+       "~38"
+      ],
+      [
+       "Open POs",
+       "~14"
+      ],
+      [
+       "Production this month",
+       "~120"
+      ],
+      [
+       "Stock available",
+       "~86"
+      ],
+      [
+       "Warranty open",
+       "~6"
+      ]
+     ],
+     "filters": [
+      "Period ▾",
+      "State ▾",
+      "Unit ▾"
+     ],
+     "note": "Only the dealer count has a value in the tour. The other nine KPIs show \"Not defined\"."
+    }
+   ],
+   "questions": [
+    {
+     "id": "O03-1",
+     "question": "How is each of the ten KPIs worked out?",
+     "why": "The spec names ten KPIs. The tour could value only \"number of dealers\".",
+     "suggestion": "Give one line per KPI: what it counts, the period it uses and the screen it opens. I can draft the ten from the order, stock and warranty screens for you to correct.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O03-2",
+     "question": "Who can edit the slogan, and where does it show?",
+     "why": "The spec lists \"edit slogan\" and says all roles except PH and PM may open the dashboard.",
+     "suggestion": "Only the Super Admin edits it. It shows at the top of the dealer dashboard (D04).",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O03-3",
+     "question": "How does the unit filter work for users who belong to one manufacturing unit?",
+     "why": "Rule R6 scopes some roles to one unit.",
+     "suggestion": "Users with a unit see only that unit and the filter is fixed. Admin sees all.",
+     "raised": [
+      "Feedback/assumption.md #21"
+     ],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O49",
+   "name": "Settings: Profile",
+   "tours": [
+    "oem-security-audit",
+    "oem-setup"
+   ],
+   "priority": "P0",
+   "estDays": "1.5",
+   "purpose": "The OEM company profile, with the GST switch, the approval-admin email and password change.",
+   "spec": {
+    "code": "O49",
+    "name": "Settings: Profile",
+    "path": "/settings/profile",
+    "type": "Detail + Form",
+    "mode": "Update (ADM)",
+    "roles": "PROFILE",
+    "priority": "P0",
+    "buttons": "save approval email, GST toggle, change password",
+    "fields": [
+     [
+      "Is GST Needed?",
+      "isGstNeeded",
+      "toggle",
+      "—",
+      "ADM only (GST_BUTTON)"
+     ],
+     [
+      "Approval Admin Email",
+      "approvalAdminEmail",
+      "email",
+      "?",
+      "vendor-PO approvals emailed here; only OEM admin can change"
+     ],
+     [
+      "Org, GST, created, country, state, location, address, currency, tax ID, language, time zone",
+      "—",
+      "ro",
+      "—",
+      "\"contact DMS Admin\""
+     ],
+     [
+      "Change Password",
+      "password, confirmPassword",
+      "password",
+      "✔",
+      "—"
+     ]
+    ],
+    "note": "",
+    "rules": []
+   },
+   "workbook": {
+    "notes": "Approval admin email (editable), GST toggle; org details read-only.",
+    "dependencies": "",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so the compliance fields (CIN, TAN, PAN, MSME, IEC and Directors Details) cannot be shown. N22 extends O49, which is shown unchanged."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "form",
+     "title": "OEM profile",
+     "fields": [
+      [
+       "Is GST Needed?",
+       "☑"
+      ],
+      [
+       "Approval Admin Email?",
+       "admin@example.com"
+      ],
+      [
+       "Org / GST / currency / time zone",
+       "(read only)"
+      ],
+      [
+       "~CIN, TAN, PAN, MSME, IEC, Directors (N22)",
+       "~…"
+      ]
+     ],
+     "actions": [
+      "Save approval email",
+      "Change password"
+     ],
+     "dialog": false
+    }
+   ],
+   "questions": [
+    {
+     "id": "O49-1",
+     "question": "Is the Approval Admin Email required?",
+     "why": "It is marked \"?\". It is the address PO approvals go to (see O41).",
+     "suggestion": "Required, because vendor POs cannot be approved without it.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O49-2",
+     "question": "Should the profile hold compliance details (N22)?",
+     "why": "N22 asks for CIN, TAN, PAN, MSME, IEC and Directors' details, and edit rights. No screen.",
+     "suggestion": "Yes, as read-write fields for the Super Admin, shown on documents such as the PO and invoice header.",
+     "raised": [
+      "Feedback/assumption.md #32"
+     ],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O33",
+   "name": "MU Create / Edit",
+   "tours": [
+    "oem-setup"
+   ],
+   "priority": "P0",
+   "estDays": "2.5",
+   "purpose": "Create or edit a manufacturing unit (factory): address, bank, GST and its head.",
+   "spec": {
+    "code": "O33",
+    "name": "MU Create / Edit",
+    "path": "/manufacturing-unit/new, /manufacturing-unit/edit/:id",
+    "type": "Form",
+    "mode": "CRUD",
+    "roles": "ADM",
+    "priority": "P0",
+    "buttons": "create, save, use current location",
+    "fields": [
+     [
+      "Unit Name",
+      "unitName",
+      "text",
+      "✔",
+      "—"
+     ],
+     [
+      "State",
+      "state",
+      "select",
+      "✔",
+      "36 states / UTs + Nepal"
+     ],
+     [
+      "Production Unit Head",
+      "userID",
+      "select",
+      "—",
+      "OEM_PRODUCTION_HEAD users (\"No unit head\")"
+     ],
+     [
+      "Address",
+      "address",
+      "textarea",
+      "✔",
+      "—"
+     ],
+     [
+      "GST No",
+      "gstNo",
+      "text",
+      "✔",
+      "—"
+     ],
+     [
+      "Account No",
+      "accountNumber",
+      "text",
+      "✔",
+      "—"
+     ],
+     [
+      "IFSC Code",
+      "ifscCode",
+      "text",
+      "—",
+      "—"
+     ],
+     [
+      "A/c Holder Name",
+      "accountHolderName",
+      "text",
+      "—",
+      "—"
+     ],
+     [
+      "Bank Branch",
+      "bankBranch",
+      "text",
+      "—",
+      "—"
+     ],
+     [
+      "Phone No",
+      "phoneNo",
+      "text",
+      "✔",
+      "—"
+     ],
+     [
+      "City",
+      "city",
+      "text",
+      "✔",
+      "—"
+     ],
+     [
+      "Email",
+      "email",
+      "email",
+      "✔",
+      "—"
+     ],
+     [
+      "Pincode",
+      "pincode",
+      "text",
+      "✔",
+      "—"
+     ],
+     [
+      "Latitude / Longitude",
+      "latitude, longitude",
+      "number",
+      "—",
+      "\"Use my current location\""
+     ]
+    ],
+    "note": "",
+    "rules": [
+     "**Counterpart:** D30 quotation letterhead",
+     "**Dependency note:** counterpart D30 quotation letterhead"
+    ]
+   },
+   "workbook": {
+    "notes": "Name, address, GST, bank details, phone, city, email, lat/long.",
+    "dependencies": "counterpart D30 quotation letterhead",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "screen control",
+     "text": "Capacity and working calendar are a separate screen detail. screen_details.md gives only the endpoints for them."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "form",
+     "title": "Manufacturing unit",
+     "fields": [
+      [
+       "Unit Name*",
+       "MU Hosur"
+      ],
+      [
+       "State*",
+       "Tamil Nadu"
+      ],
+      [
+       "Production Unit Head",
+       "~Select user ▾"
+      ],
+      [
+       "GST No*",
+       "…"
+      ],
+      [
+       "Account No*",
+       "…"
+      ],
+      [
+       "Phone No*",
+       "…"
+      ],
+      [
+       "~Capacity per day",
+       "~…"
+      ],
+      [
+       "~Working calendar",
+       "~Mon–Sat"
+      ]
+     ],
+     "actions": [
+      "Create",
+      "Save",
+      "Use current location"
+     ],
+     "dialog": false
+    }
+   ],
+   "questions": [
+    {
+     "id": "O33-1",
+     "question": "What are \"Capacity\" and \"Working calendar\", and what do they feed?",
+     "why": "The spec gives endpoints only and no screen. The tour shows \"Not defined\". The dispatch calendar (O36) needs them.",
+     "suggestion": "Capacity: units per day per product type. Calendar: working days and holidays. Both feed the dispatch plan.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O33-2",
+     "question": "How is a Production Unit Head assigned?",
+     "why": "The spec lists OEM_PRODUCTION_HEAD users but the OEM setup tour creates none. The select offers only \"No unit head\".",
+     "suggestion": "Pick from OEM users with the Production Head role. Allow changing the head later from this form.",
+     "raised": [
+      "Feedback/assumption.md #20"
+     ],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O52",
+   "name": "Settings: Users",
+   "tours": [
+    "oem-setup"
+   ],
+   "priority": "P0",
+   "estDays": "1.5",
+   "purpose": "The OEM list of staff users, with create, edit and unlock.",
+   "spec": {
+    "code": "O52",
+    "name": "Settings: Users",
+    "path": "/settings/users",
+    "type": "List",
+    "mode": "RO",
+    "roles": "ADM",
+    "priority": "P0",
+    "buttons": "search, create, edit, unlock account",
+    "fields": [],
+    "note": "No dedicated input form — this is a list screen. Display/column content: Search, create, edit, unlock account.",
+    "rules": [
+     "**Dependency note:** ADM only"
+    ]
+   },
+   "workbook": {
+    "notes": "Search, create, edit, unlock account.",
+    "dependencies": "ADM only",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "screen control",
+     "text": "$… is not defined in screen_details.md (O52).`)}"
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "list",
+     "title": "Users",
+     "cols": [
+      "~User ID",
+      "~Name",
+      "~Role",
+      "~Role category",
+      "~Status"
+     ],
+     "rows": [
+      [
+       "OEM0002",
+       "Charan Sample",
+       "Super Admin",
+       "Admin",
+       "Active"
+      ]
+     ],
+     "actions": [
+      "Create",
+      "Edit",
+      "Unlock account"
+     ],
+     "tabs": [],
+     "filters": [],
+     "search": "Search"
+    }
+   ],
+   "questions": [
+    {
+     "id": "O52-1",
+     "question": "How are user IDs generated, and what is \"role category\"?",
+     "why": "The spec does not say how an ID is made. The list has a \"role category\" column with no definition.",
+     "suggestion": "IDs run OEM0001, OEM0002 and so on. Role category groups roles for reports: Admin, Sales, Production, Inventory, Accounts, Service.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O52-2",
+     "question": "Where is the full list of OEM roles?",
+     "why": "O53 says \"15 OEM roles (section 2.1)\". Section 2.1 is not in screen_details.md.",
+     "suggestion": "Provide the list, with each role's screens (the role-to-screen matrix).",
+     "raised": [
+      "Feedback/assumption.md #20"
+     ],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O53",
+   "name": "OEM User Add / Edit",
+   "tours": [
+    "oem-security-audit",
+    "oem-setup"
+   ],
+   "priority": "P0",
+   "estDays": "3",
+   "purpose": "Create or edit an OEM staff user: role, unit, contact and password, and for sales roles which dealers they handle.",
+   "spec": {
+    "code": "O53",
+    "name": "OEM User Add / Edit",
+    "path": "(O52)",
+    "type": "Form / Dialog",
+    "mode": "CRUD",
+    "roles": "ADM",
+    "priority": "P0",
+    "buttons": "create, submit, change password, sign out devices, assign dealers",
+    "fields": [
+     [
+      "User Role",
+      "role",
+      "select",
+      "✔",
+      "15 OEM roles (section 2.1)",
+      "—"
+     ],
+     [
+      "Manufacturing Unit",
+      "manufacturingUnitId",
+      "select",
+      "—",
+      "\"All units (global)\" or one MU",
+      "R6"
+     ],
+     [
+      "First Name",
+      "firstName",
+      "text",
+      "✔",
+      "3–30 chars",
+      "—"
+     ],
+     [
+      "Last Name",
+      "lastName",
+      "text",
+      "✔",
+      "≥ 1 char",
+      "—"
+     ],
+     [
+      "Email ID",
+      "email",
+      "email",
+      "✔",
+      "valid email",
+      "—"
+     ],
+     [
+      "Contact",
+      "phone",
+      "text",
+      "✔",
+      "10 digits",
+      "—"
+     ],
+     [
+      "Password / Confirm (add)",
+      "password, confirmPassword",
+      "password",
+      "✔",
+      "must match",
+      "—"
+     ],
+     [
+      "Status (edit)",
+      "isActive",
+      "select",
+      "✔",
+      "Active / InActive",
+      "—"
+     ],
+     [
+      "Assigned Dealers (sales roles, edit)",
+      "dealerIds[]",
+      "multi-select checklist",
+      "—",
+      "\"This sales user can view ONLY the dealers ticked here… With none selected the user sees no dealers\"",
+      "R7"
+     ],
+     [
+      "Device limit (edit)",
+      "deviceLimit",
+      "number",
+      "—",
+      "blank = OEM default; 0 = unlimited",
+      "—"
+     ],
+     [
+      "Devices & sessions (edit)",
+      "—",
+      "table + action",
+      "—",
+      "device, IP, last active, signed in; sign out",
+      "—"
+     ]
+    ],
+    "note": "",
+    "rules": [
+     "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+     "**R7** — OEM sales user sees **only dealers ticked in \"Assigned Dealers\"** (their POs, payments, details); none ticked = no dealers",
+     "**Dependency note:** R6/R7 (verbatim 'none ticked = sees no dealers' rule)"
+    ]
+   },
+   "workbook": {
+    "notes": "15 OEM roles, MU scope, Assigned Dealers (sales roles), device limit, sessions.",
+    "dependencies": "R6/R7 (verbatim 'none ticked = sees no dealers' rule)",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so the expanded role list cannot be shown. N28 adds Procurement Manager, Inventory Manager, National Sales Head and Area Sales Manager. O53 is shown unchanged."
+    },
+    {
+     "where": "screen control",
+     "text": "The 15 OEM roles are referenced as section 2.1 in screen_details.md (O53), which is not in the file."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "form",
+     "title": "OEM user",
+     "fields": [
+      [
+       "User Role*",
+       "(options?) ▾"
+      ],
+      [
+       "Manufacturing Unit",
+       "MU Hosur ▾"
+      ],
+      [
+       "First / Last Name*",
+       "Ruby Sample"
+      ],
+      [
+       "Email ID*",
+       "ruby@example.com"
+      ],
+      [
+       "Contact*",
+       "90000 00004"
+      ],
+      [
+       "Password*",
+       "••••••••"
+      ],
+      [
+       "Status (edit)*",
+       "Active"
+      ],
+      [
+       "Assigned Dealers (sales roles)",
+       "~…"
+      ],
+      [
+       "Device limit (edit)",
+       "3"
+      ]
+     ],
+     "actions": [
+      "Create",
+      "Submit",
+      "Change password",
+      "Sign out devices"
+     ],
+     "dialog": false
+    }
+   ],
+   "questions": [
+    {
+     "id": "O53-1",
+     "question": "What are the role options?",
+     "why": "The spec says 15 OEM roles (section 2.1, not in the file). The select shows \"Not defined\".",
+     "suggestion": "Provide the 15 roles. Add the four roles N28 proposes: Procurement Manager, Inventory Manager, National Sales Head, Area Sales Manager.",
+     "raised": [
+      "Feedback/assumption.md #20",
+      "EV_App_Screens_Estimation.xlsx row N28"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O53-2",
+     "question": "How do assigned dealers, regions and zones restrict what a sales user sees?",
+     "why": "The spec shows \"Assigned Dealers\" for sales roles and region and zone fields elsewhere.",
+     "suggestion": "A sales user sees only assigned dealers. Region and zone heads see all dealers in their area. The narrowest scope wins.",
+     "raised": [
+      "Feedback/assumption.md #21"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O53-3",
+     "question": "What is the difference between \"create\" and \"submit\"?",
+     "why": "Both buttons are listed.",
+     "suggestion": "Use one button, \"Save\". Drop the other.",
+     "raised": [],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O39",
+   "name": "Vendors",
+   "tours": [
+    "oem-setup",
+    "procurement-to-material-inward"
+   ],
+   "priority": "P0",
+   "estDays": "1.5",
+   "purpose": "The OEM list of vendors (suppliers), with add, edit, delete, and a button to start buying from a vendor.",
+   "spec": {
+    "code": "O39",
+    "name": "Vendors",
+    "path": "/vendors",
+    "type": "List + Dialog",
+    "mode": "CRUD",
+    "roles": "(unkeyed)",
+    "priority": "P0",
+    "buttons": "add, edit, delete, procurement",
+    "fields": [
+     [
+      "Name",
+      "name",
+      "text",
+      "✔"
+     ],
+     [
+      "Contact Person",
+      "contactPerson",
+      "text",
+      "—"
+     ],
+     [
+      "Phone",
+      "phone",
+      "text",
+      "—"
+     ],
+     [
+      "Email",
+      "email",
+      "text",
+      "—"
+     ],
+     [
+      "GST No",
+      "gstNo",
+      "text",
+      "—"
+     ],
+     [
+      "Address",
+      "address",
+      "text",
+      "—"
+     ],
+     [
+      "City",
+      "city",
+      "text",
+      "—"
+     ],
+     [
+      "State",
+      "state",
+      "text",
+      "—"
+     ],
+     [
+      "Pincode",
+      "pincode",
+      "text",
+      "—"
+     ],
+     [
+      "Active",
+      "isActive",
+      "checkbox",
+      "—"
+     ],
+     [
+      "Notes",
+      "notes",
+      "textarea",
+      "—"
+     ]
+    ],
+    "note": "",
+    "rules": [
+     "**Dependency note:** Role not keyed — confirm access"
+    ]
+   },
+   "workbook": {
+    "notes": "Name, contact, phone, email, GST, address, active flag, notes.",
+    "dependencies": "Role not keyed — confirm access",
+    "openQuestion": "Which OEM roles can manage vendors? Not in the role map."
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so the GST lookup (N01) and the extended vendor profile (N23) for … cannot be shown."
+    }
+   ],
+   "feedback": [
+    {
+     "by": "Vishnavi",
+     "text": "provide option add bank details filed for vendor \n\nprovide options to have multiple phone numbers , designation , email , name \n\nprovide filed has active inactive blocked\n\nvendor code should be added and auto generated\n\nprovide description filed to the vendor \"what is going to supply\"",
+     "walkthrough": "procurement-to-material-inward"
+    }
+   ],
+   "mock": [
+    {
+     "t": "list",
+     "title": "Vendors",
+     "cols": [
+      "~Vendor code",
+      "Name",
+      "~Status",
+      "~Phone",
+      "~Supplies"
+     ],
+     "rows": [
+      [
+       "V-0001",
+       "Sample Components Ltd",
+       "Active",
+       "90000 00006",
+       "Motors, controllers"
+      ]
+     ],
+     "actions": [
+      "Add",
+      "Edit",
+      "Delete",
+      "Procurement"
+     ],
+     "tabs": [],
+     "filters": [],
+     "search": ""
+    },
+    {
+     "t": "form",
+     "title": "Vendor",
+     "fields": [
+      [
+       "~Vendor code",
+       "~Auto (V-0002)"
+      ],
+      [
+       "Name*",
+       "…"
+      ],
+      [
+       "~Contacts",
+       "~Name · designation · phone · email (many)"
+      ],
+      [
+       "~Bank details",
+       "~Account, IFSC, branch"
+      ],
+      [
+       "GST No",
+       "~Auto-fill from GST (N01)"
+      ],
+      [
+       "~Status",
+       "~Active / Inactive / Blocked"
+      ],
+      [
+       "~What they supply",
+       "~…"
+      ]
+     ],
+     "actions": [
+      "Save"
+     ],
+     "dialog": true
+    }
+   ],
+   "questions": [
+    {
+     "id": "O39-1",
+     "question": "Should the vendor record carry bank details, several contacts, a status, an auto vendor code and a \"what they supply\" description?",
+     "why": "Vishnavi's feedback asks for all of these. The spec has Name, one contact, phone, email, GST, address, active flag and notes. N23 (extended vendor profile) is one line with no screen.",
+     "suggestion": "Yes to all five. Contacts: many, each with name, designation, phone, email. Status: Active, Inactive, Blocked (blocked cannot receive new POs). Vendor code is generated: V-0001, V-0002.",
+     "raised": [
+      "Feedback from Vishnavi (walkthrough feedback)",
+      "EV_App_Screens_Estimation.xlsx row N23"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O39-2",
+     "question": "Should GST lookup (N01) fill the vendor details automatically?",
+     "why": "N01 needs a GST-portal provider. The workbook asks which one.",
+     "suggestion": "Yes, for vendors and dealers, once a provider is chosen. Until then, manual entry.",
+     "raised": [
+      "EV_App_Screens_Estimation.xlsx row N01",
+      "Feedback/assumption.md #32"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O39-3",
+     "question": "Which OEM roles can manage vendors?",
+     "why": "The spec says \"Role not keyed — confirm access\" and the workbook asks the same.",
+     "suggestion": "Procurement Manager and Admin edit; Inventory Manager reads.",
+     "raised": [
+      "EV_App_Screens_Estimation.xlsx row O39",
+      "Feedback/assumption.md #20"
+     ],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O26",
+   "name": "Product Create / Edit: Vehicle",
+   "tours": [
+    "oem-setup",
+    "procurement-to-material-inward"
+   ],
+   "priority": "P0",
+   "estDays": "5",
+   "purpose": "Create or edit a vehicle model: variants, colours, taxes, prices per dealer tier, and which motor, controller, battery and charger it uses.",
+   "spec": {
+    "code": "O26",
+    "name": "Product Create / Edit: Vehicle",
+    "path": "/products/vehicle/new, /products/vehicle/:id/edit",
+    "type": "Form",
+    "mode": "CRUD",
+    "roles": "ADM",
+    "priority": "P0",
+    "buttons": "add colour, add variant, add spec, create",
+    "fields": [],
+    "note": "",
+    "rules": [
+     "**F1** — Each variant has 5 prices: Distributor, Divisional Distributor, District Dealer, Area Dealer, Customer. A dealer sees only **its tier** (on PO) and **Customer** (on sale). Spares and components have Dealer + Customer price.",
+     "**Counterpart:** D29, D20 picker",
+     "**Dependency note:** F1 (5-tier pricing)"
+    ]
+   },
+   "workbook": {
+    "notes": "Model, type, motor/controller links, HSN/GST, colours, embedded variant details with 5-tier price matrix, tech specs, per-MU availability, purchase limit.",
+    "dependencies": "F1 (5-tier pricing)",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so the bill of materials per vehicle model (N08) and its versioning and approval (N09) cannot be shown."
+    },
+    {
+     "where": "screen control",
+     "text": "The dealer types and the share of stock for Purchase limit are not defined in screen_details.md (O26)."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "form",
+     "title": "Vehicle product",
+     "fields": [
+      [
+       "Vehicle Model*",
+       "Tera Zip"
+      ],
+      [
+       "Type*",
+       "Scooter"
+      ],
+      [
+       "HSN No*",
+       "8711"
+      ],
+      [
+       "CGST / SGST (%)*",
+       "2.5 / 2.5"
+      ],
+      [
+       "Variant 1*",
+       "60V 30Ah"
+      ],
+      [
+       "Without Battery & Charger",
+       "☐"
+      ],
+      [
+       "Battery",
+       "~Battery 30Ah ▾"
+      ],
+      [
+       "Price: Distributor*",
+       "₹…"
+      ],
+      [
+       "~Bill of materials",
+       "~Parts, quantity, landing price (N08)"
+      ],
+      [
+       "~BOM version",
+       "~v1 (N09)"
+      ]
+     ],
+     "actions": [
+      "Add colour",
+      "Add variant",
+      "Add spec",
+      "Create"
+     ],
+     "dialog": false
+    }
+   ],
+   "questions": [
+    {
+     "id": "O26-1",
+     "question": "What does the bill of materials (N08) hold, and who approves a change (N09)?",
+     "why": "N08 and N09 have one line each and no screen. The workbook asks \"does every BOM change need versioning, or only material changes? Who approves: Production Head, QC or OEM Admin?\"",
+     "suggestion": "A BOM per vehicle model: part, quantity, image, landing price. Any change creates a new version; the OEM Admin approves. Work already in progress keeps the old version.",
+     "raised": [
+      "Feedback/assumption.md #23",
+      "EV_App_Screens_Estimation.xlsx row N09"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O26-2",
+     "question": "Should the charger be hidden when \"Without Battery & Charger\" is ticked?",
+     "why": "The spec says it should; the tour shows the charger always.",
+     "suggestion": "Hide Battery, Battery Qty and Charger when ticked.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O26-3",
+     "question": "Where do the motor, controller, battery and charger lists come from?",
+     "why": "The tour created one component (the motor) and used sample lists for the others.",
+     "suggestion": "From the component product lists (O25 tabs), filtered to Active.",
+     "raised": [],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O27",
+   "name": "Product Create / Edit: Spare, Accessory",
+   "tours": [
+    "oem-setup",
+    "oem-warehouse-products"
+   ],
+   "priority": "P0",
+   "estDays": "2.5",
+   "purpose": "Create or edit a spare part or accessory.",
+   "spec": {
+    "code": "O27",
+    "name": "Product Create / Edit: Spare, Accessory",
+    "path": "/products/{spare, accessory}/new, edit",
+    "type": "Form",
+    "mode": "CRUD",
+    "roles": "ADM",
+    "priority": "P0",
+    "buttons": "create",
+    "fields": [
+     [
+      "Vehicle",
+      "vehicleId",
+      "select",
+      "✔",
+      "vehicle products",
+      "compatibility"
+     ],
+     [
+      "Spare Name / Accessory Name",
+      "spareName / productName",
+      "text",
+      "✔",
+      "—",
+      "—"
+     ],
+     [
+      "Is Panel / Painted Part? (spare)",
+      "isPanel",
+      "checkbox",
+      "—",
+      "creates one spare per colour of the model",
+      "—"
+     ],
+     [
+      "Parts Code",
+      "partCode",
+      "text",
+      "—",
+      "—",
+      "—"
+     ],
+     [
+      "Vendor / Supplier (spare)",
+      "vendorId",
+      "select",
+      "—",
+      "None / vendors",
+      "links to O40 procurement"
+     ],
+     [
+      "Category, Brand (accessory) [C]",
+      "category, brand",
+      "text / select",
+      "—",
+      "—",
+      "—"
+     ],
+     [
+      "HSN Code",
+      "HSN",
+      "text",
+      "✔",
+      "—",
+      "—"
+     ],
+     [
+      "CGST / SGST",
+      "cgst, sgst",
+      "text",
+      "—",
+      "—",
+      "—"
+     ],
+     [
+      "Dealer Price",
+      "dealerPrice",
+      "text ₹",
+      "—",
+      "single dealer price (not tiered)",
+      "—"
+     ],
+     [
+      "Customer Price",
+      "customerPrice",
+      "text ₹",
+      "—",
+      "—",
+      "—"
+     ],
+     [
+      "Image",
+      "images",
+      "file",
+      "—",
+      "—",
+      "—"
+     ],
+     [
+      "Additional specs",
+      "specs[]",
+      "key / value",
+      "—",
+      "—",
+      "—"
+     ],
+     [
+      "Available from per MU, Purchase limit",
+      "—",
+      "checkbox",
+      "—",
+      "as 7.12",
+      "—"
+     ]
+    ],
+    "note": "",
+    "rules": [
+     "**F1** — Each variant has 5 prices: Distributor, Divisional Distributor, District Dealer, Area Dealer, Customer. A dealer sees only **its tier** (on PO) and **Customer** (on sale). Spares and components have Dealer + Customer price.",
+     "**Counterpart:** D29 (spares), D20"
+    ]
+   },
+   "workbook": {
+    "notes": "Vehicle link, vendor/supplier, HSN/GST, dealer+customer price, images, specs, per-MU availability.",
+    "dependencies": "",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so the inventory type flag (N14) and the spare part extended fields (N24) cannot be shown on this form."
+    },
+    {
+     "where": "screen control",
+     "text": "Category and Brand (accessory) have a \"text / select\" type but no option list in screen_details.md (O27)."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "form",
+     "title": "Spare / accessory",
+     "fields": [
+      [
+       "Vehicle*",
+       "Tera Zip ▾"
+      ],
+      [
+       "Spare Name*",
+       "Brake pad"
+      ],
+      [
+       "Parts Code",
+       "BP-001"
+      ],
+      [
+       "Category / Brand",
+       "~(options?)"
+      ],
+      [
+       "HSN Code*",
+       "8714"
+      ],
+      [
+       "Dealer Price",
+       "₹…"
+      ],
+      [
+       "Customer Price",
+       "₹…"
+      ],
+      [
+       "~Inventory type",
+       "~Saleable ▾ (N14)"
+      ],
+      [
+       "~UoM, weight, material (N24)",
+       "~…"
+      ]
+     ],
+     "actions": [
+      "Create"
+     ],
+     "dialog": false
+    }
+   ],
+   "questions": [
+    {
+     "id": "O27-1",
+     "question": "How should internal-use items (N14) be flagged?",
+     "why": "N14 asks for a new field and filter so internal-use items are excluded from dealer-facing inventory. The workbook says the client flagged the naming as a placeholder.",
+     "suggestion": "A field \"Inventory type\": Saleable or Internal use. Internal use never shows to dealers or in D25. Only Inventory Manager and Admin can change it.",
+     "raised": [
+      "Feedback/assumption.md #25",
+      "EV_App_Screens_Estimation.xlsx row N14"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O27-2",
+     "question": "Which extra fields belong on a spare part (N24)?",
+     "why": "N24 lists unit of measure, weight, material, multi-model use, purchase cost and price history, from a slide deck.",
+     "suggestion": "Add them as optional fields; price history kept automatically when price changes.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O27-3",
+     "question": "Where do the options for Category and Brand come from?",
+     "why": "The spec says \"text / select\" with no list.",
+     "suggestion": "A small master list that an admin can extend.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O27-4",
+     "question": "What does \"Is Panel / Painted Part?\" create?",
+     "why": "The spec says it creates one spare per colour of the model.",
+     "suggestion": "Confirm: on save, one spare record per colour, named \"Part (Colour)\".",
+     "raised": [],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O05",
+   "name": "Add / Edit Dealer",
+   "tours": [
+    "dealer-setup"
+   ],
+   "priority": "P0",
+   "estDays": "5",
+   "purpose": "The OEM Super Admin creates a new dealer here. It sets the price tier, the region, zone and manufacturing unit, and the sign-in password.",
+   "spec": {
+    "code": "O05",
+    "name": "Add / Edit Dealer",
+    "path": "/dealers/new, /dealers/:id/edit",
+    "type": "Form",
+    "mode": "CRUD",
+    "roles": "ADM",
+    "priority": "P0",
+    "buttons": "create new dealer, save",
+    "fields": [
+     [
+      "User Type",
+      "dealerType",
+      "radio",
+      "✔",
+      "Distributor / Divisional Distributor / District Dealer / Area Dealer",
+      "sets price tier (F1) and seller"
+     ],
+     [
+      "Owner Name: title",
+      "namePrefix",
+      "select",
+      "✔",
+      "Mr. / Miss. / Mrs.",
+      "—"
+     ],
+     [
+      "Owner first / last name",
+      "firstName, lastName",
+      "text",
+      "✔",
+      "—",
+      "—"
+     ],
+     [
+      "Firm Name",
+      "orgName",
+      "text",
+      "✔",
+      "—",
+      "—"
+     ],
+     [
+      "GST No",
+      "gstNo",
+      "text",
+      "✔",
+      "—",
+      "—"
+     ],
+     [
+      "Org Email ID",
+      "orgEmail",
+      "text",
+      "✔",
+      "—",
+      "—"
+     ],
+     [
+      "Org Contact",
+      "contact",
+      "text",
+      "✔",
+      "—",
+      "—"
+     ],
+     [
+      "Joining Date",
+      "joiningDate",
+      "date",
+      "✔",
+      "—",
+      "—"
+     ],
+     [
+      "State",
+      "state",
+      "select",
+      "—",
+      "operating states",
+      "drives District"
+     ],
+     [
+      "District",
+      "district",
+      "select",
+      "—",
+      "\"Select a state first\"",
+      "—"
+     ],
+     [
+      "Area",
+      "area",
+      "text",
+      "—",
+      "—",
+      "—"
+     ],
+     [
+      "Select Region",
+      "regionId",
+      "select",
+      "✔",
+      "regions (O51)",
+      "—"
+     ],
+     [
+      "Select Zone",
+      "zoneId",
+      "select",
+      "✔",
+      "zones of region",
+      "—"
+     ],
+     [
+      "Manufacturing Unit",
+      "manufacturingUnitId",
+      "select",
+      "—",
+      "None / MU list",
+      "dealer's seller and letterhead"
+     ],
+     [
+      "Password",
+      "password",
+      "password",
+      "✔",
+      "—",
+      "creates dealer login (D00000n auto)"
+     ],
+     [
+      "Organization Logo",
+      "logo",
+      "file image / *",
+      "—",
+      "240×240 px, ≤ 1 MB",
+      "shown on PDFs / emails"
+     ],
+     [
+      "Billing: Country, State, Address, City, Pincode",
+      "billingAddress.*",
+      "select / text",
+      "✔ all",
+      "—",
+      "—"
+     ],
+     [
+      "Shipping: same (+ Copy Billing)",
+      "shippingAddress.*",
+      "—",
+      "✔ all",
+      "—",
+      "—"
+     ],
+     [
+      "Shop Location: Latitude, Longitude, Address",
+      "latitude, longitude, address",
+      "number / textarea",
+      "—",
+      "—",
+      "—"
+     ],
+     [
+      "Bank: Account Type",
+      "bankDetails.accountType",
+      "radio",
+      "✔",
+      "Current / Saving",
+      "—"
+     ],
+     [
+      "Beneficiary Name",
+      "bankDetails.beneficiaryName",
+      "text",
+      "✔",
+      "—",
+      "—"
+     ],
+     [
+      "Bank Name",
+      "bankDetails.bankName",
+      "text",
+      "✔",
+      "—",
+      "—"
+     ],
+     [
+      "Account Number",
+      "bankDetails.accountNumber",
+      "text",
+      "✔",
+      "—",
+      "—"
+     ],
+     [
+      "Re-enter Account Number",
+      "bankDetails.confirmAccount",
+      "text",
+      "✔",
+      "must match",
+      "—"
+     ],
+     [
+      "IFSC",
+      "bankDetails.IFSC",
+      "text",
+      "✔",
+      "—",
+      "—"
+     ]
+    ],
+    "note": "",
+    "rules": [
+     "**F3** — Dealer profile (org, GST, bank, addresses, MU, region / zone, type) is OEM-owned and read-only to dealer. Dealer may edit only password, shop location, photo and business documents.",
+     "**Counterpart:** D47 (read-only)",
+     "**Dependency note:** F3; creates dealer login"
+    ]
+   },
+   "workbook": {
+    "notes": "Full onboarding: type, owner, firm, GST, region/zone, MU, password, billing+shipping address, shop location, bank details, logo.",
+    "dependencies": "F3; creates dealer login",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "screen control",
+     "text": "The Country options are not defined in screen_details.md."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "form",
+     "title": "Add dealer",
+     "fields": [
+      [
+       "User Type*",
+       "District Dealer ▾"
+      ],
+      [
+       "Firm Name*",
+       "Sri Lakshmi EVs"
+      ],
+      [
+       "GST No*",
+       "36AAAAA0000A1Z5"
+      ],
+      [
+       "Select Region*",
+       "South ▾"
+      ],
+      [
+       "Select Zone*",
+       "Hyderabad ▾"
+      ],
+      [
+       "Manufacturing Unit",
+       "MU Hosur ▾"
+      ],
+      [
+       "Password*",
+       "••••••••"
+      ]
+     ],
+     "actions": [
+      "Save"
+     ],
+     "dialog": false
+    }
+   ],
+   "questions": [
+    {
+     "id": "O05-1",
+     "question": "Where does the user land after Save?",
+     "why": "The spec does not say. The tour goes to the dealers list (O04), where the new row is visible, then opens the dealer (O06).",
+     "suggestion": "Land on the dealers list, with the new firm name as a link to the detail page.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O05-2",
+     "question": "How does the dealer get the User ID and password?",
+     "why": "No screen or rule covers it. The tour shows \"Not defined\" at O06.",
+     "suggestion": "Send both to the dealer's email and WhatsApp number when the dealer is saved. Force a password change at first sign-in.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O05-3",
+     "question": "What is the Dealer ID format?",
+     "why": "O05 says \"D00000n auto\". D01 shows the example \"D000002\" (7 characters) and the placeholder \"eg. D001\" (6).",
+     "suggestion": "Seven characters: D plus six digits, for example D000002. Change the placeholder to match.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O05-4",
+     "question": "Where do the lists of states, districts, regions, zones and manufacturing units come from?",
+     "why": "The spec gives no values. Region, zone and unit must exist before a dealer can be created.",
+     "suggestion": "States and districts from master data. Regions, zones and units from the OEM setup screens. Block dealer creation until at least one of each exists.",
+     "raised": [],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O06",
+   "name": "Dealer Detail (9 tabs)",
+   "tours": [
+    "dealer-setup",
+    "oem-monitor-dealer"
+   ],
+   "priority": "P0",
+   "estDays": "3",
+   "purpose": "The OEM's page for one dealer. Everything about that dealer is reached from its tabs.",
+   "spec": {
+    "code": "O06",
+    "name": "Dealer Detail (9 tabs)",
+    "path": "/dealers/:id/details",
+    "type": "Detail (9 tabs)",
+    "mode": "RO",
+    "roles": "see DEALER_DETAILS",
+    "priority": "P0",
+    "buttons": "edit, switch tab",
+    "fields": [],
+    "note": "No dedicated input form — this is a detail (9 tabs) screen. Display/column content: Profile, connections, ledger top-ups tab shell.",
+    "rules": [
+     "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+     "**R7** — OEM sales user sees **only dealers ticked in \"Assigned Dealers\"** (their POs, payments, details); none ticked = no dealers",
+     "**Counterpart:** D47, D35",
+     "**Dependency note:** R6/R7"
+    ]
+   },
+   "workbook": {
+    "notes": "Profile, connections, ledger top-ups tab shell.",
+    "dependencies": "R6/R7",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "How the dealer's login details are handed over is not defined in screen_details.md. No screen or rule covers this step."
+    },
+    {
+     "where": "tour step",
+     "text": "The spec does not say how the dealer detail (O06) leads to the mirror screens. Only the Profile, Connections and Ledger top-ups tab names are given, and no tab links to the mirrors."
+    },
+    {
+     "where": "screen control",
+     "text": "The Connections tab content is not defined in screen_details.md."
+    },
+    {
+     "where": "screen control",
+     "text": "The Ledger top-ups tab content is not defined in screen_details.md."
+    },
+    {
+     "where": "screen control",
+     "text": "This tab name and content are not defined in screen_details.md."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "detail",
+     "title": "Sri Lakshmi EVs · D000002",
+     "tabs": [
+      "Profile",
+      "Connections",
+      "Ledger top-ups",
+      "~Customers",
+      "~Enquiries",
+      "~Vehicles sold",
+      "~Vehicle stock",
+      "~Warranty",
+      "~Purchase orders"
+     ],
+     "kv": [
+      [
+       "User type",
+       "District Dealer"
+      ],
+      [
+       "Region",
+       "South"
+      ],
+      [
+       "Zone",
+       "Hyderabad"
+      ],
+      [
+       "MU",
+       "MU Hosur"
+      ]
+     ],
+     "actions": [
+      "Edit"
+     ]
+    }
+   ],
+   "questions": [
+    {
+     "id": "O06-1",
+     "question": "What are the nine tabs, and what do Connections and Ledger top-ups show?",
+     "why": "The spec says \"9 tabs\" and names only Profile, Connections and Ledger top-ups. The other six have no names and the three named ones have no content.",
+     "suggestion": "Profile, Connections, Ledger top-ups, Customers, Enquiries, Vehicles sold, Vehicle stock, Warranty claims, Purchase orders. Connections lists linked sub-dealers; Ledger top-ups lists D46 submissions and their verification.",
+     "raised": [
+      "Feedback/assumption.md #15, #17"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O06-2",
+     "question": "How does the OEM reach the customer, enquiry, stock and other mirror screens (O07 to O14)?",
+     "why": "No tab, button or link is defined for it. The tour moves there without a spec link.",
+     "suggestion": "One tab per mirror screen, as proposed above.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O06-3",
+     "question": "Where is the dealer's sign-in information shown after creation?",
+     "why": "The credential hand-over is not defined (see O05).",
+     "suggestion": "Show the User ID and a \"Resend credentials\" button to the Super Admin only.",
+     "raised": [],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "D04",
+   "name": "Dashboard",
+   "tours": [
+    "dealer-setup"
+   ],
+   "priority": "P0",
+   "estDays": "2.5",
+   "purpose": "The first page a dealer sees after signing in. It shows business totals at a glance.",
+   "spec": {
+    "code": "D04",
+    "name": "Dashboard",
+    "path": "/dashboard",
+    "type": "Dashboard",
+    "mode": "RO",
+    "roles": "D S V",
+    "priority": "P0",
+    "buttons": "period filter, drill links",
+    "fields": [],
+    "note": "No dedicated input form — this is a dashboard screen. Display/column content: Aggregates: invoices, POs, service, warranty, follow-ups; period filter.",
+    "rules": [
+     "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+     "**Counterpart:** O03 (all dealers), O06 header",
+     "**Dependency note:** R1 scoping"
+    ]
+   },
+   "workbook": {
+    "notes": "Aggregates: invoices, POs, service, warranty, follow-ups; period filter.",
+    "dependencies": "R1 scoping",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "screen control",
+     "text": "$…' are not defined in screen_details.md (D04).`\n    )}"
+    },
+    {
+     "where": "screen control",
+     "text": "The period filter options are not defined in screen_details.md (D04)."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "dash",
+     "title": "Dashboard",
+     "tiles": [
+      [
+       "Invoices",
+       "~42 this month"
+      ],
+      [
+       "Purchase orders",
+       "~7 open"
+      ],
+      [
+       "Service jobs",
+       "~5 open"
+      ],
+      [
+       "Warranty claims",
+       "~2 open"
+      ],
+      [
+       "Follow-ups",
+       "~9 due today"
+      ]
+     ],
+     "filters": [
+      "Period ▾"
+     ],
+     "note": "Tile numbers and the drill-down targets are proposed."
+    }
+   ],
+   "questions": [
+    {
+     "id": "D04-1",
+     "question": "What number does each tile show, and where does clicking it go?",
+     "why": "The spec names five aggregates (invoices, POs, service, warranty, follow-ups) and \"drill links\", but gives no values or targets. The tour shows \"Not defined\".",
+     "suggestion": "Invoices: count and ₹ total, opens the invoice list. POs: open count, opens the PO list. Service: open jobs, opens the service list. Warranty: open claims, opens the warranty list. Follow-ups: due today, opens the follow-up list.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "D04-2",
+     "question": "Which period options does the filter offer?",
+     "why": "The spec says \"period filter\" with no options.",
+     "suggestion": "Today, this week, this month, this year, custom dates (the same set the OEM vehicle-sold report uses).",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "D04-3",
+     "question": "Do all three roles (Dealer, Sales, Service) see all five tiles?",
+     "why": "Roles D, S and V may open the dashboard. No tile is tied to a role.",
+     "suggestion": "Dealer owner sees all. Sales sees invoices and follow-ups. Service sees service and warranty.",
+     "raised": [
+      "Feedback/assumption.md #20 (role-to-screen matrix)"
+     ],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "D37",
+   "name": "Warranty List",
+   "tours": [
+    "service-warranty-claim"
+   ],
+   "priority": "P0",
+   "estDays": "2",
+   "purpose": "Lists the dealer's warranty claims and starts a new one by choosing the customer and vehicle.",
+   "spec": {
+    "code": "D37",
+    "name": "Warranty List",
+    "path": "/warranty; tab /customer/:id/warranty-claims",
+    "type": "List + Dialog",
+    "mode": "RO",
+    "roles": "D V",
+    "priority": "P0",
+    "buttons": "search; + → select customer by chassis",
+    "fields": [],
+    "note": "No dedicated input form — this is a list + dialog screen. Display/column content: Search; new claim by selecting customer/chassis.",
+    "rules": [
+     "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+     "**Counterpart:** O43, O11",
+     "**Dependency note:** R1; counterpart O43/O11"
+    ]
+   },
+   "workbook": {
+    "notes": "Search; new claim by selecting customer/chassis.",
+    "dependencies": "R1; counterpart O43/O11",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "The select customer by chassis dialog (opened by + on the Warranty List) is not defined in screen_details.md. The walkthrough goes straight to Warranty Claim Create for the customer."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "list",
+     "title": "Warranty claims",
+     "cols": [
+      "~Claim ID",
+      "~Customer",
+      "~Raised to",
+      "~Status"
+     ],
+     "rows": [
+      [
+       "WC-014",
+       "Meena Sample",
+       "OEM",
+       "Raised to OEM"
+      ]
+     ],
+     "actions": [
+      "+ New claim"
+     ],
+     "tabs": [],
+     "filters": [],
+     "search": "Search"
+    },
+    {
+     "t": "form",
+     "title": "Select customer by chassis",
+     "fields": [
+      [
+       "Chassis number",
+       "~CH-1042"
+      ],
+      [
+       "~Customer",
+       "~Meena Sample (auto)"
+      ]
+     ],
+     "actions": [
+      "Continue"
+     ],
+     "dialog": true
+    }
+   ],
+   "questions": [
+    {
+     "id": "D37-1",
+     "question": "What does the \"select customer by chassis\" dialog contain?",
+     "why": "The \"+\" button opens it, but the spec gives no fields. The tour jumps straight to the claim form.",
+     "suggestion": "One field: chassis number. The system finds the customer and vehicle and opens D38 with them filled in.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "D37-2",
+     "question": "Which columns and search fields does the list have?",
+     "why": "The spec says only \"search\" and \"+\". Columns are not given.",
+     "suggestion": "Columns: Claim ID, Customer, Product, Raised to, Status, Date. Search by claim ID, customer or chassis.",
+     "raised": [],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "D38",
+   "name": "Warranty Claim Create",
+   "tours": [
+    "service-warranty-claim"
+   ],
+   "priority": "P0",
+   "estDays": "3",
+   "purpose": "The form a dealer fills to claim warranty on a customer's vehicle or part.",
+   "spec": {
+    "code": "D38",
+    "name": "Warranty Claim Create",
+    "path": "/customer/:id/warranty-claims/new",
+    "type": "Form",
+    "mode": "Create",
+    "roles": "D V",
+    "priority": "P0",
+    "buttons": "claim warranty",
+    "fields": [
+     [
+      "Raised to",
+      "raisedTo",
+      "radio",
+      "✔",
+      "OEM / Dealer (service team)",
+      "dealer path = dealer runs the workflow"
+     ],
+     [
+      "Product type",
+      "productType",
+      "radio",
+      "✔",
+      "Vehicle / Warranty products",
+      "—"
+     ],
+     [
+      "Customer Name",
+      "customerName",
+      "ro",
+      "—",
+      "—",
+      "—"
+     ],
+     [
+      "Select Vehicle",
+      "vehicleChasisNo → inventoryId, chasisNumber, vehicleId, variantId",
+      "select",
+      "✔",
+      "customer's **paid** invoices: \"model (variant) · chassis · colour\"",
+      "—"
+     ],
+     [
+      "Chassis, Variant, Colour, Motor no, Controller no, Charger no, Battery no(s)",
+      "—",
+      "ro",
+      "—",
+      "from invoice serials",
+      "—"
+     ],
+     [
+      "Select Spare",
+      "selectedVehicleSpare → itemDetails.spareType",
+      "select",
+      "✔",
+      "Battery / Controller / Motor / Charger",
+      "—"
+     ],
+     [
+      "Select serial number(s)",
+      "spareSerialSelector → itemDetails.itemNo",
+      "checkbox list",
+      "✔",
+      "serials already on an active claim are locked",
+      "\"No serial number found on the invoice…\""
+     ],
+     [
+      "Issue",
+      "issue",
+      "select",
+      "✔",
+      "Not Working / Run Very slow / Other",
+      "—"
+     ],
+     [
+      "Still Warranty",
+      "itemDetails.warenty",
+      "ro date",
+      "✔",
+      "computed end date",
+      "—"
+     ],
+     [
+      "Remarks",
+      "remarks",
+      "textarea",
+      "✔",
+      "—",
+      "—"
+     ],
+     [
+      "Claim images",
+      "warrantyImages[]",
+      "file image / *",
+      "—",
+      "≤ 10 files, ≤ 5 MB each; images only",
+      "—"
+     ],
+     [
+      "Warranty-products mode: search",
+      "productId, partCode",
+      "search",
+      "✔",
+      "name, part code, type, invoice #",
+      "—"
+     ]
+    ],
+    "note": "",
+    "rules": [
+     "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+     "**Counterpart:** O44",
+     "**Dependency note:** R1; counterpart O44"
+    ]
+   },
+   "workbook": {
+    "notes": "Raised to OEM or dealer service team; select vehicle/spare/serial, issue, remarks, up to 10 images.",
+    "dependencies": "R1; counterpart O44",
+    "openQuestion": ""
+   },
+   "guesses": [],
+   "feedback": [
+    {
+     "by": "Vishnavi",
+     "text": "more items to add in  warranty list in future",
+     "walkthrough": "service-warranty-claim"
+    }
+   ],
+   "mock": [
+    {
+     "t": "form",
+     "title": "New warranty claim",
+     "fields": [
+      [
+       "Raised to*",
+       "OEM"
+      ],
+      [
+       "Product type*",
+       "Spare"
+      ],
+      [
+       "Select Vehicle*",
+       "Tera Zip · CH-1042"
+      ],
+      [
+       "Select Spare*",
+       "Battery"
+      ],
+      [
+       "Select serial number(s)*",
+       "~SN-8841"
+      ],
+      [
+       "Issue*",
+       "Cell swelling"
+      ],
+      [
+       "Still Warranty*",
+       "~Yes (from invoice date)"
+      ],
+      [
+       "Remarks*",
+       "Seen after charging"
+      ],
+      [
+       "Claim images",
+       "photo.jpg"
+      ]
+     ],
+     "actions": [
+      "Claim warranty"
+     ],
+     "dialog": false
+    }
+   ],
+   "questions": [
+    {
+     "id": "D38-1",
+     "question": "Which items can be claimed, and who keeps that list up to date?",
+     "why": "The spare list is fixed in the screen. Feedback from Vishnavi: \"more items to add in warranty list in future\".",
+     "suggestion": "Keep the warrantable items as master data that an OEM admin can extend (battery, motor, controller, charger to start), not a fixed list.",
+     "raised": [
+      "Feedback from Vishnavi (walkthrough feedback, 27 Oct)"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "D38-2",
+     "question": "Is \"Still Warranty?\" typed by the dealer or worked out by the system?",
+     "why": "The field is required with no rule.",
+     "suggestion": "The system works it out from the invoice date and the product's warranty period. The dealer cannot change it.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "D38-3",
+     "question": "Which images or files are allowed, and how many?",
+     "why": "The spec lists \"Claim images\" with no limits.",
+     "suggestion": "Images or short video, up to 5 files, 10 MB each.",
+     "raised": [],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "D39",
+   "name": "Warranty Claim Detail",
+   "tours": [
+    "service-warranty-claim"
+   ],
+   "priority": "P0",
+   "estDays": "3.5",
+   "purpose": "Dealer-side view of one warranty claim as it moves from raised, to OEM inspection, to repair or replacement.",
+   "spec": {
+    "code": "D39",
+    "name": "Warranty Claim Detail",
+    "path": "/customer/:id/warranty-claims/:id",
+    "type": "Detail + Dialogs",
+    "mode": "RO + Action",
+    "roles": "D V",
+    "priority": "P0",
+    "buttons": "mark in transit, pay service charge, confirm receipt, report post-receipt issue, print receipt",
+    "fields": [],
+    "note": "",
+    "rules": [
+     "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+     "**F8** — Issue review notes and OEM approval steps are shown to dealer only as **stage + outcome**",
+     "**Counterpart:** **O44**",
+     "**Dependency note:** R1, F8; counterpart O44"
+    ]
+   },
+   "workbook": {
+    "notes": "Mark in transit, pay service charge, confirm receipt, report post-receipt issue.",
+    "dependencies": "R1, F8; counterpart O44",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "screen control",
+     "text": "$…"
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "detail",
+     "title": "Claim WC-014",
+     "tabs": [
+      "~Claim details",
+      "~Photos",
+      "~History"
+     ],
+     "kv": [
+      [
+       "Status",
+       "Raised to OEM"
+      ],
+      [
+       "Product",
+       "Battery"
+      ],
+      [
+       "Service charge",
+       "₹1,500 (asked by OEM)"
+      ]
+     ],
+     "actions": [
+      "Mark in transit",
+      "Pay service charge",
+      "Confirm receipt",
+      "Report post-receipt issue"
+     ]
+    }
+   ],
+   "questions": [
+    {
+     "id": "D39-1",
+     "question": "What fields does \"Claim details\" show?",
+     "why": "The spec gives no fields for this heading. The tour shows \"Not defined\".",
+     "suggestion": "Claim ID, customer, vehicle and chassis, part and serial, issue, date raised, current status, photos.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "D39-2",
+     "question": "What are the claim statuses, in order?",
+     "why": "The spec names a few (in transit, verify, inspect, service) but not the full list. The tour composed the rest.",
+     "suggestion": "Raised, Verified, In transit, Received, Inspecting, Service or replacement, Awaiting service charge, Completed, Rejected.",
+     "raised": [
+      "Feedback/assumption.md #14"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "D39-3",
+     "question": "When the OEM asks for a service charge, who pays: the customer, the dealer, or is it set per case?",
+     "why": "The workflow leaves this open. The tour does not show it.",
+     "suggestion": "The dealer pays the OEM; the dealer may pass it on to the customer. Record the charge on the claim.",
+     "raised": [],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O43",
+   "name": "Warranty (Received)",
+   "tours": [
+    "service-warranty-claim"
+   ],
+   "priority": "P0",
+   "estDays": "2",
+   "purpose": "The OEM queue of warranty claims raised to the OEM.",
+   "spec": {
+    "code": "O43",
+    "name": "Warranty (Received)",
+    "path": "/warranty (raisedTo = oem)",
+    "type": "List",
+    "mode": "RO",
+    "roles": "WARRANTY roles",
+    "priority": "P0",
+    "buttons": "status filter",
+    "fields": [],
+    "note": "No dedicated input form — this is a list screen. Display/column content: Status filter; raisedTo=oem queue.",
+    "rules": [
+     "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+     "**R7** — OEM sales user sees **only dealers ticked in \"Assigned Dealers\"** (their POs, payments, details); none ticked = no dealers",
+     "**Counterpart:** D37",
+     "**Dependency note:** R6/R7"
+    ]
+   },
+   "workbook": {
+    "notes": "Status filter; raisedTo=oem queue.",
+    "dependencies": "R6/R7",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "screen control",
+     "text": "The status filter options are not defined in screen_details.md."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "list",
+     "title": "Warranty claims received",
+     "cols": [
+      "~Claim ID",
+      "~Dealer",
+      "~Raised to",
+      "~Status"
+     ],
+     "rows": [
+      [
+       "WC-014",
+       "Sri Lakshmi EVs",
+       "OEM",
+       "Verify"
+      ]
+     ],
+     "actions": [],
+     "tabs": [],
+     "filters": [
+      "Status ▾"
+     ],
+     "search": ""
+    }
+   ],
+   "questions": [
+    {
+     "id": "O43-1",
+     "question": "Which statuses does the filter offer, and which columns show?",
+     "why": "The spec says \"status filter; raisedTo = OEM queue\". Columns and options are not given.",
+     "suggestion": "Statuses as on the claim (see D39). Columns: Claim ID, Dealer, Product, Raised to, Status, Date.",
+     "raised": [
+      "Feedback/assumption.md #14"
+     ],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O44",
+   "name": "Warranty Claim Page",
+   "tours": [
+    "service-warranty-claim"
+   ],
+   "priority": "P0",
+   "estDays": "5",
+   "purpose": "The OEM works one warranty claim: verify it, inspect, decide service or replacement, ask the dealer for a service charge, and close it.",
+   "spec": {
+    "code": "O44",
+    "name": "Warranty Claim Page",
+    "path": "/warranty/warranty-receipt/:id",
+    "type": "Detail + Dialogs",
+    "mode": "Action",
+    "roles": "WARRANTY roles",
+    "priority": "P0",
+    "buttons": "verify / reject, inspection report, service or replacement, request / edit / waive service charge, verify / reject dealer payment, return details",
+    "fields": [],
+    "note": "",
+    "rules": [
+     "**Counterpart:** **D39**",
+     "**Dependency note:** counterpart D39"
+    ]
+   },
+   "workbook": {
+    "notes": "Verify/reject, inspection report, service-or-replacement (stock-checked), service charge request/edit/waive/verify, return logistics.",
+    "dependencies": "counterpart D39",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "screen control",
+     "text": "$…"
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "detail",
+     "title": "Claim WC-014",
+     "tabs": [
+      "OEM review",
+      "Customer & claim",
+      "Issue & coverage",
+      "Dealer claim photos",
+      "Dealer issue report"
+     ],
+     "kv": [
+      [
+       "Status",
+       "Raised to OEM"
+      ],
+      [
+       "Product",
+       "Battery"
+      ]
+     ],
+     "actions": [
+      "Verify / reject",
+      "Inspection report",
+      "Service or replacement",
+      "Ask cost from dealer",
+      "Return / complete"
+     ]
+    }
+   ],
+   "questions": [
+    {
+     "id": "O44-1",
+     "question": "What fields do the five sections without a field table contain?",
+     "why": "OEM review, Customer & claim, Issue & coverage, Dealer claim photos and Dealer issue report have no field table. The tour shows \"Not defined\".",
+     "suggestion": "Draft the tables from the claim form (D38) and the dealer claim detail (D39), then confirm.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O44-2",
+     "question": "Which comes first: service/replacement or asking the dealer for the cost?",
+     "why": "The spec's own rule says asking cost blocks service until the dealer pays and the OEM verifies, but the chosen step order is the other way round.",
+     "suggestion": "Ask cost → dealer pays → OEM verifies → service or replacement.",
+     "raised": [
+      "Feedback/assumption.md #6"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O44-3",
+     "question": "When replacement is chosen, what happens to stock?",
+     "why": "Replacement is not built in the tour. No stock check or deduction is described.",
+     "suggestion": "Check OEM stock for the part; reserve it; deduct when the replacement is dispatched.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O44-4",
+     "question": "Who bears the service charge?",
+     "why": "The workflow leaves this open (customer, dealer or configurable).",
+     "suggestion": "The dealer pays the OEM; the OEM may waive it (\"waive\" is already a button).",
+     "raised": [],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "D16",
+   "name": "Customer Add / Edit",
+   "tours": [
+    "enquiry-to-invoice"
+   ],
+   "priority": "P0",
+   "estDays": "3",
+   "purpose": "Creates or edits a customer record. Used when an enquiry is converted to a customer, or a customer walks in.",
+   "spec": {
+    "code": "D16",
+    "name": "Customer Add / Edit",
+    "path": "/customer/new-customer, /customer/:id/edit",
+    "type": "Form",
+    "mode": "CRUD",
+    "roles": "D S V",
+    "priority": "P0",
+    "buttons": "create, save, delete (menu)",
+    "fields": [
+     [
+      "Customer Type",
+      "customerType",
+      "radio",
+      "✔",
+      "individual_customer / business",
+      "business reveals GST"
+     ],
+     [
+      "Title",
+      "namePrefix",
+      "select",
+      "✔",
+      "Mr / Miss / Mrs / Dr",
+      "—"
+     ],
+     [
+      "First Name",
+      "firstName",
+      "text",
+      "✔",
+      "—",
+      "`name` composed \"prefix first last\""
+     ],
+     [
+      "Last Name",
+      "lastName",
+      "text",
+      "✔",
+      "—",
+      "—"
+     ],
+     [
+      "Customer Email",
+      "email",
+      "text",
+      "—",
+      "email format",
+      "—"
+     ],
+     [
+      "GST Number",
+      "gstNumber",
+      "text",
+      "—",
+      "business only",
+      "—"
+     ],
+     [
+      "Mobile",
+      "phone",
+      "text",
+      "✔",
+      "`^[0-9]{10}$`",
+      "—"
+     ],
+     [
+      "Work",
+      "workPhone",
+      "text",
+      "—",
+      "10 digits",
+      "—"
+     ],
+     [
+      "WhatsApp",
+      "whatsappNumber",
+      "text",
+      "—",
+      "10 digits",
+      "—"
+     ],
+     [
+      "Billing: Country",
+      "billingAddress.country",
+      "select",
+      "✔",
+      "India / Nepal",
+      "—"
+     ],
+     [
+      "Billing: State",
+      "billingAddress.state",
+      "select",
+      "✔",
+      "36 states / UTs (`GET /general/states`)",
+      "—"
+     ],
+     [
+      "Billing: Address",
+      "billingAddress.address",
+      "textarea",
+      "✔",
+      "—",
+      "—"
+     ],
+     [
+      "Billing: City",
+      "billingAddress.city",
+      "text",
+      "✔",
+      "—",
+      "—"
+     ],
+     [
+      "Billing: Pincode",
+      "billingAddress.pincode",
+      "text",
+      "✔",
+      "`^[0-9]{6}$`",
+      "—"
+     ],
+     [
+      "Shipping (same 5 fields)",
+      "shippingAddress.*",
+      "—",
+      "✔",
+      "\"Copy Billing Address here\"",
+      "—"
+     ],
+     [
+      "PAN No + Upload Proof",
+      "documents[pan].documentNumber, file",
+      "text + file",
+      "✔ **≥1 of 3**",
+      "file: PDF / image, drag-drop",
+      "\"Please provide at least one document: PAN, Aadhar, or Licence\""
+     ],
+     [
+      "Aadhar No + Upload Proof",
+      "documents[aadhar].…",
+      "text + file",
+      "✔ ≥1 of 3",
+      "`^\\d{12}$`",
+      "—"
+     ],
+     [
+      "Licence No + Upload Proof",
+      "documents[licence].…",
+      "text + file",
+      "✔ ≥1 of 3",
+      "alphanumeric",
+      "—"
+     ],
+     [
+      "(hidden)",
+      "enquireId",
+      "number",
+      "—",
+      "set when converting from enquiry",
+      "—"
+     ]
+    ],
+    "note": "",
+    "rules": [
+     "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+     "**F9** — **Gap:** OEM sees customer PII (PAN / Aadhaar numbers, phone) unmasked",
+     "**Counterpart:** O07 (read)",
+     "**Dependency note:** R1, F9 (PII unmasked on OEM side — gap)"
+    ]
+   },
+   "workbook": {
+    "notes": "Type, name, GST (business), phone/WhatsApp/work, billing+shipping address, PAN/Aadhaar/Licence (>=1 of 3 required with file upload).",
+    "dependencies": "R1, F9 (PII unmasked on OEM side — gap)",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "screen control",
+     "text": "The state list (36 states / union territories) is not in screen_details.md, only its source API."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "form",
+     "title": "Add customer",
+     "fields": [
+      [
+       "Customer Type*",
+       "Individual"
+      ],
+      [
+       "Name*",
+       "Meena Sample"
+      ],
+      [
+       "Mobile*",
+       "90000 00002"
+      ],
+      [
+       "Billing: State*",
+       "~Telangana ▾"
+      ],
+      [
+       "Billing: Country*",
+       "India"
+      ],
+      [
+       "PAN No*",
+       "XXXXX0000X + proof"
+      ],
+      [
+       "Aadhar No",
+       "0000 0000 0000 + proof"
+      ],
+      [
+       "Licence No",
+       "(empty)"
+      ]
+     ],
+     "actions": [
+      "Create"
+     ],
+     "dialog": false
+    }
+   ],
+   "questions": [
+    {
+     "id": "D16-1",
+     "question": "Where does the State list come from, and which countries are allowed?",
+     "why": "The spec says \"36 states / UTs\", from an API, with no values. Country has no options. The tour shows \"Not defined\".",
+     "suggestion": "A fixed list of the 28 states and 8 union territories, loaded from master data. Country defaults to India; other countries not allowed for now.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "D16-2",
+     "question": "Are PAN, Aadhar and Licence all required, or at least one?",
+     "why": "The spec table marks all three as required with proof upload. The tour treats it as \"at least one of the three\".",
+     "suggestion": "At least one identity proof with its file. Mark the other two optional.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "D16-3",
+     "question": "Where does the user land after creating a customer?",
+     "why": "The spec does not say. The tour opens the customer hub (D17).",
+     "suggestion": "The customer hub (D17), where products, invoices and payments are one click away.",
+     "raised": [],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "D13",
+   "name": "Service Follow-ups List",
+   "tours": [
+    "service-to-job-card"
+   ],
+   "priority": "P1",
+   "estDays": "1.5",
+   "purpose": "A reminder list of customers whose vehicle is due for service, so the dealer can call them.",
+   "spec": {
+    "code": "D13",
+    "name": "Service Follow-ups List",
+    "path": "/enquire/service-follow-up",
+    "type": "List",
+    "mode": "RO",
+    "roles": "D S",
+    "priority": "P1",
+    "buttons": "filter, search by name / phone / email",
+    "fields": [],
+    "note": "No dedicated input form — this is a list screen. Display/column content: Filter, search by name/phone/email.",
+    "rules": [
+     "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+     "**Dependency note:** No OEM counterpart"
+    ]
+   },
+   "workbook": {
+    "notes": "Filter, search by name/phone/email.",
+    "dependencies": "No OEM counterpart",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "screen control",
+     "text": "The filter options for this screen are not in screen_details.md."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "list",
+     "title": "Service follow-ups",
+     "cols": [
+      "~Customer",
+      "~Mobile",
+      "~Chassis",
+      "~Reason",
+      "~Due on",
+      "~Status"
+     ],
+     "rows": [
+      [
+       "Meena Sample",
+       "90000 00002",
+       "CH-1042",
+       "First free service due",
+       "30 Oct",
+       "Open"
+      ],
+      [
+       "Arun Sample",
+       "90000 00003",
+       "CH-0991",
+       "Battery check due",
+       "02 Nov",
+       "Open"
+      ]
+     ],
+     "actions": [],
+     "tabs": [],
+     "filters": [
+      "Filter ▾"
+     ],
+     "search": "Search name / phone / email"
+    }
+   ],
+   "questions": [
+    {
+     "id": "D13-1",
+     "question": "What is a service follow-up, and what creates one?",
+     "why": "D13 and D14 exist, but no rule says when a follow-up is due. The tour uses invented reasons (\"First free service due\").",
+     "suggestion": "The system creates one automatically at each free-service milestone after the invoice. Staff can also add one by hand.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "D13-2",
+     "question": "Which columns and filter values does the list have?",
+     "why": "The spec says \"filter, search by name / phone / email\" and nothing else. The tour shows the filter as \"Not defined\".",
+     "suggestion": "Columns: Customer, Mobile, Chassis, Reason, Due on, Status. Filter: Due, Overdue, Done.",
+     "raised": [],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "D40",
+   "name": "Service List",
+   "tours": [
+    "service-to-job-card"
+   ],
+   "priority": "P1",
+   "estDays": "1.5",
+   "purpose": "Lists service jobs. A dealer opens a job card from it, or creates a new one.",
+   "spec": {
+    "code": "D40",
+    "name": "Service List",
+    "path": "/service; tab /customer/:id/service",
+    "type": "List",
+    "mode": "RO",
+    "roles": "D V",
+    "priority": "P1",
+    "buttons": "status filter, open, create",
+    "fields": [],
+    "note": "No dedicated input form — this is a list screen. Display/column content: Status filter, open, create.",
+    "rules": [
+     "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+     "**Counterpart:** O07 service (mirror)",
+     "**Dependency note:** R1; counterpart O07 (mirror)"
+    ]
+   },
+   "workbook": {
+    "notes": "Status filter, open, create.",
+    "dependencies": "R1; counterpart O07 (mirror)",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "screen control",
+     "text": "The status filter options for this screen are not in screen_details.md."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "list",
+     "title": "Service jobs",
+     "cols": [
+      "~Job #",
+      "~Customer",
+      "~Chassis",
+      "~Type",
+      "~Status"
+     ],
+     "rows": [
+      [
+       "SV-031",
+       "Meena Sample",
+       "CH-1042",
+       "Free service",
+       "In progress"
+      ]
+     ],
+     "actions": [
+      "Create"
+     ],
+     "tabs": [],
+     "filters": [
+      "Status ▾"
+     ],
+     "search": ""
+    }
+   ],
+   "questions": [
+    {
+     "id": "D40-1",
+     "question": "Which statuses does the filter offer?",
+     "why": "The spec says \"status filter\" with no options.",
+     "suggestion": "Open, In progress, Completed, Invoiced.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "D40-2",
+     "question": "Where does \"open\" go?",
+     "why": "The spec lists \"open\" with no target.",
+     "suggestion": "The job card (D42).",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "D40-3",
+     "question": "Should Sales (S) be allowed to see the service list?",
+     "why": "The spec lists D and V only, but the tour needs service staff in the dealer team.",
+     "suggestion": "Allow Dealer and Service. Sales has no access.",
+     "raised": [
+      "Feedback/assumption.md #20"
+     ],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "D45",
+   "name": "Payments (2 tabs)",
+   "tours": [
+    "dealer-payments-ledger"
+   ],
+   "priority": "P0",
+   "estDays": "2",
+   "purpose": "The dealer's payments page: what has been paid against orders, and money added to the ledger. Opens the \"add payment\" dialog (D46).",
+   "spec": {
+    "code": "D45",
+    "name": "Payments (2 tabs)",
+    "path": "/payments",
+    "type": "List (2 tabs)",
+    "mode": "RO",
+    "roles": "D",
+    "priority": "P0",
+    "buttons": "search, status, date range, add payment, ledger history",
+    "fields": [],
+    "note": "No dedicated input form — this is a list (2 tabs) screen. Display/column content: Search, status, date range, ledger history.",
+    "rules": [
+     "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+     "**R3** — Dealer sees balance only of ledger(s) it is **attached to**; a ledger can be shared by several dealers",
+     "**Counterpart:** O45, O47",
+     "**Dependency note:** R1/R3; counterpart O45/O47"
+    ]
+   },
+   "workbook": {
+    "notes": "Search, status, date range, ledger history.",
+    "dependencies": "R1/R3; counterpart O45/O47",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "screen control",
+     "text": "The status options are not in screen_details.md."
+    },
+    {
+     "where": "screen control",
+     "text": "The spec says D45 has 2 tabs but does not name them or describe the second tab."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "tabs",
+     "tabs": [
+      "~Payments",
+      "~Ledger top-ups"
+     ]
+    },
+    {
+     "t": "list",
+     "title": "Payments",
+     "cols": [
+      "~Date",
+      "~Transaction ID",
+      "~Amount (₹)",
+      "~Status"
+     ],
+     "rows": [
+      [
+       "22 Oct",
+       "UTR4471…",
+       "2,00,000",
+       "Pending"
+      ],
+      [
+       "15 Oct",
+       "UTR3920…",
+       "1,50,000",
+       "Verified"
+      ]
+     ],
+     "actions": [
+      "Ledger history",
+      "+ Add payment"
+     ],
+     "tabs": [],
+     "filters": [
+      "Status ▾",
+      "Date range ▾"
+     ],
+     "search": "Search"
+    },
+    {
+     "t": "form",
+     "title": "Add payment (ledger top-up) · D46",
+     "fields": [
+      [
+       "Transaction ID*",
+       "Exactly as on your bank record"
+      ],
+      [
+       "Amount (₹)*",
+       "2,00,000"
+      ],
+      [
+       "Payment Date*",
+       "22 Oct 2026"
+      ],
+      [
+       "Note",
+       "Optional"
+      ],
+      [
+       "(no proof upload, per spec)",
+       ""
+      ]
+     ],
+     "actions": [
+      "Cancel",
+      "Submit for verification"
+     ],
+     "dialog": true
+    }
+   ],
+   "questions": [
+    {
+     "id": "D45-1",
+     "question": "What are the two tabs, and what does each show?",
+     "why": "The spec says \"2 tabs\" and names neither.",
+     "suggestion": "Tab 1 \"Payments\": payments made against purchase orders. Tab 2 \"Ledger top-ups\": money added to the ledger through D46.",
+     "raised": [
+      "discussion_dealer_payments_screens.md question 5",
+      "Feedback/questions.md D45 Q1 and Q2"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "D45-2",
+     "question": "Is \"Ledger history\" a page, a tab, a dialog, or the same as D33 (Payment Ledger)?",
+     "why": "It is listed as a button with no target. Under rule R3 a ledger can be shared by several dealers.",
+     "suggestion": "A dialog with credits, debits and a running balance. If D33 is merged into D45 (option B in the discussion paper), this becomes a third tab.",
+     "raised": [
+      "discussion_dealer_payments_screens.md question 1 and options A to D",
+      "Feedback/questions.md D45 Q5"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "D45-3",
+     "question": "Which columns, status values and date ranges apply?",
+     "why": "The spec lists \"search, status, date range\" with no values.",
+     "suggestion": "Columns: Date, Transaction ID, Amount, Status. Status: Pending, Verified, Rejected. Date: today, week, month, custom.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "D45-4",
+     "question": "D46: is \"no proof upload\" intended, and what happens after submit? Is there an amount limit?",
+     "why": "The spec marks \"no proof upload\". D31 (PO payment) takes a receipt, D46 does not.",
+     "suggestion": "Keep no proof. After submit the dialog closes and the row shows as Pending. No upper limit. A repeated Transaction ID is blocked.",
+     "raised": [
+      "discussion_dealer_payments_screens.md question 4",
+      "Feedback/assumption.md #18"
+     ],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O45",
+   "name": "Payments (All Dealers)",
+   "tours": [
+    "dealer-payments-ledger"
+   ],
+   "priority": "P0",
+   "estDays": "2",
+   "purpose": "The OEM list of every payment dealers have submitted, to verify or reject each one.",
+   "spec": {
+    "code": "O45",
+    "name": "Payments (All Dealers)",
+    "path": "/payments",
+    "type": "List + Action",
+    "mode": "Action",
+    "roles": "(unkeyed)",
+    "priority": "P0",
+    "buttons": "search, status, date range, view receipt, verify / reject",
+    "fields": [],
+    "note": "",
+    "rules": [
+     "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+     "**R7** — OEM sales user sees **only dealers ticked in \"Assigned Dealers\"** (their POs, payments, details); none ticked = no dealers",
+     "**Counterpart:** D31, D46",
+     "**Dependency note:** R6/R7; Role not keyed — confirm access; counterpart D31/D46"
+    ]
+   },
+   "workbook": {
+    "notes": "Search, status, date range, view receipt, verify/reject.",
+    "dependencies": "R6/R7; Role not keyed — confirm access; counterpart D31/D46",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "screen control",
+     "text": "The status options are not in screen_details.md."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "list",
+     "title": "Payments (all dealers)",
+     "cols": [
+      "~Date",
+      "~Dealer",
+      "~Type",
+      "~Amount",
+      "~Status"
+     ],
+     "rows": [
+      [
+       "22 Oct",
+       "Sri Lakshmi EVs",
+       "Ledger top-up",
+       "₹2,00,000",
+       "Pending"
+      ]
+     ],
+     "actions": [
+      "View receipt",
+      "Verify",
+      "Reject"
+     ],
+     "tabs": [],
+     "filters": [
+      "Status ▾",
+      "Date range ▾"
+     ],
+     "search": "Search"
+    }
+   ],
+   "questions": [
+    {
+     "id": "O45-1",
+     "question": "Which status options does the filter have, and which role verifies?",
+     "why": "The spec gives no options and says \"Role not keyed — confirm access\". The tour uses an Accounts Manager.",
+     "suggestion": "Status: Pending, Verified, Rejected. Roles: Accounts Manager and Admin.",
+     "raised": [
+      "Feedback/assumption.md #6, #20"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O45-2",
+     "question": "What are the \"submitted\" and \"received\" dates?",
+     "why": "The spec lists both; the sample data has only one date.",
+     "suggestion": "Submitted = when the dealer entered it. Received = the bank date the dealer typed on the payment.",
+     "raised": [],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "D27",
+   "name": "Inventory Issues",
+   "tours": [
+    "dealer-stock-and-issues"
+   ],
+   "priority": "P0",
+   "estDays": "2",
+   "purpose": "Where a dealer reports a problem with a spare or accessory it holds in stock (not with a shipment).",
+   "spec": {
+    "code": "D27",
+    "name": "Inventory Issues",
+    "path": "/inventory/issues",
+    "type": "List + Dialog",
+    "mode": "C+R",
+    "roles": "D S",
+    "priority": "P0",
+    "buttons": "new issue",
+    "fields": [
+     [
+      "Type",
+      "type",
+      "radio",
+      "?",
+      "Spare / Accessory",
+      "—"
+     ],
+     [
+      "Select Spare",
+      "—",
+      "select",
+      "?",
+      "Motor / Battery / Controller / Accessories",
+      "—"
+     ],
+     [
+      "Title",
+      "title",
+      "text",
+      "?",
+      "—",
+      "—"
+     ],
+     [
+      "Description",
+      "description",
+      "textarea",
+      "?",
+      "—",
+      "—"
+     ],
+     [
+      "File",
+      "—",
+      "file",
+      "—",
+      "preview",
+      "—"
+     ]
+    ],
+    "note": "",
+    "rules": [
+     "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+     "**Counterpart:** O42",
+     "**Dependency note:** R1; counterpart O42"
+    ]
+   },
+   "workbook": {
+    "notes": "New issue (type, select spare, title, description, file).",
+    "dependencies": "R1; counterpart O42",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md: the dialog has no submit control and no link to the OEM issues list (O42). The fields are shown, but an issue cannot be saved from this dialog."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "list",
+     "title": "Inventory issues",
+     "cols": [
+      "~Issue #",
+      "~Type",
+      "~Item",
+      "~Title",
+      "~Stage",
+      "~Reported"
+     ],
+     "rows": [
+      [
+       "I-014",
+       "Spare",
+       "Battery",
+       "Cell swelling",
+       "OEM review",
+       "24 Oct"
+      ],
+      [
+       "I-009",
+       "Accessory",
+       "Accessories",
+       "Missing mirror",
+       "Resolved",
+       "11 Oct"
+      ]
+     ],
+     "actions": [
+      "+ New issue"
+     ],
+     "tabs": [],
+     "filters": [],
+     "search": ""
+    },
+    {
+     "t": "form",
+     "title": "New issue",
+     "fields": [
+      [
+       "Type?",
+       "◉ Spare  ○ Accessory"
+      ],
+      [
+       "~Select item?",
+       "Battery ▾ (follows Type)"
+      ],
+      [
+       "Title?",
+       "Cell swelling after charge"
+      ],
+      [
+       "Description?",
+       "Left cell looks swollen"
+      ],
+      [
+       "File",
+       "photo.jpg (preview)"
+      ]
+     ],
+     "actions": [
+      "Cancel",
+      "~Submit"
+     ],
+     "dialog": true
+    }
+   ],
+   "questions": [
+    {
+     "id": "D27-1",
+     "question": "What should the list and the dialog show, and how does the dealer submit?",
+     "why": "The spec gives a \"new issue\" button and a field table, but no Submit button, no list columns, and no link to the OEM Issues list (O42).",
+     "suggestion": "A list (Issue #, Type, Item, Title, Stage, Reported) with \"+ New issue\". The dialog gets Cancel and Submit. A new issue starts at stage \"Reported\".",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "D27-2",
+     "question": "Which fields are required?",
+     "why": "Type, Select Spare, Title and Description are all marked \"?\" in the Req column.",
+     "suggestion": "Required: Type, item, Title. Optional: Description, File.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "D27-3",
+     "question": "Should the item choices depend on Type (Spare or Accessory)?",
+     "why": "\"Select Spare\" lists Motor, Battery, Controller and Accessories whatever the Type is.",
+     "suggestion": "Spare shows Motor, Battery, Controller. Accessory shows Accessories. Rename the field \"Select item\".",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "D27-4",
+     "question": "Is this the same list the OEM sees on O42, and is it a different process from a shipment issue?",
+     "why": "The spec names O42 as the counterpart but does not say they share data. D36 lists issues from shipments.",
+     "suggestion": "Same records and stages as O42. Shipment issues (from D32) and inventory issues (D27) stay separate types in one list, filtered by type.",
+     "raised": [
+      "Feedback/assumption.md #16"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "D27-5",
+     "question": "Which file types and sizes are allowed?",
+     "why": "The File field says only \"preview\".",
+     "suggestion": "Image, PDF or video, up to 10 MB each, up to 3 files.",
+     "raised": [],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O42",
+   "name": "Issues",
+   "tours": [
+    "dealer-stock-and-issues"
+   ],
+   "priority": "P0",
+   "estDays": "2.5",
+   "purpose": "The OEM reviews issues raised by dealers: manager review, OEM approval, then money settlement or replacement.",
+   "spec": {
+    "code": "O42",
+    "name": "Issues",
+    "path": "/issues",
+    "type": "List + Actions",
+    "mode": "Action",
+    "roles": "IM SVH ADM",
+    "priority": "P0",
+    "buttons": "stage tabs, approve / decline (manager), approve / decline (OEM), settle with money, replace → mark dispatched",
+    "fields": [],
+    "note": "",
+    "rules": [
+     "**F8** — Issue review notes and OEM approval steps are shown to dealer only as **stage + outcome**",
+     "**Counterpart:** D36, D32",
+     "**Dependency note:** F8; counterpart D36/D32"
+    ]
+   },
+   "workbook": {
+    "notes": "Stage tabs; manager approve/decline; OEM approve/decline; settle with money or replace → mark dispatched.",
+    "dependencies": "F8; counterpart D36/D32",
+    "openQuestion": ""
+   },
+   "guesses": [],
+   "feedback": [
+    {
+     "by": "Vishnavi",
+     "text": "change the button name \" settle with credit note\"",
+     "walkthrough": "dealer-stock-and-issues"
+    }
+   ],
+   "mock": [
+    {
+     "t": "list",
+     "title": "Issues",
+     "cols": [
+      "~Issue",
+      "~Dealer",
+      "~Product",
+      "~Stage",
+      "~Reported"
+     ],
+     "rows": [
+      [
+       "I-014",
+       "Sri Lakshmi EVs",
+       "Battery",
+       "Manager review",
+       "24 Oct"
+      ]
+     ],
+     "actions": [
+      "Approve / decline (manager)",
+      "Approve / decline (OEM)",
+      "Settle with ~credit note",
+      "Replace",
+      "Mark dispatched",
+      "Resolve / reject"
+     ],
+     "tabs": [
+      "~Reported",
+      "~Manager review",
+      "~OEM review",
+      "~Settlement",
+      "~Closed"
+     ],
+     "filters": [],
+     "search": ""
+    }
+   ],
+   "questions": [
+    {
+     "id": "O42-1",
+     "question": "Should the settlement button say \"Settle with credit note\"?",
+     "why": "Vishnavi's feedback: change the button name to \"settle with credit note\". The spec says \"settle with money\" with Compensation amount and Transaction ID.",
+     "suggestion": "Offer both choices in one dialog: \"Settle with money\" (amount and transaction ID) and \"Settle with credit note\" (amount, credit goes to the dealer ledger). Button label: \"Settle\".",
+     "raised": [
+      "Feedback from Vishnavi (walkthrough feedback)"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O42-2",
+     "question": "What are the stage names, and what does each action change?",
+     "why": "Stage tabs exist, but no names. Decline, replace, mark dispatched, resolve and reject have no stated effect on the stage.",
+     "suggestion": "Reported, Manager review, OEM review, Settlement, Replacement, Resolved, Rejected. Each action moves to the next stage; decline moves to Rejected with a reason.",
+     "raised": [
+      "Feedback/assumption.md #16"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O42-3",
+     "question": "Do manager and OEM review need different people?",
+     "why": "The spec lists roles IM, SVH and ADM only.",
+     "suggestion": "Manager review by IM (Inventory Manager) or SVH; OEM approval by ADM.",
+     "raised": [
+      "Feedback/assumption.md #20"
+     ],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O07",
+   "name": "Dealer → Customers + Customer Mirror",
+   "tours": [
+    "oem-monitor-dealer"
+   ],
+   "priority": "P0",
+   "estDays": "2",
+   "purpose": "Read-only view of a dealer's customers and what they hold (invoices, payments, service, warranty). The OEM can look, not change.",
+   "spec": {
+    "code": "O07",
+    "name": "Dealer → Customers + Customer Mirror",
+    "path": "/dealers/:id/customer-detail; /customers/:id/*",
+    "type": "List + Detail (6 tabs)",
+    "mode": "Mirror",
+    "roles": "see DEALER_DETAILS_CUSTOMER_LIST",
+    "priority": "P0",
+    "buttons": "search, open",
+    "fields": [],
+    "note": "No dedicated input form — this is a list + detail (6 tabs) screen. Display/column content: Read-only view of dealer-owned customer/invoice/payment/service/warranty data.",
+    "rules": [
+     "**R10** — OEM reads all dealer CRM data **read-only** through `?dealerProfileID=`",
+     "**F9** — **Gap:** OEM sees customer PII (PAN / Aadhaar numbers, phone) unmasked",
+     "**Counterpart:** D15–D23, D40–D42",
+     "**Dependency note:** R10, F9 (PII unmasked — gap); mirrors D15-D23, D40-D42"
+    ]
+   },
+   "workbook": {
+    "notes": "Read-only view of dealer-owned customer/invoice/payment/service/warranty data.",
+    "dependencies": "R10, F9 (PII unmasked — gap); mirrors D15-D23, D40-D42",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "screen control",
+     "text": "The $… tab content is not defined in screen_details.md (D17 shows the tab shell only)."
+    }
+   ],
+   "feedback": [
+    {
+     "by": "Vishnavi",
+     "text": "customers list export into excel sheet \" admin only access\"",
+     "walkthrough": "oem-monitor-dealer"
+    }
+   ],
+   "mock": [
+    {
+     "t": "list",
+     "title": "Dealer customers",
+     "cols": [
+      "~Customer ID",
+      "~Name",
+      "~Phone",
+      "~Email",
+      "~Status"
+     ],
+     "rows": [
+      [
+       "C-0102",
+       "Meena Sample",
+       "90000 00002",
+       "meena@example.com",
+       "Active"
+      ]
+     ],
+     "actions": [
+      "Open",
+      "~Export to Excel (admin only)"
+     ],
+     "tabs": [],
+     "filters": [],
+     "search": "Search"
+    },
+    {
+     "t": "tabs",
+     "tabs": [
+      "~Personal",
+      "~Vehicles",
+      "~Invoices",
+      "~Payments",
+      "~Service",
+      "~Warranty"
+     ]
+    }
+   ],
+   "questions": [
+    {
+     "id": "O07-1",
+     "question": "Should the OEM be able to export this list to Excel?",
+     "why": "Not in the spec. Vishnavi's feedback: \"customers list export into excel sheet, admin only access\". Your own note asks whether Excel export is a security risk on list screens.",
+     "suggestion": "Yes, admin only, the filtered set only, up to 5,000 rows, and every export is written to the audit log.",
+     "raised": [
+      "Feedback from Vishnavi (walkthrough feedback)",
+      "issues_to_fix/decisions.md",
+      "issues_to_fix/list_screen.md (Export)"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O07-2",
+     "question": "What are the six tabs?",
+     "why": "The spec says \"6 tabs\" for the customer page without names. The tour borrowed the dealer-side names (D17).",
+     "suggestion": "Personal, Vehicles, Invoices, Payments, Service, Warranty.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O07-3",
+     "question": "Should PAN and Aadhaar be shown in full to the OEM?",
+     "why": "Rule F9 marks this as a gap. The tour shows the (fake) values unmasked as the spec says.",
+     "suggestion": "Mask all but the last 4 characters; show in full only to the Super Admin.",
+     "raised": [],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O10",
+   "name": "Dealer → Vehicle Stock + Add Stock",
+   "tours": [
+    "oem-monitor-dealer"
+   ],
+   "priority": "P0",
+   "estDays": "2",
+   "purpose": "The OEM sees a dealer's vehicle stock and can add stock to the dealer.",
+   "spec": {
+    "code": "O10",
+    "name": "Dealer → Vehicle Stock + Add Stock",
+    "path": "/dealers/:id/vehicle-stock",
+    "type": "List + Dialog",
+    "mode": "RO + Create",
+    "roles": "ADM SZH APM DH",
+    "priority": "P0",
+    "buttons": "type tabs, **add stock to dealer**",
+    "fields": [
+     [
+      "Product type",
+      "productType",
+      "select",
+      "✔",
+      "Vehicle / Spare / Accessory / Battery / Charger / Motor / Controller"
+     ],
+     [
+      "Product",
+      "productId",
+      "select",
+      "✔",
+      "—"
+     ],
+     [
+      "Quantity",
+      "quantity",
+      "number",
+      "✔",
+      "—"
+     ]
+    ],
+    "note": "",
+    "rules": [
+     "**R10** — OEM reads all dealer CRM data **read-only** through `?dealerProfileID=`",
+     "**Counterpart:** D24 / D25",
+     "**Dependency note:** R10; mirrors D24/D25"
+    ]
+   },
+   "workbook": {
+    "notes": "Type tabs; 'Add stock to dealer' (product type, product, qty) — OEM pushes stock without a PO.",
+    "dependencies": "R10; mirrors D24/D25",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "The spec gives no effect and no submit control for add stock to dealer, and no options for Product. The dialog shows its fields only."
+    },
+    {
+     "where": "screen control",
+     "text": "The spec gives no options for Product in the add stock dialog."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "list",
+     "title": "Dealer vehicle stock",
+     "cols": [
+      "~Product",
+      "~Quantity",
+      "~Status"
+     ],
+     "rows": [
+      [
+       "Tera Zip 60V 30Ah",
+       "12",
+       "Available"
+      ]
+     ],
+     "actions": [
+      "Add stock to dealer"
+     ],
+     "tabs": [
+      "~Vehicle",
+      "~Spare",
+      "~Accessory"
+     ],
+     "filters": [],
+     "search": ""
+    },
+    {
+     "t": "form",
+     "title": "Add stock to dealer",
+     "fields": [
+      [
+       "Product type*",
+       "Vehicle ▾"
+      ],
+      [
+       "Product*",
+       "~Tera Zip 60V 30Ah ▾"
+      ],
+      [
+       "Quantity*",
+       "4"
+      ]
+     ],
+     "actions": [
+      "Cancel",
+      "~Submit"
+     ],
+     "dialog": true
+    }
+   ],
+   "questions": [
+    {
+     "id": "O10-1",
+     "question": "What does \"add stock to dealer\" do, and who confirms it?",
+     "why": "The spec gives three fields but no submit control, no effect and no Product options.",
+     "suggestion": "It records opening or corrected stock at the dealer, with a reason, and writes an audit entry. It does not touch OEM manufacturing-unit stock.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O10-2",
+     "question": "Which roles may add stock?",
+     "why": "The spec allows ADM, SZH, APM and DH, but none of the codes is defined in people.md.",
+     "suggestion": "Keep the four roles once the codes are defined.",
+     "raised": [
+      "Feedback/assumption.md #20"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O10-3",
+     "question": "What are the tab names?",
+     "why": "The tabs are the product types in the spec; names are not given.",
+     "suggestion": "Vehicle, Spare, Accessory, Battery, Charger, Motor, Controller (the same seven as the product list).",
+     "raised": [],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O11",
+   "name": "Dealer → Warranty Claims",
+   "tours": [
+    "oem-monitor-dealer"
+   ],
+   "priority": "P0",
+   "estDays": "1.5",
+   "purpose": "Read-only view of a dealer's warranty claims, with a chart of claims by product.",
+   "spec": {
+    "code": "O11",
+    "name": "Dealer → Warranty Claims",
+    "path": "/dealers/:id/warranty-claim",
+    "type": "List + Report",
+    "mode": "Mirror",
+    "roles": "see …_WARRANTY_CLAIM",
+    "priority": "P0",
+    "buttons": "period filter, claims by product",
+    "fields": [],
+    "note": "No dedicated input form — this is a list + report screen. Display/column content: Period filter, claims-by-product chart.",
+    "rules": [
+     "**R10** — OEM reads all dealer CRM data **read-only** through `?dealerProfileID=`",
+     "**Counterpart:** D37",
+     "**Dependency note:** R10; mirrors D37"
+    ]
+   },
+   "workbook": {
+    "notes": "Period filter, claims-by-product chart.",
+    "dependencies": "R10; mirrors D37",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "screen control",
+     "text": "The period filter options are not defined in screen_details.md."
+    },
+    {
+     "where": "screen control",
+     "text": "The claims-by-product chart is not defined in screen_details.md. The table below is the walkthrough's own view of the same data."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "list",
+     "title": "Dealer warranty claims",
+     "cols": [
+      "~Claim ID",
+      "~Product",
+      "~Status",
+      "~Date"
+     ],
+     "rows": [
+      [
+       "WC-014",
+       "Battery",
+       "Raised to OEM",
+       "24 Oct"
+      ]
+     ],
+     "actions": [],
+     "tabs": [],
+     "filters": [
+      "Period ▾"
+     ],
+     "search": ""
+    },
+    {
+     "t": "note",
+     "text": "~Claims by product: a bar chart (proposed)"
+    }
+   ],
+   "questions": [
+    {
+     "id": "O11-1",
+     "question": "What does the \"claims by product\" chart show?",
+     "why": "The spec names the chart and a period filter with no detail. The tour shows a table instead and marks the chart \"Not defined\".",
+     "suggestion": "A bar chart: number of claims per product for the chosen period.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O11-2",
+     "question": "Which period options are available?",
+     "why": "The spec names a \"period filter\" for O11 and gives no options.",
+     "suggestion": "Month, quarter, year, custom.",
+     "raised": [],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O12",
+   "name": "Dealer → Purchase Orders",
+   "tours": [
+    "oem-monitor-dealer"
+   ],
+   "priority": "P0",
+   "estDays": "1.5",
+   "purpose": "Read-only list of a dealer's purchase orders.",
+   "spec": {
+    "code": "O12",
+    "name": "Dealer → Purchase Orders",
+    "path": "/dealers/:id/purchase-order",
+    "type": "List",
+    "mode": "RO",
+    "roles": "see …_PO",
+    "priority": "P0",
+    "buttons": "status / type filter",
+    "fields": [],
+    "note": "No dedicated input form — this is a list screen. Display/column content: Status/type filter.",
+    "rules": [
+     "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+     "**R7** — OEM sales user sees **only dealers ticked in \"Assigned Dealers\"** (their POs, payments, details); none ticked = no dealers",
+     "**Counterpart:** D28",
+     "**Dependency note:** R6/R7; mirrors D28"
+    ]
+   },
+   "workbook": {
+    "notes": "Status/type filter.",
+    "dependencies": "R6/R7; mirrors D28",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "screen control",
+     "text": "The status filter options are not defined in screen_details.md."
+    },
+    {
+     "where": "screen control",
+     "text": "The type filter options are not defined in screen_details.md."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "list",
+     "title": "Dealer purchase orders",
+     "cols": [
+      "~PO #",
+      "~Type",
+      "~Status",
+      "~Total",
+      "~Date"
+     ],
+     "rows": [
+      [
+       "PO-1001",
+       "Vehicle",
+       "Dispatched",
+       "₹9,92,000",
+       "20 Oct"
+      ]
+     ],
+     "actions": [],
+     "tabs": [],
+     "filters": [
+      "Status ▾",
+      "Type ▾"
+     ],
+     "search": ""
+    }
+   ],
+   "questions": [
+    {
+     "id": "O12-1",
+     "question": "Which statuses and types are in the two filters, and which columns show?",
+     "why": "The spec says \"status / type filter\" and gives no values or columns. The tour used the dealer-side list columns (D28).",
+     "suggestion": "Type: Vehicle, Spare, Accessory, Warranty. Status: the PO status list once it is defined. Columns as proposed.",
+     "raised": [
+      "Feedback/assumption.md #14",
+      "issues_to_fix/pending_definitions.md (status lifecycles)"
+     ],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O15",
+   "name": "Announcements List",
+   "tours": [
+    "announcements"
+   ],
+   "priority": "P1",
+   "estDays": "1",
+   "purpose": "The OEM's list of announcements sent to dealers.",
+   "spec": {
+    "code": "O15",
+    "name": "Announcements List",
+    "path": "/announcements",
+    "type": "List",
+    "mode": "RO",
+    "roles": "(unkeyed)",
+    "priority": "P1",
+    "buttons": "new, open",
+    "fields": [],
+    "note": "No dedicated input form — this is a list screen. Display/column content: New, open.",
+    "rules": [
+     "**Counterpart:** D05",
+     "**Dependency note:** Role not in permission map — confirm access"
+    ]
+   },
+   "workbook": {
+    "notes": "New, open.",
+    "dependencies": "Role not in permission map — confirm access",
+    "openQuestion": "Which OEM roles can view/send announcements? Not in the 73-entry role map."
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so the WhatsApp employee broadcast (N20) cannot be shown."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "list",
+     "title": "Announcements",
+     "cols": [
+      "~Title",
+      "~Target dealers",
+      "~Attachment"
+     ],
+     "rows": [
+      [
+       "Festival offer",
+       "All dealers",
+       "PDF"
+      ]
+     ],
+     "actions": [
+      "New",
+      "Open"
+     ],
+     "tabs": [],
+     "filters": [],
+     "search": ""
+    }
+   ],
+   "questions": [
+    {
+     "id": "O15-1",
+     "question": "Which OEM roles may see and send announcements?",
+     "why": "The spec says \"Role not in permission map — confirm access\". The workbook asks the same.",
+     "suggestion": "Super Admin and Sales Head send; all OEM roles can read.",
+     "raised": [
+      "EV_App_Screens_Estimation.xlsx row O15",
+      "Feedback/assumption.md #20"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O15-2",
+     "question": "Should the OEM also be able to broadcast on WhatsApp to employees (N20)?",
+     "why": "The requirement N20 has one line and no screen. The tour shows a card.",
+     "suggestion": "Out of v1. If wanted: a \"Send on WhatsApp\" option on the announcement with an employee group picker.",
+     "raised": [
+      "Feedback/assumption.md #30"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O15-3",
+     "question": "Which columns does the list show, and what does \"open\" do?",
+     "why": "No columns and no target in the spec.",
+     "suggestion": "Title, Target dealers, Attachment, Date, Status. Open shows the announcement as the dealer sees it.",
+     "raised": [],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O16",
+   "name": "Announcement Create / Edit",
+   "tours": [
+    "announcements"
+   ],
+   "priority": "P1",
+   "estDays": "2.5",
+   "purpose": "Create an announcement for all dealers or for the dealers of one manufacturing unit.",
+   "spec": {
+    "code": "O16",
+    "name": "Announcement Create / Edit",
+    "path": "/announcements/new, /announcements/:id/edit",
+    "type": "Form",
+    "mode": "CRUD",
+    "roles": "(unkeyed)",
+    "priority": "P1",
+    "buttons": "create, edit, stop",
+    "fields": [
+     [
+      "Title",
+      "title",
+      "text",
+      "?",
+      "—"
+     ],
+     [
+      "Description",
+      "description",
+      "textarea",
+      "?",
+      "—"
+     ],
+     [
+      "Attachment",
+      "attachmentType + file / table",
+      "radio + file / grid",
+      "—",
+      "None / File (Image / PDF / Video) / Table"
+     ],
+     [
+      "Target Dealers",
+      "targetType (+ muIds)",
+      "select",
+      "?",
+      "All Manufacturing Units / Selected Manufacturing Unit"
+     ]
+    ],
+    "note": "",
+    "rules": [
+     "**Counterpart:** D06",
+     "**Dependency note:** mirrors D05/D06"
+    ]
+   },
+   "workbook": {
+    "notes": "Title, description, attachment (file/table), target (all/selected MU).",
+    "dependencies": "mirrors D05/D06",
+    "openQuestion": ""
+   },
+   "guesses": [],
+   "feedback": [
+    {
+     "by": "Vishnavi",
+     "text": "add high priority , medium, general .\n based  on message",
+     "walkthrough": "announcements"
+    }
+   ],
+   "mock": [
+    {
+     "t": "form",
+     "title": "New announcement",
+     "fields": [
+      [
+       "Title?",
+       "Festival offer"
+      ],
+      [
+       "Description?",
+       "Special dealer margin until 15 Nov"
+      ],
+      [
+       "~Priority",
+       "High ▾ (High / Medium / General)"
+      ],
+      [
+       "Attachment",
+       "File: PDF  ○ Table  ○ None"
+      ],
+      [
+       "Target Dealers?",
+       "All dealers ▾ / Selected MU"
+      ]
+     ],
+     "actions": [
+      "Create",
+      "Stop"
+     ],
+     "dialog": false
+    }
+   ],
+   "questions": [
+    {
+     "id": "O16-1",
+     "question": "Should an announcement have a priority?",
+     "why": "Vishnavi's feedback: \"add high priority, medium, general, based on message\". The spec has no such field.",
+     "suggestion": "Add a Priority field: High, Medium, General. High shows a red banner on the dealer dashboard.",
+     "raised": [
+      "Feedback from Vishnavi (walkthrough feedback)"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O16-2",
+     "question": "Which fields are required, and what does \"stop\" do?",
+     "why": "Title, Description and Target Dealers are marked \"?\". The effect of create, edit and stop is not described.",
+     "suggestion": "All three required. Stop hides the announcement from dealers but keeps it in the list as \"Stopped\".",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O16-3",
+     "question": "What are the attachment choices (\"Table\" in particular)?",
+     "why": "The spec lists File, Table and others; Table is not described. File types are Image, PDF, Video.",
+     "suggestion": "Drop \"Table\" from v1. Keep image, PDF, video up to 20 MB.",
+     "raised": [],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O40",
+   "name": "Vendor Procurement",
+   "tours": [
+    "procurement-to-material-inward"
+   ],
+   "priority": "P0",
+   "estDays": "3",
+   "purpose": "Where the OEM decides how much to buy from one vendor and creates the purchase order.",
+   "spec": {
+    "code": "O40",
+    "name": "Vendor Procurement",
+    "path": "/vendors/:id/procurement",
+    "type": "Form",
+    "mode": "Create",
+    "roles": "(unkeyed)",
+    "priority": "P0",
+    "buttons": "set order qty / rate, create PO",
+    "fields": [],
+    "note": "",
+    "rules": [
+     "**Dependency note:** Where vendor POs are actually raised"
+    ]
+   },
+   "workbook": {
+    "notes": "Needed-vs-in-stock from dispatch demand, order qty/rate input, create PO.",
+    "dependencies": "Where vendor POs are actually raised",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so the minimum-stock and sales-forecast reorder (N25) that feeds this screen cannot be shown."
+    }
+   ],
+   "feedback": [
+    {
+     "by": "Vishnavi",
+     "text": "check if the reorder qty is included in \"Needed\"",
+     "walkthrough": "procurement-to-material-inward"
+    }
+   ],
+   "mock": [
+    {
+     "t": "list",
+     "title": "Procurement: Sample Components Ltd",
+     "cols": [
+      "Product",
+      "Type",
+      "Needed",
+      "In stock",
+      "Net",
+      "Order Qty*",
+      "Rate*",
+      "Amount",
+      "MU?"
+     ],
+     "rows": [
+      [
+       "Motor 60V",
+       "Motor",
+       "~20",
+       "8",
+       "~12",
+       "12",
+       "₹4,500",
+       "₹54,000",
+       "MU Hosur"
+      ]
+     ],
+     "actions": [
+      "Create PO (1)"
+     ],
+     "tabs": [],
+     "filters": [],
+     "search": ""
+    }
+   ],
+   "questions": [
+    {
+     "id": "O40-1",
+     "question": "Does \"Needed\" include the reorder quantity?",
+     "why": "Vishnavi asked: \"check if the reorder qty is included in Needed\". The spec calls Needed a figure from the dispatch list and does not mention reorder levels.",
+     "suggestion": "Needed = demand from the dispatch list + quantity to bring stock back to the minimum level (N25). Show both parts in the cell.",
+     "raised": [
+      "Feedback from Vishnavi (walkthrough feedback)"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O40-2",
+     "question": "How does the minimum-stock and sales-forecast reorder (N25) reach this screen?",
+     "why": "N25 has no screen, and the spec does not say how a reorder lands here.",
+     "suggestion": "Rows are pre-filled for items at or below minimum stock; the user edits quantity and rate.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O40-3",
+     "question": "What does \"Create PO (n)\" count, and how are Net and Amount worked out?",
+     "why": "The tour reads n and the totals from sample data.",
+     "suggestion": "n = rows with a quantity above zero. Net = Needed − In stock. Amount = quantity × rate.",
+     "raised": [],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O41",
+   "name": "Vendor POs",
+   "tours": [
+    "procurement-to-material-inward"
+   ],
+   "priority": "P1",
+   "estDays": "2",
+   "purpose": "The OEM list of purchase orders to vendors. A new PO starts here and is approved by email.",
+   "spec": {
+    "code": "O41",
+    "name": "Vendor POs",
+    "path": "/vendor-pos",
+    "type": "List + Dialog",
+    "mode": "C+R + approval",
+    "roles": "(unkeyed)",
+    "priority": "P1",
+    "buttons": "create (choose vendor → O40), filter, view",
+    "fields": [
+     [
+      "Choose vendor",
+      "vendorId",
+      "select",
+      "✔",
+      "\"You'll be taken to the vendor's procurement view\" (→ 7.21)"
+     ]
+    ],
+    "note": "",
+    "rules": [
+     "**Dependency note:** Role not keyed — confirm access"
+    ]
+   },
+   "workbook": {
+    "notes": "Create (choose vendor → O40), filter, view. Approval is by email to the OEM approval admin.",
+    "dependencies": "Role not keyed — confirm access",
+    "openQuestion": "Does the PO document itself get emailed to the vendor, or only the internal approval request?"
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so the approval by the OEM approval admin, via email, cannot be shown. No approval screen is defined."
+    },
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so the automatic email of the approved PO to … (N17) cannot be shown."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "list",
+     "title": "Vendor POs",
+     "cols": [
+      "~PO #",
+      "~Vendor",
+      "~Total",
+      "~Status"
+     ],
+     "rows": [
+      [
+       "VPO-001",
+       "Sample Components Ltd",
+       "₹54,000",
+       "Awaiting approval"
+      ]
+     ],
+     "actions": [
+      "Create",
+      "View"
+     ],
+     "tabs": [],
+     "filters": [
+      "Status ▾"
+     ],
+     "search": ""
+    },
+    {
+     "t": "flow",
+     "steps": [
+      "Create PO",
+      "~Approval request by email",
+      "~Approved",
+      "~PO emailed to vendor (N17)"
+     ]
+    }
+   ],
+   "questions": [
+    {
+     "id": "O41-1",
+     "question": "How does approval by email work?",
+     "why": "The spec says the PO is approved \"by the OEM approval admin, via email\", but gives no screen and no rule. The tour shows a card.",
+     "suggestion": "An email with Approve and Reject links goes to the approval admin set on O49. The PO status changes on click. Approvals are written to the audit log.",
+     "raised": [
+      "EV_App_Screens_Estimation.xlsx row O41"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O41-2",
+     "question": "Is the PO itself emailed to the vendor after approval (N17)?",
+     "why": "The workbook asks whether the PO document or only the internal approval request is emailed.",
+     "suggestion": "Yes, the PO as PDF is emailed to the vendor's contacts automatically after approval.",
+     "raised": [
+      "EV_App_Screens_Estimation.xlsx rows O41 and N17"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O41-3",
+     "question": "If a PO changes after approval, is a revised PO sent?",
+     "why": "Not defined. N17 asks the same.",
+     "suggestion": "A change needs re-approval. The revised PO is sent and the earlier copy is marked \"Superseded\".",
+     "raised": [
+      "Feedback/assumption.md #28"
+     ],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O35",
+   "name": "MU Stock",
+   "tours": [
+    "manufacturing-unit-operations",
+    "oem-warehouse-products",
+    "procurement-to-material-inward"
+   ],
+   "priority": "P0",
+   "estDays": "5",
+   "purpose": "The stock register for one manufacturing unit: daily movements, shipments in transit, components needed, and reducing stock.",
+   "spec": {
+    "code": "O35",
+    "name": "MU Stock",
+    "path": "/inventory/mu-stock/:unitId",
+    "type": "Report + Dialogs",
+    "mode": "RO + Create",
+    "roles": "ADM APM DH DM",
+    "priority": "P0",
+    "buttons": "date, daily register, in-transit (add, edit, receive), components needed, reduce stock",
+    "fields": [
+     [
+      "Product",
+      "productId",
+      "select",
+      "✔",
+      "—"
+     ],
+     [
+      "Dispatch Date",
+      "dispatchDate",
+      "date",
+      "?",
+      "—"
+     ],
+     [
+      "Colors Breakdown (+ Add Color)",
+      "colours[{colour, qty}]",
+      "select + number, repeat",
+      "?",
+      "—"
+     ],
+     [
+      "Notes",
+      "notes",
+      "textarea",
+      "—",
+      "—"
+     ]
+    ],
+    "note": "",
+    "rules": [
+     "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+     "**F6** — OEM-only fields: ledger tally, reserved stock by dealer, production status / plan, MU stock register, dispatch batch / token, vendor data, audit trail (section 9)",
+     "**Dependency note:** R6, F6"
+    ]
+   },
+   "workbook": {
+    "notes": "Daily stock register, in-transit shipments (add/receive), components needed, reduce stock. The only way stock enters the system.",
+    "dependencies": "R6, F6",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so the fields for Reduce Stock cannot be shown. The spec does not capture them."
+    },
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so the warehouse locations cannot be shown. N12 Warehouse Location Master defines bin, rack and zone locations per manufacturing unit."
+    },
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so material inward receiving and quality check (N02) cannot be shown. The received count, shortfall, pass or fail per item and scrap are not defined."
+    },
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so backdated data entry for purchase orders and material inward (N18) cannot be shown."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "list",
+     "title": "MU stock · daily register",
+     "cols": [
+      "Model",
+      "Opening",
+      "Dispatched",
+      "Reserved",
+      "Received",
+      "Closing",
+      "In transit"
+     ],
+     "rows": [
+      [
+       "Tera Zip",
+       "20",
+       "4",
+       "2",
+       "8",
+       "22",
+       "3"
+      ]
+     ],
+     "actions": [
+      "In-transit: add / edit / receive",
+      "Components needed",
+      "Reduce stock"
+     ],
+     "tabs": [],
+     "filters": [],
+     "search": ""
+    },
+    {
+     "t": "form",
+     "title": "Reduce stock",
+     "fields": [
+      [
+       "~Product",
+       "~Tera Zip ▾"
+      ],
+      [
+       "~Quantity",
+       "~2"
+      ],
+      [
+       "~Reason",
+       "~Damage ▾"
+      ],
+      [
+       "~Date",
+       "~Today (backdating? N18)"
+      ],
+      [
+       "~Note",
+       "~…"
+      ]
+     ],
+     "actions": [
+      "Cancel",
+      "Reduce"
+     ],
+     "dialog": true
+    }
+   ],
+   "questions": [
+    {
+     "id": "O35-1",
+     "question": "What fields does \"Reduce stock\" have?",
+     "why": "The spec names the button and no fields.",
+     "suggestion": "Product, quantity, reason (damage, loss, transfer, other), date, note. Needs an approver above a limit.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O35-2",
+     "question": "What is \"Reserved\" and where does the number come from?",
+     "why": "The column is in the spec; its source is not.",
+     "suggestion": "Reserved = stock assigned to approved orders not yet dispatched (from O21). Click-through shows the order list. OEM-only.",
+     "raised": [
+      "Feedback/assumption.md #10"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O35-3",
+     "question": "Should users be allowed to enter records with an earlier date (N18)?",
+     "why": "N18 asks for backdated entry on POs and material inward, with no rules.",
+     "suggestion": "Only Admin and Inventory Manager, up to 90 days, with the original and entry dates both stored. Never on closed periods.",
+     "raised": [
+      "Feedback/assumption.md #31"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O35-4",
+     "question": "Should stock have bin, rack or zone locations (N12)?",
+     "why": "N12 asks for a location master per unit; no screen.",
+     "suggestion": "Yes, as a simple master list per unit, selectable on receiving and shown on the register.",
+     "raised": [
+      "EV_App_Screens_Estimation.xlsx row N12",
+      "Feedback/assumption.md #25"
+     ],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O25",
+   "name": "Products List",
+   "tours": [
+    "oem-warehouse-products"
+   ],
+   "priority": "P0",
+   "estDays": "2",
+   "purpose": "The OEM list of products, one tab per product type, with add, edit and delete.",
+   "spec": {
+    "code": "O25",
+    "name": "Products List",
+    "path": "/products/{vehicle, spare, accessory, battery, charger, motor, controller}",
+    "type": "List",
+    "mode": "RO",
+    "roles": "ADM",
+    "priority": "P0",
+    "buttons": "status filter, add, edit, delete",
+    "fields": [],
+    "note": "No dedicated input form — this is a list screen. Display/column content: Status filter, add/edit/delete, 7 product-type tabs.",
+    "rules": [
+     "**Counterpart:** D29 catalogue",
+     "**Dependency note:** ADM only"
+    ]
+   },
+   "workbook": {
+    "notes": "Status filter, add/edit/delete, 7 product-type tabs.",
+    "dependencies": "ADM only",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so the list columns and the status filter values for the products list cannot be shown. The columns shown are Vehicle, Variant, Colour and Status."
+    },
+    {
+     "where": "screen control",
+     "text": "The status filter values are not defined in screen_details.md."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "list",
+     "title": "Products",
+     "cols": [
+      "~Product",
+      "~Variant",
+      "~Colour",
+      "~Status"
+     ],
+     "rows": [
+      [
+       "Tera Zip",
+       "60V 30Ah",
+       "Red",
+       "Active"
+      ]
+     ],
+     "actions": [
+      "Add",
+      "Edit",
+      "Delete"
+     ],
+     "tabs": [
+      "Vehicle",
+      "Spare",
+      "Accessory",
+      "Battery",
+      "Charger",
+      "Motor",
+      "Controller"
+     ],
+     "filters": [
+      "Status ▾"
+     ],
+     "search": ""
+    }
+   ],
+   "questions": [
+    {
+     "id": "O25-1",
+     "question": "Which columns does each product tab show?",
+     "why": "The spec says only \"status filter, add / edit / delete, 7 tabs\". The workbook marks the screen P1.",
+     "suggestion": "Vehicle: model, variant, colour, status. Spare and accessory: name, parts code, price, status. Components: name, type, status.",
+     "raised": [
+      "EV_App_Screens_Estimation.xlsx row O25"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O25-2",
+     "question": "Which status values exist, and what does delete do to a product already sold?",
+     "why": "Status values are not given.",
+     "suggestion": "Active, Inactive, Draft. Delete is only allowed for a product never used; otherwise set it to Inactive.",
+     "raised": [],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O29",
+   "name": "Product Detail + Dashboard",
+   "tours": [
+    "oem-warehouse-products"
+   ],
+   "priority": "P1",
+   "estDays": "5",
+   "purpose": "One report page per vehicle model: stock, sales, warranty, issues, stock by manufacturing unit, and prices.",
+   "spec": {
+    "code": "O29",
+    "name": "Product Detail + Dashboard",
+    "path": "/products/vehicle-details/:id",
+    "type": "Detail + Report",
+    "mode": "RO",
+    "roles": "ADM",
+    "priority": "P1",
+    "buttons": "week / month / year, purchased vs sold",
+    "fields": [],
+    "note": "No dedicated input form — this is a detail + report screen. Display/column content: Per-model rollup: stock, sales, warranty, issues; stock-by-MU; price matrix.",
+    "rules": [
+     "**Dependency note:** Rolls up Inventory/Orders/Sales/Warranty/Issues"
+    ]
+   },
+   "workbook": {
+    "notes": "Per-model rollup: stock, sales, warranty, issues; stock-by-MU; price matrix.",
+    "dependencies": "Rolls up Inventory/Orders/Sales/Warranty/Issues",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so the week, month and year options and the report content (per-model rollup, stock by manufacturing unit and the price matrix) cannot be shown for …."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "list",
+     "title": "Tera Zip: stock by manufacturing unit",
+     "cols": [
+      "Manufacturing Unit",
+      "Quantity",
+      "~Product"
+     ],
+     "rows": [
+      [
+       "MU Hosur",
+       "12",
+       "Tera Zip 60V"
+      ]
+     ],
+     "actions": [
+      "Purchased vs sold"
+     ],
+     "tabs": [],
+     "filters": [
+      "Week",
+      "Month",
+      "Year"
+     ],
+     "search": ""
+    }
+   ],
+   "questions": [
+    {
+     "id": "O29-1",
+     "question": "What does each section of the report contain?",
+     "why": "The spec lists \"per-model rollup: stock, sales, warranty, issues; stock-by-MU; price matrix\" with no layout or formulas.",
+     "suggestion": "Four cards (Stock, Sold, Warranty claims, Issues) for the chosen period, then a stock-by-unit table and the price matrix by dealer tier.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O29-2",
+     "question": "What are the week, month and year options, and what is \"purchased vs sold\"?",
+     "why": "The spec lists the buttons but gives no default period and does not say what \"purchased vs sold\" compares.",
+     "suggestion": "Period buttons default to Month. \"Purchased vs sold\" compares units received from production with units dispatched to dealers.",
+     "raised": [],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O30",
+   "name": "Inventory (OEM Stock)",
+   "tours": [
+    "oem-warehouse-products"
+   ],
+   "priority": "P0",
+   "estDays": "3",
+   "purpose": "The OEM view of stock held, with nine tabs including stock history and reserved stock.",
+   "spec": {
+    "code": "O30",
+    "name": "Inventory (OEM Stock)",
+    "path": "/inventory/stock (+ stock history, reserved stock)",
+    "type": "List (9 tabs)",
+    "mode": "RO",
+    "roles": "see INVENTORY_*",
+    "priority": "P0",
+    "buttons": "unit / stock filter, search",
+    "fields": [],
+    "note": "No dedicated input form — this is a list (9 tabs) screen. Display/column content: Unit/stock filter, search, stock history, reserved stock tabs.",
+    "rules": [
+     "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+     "**F6** — OEM-only fields: ledger tally, reserved stock by dealer, production status / plan, MU stock register, dispatch batch / token, vendor data, audit trail (section 9)",
+     "**Counterpart:** D29 \"N in stock\"",
+     "**Dependency note:** R6, F6"
+    ]
+   },
+   "workbook": {
+    "notes": "Unit/stock filter, search, stock history, reserved stock tabs.",
+    "dependencies": "R6, F6",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so the names of the nine tabs and the unit and stock filter values cannot be shown. Only stock history and reserved stock are named."
+    },
+    {
+     "where": "screen control",
+     "text": "The stock filter values are not defined in screen_details.md."
+    },
+    {
+     "where": "screen control",
+     "text": "This tab name and content are not defined in screen_details.md."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "list",
+     "title": "OEM inventory",
+     "cols": [
+      "~Product",
+      "~Quantity",
+      "~Status"
+     ],
+     "rows": [
+      [
+       "Tera Zip 60V",
+       "12",
+       "Available"
+      ]
+     ],
+     "actions": [],
+     "tabs": [
+      "~Stock",
+      "~Stock history",
+      "~Reserved stock",
+      "~Vehicle",
+      "~Spare",
+      "~Accessory",
+      "~Battery",
+      "~Charger",
+      "~Motor"
+     ],
+     "filters": [
+      "Unit ▾",
+      "Stock ▾"
+     ],
+     "search": "Search"
+    }
+   ],
+   "questions": [
+    {
+     "id": "O30-1",
+     "question": "What are the nine tabs?",
+     "why": "The spec names only \"stock history\" and \"reserved stock\". The tour shows the other seven as \"Not defined\" tabs.",
+     "suggestion": "Stock, Stock history, Reserved stock, then one tab per product type (vehicle, spare, accessory, battery, charger, motor) as proposed.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O30-2",
+     "question": "What do the unit filter and stock filter offer?",
+     "why": "No values are given.",
+     "suggestion": "Unit: each manufacturing unit. Stock: Available, Locked, Delivered, Draft (the statuses on the inventory list).",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O30-3",
+     "question": "Who sees reserved stock by dealer?",
+     "why": "Rule F6 says reserved stock by dealer is OEM-only.",
+     "suggestion": "OEM users only; dealers never see it.",
+     "raised": [
+      "Feedback/assumption.md #10"
+     ],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "N13",
+   "name": "FIFO Stock Issuance & Location Report",
+   "tours": [
+    "oem-warehouse-products"
+   ],
+   "priority": "P1",
+   "estDays": "5",
+   "purpose": "When stock is issued, the system picks the oldest stock first and says which location it is in. A report shows stock by location.",
+   "spec": {
+    "code": "N13",
+    "name": "FIFO Stock Issuance & Location Report",
+    "path": "—",
+    "type": "Report / Action",
+    "mode": "NEW",
+    "roles": "",
+    "priority": "P1",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Stock issued from the correct (oldest-first) location; current stock-by-location report. Touches core inventory issuance logic across O30/O31/O35.",
+    "fields": [],
+    "note": "*Not yet speced — proposed scope only:* Stock issued from the correct (oldest-first) location; current stock-by-location report. Touches core inventory issuance logic across O30/O31/O35.",
+    "rules": [
+     "**Depends on / extends:** Depends on N12; significant change to existing Inventory issuance"
+    ]
+   },
+   "workbook": {
+    "notes": "Stock issued from the correct (oldest-first) location; current stock-by-location report. Touches core inventory issuance logic across O30/O31/O35.",
+    "dependencies": "Depends on N12; significant change to existing Inventory issuance",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so the FIFO stock issue (oldest first) and the stock-by-location report (N13) cannot be shown."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "list",
+     "title": "Stock by location (proposed)",
+     "cols": [
+      "~Product",
+      "~Location",
+      "~Received",
+      "~Quantity"
+     ],
+     "rows": [
+      [
+       "Motor 60V",
+       "Rack A-2",
+       "12 Sep",
+       "8"
+      ],
+      [
+       "Motor 60V",
+       "Rack B-1",
+       "20 Oct",
+       "10"
+      ]
+     ],
+     "actions": [
+      "~Issue oldest first"
+     ],
+     "tabs": [],
+     "filters": [],
+     "search": ""
+    }
+   ],
+   "questions": [
+    {
+     "id": "N13-1",
+     "question": "What exactly does FIFO apply to, and what if the oldest stock is unusable?",
+     "why": "The workbook line: \"stock issued from the correct (oldest-first) location; current stock-by-location report\". It depends on the location master (N12) and \"significantly changes existing inventory issuance\".",
+     "suggestion": "FIFO on components and spares. If the oldest lot is damaged or reserved, the user picks the next lot and records why.",
+     "raised": [
+      "Feedback/assumption.md #25",
+      "EV_App_Screens_Estimation.xlsx row N13"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "N13-2",
+     "question": "How does FIFO work with reservations for orders?",
+     "why": "Not defined.",
+     "suggestion": "A reservation holds quantity from the oldest lot. Issue uses reserved lots first.",
+     "raised": [
+      "Feedback/assumption.md #10, #25"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "N13-3",
+     "question": "Should this ship in v1, given it touches core inventory logic (5 days, P1)?",
+     "why": "The workbook rates it P1 and \"significant\".",
+     "suggestion": "Decide scope with N12; both together, or both later.",
+     "raised": [
+      "Feedback/assumption.md #32"
+     ],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O34",
+   "name": "MU View",
+   "tours": [
+    "manufacturing-unit-operations"
+   ],
+   "priority": "P0",
+   "estDays": "3",
+   "purpose": "The page for one manufacturing unit, with links to its stock, dispatch plan, load plan, containers and production.",
+   "spec": {
+    "code": "O34",
+    "name": "MU View",
+    "path": "/manufacturing-unit/view/:id",
+    "type": "Detail",
+    "mode": "RO + Action",
+    "roles": "ADM DH DM",
+    "priority": "P0",
+    "buttons": "edit, MU stock, dispatch plan, load plan, containers, production, **connect a dealer**",
+    "fields": [
+     [
+      "Search any dealer",
+      "dealerId",
+      "search / select",
+      "✔",
+      "moves the dealer to this unit; already-connected ones are flagged"
+     ]
+    ],
+    "note": "",
+    "rules": [
+     "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+     "**Dependency note:** R6"
+    ]
+   },
+   "workbook": {
+    "notes": "Unit details, connect a dealer, right-hand nav to stock/dispatch-plan/load-plan/containers/production.",
+    "dependencies": "R6",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so the MU View layout cannot be shown. The details shown are the O33 fields for …. What the edit, production, load plan and containers buttons lead to is not defined."
+    },
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so the Unit Asset Register (N21) cannot be shown. N21 defines and tracks fixed and movable assets per manufacturing unit."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "detail",
+     "title": "MU Hosur",
+     "tabs": [
+      "Details"
+     ],
+     "kv": [
+      [
+       "State",
+       "Tamil Nadu"
+      ],
+      [
+       "Head",
+       "Ruby Sample"
+      ],
+      [
+       "Connected dealers",
+       "1"
+      ]
+     ],
+     "actions": [
+      "Edit",
+      "MU stock",
+      "Dispatch plan",
+      "Load plan",
+      "Containers",
+      "Production",
+      "Connect a dealer"
+     ]
+    },
+    {
+     "t": "note",
+     "text": "~N21: unit asset register (fixed and movable assets) would be a tab here"
+    }
+   ],
+   "questions": [
+    {
+     "id": "O34-1",
+     "question": "How should the page be laid out?",
+     "why": "The spec lists buttons only; the layout is not defined. The tour reuses the create-form fields.",
+     "suggestion": "Header with the unit details, then the six buttons as cards. Connected dealers shown in a list below.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O34-2",
+     "question": "What does \"Connect a dealer\" do exactly?",
+     "why": "The spec says it \"moves the dealer to this unit; already-connected ones are flagged\", with a \"Search any dealer\" box.",
+     "suggestion": "Searching shows dealers; connecting one moves it from its old unit after a confirmation that names both units.",
+     "raised": [
+      "Feedback/assumption.md #9"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O34-3",
+     "question": "Is the unit asset register (N21) in scope?",
+     "why": "N21 asks to track fixed and movable assets per unit, with an admin-managed asset-type list. It has no screen.",
+     "suggestion": "Decide scope. If yes: a new tab with asset, type, location, status.",
+     "raised": [
+      "Feedback/assumption.md #32"
+     ],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O36",
+   "name": "MU Dispatch Plan (ETA)",
+   "tours": [
+    "manufacturing-unit-operations"
+   ],
+   "priority": "P1",
+   "estDays": "3.5",
+   "purpose": "A month calendar for one manufacturing unit showing dispatch dates, build dates and components running short.",
+   "spec": {
+    "code": "O36",
+    "name": "MU Dispatch Plan (ETA)",
+    "path": "/manufacturing-unit/dispatch-plan/:id",
+    "type": "Report (calendar)",
+    "mode": "RO",
+    "roles": "ADM DH DM",
+    "priority": "P1",
+    "buttons": "month navigation",
+    "fields": [],
+    "note": "No dedicated input form — this is a report (calendar) screen. Display/column content: Month calendar of dispatch/build/component-short markers.",
+    "rules": [
+     "**R6** — OEM user with `manufacturingUnitId` set sees only that MU's dealers, POs and stock; blank = \"All units (global)\"",
+     "**Dependency note:** R6"
+    ]
+   },
+   "workbook": {
+    "notes": "Month calendar of dispatch/build/component-short markers.",
+    "dependencies": "R6",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so the meaning of the dispatch, build and component-short markers and the date range cannot be shown."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "cal",
+     "title": "Oct 2026",
+     "marks": [
+      "4:Dispatch",
+      "11:~Build",
+      "18:~Component short",
+      "25:Dispatch"
+     ],
+     "note": "Marker meaning and the date range are proposed."
+    }
+   ],
+   "questions": [
+    {
+     "id": "O36-1",
+     "question": "What do the three markers mean, and what dates do they cover?",
+     "why": "The spec names markers (dispatch, build, component-short) but not their meaning or date range. Nothing is calculated in the tour.",
+     "suggestion": "Dispatch: planned shipment date. Build: planned production date. Component-short: a day a needed part would run out. Calendar covers the current month, with next and previous month arrows.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O36-2",
+     "question": "Where do the dates come from?",
+     "why": "The calendar is described only as \"month calendar of markers\". Nothing says where each date comes from.",
+     "suggestion": "Dispatch dates from approved orders and ETA; build dates from production plan (O18); shortage from the BOM against stock.",
+     "raised": [],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "D47",
+   "name": "Settings: Profile",
+   "tours": [
+    "dealer-settings-users"
+   ],
+   "priority": "P0",
+   "estDays": "2",
+   "purpose": "The dealer's own profile. Most of it is read-only; the dealer can set the shop location, upload documents and change the password.",
+   "spec": {
+    "code": "D47",
+    "name": "Settings: Profile",
+    "path": "/settings/profile",
+    "type": "Detail + Dialogs",
+    "mode": "RO + limited update",
+    "roles": "D S V",
+    "priority": "P0",
+    "buttons": "change password, shop location save, upload documents, profile photo",
+    "fields": [
+     [
+      "Latitude",
+      "latitude",
+      "number",
+      "—",
+      "from browser geolocation (\"Use my current location\")",
+      "`PUT /accounts/me/shop-location`"
+     ],
+     [
+      "Longitude",
+      "longitude",
+      "number",
+      "—",
+      "—",
+      "—"
+     ],
+     [
+      "Address",
+      "address",
+      "text",
+      "—",
+      "optional",
+      "—"
+     ]
+    ],
+    "note": "",
+    "rules": [
+     "**F3** — Dealer profile (org, GST, bank, addresses, MU, region / zone, type) is OEM-owned and read-only to dealer. Dealer may edit only password, shop location, photo and business documents.",
+     "**Counterpart:** O05 (owner)",
+     "**Dependency note:** F3; counterpart O05 (owner)"
+    ]
+   },
+   "workbook": {
+    "notes": "Org/bank/address fields read-only (F3); dealer may edit password, shop location, documents, photo.",
+    "dependencies": "F3; counterpart O05 (owner)",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so the effects of the shop location save, document upload and profile photo cannot be shown. The other dealer_profile fields are read-only, and their labels are not listed in the spec."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "detail",
+     "title": "Settings: Profile",
+     "tabs": [
+      "Profile",
+      "~Documents",
+      "Shop location",
+      "Password"
+     ],
+     "kv": [
+      [
+       "Firm name",
+       "Sri Lakshmi EVs (contact OEM Admin)"
+      ],
+      [
+       "~GST No",
+       "(read only)"
+      ],
+      [
+       "Latitude",
+       "17.38"
+      ],
+      [
+       "Longitude",
+       "78.48"
+      ]
+     ],
+     "actions": [
+      "Use my location",
+      "Save shop location",
+      "Upload",
+      "Change password"
+     ]
+    }
+   ],
+   "questions": [
+    {
+     "id": "D47-1",
+     "question": "Which profile fields does the dealer see (read-only)?",
+     "why": "The spec says all organisation, address, bank and login fields are read-only, but lists none by name. The tour shows only Firm Name.",
+     "suggestion": "Show everything the OEM captured on O05, read-only, plus a line \"contact the OEM Admin to change\".",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "D47-2",
+     "question": "What happens when the dealer saves the shop location, uploads a document or changes the photo?",
+     "why": "The spec gives the endpoint only. The tour shows a message.",
+     "suggestion": "Location saves at once. Documents go to the OEM for approval, with the status shown (pending, approved, rejected). The photo saves at once.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "D47-3",
+     "question": "Is changing the password forced at first sign-in?",
+     "why": "The spec makes it optional.",
+     "suggestion": "Forced on first sign-in, because the OEM set the first password.",
+     "raised": [],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "D48",
+   "name": "Settings: Users",
+   "tours": [
+    "dealer-settings-users"
+   ],
+   "priority": "P0",
+   "estDays": "1",
+   "purpose": "The dealer owner's list of the dealer's own staff users.",
+   "spec": {
+    "code": "D48",
+    "name": "Settings: Users",
+    "path": "/settings/users",
+    "type": "List",
+    "mode": "RO",
+    "roles": "D",
+    "priority": "P0",
+    "buttons": "search, create, edit",
+    "fields": [],
+    "note": "No dedicated input form — this is a list screen. Display/column content: Search, create, edit dealer staff.",
+    "rules": [
+     "**R1** — Dealer user sees only rows with `dealerProfileID` = own dealer",
+     "**Dependency note:** R1"
+    ]
+   },
+   "workbook": {
+    "notes": "Search, create, edit dealer staff.",
+    "dependencies": "R1",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so the list columns cannot be taken from the spec. The columns shown are the O52 labels (assumption)."
+    },
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so the N11 role assignment for a dealer and its connected sub-dealers cannot be shown. It depends on the sub-dealer clarification document, which is not in the repo yet."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "list",
+     "title": "Users",
+     "cols": [
+      "~User ID",
+      "~Name",
+      "~Role",
+      "~Contact",
+      "~Email",
+      "~Status"
+     ],
+     "rows": [
+      [
+       "SL-0002",
+       "Swati Sample",
+       "Sales Man",
+       "90000 00005",
+       "swati@example.com",
+       "Active"
+      ]
+     ],
+     "actions": [
+      "Create"
+     ],
+     "tabs": [],
+     "filters": [],
+     "search": "Search"
+    }
+   ],
+   "questions": [
+    {
+     "id": "D48-1",
+     "question": "Which columns does the list show?",
+     "why": "The spec says \"search, create, edit\" only. Columns come from the OEM users screen (O52).",
+     "suggestion": "User ID, Name, Role, Contact, Email, Status, and an Edit button.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "D48-2",
+     "question": "Can the dealer owner deactivate a user, and can the owner change a user's password?",
+     "why": "The spec gives edit only.",
+     "suggestion": "Yes to deactivate (status Inactive, history kept). The owner can set a new password for staff.",
+     "raised": [
+      "Feedback/assumption.md #20"
+     ],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O54",
+   "name": "Settings: Audit Logs",
+   "tours": [
+    "oem-security-audit"
+   ],
+   "priority": "P1",
+   "estDays": "3",
+   "purpose": "A log of who changed what and when, with filters and a view of the before and after values.",
+   "spec": {
+    "code": "O54",
+    "name": "Settings: Audit Logs",
+    "path": "/settings/audit-logs",
+    "type": "List",
+    "mode": "RO",
+    "roles": "ADM",
+    "priority": "P1",
+    "buttons": "feature / action / date filters, expand diff",
+    "fields": [],
+    "note": "No dedicated input form — this is a list screen. Display/column content: Feature/action/date filters, expandable field diff.",
+    "rules": [
+     "**Dependency note:** See also new Purge/Export rows below"
+    ]
+   },
+   "workbook": {
+    "notes": "Feature/action/date filters, expandable field diff.",
+    "dependencies": "See also new Purge/Export rows below",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so the audit purge (N15, super admin only) and the customer export (N16) cannot be shown. Both extend O54. The diff content and the columns are not defined either."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "list",
+     "title": "Audit logs",
+     "cols": [
+      "~Feature",
+      "~Action",
+      "~Date",
+      "~By",
+      "~Changes"
+     ],
+     "rows": [
+      [
+       "Dealer",
+       "Created",
+       "27 Oct",
+       "Charan",
+       "▸ expand diff"
+      ]
+     ],
+     "actions": [],
+     "tabs": [],
+     "filters": [
+      "Feature ▾",
+      "Action ▾",
+      "Date ▾"
+     ],
+     "search": ""
+    },
+    {
+     "t": "note",
+     "text": "~N15 purge and N16 export would add two buttons here"
+    }
+   ],
+   "questions": [
+    {
+     "id": "O54-1",
+     "question": "Which columns and filter values does the log have, and what does the expanded \"diff\" show?",
+     "why": "The spec says \"feature / action / date filters, expandable field diff\" with no values.",
+     "suggestion": "Columns: Feature, Action, Date, User, Record. Diff shows field, old value, new value. Filters list every feature and action.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O54-2",
+     "question": "Should the Super Admin be able to purge old records (N15), with a retention date?",
+     "why": "N15 has one line and no screen.",
+     "suggestion": "Yes. Retention is set in settings (for example 7 years); a purge needs a typed confirmation and is itself logged.",
+     "raised": [
+      "Feedback/assumption.md #29"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "O54-3",
+     "question": "Can customers export their own audit trail (N16)?",
+     "why": "N16: \"customer-facing export/download of their own audit trail\". Format, scope and sign-in check are not given.",
+     "suggestion": "CSV, only the customer's own records, after re-entering the password.",
+     "raised": [
+      "Feedback/assumption.md #29"
+     ],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "O55",
+   "name": "Settings: Security",
+   "tours": [
+    "oem-security-audit"
+   ],
+   "priority": "P1",
+   "estDays": "2",
+   "purpose": "Security settings: the user's signed-in devices, signing out others, and the default device limit.",
+   "spec": {
+    "code": "O55",
+    "name": "Settings: Security",
+    "path": "/settings/security",
+    "type": "Detail + Form",
+    "mode": "Action",
+    "roles": "ADM (others: own devices)",
+    "priority": "P1",
+    "buttons": "sign out other devices / everywhere, default device limit",
+    "fields": [
+     [
+      "My devices",
+      "—",
+      "list",
+      "—",
+      "sign out other devices / everywhere"
+     ],
+     [
+      "Default device limit",
+      "deviceLimit",
+      "number",
+      "—",
+      "ADM; logged-in accounts table: account, role, devices, limit, last active"
+     ]
+    ],
+    "note": "",
+    "rules": []
+   },
+   "workbook": {
+    "notes": "My devices, logged-in accounts, default device limit, sign-out.",
+    "dependencies": "",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so the My devices columns and what sign out does cannot be shown. The default device limit and the accounts table are shown with sample values."
+    },
+    {
+     "where": "screen control",
+     "text": "My devices columns and device data are not defined in screen_details.md (O55)."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "form",
+     "title": "Security",
+     "fields": [
+      [
+       "My devices",
+       "~Device · browser · last active · IP"
+      ],
+      [
+       "Default device limit",
+       "3"
+      ]
+     ],
+     "actions": [
+      "Sign out other devices",
+      "Sign out everywhere"
+     ],
+     "dialog": false
+    }
+   ],
+   "questions": [
+    {
+     "id": "O55-1",
+     "question": "What does the \"My devices\" table show?",
+     "why": "The spec names the heading only.",
+     "suggestion": "Device name, browser, location, last active, and a button to sign out that device.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O55-2",
+     "question": "What happens when the limit is reached?",
+     "why": "The effect of \"Default device limit\" is not defined.",
+     "suggestion": "The oldest session is signed out on the new sign-in, with an email to the user.",
+     "raised": [],
+     "basis": "mine"
+    },
+    {
+     "id": "O55-3",
+     "question": "Who may sign out other users' devices?",
+     "why": "The spec says Admin; others see only their own devices.",
+     "suggestion": "Admin only, from the user edit page (O53).",
+     "raised": [],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "N05",
+   "name": "QC Inspection Checklist",
+   "tours": [
+    "qc-and-packaging"
+   ],
+   "priority": "P0",
+   "estDays": "2.5",
+   "purpose": "A yes / no checklist QC fills for each finished unit before it is released.",
+   "spec": {
+    "code": "N05",
+    "name": "QC Inspection Checklist",
+    "path": "—",
+    "type": "Form",
+    "mode": "NEW",
+    "roles": "",
+    "priority": "P0",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Yes/No checklist per finished unit before release.",
+    "fields": [],
+    "note": "*Not yet speced — proposed scope only:* Yes/No checklist per finished unit before release.",
+    "rules": [
+     "**Depends on / extends:** Gated after Production Completion (N04)"
+    ]
+   },
+   "workbook": {
+    "notes": "Yes/No checklist per finished unit before release.",
+    "dependencies": "Gated after Production Completion (N04)",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so this stage cannot be shown. N05 QC Inspection Checklist (by …) is a Yes/No checklist per finished unit of … before release."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "form",
+     "title": "QC checklist (proposed)",
+     "fields": [
+      [
+       "~Unit",
+       "~CH-1042"
+      ],
+      [
+       "~Frame and paint OK?",
+       "~Yes / No"
+      ],
+      [
+       "~Brakes OK?",
+       "~Yes / No"
+      ],
+      [
+       "~Lights and horn OK?",
+       "~Yes / No"
+      ],
+      [
+       "~Battery and charger OK?",
+       "~Yes / No"
+      ],
+      [
+       "~Remarks",
+       "~…"
+      ]
+     ],
+     "actions": [
+      "~Pass",
+      "~Fail → rework"
+     ],
+     "dialog": false
+    }
+   ],
+   "questions": [
+    {
+     "id": "N05-1",
+     "question": "Which checks are on the list?",
+     "why": "The spec says only \"Yes/No checklist per finished unit before release\". No items are given.",
+     "suggestion": "Start with ten items per vehicle type, set by the QC Manager and editable by Admin. I can draft a list.",
+     "raised": [
+      "EV_App_Screens_Estimation.xlsx row N05"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "N05-2",
+     "question": "What happens when a check fails?",
+     "why": "The flow document sends a failed unit back to production, but that loop is not in the spec.",
+     "suggestion": "The unit goes to a \"Rework\" list with the failed items. After rework it is checked again; the first result stays in history.",
+     "raised": [
+      "Feedback/assumption.md #11"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "N05-3",
+     "question": "Is a QC pass needed for every unit before dispatch?",
+     "why": "Not stated.",
+     "suggestion": "Yes, no dispatch without a pass.",
+     "raised": [
+      "Feedback/assumption.md #11"
+     ],
+     "basis": "mine"
+    }
+   ]
+  },
+  {
+   "code": "N06",
+   "name": "QC Branding / Packaging Requisition",
+   "tours": [
+    "qc-and-packaging"
+   ],
+   "priority": "P1",
+   "estDays": "2",
+   "purpose": "QC asks Inventory for branding and packaging materials for a specific finished product.",
+   "spec": {
+    "code": "N06",
+    "name": "QC Branding / Packaging Requisition",
+    "path": "—",
+    "type": "Form / Action",
+    "mode": "NEW",
+    "roles": "",
+    "priority": "P1",
+    "buttons": "*Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: QC requests branding/packaging materials from Inventory against a specific finished product; sourced from the BOM.",
+    "fields": [],
+    "note": "*Not yet speced — proposed scope only:* QC requests branding/packaging materials from Inventory against a specific finished product; sourced from the BOM.",
+    "rules": [
+     "**Depends on / extends:** Depends on BOM (N08) for branding/packaging line items"
+    ]
+   },
+   "workbook": {
+    "notes": "QC requests branding/packaging materials from Inventory against a specific finished product; sourced from the BOM.",
+    "dependencies": "Depends on BOM (N08) for branding/packaging line items",
+    "openQuestion": ""
+   },
+   "guesses": [
+    {
+     "where": "tour step",
+     "text": "Not defined in screen_details.md, so this stage cannot be shown. N06 QC Branding / Packaging Requisition (by …) requests branding and packaging materials from … against …, sourced from the BOM (N08)."
+    }
+   ],
+   "feedback": [],
+   "mock": [
+    {
+     "t": "form",
+     "title": "Branding / packaging requisition (proposed)",
+     "fields": [
+      [
+       "~Finished product",
+       "~Tera Zip · CH-1042"
+      ],
+      [
+       "~Items",
+       "~from the BOM (N08)"
+      ],
+      [
+       "~Quantity",
+       "~1 set"
+      ],
+      [
+       "~Requested by",
+       "~QC"
+      ]
+     ],
+     "actions": [
+      "~Submit request"
+     ],
+     "dialog": false
+    }
+   ],
+   "questions": [
+    {
+     "id": "N06-1",
+     "question": "Which items can be requested, and where does the list come from?",
+     "why": "The workbook line says the items are \"sourced from the BOM\". The BOM (N08) has no screen yet.",
+     "suggestion": "Items marked \"Branding\" or \"Packaging\" in the BOM for that model.",
+     "raised": [
+      "EV_App_Screens_Estimation.xlsx row N06"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "N06-2",
+     "question": "Does every unit need branding and packaging before dispatch?",
+     "why": "Not stated.",
+     "suggestion": "Yes for new vehicles. Not needed for spares.",
+     "raised": [
+      "Feedback/assumption.md #11"
+     ],
+     "basis": "mine"
+    },
+    {
+     "id": "N06-3",
+     "question": "Who approves and who issues the material?",
+     "why": "Not stated. The tour names Ruby (Inventory Manager) in a card only.",
+     "suggestion": "Inventory Manager approves and issues; stock is deducted on issue.",
+     "raised": [
+      "Feedback/assumption.md #20"
+     ],
+     "basis": "mine"
+    }
+   ]
+  }
+ ]
+}

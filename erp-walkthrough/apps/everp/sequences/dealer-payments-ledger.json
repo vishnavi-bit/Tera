@@ -1,0 +1,141 @@
+{
+  "id": "dealer-payments-ledger",
+  "title": "Dealer payments and ledger",
+  "startStep": "payments",
+  "completionMessage": "The dealer topped up the ledger, accounts verified it, and the dealer paid the order advance from the ledger. The OEM sees both movements in the dealer's payment history. Next in the real flow: the OEM raises production for the paid order (see Dealer order to dealer delivery).",
+  "steps": {
+    "payments": {
+      "user": "dealer-owner",
+      "screen": "D45",
+      "proposedAction": "Click add payment",
+      "infoPanel": [
+        {
+          "key": "ledger.balance",
+          "label": "Ledger balance",
+          "format": "inr"
+        }
+      ],
+      "actions": {
+        "add-payment": {
+          "performedText": "clicked add payment",
+          "nextStep": "topup"
+        }
+      }
+    },
+    "topup": {
+      "user": "dealer-owner",
+      "screen": "D46",
+      "proposedAction": "Check the top-up details and submit for verification",
+      "infoPanel": [
+        {
+          "key": "ledger.balance",
+          "label": "Ledger balance",
+          "format": "inr"
+        }
+      ],
+      "actions": {
+        "submit-topup": {
+          "performedText": "submitted the ledger top-up of {topup.amount|inr}",
+          "nextStep": "verify",
+          "stateChange": {
+            "topup.status": {
+              "set": "Submitted"
+            }
+          }
+        }
+      }
+    },
+    "verify": {
+      "user": "oem-accounts",
+      "screen": "O45",
+      "proposedAction": "Verify the ledger top-up",
+      "infoPanel": [
+        {
+          "key": "ledger.balance",
+          "label": "Ledger balance",
+          "format": "inr"
+        },
+        {
+          "key": "topup.status",
+          "label": "Top-up status"
+        }
+      ],
+      "actions": {
+        "verify-topup": {
+          "performedText": "verified the ledger top-up",
+          "nextStep": "ledger",
+          "stateChange": {
+            "topup.status": {
+              "set": "Verified"
+            },
+            "ledger.balance": {
+              "copy": "ledger.afterTopup"
+            }
+          }
+        }
+      }
+    },
+    "ledger": {
+      "user": "dealer-owner",
+      "screen": "D33",
+      "proposedAction": "Check the ledger balance",
+      "infoPanel": [
+        {
+          "key": "ledger.balance",
+          "label": "Ledger balance",
+          "format": "inr"
+        }
+      ],
+      "performedText": "checked the ledger balance",
+      "nextStep": "advance"
+    },
+    "advance": {
+      "user": "dealer-owner",
+      "screen": "D34",
+      "proposedAction": "Pay the order advance from the ledger",
+      "infoPanel": [
+        {
+          "key": "ledger.balance",
+          "label": "Ledger balance",
+          "format": "inr"
+        },
+        {
+          "key": "order.advanceStatus",
+          "label": "Order advance"
+        }
+      ],
+      "actions": {
+        "pay-from-ledger": {
+          "performedText": "paid the advance of {order.advanceDue|inr} from the ledger",
+          "nextStep": "history",
+          "stateChange": {
+            "order.advanceStatus": {
+              "set": "Paid from ledger"
+            },
+            "ledger.balance": {
+              "copy": "ledger.afterAdvance"
+            }
+          }
+        }
+      }
+    },
+    "history": {
+      "user": "oem-accounts",
+      "screen": "O14",
+      "proposedAction": "Check the dealer's payment history",
+      "infoPanel": [
+        {
+          "key": "ledger.balance",
+          "label": "Ledger balance",
+          "format": "inr"
+        },
+        {
+          "key": "order.advanceStatus",
+          "label": "Order advance"
+        }
+      ],
+      "performedText": "checked the dealer's payment history",
+      "nextStep": null
+    }
+  }
+}

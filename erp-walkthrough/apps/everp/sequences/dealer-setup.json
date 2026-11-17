@@ -1,0 +1,83 @@
+{
+  "id": "dealer-setup",
+  "title": "Setting up dealer",
+  "startStep": "dealer-overview",
+  "completionMessage": "The new dealer is set up and its owner has signed in for the first time. Next in the real flow: the dealer places its first purchase order.",
+  "steps": {
+    "dealer-overview": {
+      "user": "oem-super-admin",
+      "screen": "O03",
+      "proposedAction": "Open Dealers from the menu",
+      "infoPanel": [{ "key": "dealers.count", "label": "Dealers" }],
+      "actions": {
+        "goto-O04": { "performedText": "opened the dealers list", "nextStep": "dealers-list" }
+      }
+    },
+    "dealers-list": {
+      "user": "oem-super-admin",
+      "screen": "O04",
+      "proposedAction": "Click add",
+      "infoPanel": [{ "key": "dealers.count", "label": "Dealers" }],
+      "actions": {
+        "add-dealer": { "performedText": "clicked add", "nextStep": "dealer-create" }
+      }
+    },
+    "dealer-create": {
+      "user": "oem-super-admin",
+      "screen": "O05",
+      "proposedAction": "Check the dealer details and click save",
+      "actions": {
+        "save-dealer": {
+          "performedText": "clicked save",
+          "stateChange": {
+            "dealers.count": 1,
+            "newDealer.created": { "set": true }
+          },
+          "nextStep": "dealers-list-after"
+        }
+      }
+    },
+    "dealers-list-after": {
+      "user": "oem-super-admin",
+      "screen": "O04",
+      "proposedAction": "Open the new dealer",
+      "infoPanel": [{ "key": "dealers.count", "label": "Dealers" }],
+      "actions": {
+        "goto-O06": { "performedText": "opened the new dealer", "nextStep": "dealer-detail" },
+        "add-dealer": { "performedText": "clicked add", "nextStep": "dealer-create" }
+      }
+    },
+    "dealer-detail": {
+      "user": "oem-super-admin",
+      "screen": "O06",
+      "proposedAction": "Check the dealer profile, then hand over the login details",
+      "notDefined": "How the dealer's login details are handed over is not defined in screen_details.md. No screen or rule covers this step.",
+      "performedText": "checked the dealer profile",
+      "nextStep": "dealer-login"
+    },
+    "dealer-login": {
+      "user": "dealer-owner",
+      "screen": "D01",
+      "proposedAction": "Sign in with the user ID and password",
+      "actions": {
+        "sign-in": { "performedText": "signed in for the first time", "nextStep": "shop-location" }
+      }
+    },
+    "shop-location": {
+      "user": "dealer-owner",
+      "screen": "D03",
+      "proposedAction": "Save the shop location or choose not now",
+      "actions": {
+        "save-location": { "performedText": "saved the shop location", "nextStep": "dealer-dashboard" },
+        "skip-location": { "performedText": "chose not now", "nextStep": "dealer-dashboard" }
+      }
+    },
+    "dealer-dashboard": {
+      "user": "dealer-owner",
+      "screen": "D04",
+      "proposedAction": "Check the dealer dashboard",
+      "performedText": "viewed the dealer dashboard",
+      "nextStep": null
+    }
+  }
+}

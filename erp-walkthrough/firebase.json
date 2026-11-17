@@ -1,0 +1,27 @@
+{
+  "database": [
+    { "instance": "ojasa-mirai-llp-feedback", "rules": "database.rules.json" }
+  ],
+  "hosting": {
+    "site": "om-apps-demo",
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "database.rules.json",
+      "README.md",
+      "how_to_run.md",
+      "mock-model/**",
+      "**/docs/**",
+      "**/gaps/**",
+      "walkthrough/validate-cli.mjs",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "redirects": [
+      { "source": "/", "destination": "/walkthrough/", "type": 302 }
+    ],
+    "headers": [
+      { "source": "**/*.html", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] }
+    ]
+  }
+}

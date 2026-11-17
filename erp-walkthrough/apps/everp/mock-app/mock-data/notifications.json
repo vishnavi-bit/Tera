@@ -1,0 +1,19 @@
+{
+  "oem": [
+    { "id": "n1", "title": "New purchase order PO-2026-0412 from Sri Lakshmi EVs (16 units)", "minutesAgo": 6,    "unread": true,  "link": "O20" },
+    { "id": "n2", "title": "Advance payment of ₹2,97,600 submitted against PO-2026-0412",     "minutesAgo": 48,   "unread": true,  "link": "O23" },
+    { "id": "n3", "title": "Warranty claim WC-0091 raised by Kaveri Motors",                   "minutesAgo": 130,  "unread": true,  "link": "O35" },
+    { "id": "n4", "title": "Dealer Annai EV Hub profile updated",                              "minutesAgo": 420,  "unread": false, "link": "O06" },
+    { "id": "n5", "title": "Vendor PO VPO-0178: material received at MU Hosur",                "minutesAgo": 1500, "unread": false, "link": "O40" },
+    { "id": "n6", "title": "Shipment SH-2209 reported delivered by Velan Automobiles",         "minutesAgo": 2900, "unread": false, "link": "O22" },
+    { "id": "n7", "title": "Issue IS-0034 awaiting manager review",                            "minutesAgo": 4400, "unread": false, "link": "O36" }
+  ],
+  "dealer": [
+    { "id": "d1", "title": "Order PO-2026-0412 approved. Please pay the advance.",             "minutesAgo": 15,   "unread": true,  "link": "D30" },
+    { "id": "d2", "title": "Payment UTR882104517 verified",                                    "minutesAgo": 95,   "unread": true,  "link": "D30" },
+    { "id": "d3", "title": "Expected dispatch date for PO-2026-0401 is 12-Nov-2026",           "minutesAgo": 600,  "unread": false, "link": "D30" },
+    { "id": "d4", "title": "New announcement: Festive season price list",                      "minutesAgo": 1700, "unread": false, "link": "D05" },
+    { "id": "d5", "title": "Shipment SH-2188 dispatched to your shop",                         "minutesAgo": 3100, "unread": false, "link": "D32" },
+    { "id": "d6", "title": "Warranty claim WC-0077 completed",                                 "minutesAgo": 5000, "unread": false, "link": "D39" }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "id": "manufacturing-unit-operations",
+  "title": "Manufacturing unit operations",
+  "startStep": "oem-mu-view",
+  "completionMessage": "{mu.name} stock, its dispatch plan and the connected dealer {dealerConnect.dealer.name} are shown. The unit asset register (N21) is not defined yet.",
+  "steps": {
+    "oem-mu-view": {
+      "user": "oem-super-admin",
+      "screen": "O34",
+      "proposedAction": "Open the MU View and read the unit details",
+      "infoPanel": [],
+      "notDefined": "Not defined in screen_details.md, so the MU View layout cannot be shown. The details shown are the O33 fields for {mu.name}. What the edit, production, load plan and containers buttons lead to is not defined.",
+      "performedText": "opened the MU View of {mu.name}",
+      "nextStep": "oem-click-mu-stock"
+    },
+    "oem-click-mu-stock": {
+      "user": "oem-super-admin",
+      "screen": "O34",
+      "proposedAction": "Click MU stock",
+      "infoPanel": [],
+      "actions": {
+        "mu-stock": { "performedText": "clicked MU stock for {mu.name}", "nextStep": "oem-mu-stock" }
+      }
+    },
+    "oem-mu-stock": {
+      "user": "oem-inventory-mgr",
+      "screen": "O35",
+      "proposedAction": "Read the MU stock and the in-transit material",
+      "infoPanel": [],
+      "notDefined": "Not defined in screen_details.md, so the fields for Reduce Stock cannot be shown. The spec does not capture them.",
+      "performedText": "read the MU stock of {mu.name}",
+      "nextStep": "oem-click-dispatch-plan"
+    },
+    "oem-click-dispatch-plan": {
+      "user": "oem-super-admin",
+      "screen": "O34",
+      "proposedAction": "Click dispatch plan",
+      "infoPanel": [],
+      "actions": {
+        "dispatch-plan": { "performedText": "clicked dispatch plan for {mu.name}", "nextStep": "oem-dispatch-plan" }
+      }
+    },
+    "oem-dispatch-plan": {
+      "user": "oem-logistics-mgr",
+      "screen": "O36",
+      "proposedAction": "Read the dispatch plan calendar for {dispatchPlan.month}",
+      "infoPanel": [],
+      "notDefined": "Not defined in screen_details.md, so the meaning of the dispatch, build and component-short markers and the date range cannot be shown.",
+      "performedText": "read the dispatch plan for {dispatchPlan.month}",
+      "nextStep": "oem-click-connect-dealer"
+    },
+    "oem-click-connect-dealer": {
+      "user": "oem-super-admin",
+      "screen": "O34",
+      "proposedAction": "Check the connect a dealer search",
+      "infoPanel": [],
+      "actions": {
+        "connect-dealer": { "performedText": "checked the connected dealer {dealerConnect.dealer.name} for {mu.name}", "nextStep": "oem-n21" }
+      }
+    },
+    "oem-n21": {
+      "user": "oem-super-admin",
+      "screen": "O34",
+      "proposedAction": "Read the unit asset register requirement",
+      "infoPanel": [],
+      "notDefined": "Not defined in screen_details.md, so the Unit Asset Register (N21) cannot be shown. N21 defines and tracks fixed and movable assets per manufacturing unit.",
+      "performedText": "read the unit asset register requirement for {mu.name}",
+      "nextStep": null
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "id": "qc-and-packaging",
+  "title": "QC and packaging",
+  "startStep": "production-completion",
+  "completionMessage": "{order.id} has passed through production completion (N04), QC checklist (N05), QC branding and packaging (N06) and the despatch chassis validation gate (N07). The spec defines none of these stages, so their detail and the rework loop are not shown.",
+  "steps": {
+    "production-completion": {
+      "user": "oem-production-mgr",
+      "screen": "N04",
+      "proposedAction": "Read the production completion stage",
+      "infoPanel": [],
+      "notDefined": "Not defined in screen_details.md, so this stage cannot be shown. N04 Production Completion & Handover (by {users.oem-production-mgr.name}) captures the chassis, motor, controller and battery of {order.id} and hands the inventory over.",
+      "performedText": "reached the production completion stage for {order.id}",
+      "nextStep": "qc-checklist"
+    },
+    "qc-checklist": {
+      "user": "oem-production-mgr",
+      "screen": "N05",
+      "proposedAction": "Read the QC inspection stage",
+      "infoPanel": [],
+      "notDefined": "Not defined in screen_details.md, so this stage cannot be shown. N05 QC Inspection Checklist (by {users.oem-production-mgr.name}) is a Yes/No checklist per finished unit of {order.id} before release.",
+      "performedText": "reached the QC inspection stage for {order.id}",
+      "nextStep": "qc-branding"
+    },
+    "qc-branding": {
+      "user": "oem-production-mgr",
+      "screen": "N06",
+      "proposedAction": "Read the QC branding and packaging stage",
+      "infoPanel": [],
+      "notDefined": "Not defined in screen_details.md, so this stage cannot be shown. N06 QC Branding / Packaging Requisition (by {users.oem-production-mgr.name}) requests branding and packaging materials from {users.oem-inventory-mgr.name} against {order.id}, sourced from the BOM (N08).",
+      "performedText": "reached the QC branding and packaging stage for {order.id}",
+      "nextStep": "despatch-gate"
+    },
+    "despatch-gate": {
+      "user": "oem-logistics-mgr",
+      "screen": "N07",
+      "proposedAction": "Read the despatch chassis validation gate",
+      "infoPanel": [],
+      "notDefined": "Not defined in screen_details.md, so this stage cannot be shown. N07 Despatch - Chassis Validation Gate (by {users.oem-logistics-mgr.name}) validates the chassis and identifiers of {order.id} before dispatch.",
+      "performedText": "reached the despatch chassis validation gate for {order.id}",
+      "nextStep": null
+    }
+  }
+}

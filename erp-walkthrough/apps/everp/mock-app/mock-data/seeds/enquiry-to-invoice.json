@@ -1,0 +1,114 @@
+{
+  "_sample": "SAMPLE DATA for the Enquiry to invoice walkthrough. Customer names, phone numbers, emails, addresses, IDs, chassis and serial numbers, transaction IDs and amounts are invented. Dealer and product names match the other walkthrough seeds.",
+  "dealer": { "id": "DLR-014", "name": "Sri Lakshmi EVs", "mu": "MU Hosur" },
+  "counts": { "enquiries": 2, "followUps": 1, "quotations": 0, "customers": 2, "payments": 0, "invoices": 0 },
+  "product": { "name": "Tera Zip", "variant": "60V 30Ah", "colour": "Matte Black", "netRate": 62000, "gstPercent": 5, "price": 65100 },
+  "enquiry": {
+    "id": "ENQ-SAMPLE-0003",
+    "status": "Not created",
+    "type": "HOT",
+    "customerType": "individual_customer",
+    "prefix": "Ms",
+    "firstName": "Kavya",
+    "lastName": "Sample",
+    "phone": "9000000301",
+    "whatsapp": "9000000301",
+    "alternatePhone": "",
+    "email": "kavya.sample@example.com",
+    "location": "Hosur",
+    "subject": "Interested in a 60V scooter",
+    "note": "Wants a test ride this week (sample).",
+    "schedule": "2026-10-29T11:00"
+  },
+  "enquiries": [
+    { "id": "ENQ-SAMPLE-0001", "name": "Meena Sample", "type": "WARM", "phone": "9000000101", "location": "Hosur", "nextFollowUp": "2026-10-28", "status": "Open" },
+    { "id": "ENQ-SAMPLE-0002", "name": "Arun Sample", "type": "COLD", "phone": "9000000102", "location": "Krishnagiri", "nextFollowUp": "2026-11-02", "status": "Open" }
+  ],
+  "followUp": {
+    "subject": "Test ride and price discussion",
+    "note": "Customer visited the shop and wants a quote for the 60V 30Ah variant (sample).",
+    "calledBy": "Swati",
+    "schedule": "2026-10-31T11:00"
+  },
+  "followUps": [
+    { "subject": "First call", "note": "Called the customer about the scooter (sample).", "calledBy": "Swati", "schedule": "2026-10-29 11:00", "status": "Open" }
+  ],
+  "quotation": {
+    "id": "QTN-SAMPLE-0001",
+    "status": "Not created",
+    "name": "Kavya Sample",
+    "addGst": true,
+    "date": "2026-10-27",
+    "expiryDate": "2026-11-10",
+    "adjustment": 0,
+    "terms": "Sample terms: price valid until the expiry date.",
+    "lines": [
+      { "item": "Tera Zip", "variant": "60V 30Ah", "colour": "Matte Black", "rate": 62000, "qty": 1, "discount": 0, "discountAmount": 0, "sgst": 1550, "cgst": 1550, "total": 65100 }
+    ]
+  },
+  "customer": {
+    "id": "CUS-0103",
+    "status": "Not created",
+    "customerType": "individual_customer",
+    "prefix": "Ms",
+    "firstName": "Kavya",
+    "lastName": "Sample",
+    "name": "Kavya Sample",
+    "email": "kavya.sample@example.com",
+    "phone": "9000000301",
+    "workPhone": "",
+    "whatsapp": "9000000301",
+    "billing": { "country": "India", "state": "Tamil Nadu", "address": "12 Sample Street", "city": "Hosur", "pincode": "635109" },
+    "documents": { "pan": "SAMPL1234E", "aadhar": "", "licence": "" }
+  },
+  "customers": [
+    { "id": "CUS-0101", "name": "Meena Sample", "phone": "9000000101", "email": "meena.sample@example.com" },
+    { "id": "CUS-0102", "name": "Arun Sample", "phone": "9000000102", "email": "arun.sample@example.com" }
+  ],
+  "payment": {
+    "id": "PAY-SAMPLE-0001",
+    "status": "Not recorded",
+    "type": "Advance",
+    "date": "2026-10-27",
+    "mode": "Upi",
+    "amount": 5000,
+    "bankCharges": 0,
+    "transactionId": "UTR-SAMPLE-0301",
+    "notes": "Booking advance (sample)."
+  },
+  "stock": {
+    "available": 3,
+    "vehicles": [
+      { "model": "Tera Zip", "variant": "60V 30Ah", "colour": "Matte Black", "chassis": "TZ-SAMPLE-0301", "status": "Available" },
+      { "model": "Tera Zip", "variant": "60V 30Ah", "colour": "Pearl White", "chassis": "TZ-SAMPLE-0302", "status": "Available" },
+      { "model": "Tera Zip", "variant": "48V 20Ah", "colour": "Matte Black", "chassis": "TZ-SAMPLE-0303", "status": "Available" },
+      { "model": "Tera Zip", "variant": "60V 30Ah", "colour": "Matte Black", "chassis": "TZ-SAMPLE-0299", "status": "Sold" }
+    ],
+    "parts": [
+      { "name": "Mirror set (sample)", "code": "SP-SAMPLE-01", "qty": 14 },
+      { "name": "Brake pad set (sample)", "code": "SP-SAMPLE-02", "qty": 22 }
+    ]
+  },
+  "vehicle": {
+    "chassis": "TZ-SAMPLE-0301",
+    "regNumber": "",
+    "motor": "MTR-SAMPLE-0301",
+    "controller": "CTL-SAMPLE-0301",
+    "charger": "CHG-SAMPLE-0301",
+    "batteries": ["BAT-SAMPLE-0301A", "BAT-SAMPLE-0301B"]
+  },
+  "invoice": {
+    "id": "INV-SAMPLE-0001",
+    "status": "Not created",
+    "name": "Kavya Sample",
+    "date": "2026-10-27",
+    "dueDate": "2026-11-10",
+    "adjustment": 0,
+    "terms": "Sample terms and conditions text.",
+    "total": 65100,
+    "payments": [],
+    "lines": [
+      { "item": "Tera Zip 60V 30Ah Matte Black", "hsn": "871160", "rate": 62000, "discount": 0, "discountAmount": 0, "sgst": 1550, "cgst": 1550, "amount": 65100 }
+    ]
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "name": "guard",
+  "title": "Residents - Guard",
+  "spec": "docs/guard_app_ui_requirements_v0_1.md",
+  "feedbackApp": "GUARD",
+  "walkthroughs": [
+    {
+      "id": "pre-approved-visitor",
+      "title": "Pre-approved visitor at the gate",
+      "description": "The guard scans a visitor's pass, sees it is valid, confirms entry, and finds the visitor in the inside list.",
+      "sequenceFile": "sequences/pre-approved-visitor.json",
+      "seedData": "mock-app/mock-data/seeds/pre-approved-visitor.json"
+    },
+    {
+      "id": "delivery-at-gate",
+      "title": "Delivery at the gate",
+      "description": "A courier arrives with a parcel. The guard records it, holds it at the gate, and marks it collected. No visitor check-in is needed.",
+      "sequenceFile": "sequences/delivery-at-gate.json",
+      "seedData": "mock-app/mock-data/seeds/delivery-at-gate.json"
+    },
+    {
+      "id": "phone-decision",
+      "title": "Resident gives a decision by phone",
+      "description": "The resident does not answer in the app. The guard calls, records the explicit phone decision, and then checks the visitor in.",
+      "sequenceFile": "sequences/phone-decision.json",
+      "seedData": "mock-app/mock-data/seeds/phone-decision.json"
+    },
+    {
+      "id": "visitor-exit",
+      "title": "Visitor leaves, guard checks out",
+      "description": "The guard finds a visitor in the inside list, taps Check Out, confirms, and the visit closes.",
+      "sequenceFile": "sequences/visitor-exit.json",
+      "seedData": "mock-app/mock-data/seeds/visitor-exit.json"
+    },
+    {
+      "id": "start-shift",
+      "title": "Guard starts a shift",
+      "description": "The guard signs in, starts the shift at Gate 1, and reviews recent gate activity.",
+      "sequenceFile": "sequences/start-shift.json",
+      "seedData": "mock-app/mock-data/seeds/start-shift.json"
+    },
+    {
+      "id": "unlisted-visitor-approved",
+      "title": "Unlisted visitor: guard asks, resident approves",
+      "description": "The guard registers a visitor and sends a request. The tour switches to the resident's phone to approve, then back to the guard to check the visitor in.",
+      "sequenceFile": "sequences/unlisted-visitor-approved.json",
+      "seedData": "mock-app/mock-data/seeds/unlisted-visitor-approved.json"
+    },
+    {
+      "id": "unlisted-visitor-rejected",
+      "title": "Unlisted visitor: guard asks, resident rejects",
+      "description": "Same request, but the resident rejects on their phone. Back at the gate the guard sees DO NOT ALLOW ENTRY.",
+      "sequenceFile": "sequences/unlisted-visitor-rejected.json",
+      "seedData": "mock-app/mock-data/seeds/unlisted-visitor-rejected.json"
+    },
+    {
+      "id": "pre-approved-guest",
+      "title": "Pre-approved guest: resident creates pass, guard scans it",
+      "description": "The resident creates and shares a pass. The tour then switches to the guard, who scans it and records entry.",
+      "sequenceFile": "sequences/pre-approved-guest.json",
+      "seedData": "mock-app/mock-data/seeds/pre-approved-guest.json"
+    }
+  ]
+}

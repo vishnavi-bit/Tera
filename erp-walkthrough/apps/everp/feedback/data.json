@@ -1,0 +1,1078 @@
+{
+ "title": "EV ERP: screens with missing requirements or open questions",
+ "generated": "2026-10-29",
+ "note": "Built from the 17 gap lists in apps/everp/gaps. Suggestions are proposals for the spec owner to accept, change or reject.",
+ "screens": [
+  {
+   "group": "Across the whole app",
+   "code": "X1",
+   "name": "Roles and people",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "These role codes are used in screens but not defined in docs/people.md: ADM, DH, DM, SZH, APM, IM, SVH, WARRANTY, Sales Head, Inventory Executive, and the dealer codes D, S, V.",
+     "suggestion": "Add a role table (code, name, who holds it, screens allowed). Until then the walkthrough uses one named person per role.",
+     "source": "all walkthroughs",
+     "id": "X1-1"
+    },
+    {
+     "kind": "Missing",
+     "question": "Several screens say \"Role not keyed — confirm access\" (O15, O16, O39, O40, O41, O45, O46, O47, O48).",
+     "suggestion": "List the allowed roles on each of these screens.",
+     "source": "announcements, oem-setup, procurement, payments",
+     "id": "X1-2"
+    },
+    {
+     "kind": "Missing",
+     "question": "Where is the full list of 15 OEM roles (section 2.1)? It is referenced but missing from screen_details.md.",
+     "suggestion": "Add section 2.1. N28 already proposes the extra roles (Procurement Manager, Inventory Manager, National Sales Head, Area Sales Manager).",
+     "source": "oem-setup, oem-security-audit",
+     "id": "X1-3"
+    }
+   ]
+  },
+  {
+   "group": "Across the whole app",
+   "code": "X2",
+   "name": "Status names",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "No status lists exist for orders (PO), shipments, claims, issues, invoices or payments. The walkthrough invents Pending, Approved, Payment verified, In production, Ready for Dispatch, Dispatched, Delivered, Rejected.",
+     "suggestion": "Define one status list per object and which action moves it from one to the next. I can draft these from the flow documents for you to correct.",
+     "source": "order-to-production, po-exceptions, service-warranty-claim",
+     "id": "X2-1"
+    },
+    {
+     "kind": "Missing",
+     "question": "\"Ready for Dispatch\" is used by the order tour but is not defined in the spec.",
+     "suggestion": "Add it as a PO status set when QC and handover are done (N04, N05).",
+     "source": "order-to-production, qc-and-packaging",
+     "id": "X2-2"
+    }
+   ]
+  },
+  {
+   "group": "Across the whole app",
+   "code": "X3",
+   "name": "Tabs and columns not defined",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "Tab names are missing: O06 (9 tabs, 3 named), O07 (6), O20 (6), D30 (6), O30 (9, 2 named), D45 (2).",
+     "suggestion": "Name every tab and say what it shows. Proposed names for O20: Summary, Items, Payments, Production, Dispatch, History.",
+     "source": "dealer-setup, oem-monitor-dealer, order-to-production, oem-warehouse-products",
+     "id": "X3-1"
+    },
+    {
+     "kind": "Missing",
+     "question": "About 25 list screens have no column list (for example O04, O07, O08, O09, O12, O13, O14, O25, O30, O31, D07, D11, D13, D15, D19, D22, D24, D25, D28, D36, D40, D48).",
+     "suggestion": "Add a column table for each list. The walkthrough already uses a proposed set for each; those can be the starting point.",
+     "source": "most walkthroughs",
+     "id": "X3-2"
+    },
+    {
+     "kind": "Missing",
+     "question": "Filter options are missing on many lists (status, type, period).",
+     "suggestion": "List the filter values per screen. For periods use: today, week, month, year, custom.",
+     "source": "several",
+     "id": "X3-3"
+    }
+   ]
+  },
+  {
+   "group": "Across the whole app",
+   "code": "X4",
+   "name": "Markers and rules with no legend",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "The markers [C] and [I] appear in many tables with no legend. Many fields are marked \"?\" for required.",
+     "suggestion": "Add a legend, and settle each \"?\" as required or optional.",
+     "source": "oem-setup, enquiry-to-invoice, announcements, service-warranty-claim",
+     "id": "X4-1"
+    },
+    {
+     "kind": "Missing",
+     "question": "Validation and error text is not given (login errors, lockout, \"Insufficient Stock!\", \"more than this ledger holds\").",
+     "suggestion": "Add one error-message table per screen, or a shared one for common errors.",
+     "source": "dealer-setup, enquiry-to-invoice, oem-setup",
+     "id": "X4-2"
+    },
+    {
+     "kind": "Missing",
+     "question": "Lists of options are missing: states, districts, countries, regions, zones, product types per component, category and brand.",
+     "suggestion": "Give the source of each list (fixed list or master data) and its values.",
+     "source": "dealer-setup, oem-setup",
+     "id": "X4-3"
+    }
+   ]
+  },
+  {
+   "group": "Across the whole app",
+   "code": "X5",
+   "name": "Notifications",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "No notification event is defined for \"dealer account created\". R9 covers notifications per recipient, but few events are listed (expected dispatch date, claim updates, announcements).",
+     "suggestion": "Add an events table: event, who is told, channel (in-app, email, WhatsApp).",
+     "source": "dealer-setup, po-exceptions",
+     "id": "X5-1"
+    }
+   ]
+  },
+  {
+   "group": "Across the whole app",
+   "code": "X6",
+   "name": "Payment and stock rules",
+   "items": [
+    {
+     "kind": "Question",
+     "question": "Is the 30% advance enough to dispatch, or is full payment needed first? O19, O22 and the new \"OK to Bill\" gate (N26) point different ways.",
+     "suggestion": "Pick one rule. Suggested: the 30% advance allows production; dispatch needs OK to Bill from Accounts (N26).",
+     "source": "order-to-production, po-exceptions",
+     "id": "X6-1"
+    },
+    {
+     "kind": "Question",
+     "question": "What happens to stock when the dealer confirms delivery (D32)? Does it leave OEM stock, and does it enter dealer stock?",
+     "suggestion": "State both effects, so dealer stock (D24, D25) updates on delivery.",
+     "source": "order-to-production, dealer-stock-and-issues",
+     "id": "X6-2"
+    },
+    {
+     "kind": "Question",
+     "question": "Is the stock check enforced on the invoice and on purchase quantities (D29: total must be 16, 20, 32 or 40)?",
+     "suggestion": "Say whether these block the action or only warn.",
+     "source": "enquiry-to-invoice, order-to-production",
+     "id": "X6-3"
+    }
+   ]
+  },
+  {
+   "group": "Across the whole app",
+   "code": "X7",
+   "name": "Workflow and spec disagree",
+   "items": [
+    {
+     "kind": "Conflict",
+     "question": "Service and warranty: the spec runs \"service or replacement\" before \"ask cost from dealer\", but its own O44 rule says ask cost blocks service until the dealer pays.",
+     "suggestion": "Follow the rule: ask cost, dealer pays, OEM verifies, then service. The walkthrough can swap the two steps.",
+     "source": "service-warranty-claim",
+     "id": "X7-1"
+    },
+    {
+     "kind": "Conflict",
+     "question": "The workflow puts service completion after the OEM return; the spec (D42) opens the SERVICE invoice first.",
+     "suggestion": "Confirm which comes first. The walkthrough follows the spec.",
+     "source": "service-warranty-claim",
+     "id": "X7-2"
+    },
+    {
+     "kind": "Conflict",
+     "question": "O21 Assign Item: the flow puts it after QC and before despatch; the order tour puts it before production.",
+     "suggestion": "Confirm the position.",
+     "source": "qc-and-packaging, order-to-production",
+     "id": "X7-3"
+    },
+    {
+     "kind": "Conflict",
+     "question": "Dealer ID format: O05 says \"D00000n\"; D01 shows \"D000002\" (7 characters) and the placeholder \"eg. D001\" (6).",
+     "suggestion": "Fix one format and use it everywhere.",
+     "source": "dealer-setup",
+     "id": "X7-4"
+    },
+    {
+     "kind": "Conflict",
+     "question": "Anita Rao (Sales Head) is used for O20 in the order tour; the exceptions tour uses Charan (Super Admin) on the same screen.",
+     "suggestion": "Say who approves orders, and add that person to people.md.",
+     "source": "po-exceptions, order-to-production",
+     "id": "X7-5"
+    }
+   ]
+  },
+  {
+   "group": "Dealer app",
+   "code": "D01",
+   "name": "D01 Login, D03 Shop Location Prompt, D04 Dashboard",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "D01: error text and lockout threshold are not defined (O04 also mentions unlock after failed attempts).",
+     "suggestion": "Proposed: lock after 5 failed attempts; the OEM can unlock from O04.",
+     "source": "dealer-setup",
+     "id": "D01-1"
+    },
+    {
+     "kind": "Question",
+     "question": "D03: does the shop-location prompt show once, or at every login until it is saved?",
+     "suggestion": "Proposed: at each login until a location is saved.",
+     "source": "dealer-setup",
+     "id": "D01-2"
+    },
+    {
+     "kind": "Missing",
+     "question": "D04: no values, layout or drill targets for invoices, POs, service, warranty and follow-ups; period options undefined.",
+     "suggestion": "Give a KPI list with the formula and a link target for each tile.",
+     "source": "dealer-setup",
+     "id": "D01-3"
+    },
+    {
+     "kind": "Question",
+     "question": "First login: should the dealer be forced to change the password?",
+     "suggestion": "Proposed: yes on first sign-in, as the password is set by the OEM.",
+     "source": "dealer-setup",
+     "id": "D01-4"
+    }
+   ]
+  },
+  {
+   "group": "Dealer app",
+   "code": "D05",
+   "name": "D05 / D06 Announcements (dealer)",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "D05 list columns are undefined; D06 \"full screen\" and \"download\" have no stated target.",
+     "suggestion": "Columns: Title, Date, Attachment. Full screen opens a viewer; download saves the file.",
+     "source": "announcements",
+     "id": "D05-1"
+    }
+   ]
+  },
+  {
+   "group": "Dealer app",
+   "code": "D07",
+   "name": "D07 Enquiry List",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "Columns and date-filter detail are missing.",
+     "suggestion": "Columns: Enquiry, Name, Type, Mobile, Location, Next follow-up, Status. Filter: all, today, week, month, custom date.",
+     "source": "enquiry-to-invoice",
+     "id": "D07-1"
+    }
+   ]
+  },
+  {
+   "group": "Dealer app",
+   "code": "D08",
+   "name": "D08 Enquiry Add / Edit",
+   "items": [
+    {
+     "kind": "Question",
+     "question": "Where does the user land after \"create\"? Is \"Note\" required? What sets the hidden fields followUpType and followUpDate?",
+     "suggestion": "Land on the enquiry detail (D09). Note optional. Follow-up fields are set by the first scheduled follow-up.",
+     "source": "enquiry-to-invoice",
+     "id": "D08-1"
+    },
+    {
+     "kind": "Missing",
+     "question": "The \"convert to customer\" and \"delete\" buttons: rules not given.",
+     "suggestion": "Convert opens D16 pre-filled; delete asks for confirmation and is blocked when quotations exist.",
+     "source": "enquiry-to-invoice",
+     "id": "D08-2"
+    }
+   ]
+  },
+  {
+   "group": "Dealer app",
+   "code": "D09",
+   "name": "D09 Enquiry Detail, D10 Follow-up Log",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "D09 has no field list, and no control leads to D10 (follow-up) or D11 (quotation).",
+     "suggestion": "Add \"Follow-ups\" and \"Quotations\" buttons on D09.",
+     "source": "enquiry-to-invoice",
+     "id": "D09-1"
+    },
+    {
+     "kind": "Question",
+     "question": "D10: is the first call logged separately from the next scheduled follow-up? Subject, Description and Called by are marked \"?\".",
+     "suggestion": "Log each call as one row; make Subject and Called by required.",
+     "source": "enquiry-to-invoice",
+     "id": "D09-2"
+    }
+   ]
+  },
+  {
+   "group": "Dealer app",
+   "code": "D11",
+   "name": "D11 / D12 Quotations",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "D11 columns and the read-only view of a quotation are missing. D12 required fields (Customer Name, Date, Expiry) are marked \"?\".",
+     "suggestion": "Add a read-only quotation page; make name, date and expiry required.",
+     "source": "enquiry-to-invoice",
+     "id": "D11-1"
+    },
+    {
+     "kind": "Question",
+     "question": "D12: how are totals calculated (tax, discount)? What does \"Add Products\" show?",
+     "suggestion": "Total = sum of line (price x qty) less discount, plus GST per line.",
+     "source": "enquiry-to-invoice",
+     "id": "D11-2"
+    }
+   ]
+  },
+  {
+   "group": "Dealer app",
+   "code": "D13",
+   "name": "D13 / D14 Service Follow-ups",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "What is a service follow-up, who creates it and when is one due (for example a free-service reminder)?",
+     "suggestion": "Proposed: created automatically at invoice for free-service milestones, and by hand for others.",
+     "source": "service-to-job-card",
+     "id": "D13-1"
+    },
+    {
+     "kind": "Missing",
+     "question": "D13 filter options and columns; D14 header fields and required marks; D14 dialog vs page.",
+     "suggestion": "Filter: due, overdue, done. D14 header: customer, mobile, chassis, reason.",
+     "source": "service-to-job-card",
+     "id": "D13-2"
+    }
+   ]
+  },
+  {
+   "group": "Dealer app",
+   "code": "D26",
+   "name": "D26 Service Price List",
+   "items": [
+    {
+     "kind": "Question",
+     "question": "Does a service price include GST? What is the rule text for the fields? How does D14 lead here?",
+     "suggestion": "Prices exclude GST; GST added on the invoice. Add a link \"Price list\" on D41.",
+     "source": "service-to-job-card",
+     "id": "D26-1"
+    }
+   ]
+  },
+  {
+   "group": "Dealer app",
+   "code": "D40",
+   "name": "D40 / D41 / D42 Service and Job Card",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "D40 status options and columns; \"open\" is not wired. D40 allows D and V but not S, though service staff use it.",
+     "suggestion": "Add S to D40. Status: Open, In progress, Completed.",
+     "source": "service-to-job-card",
+     "id": "D40-1"
+    },
+    {
+     "kind": "Missing",
+     "question": "D42: no inspect or fault action; no field API names; \"Done\" has no stated effect; Requested Rectification has no add control.",
+     "suggestion": "Add \"Inspect\" with a fault list, and an add control for rectifications.",
+     "source": "service-warranty-claim, service-to-job-card",
+     "id": "D40-2"
+    },
+    {
+     "kind": "Missing",
+     "question": "No link from D42 or D20 to a warranty claim.",
+     "suggestion": "Add \"Raise warranty claim\" on D42 for a faulty warranty part.",
+     "source": "service-warranty-claim",
+     "id": "D40-3"
+    }
+   ]
+  },
+  {
+   "group": "Dealer app",
+   "code": "D15",
+   "name": "D15 / D16 / D17 Customers",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "D15 columns and row link are missing. D16 State list is \"36 states / UTs from an API\" with no values.",
+     "suggestion": "Columns: Customer ID, Name, Mobile, Email. Name opens D17. Use a fixed state list.",
+     "source": "enquiry-to-invoice, service-warranty-claim",
+     "id": "D15-1"
+    },
+    {
+     "kind": "Question",
+     "question": "D16: after create, where does the user land? Which documents are mandatory (at least one of PAN, Aadhar, Licence)?",
+     "suggestion": "Land on the customer hub (D17).",
+     "source": "enquiry-to-invoice",
+     "id": "D15-2"
+    },
+    {
+     "kind": "Missing",
+     "question": "D17: field list for the Personal details tab; six tabs but only payments is described.",
+     "suggestion": "Show the D16 fields read-only; describe each tab.",
+     "source": "enquiry-to-invoice",
+     "id": "D15-3"
+    }
+   ]
+  },
+  {
+   "group": "Dealer app",
+   "code": "D18",
+   "name": "D18 Customer Products",
+   "items": [
+    {
+     "kind": "Question",
+     "question": "The input placeholder for \"search chassis\" is not stated.",
+     "suggestion": "Placeholder: \"Chassis number\".",
+     "source": "service-warranty-claim",
+     "id": "D18-1"
+    }
+   ]
+  },
+  {
+   "group": "Dealer app",
+   "code": "D19",
+   "name": "D19 / D20 / D21 Invoices",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "D19 columns. D20: how a labour line from D26 appears on a SERVICE invoice; which product picker is used; \"Add Vehicle Detail\" does not apply to a service invoice.",
+     "suggestion": "Show labour as a service line pulled from D26.",
+     "source": "enquiry-to-invoice, service-warranty-claim",
+     "id": "D19-1"
+    },
+    {
+     "kind": "Missing",
+     "question": "Invoice status list: the flow says \"Pending\" until paid in full; the spec has no list.",
+     "suggestion": "Proposed: Draft, Pending, Paid, Cancelled.",
+     "source": "enquiry-to-invoice",
+     "id": "D19-2"
+    },
+    {
+     "kind": "Question",
+     "question": "Which chassis is bound to the customer on the invoice, and how is stock checked (\"Insufficient Stock!\")?",
+     "suggestion": "Bind the chassis chosen from available stock; block when stock is zero.",
+     "source": "enquiry-to-invoice",
+     "id": "D19-3"
+    },
+    {
+     "kind": "Missing",
+     "question": "D21 print layout is not defined.",
+     "suggestion": "Provide a sample invoice layout.",
+     "source": "enquiry-to-invoice",
+     "id": "D19-4"
+    }
+   ]
+  },
+  {
+   "group": "Dealer app",
+   "code": "D22",
+   "name": "D22 / D23 Customer Payments",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "D22 columns. D23: how an advance is applied to an invoice; bank-charge formula; Invoice and Refund types are not walked.",
+     "suggestion": "Charges = percent of amount (set per payment mode). Advance links to the invoice and shows as paid.",
+     "source": "enquiry-to-invoice",
+     "id": "D22-1"
+    }
+   ]
+  },
+  {
+   "group": "Dealer app",
+   "code": "D24",
+   "name": "D24 / D25 Inventory",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "D24 and D25 columns; D24 row target (/inventory/vehicle/:id) has no screen; no link to parts.",
+     "suggestion": "Add a vehicle detail page and a \"Parts\" button.",
+     "source": "enquiry-to-invoice, dealer-stock-and-issues",
+     "id": "D24-1"
+    }
+   ]
+  },
+  {
+   "group": "Dealer app",
+   "code": "D27",
+   "name": "D27 Inventory Issues (new issue)",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "No submit control, list columns, or link to the OEM Issues list (O42). Required marks are \"?\". Select Spare options and their link to the Type radio (Spare or Accessory) are unclear.",
+     "suggestion": "Add a \"Submit\" button, a list, and make Type, Spare, Title and Description required. Select Spare shows only items of the chosen type.",
+     "source": "dealer-stock-and-issues",
+     "id": "D27-1"
+    },
+    {
+     "kind": "Question",
+     "question": "Is D27 the same list as O42? Which stage names exist? What does the file preview show?",
+     "suggestion": "Same data; the OEM adds the stages.",
+     "source": "dealer-stock-and-issues",
+     "id": "D27-2"
+    }
+   ]
+  },
+  {
+   "group": "Dealer app",
+   "code": "D29",
+   "name": "D28 / D29 / D30 Purchase Orders (dealer)",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "D30: tab names; no \"view\" action; Dispatch tab fields beyond O22. D29: \"Purchase From\" radio has no control to choose the seller; Variant and Colour are called chips, built as radios.",
+     "suggestion": "Name the six D30 tabs. Use chips for variant and colour.",
+     "source": "order-to-production",
+     "id": "D29-1"
+    },
+    {
+     "kind": "Question",
+     "question": "D29 order rule: is the 16/20/32/40 quantity validation enforced? Is the min price for non-vehicle orders enforced?",
+     "suggestion": "Block Place Order with a message.",
+     "source": "order-to-production",
+     "id": "D29-2"
+    }
+   ]
+  },
+  {
+   "group": "Dealer app",
+   "code": "D32",
+   "name": "D31 / D32 Payment and Delivery",
+   "items": [
+    {
+     "kind": "Question",
+     "question": "D32 \"Submit & confirm\" also marks delivered: what if already delivered? Is serial / chassis required? What happens on Reject beyond re-opening dispatch?",
+     "suggestion": "Chassis required on confirm. Reject asks a reason and notifies the OEM.",
+     "source": "dealer-stock-and-issues, po-exceptions",
+     "id": "D32-1"
+    },
+    {
+     "kind": "Missing",
+     "question": "D32 photos and videos preview; \"Report issue\" has no step in the tour.",
+     "suggestion": "Add a preview and one step for it.",
+     "source": "dealer-stock-and-issues, order-to-production",
+     "id": "D32-2"
+    }
+   ]
+  },
+  {
+   "group": "Dealer app",
+   "code": "D33",
+   "name": "D33 / D34 Ledger and Advance",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "D33 columns. D34: whether the OEM verifies a ledger payment; the \"balance after\" calculation; behaviour when the balance is too low; shared ledgers (R3).",
+     "suggestion": "Ledger payment needs no OEM check. Block when balance is too low with a top-up link. Show other dealers' use of a shared ledger.",
+     "source": "dealer-payments-ledger",
+     "id": "D33-1"
+    }
+   ]
+  },
+  {
+   "group": "Dealer app",
+   "code": "D45",
+   "name": "D45 / D46 Payments and Ledger top-up",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "D45: names of the two tabs; columns; status and date filters; what \"ledger history\" opens. D46: dialog or page; where submit goes; amount limit.",
+     "suggestion": "Tabs: Payments, Ledger top-ups. History opens a dialog. D46 is a dialog and returns to D45.",
+     "source": "dealer-payments-ledger",
+     "id": "D45-1"
+    }
+   ]
+  },
+  {
+   "group": "Dealer app",
+   "code": "D36",
+   "name": "D36 / D37 / D38 / D39 Issues and Warranty",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "D36 columns, open-PO target, outcome wording. D37 columns and search. D38 Select Vehicle and \"Select customer by chassis\" dialog fields. D39 \"Claim details\" has no fields, and no legend for [I].",
+     "suggestion": "Use the O42 columns plus Outcome. Define the D39 fields (company, contact, tracking, amount, transaction ID, proof, description, media).",
+     "source": "dealer-stock-and-issues, service-warranty-claim",
+     "id": "D36-1"
+    }
+   ]
+  },
+  {
+   "group": "Dealer app",
+   "code": "D47",
+   "name": "D47 Settings Profile",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "Read-only dealer profile fields are not listed; what the browser location fills in; effects of upload, photo and Save shop location.",
+     "suggestion": "List the read-only fields. Location fills latitude, longitude and address.",
+     "source": "dealer-settings-users",
+     "id": "D47-1"
+    },
+    {
+     "kind": "Question",
+     "question": "Is changing the password optional or forced?",
+     "suggestion": "Forced on first login (see D01).",
+     "source": "dealer-settings-users",
+     "id": "D47-2"
+    }
+   ]
+  },
+  {
+   "group": "Dealer app",
+   "code": "D48",
+   "name": "D48 / D49 Users",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "D48 columns and search target. D49 contact format; edit-mode items (status, change password) not shown; no matching check on passwords.",
+     "suggestion": "Contact: 10-digit mobile. Passwords must match.",
+     "source": "dealer-settings-users",
+     "id": "D48-1"
+    },
+    {
+     "kind": "Question",
+     "question": "How are sub-dealer roles assigned (N11)? The sub-dealer clarification document is not in the repo.",
+     "suggestion": "Provide the document.",
+     "source": "dealer-settings-users",
+     "id": "D48-2"
+    }
+   ]
+  },
+  {
+   "group": "OEM app",
+   "code": "O01",
+   "name": "O01 Login / Forgot Password",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "Forgot password has no fields or actions. \"Remember me\" rule for the OEM is undefined. The User ID placeholder is a dealer example.",
+     "suggestion": "Forgot password: email link. Do not store passwords. Placeholder \"eg. OEM0001\".",
+     "source": "oem-setup",
+     "id": "O01-1"
+    }
+   ]
+  },
+  {
+   "group": "OEM app",
+   "code": "O03",
+   "name": "O03 Dashboard",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "Ten KPIs are named but only \"number of dealers\" has a value. Nothing about periods or drill links.",
+     "suggestion": "Give the formula for each KPI.",
+     "source": "dealer-setup",
+     "id": "O03-1"
+    }
+   ]
+  },
+  {
+   "group": "OEM app",
+   "code": "O04",
+   "name": "O04 / O05 / O06 Dealers",
+   "items": [
+    {
+     "kind": "Question",
+     "question": "After Save on O05, where does the user land? How do users reach O05 and O06 (menu item, firm name link)?",
+     "suggestion": "Land on the dealers list, with the firm name as a link to O06.",
+     "source": "dealer-setup",
+     "id": "O04-1"
+    },
+    {
+     "kind": "Missing",
+     "question": "O04 columns and map; O06 tab names (six of nine); Profile fields; Connections and Ledger top-ups content.",
+     "suggestion": "Name the tabs. Profile shows the O05 fields.",
+     "source": "dealer-setup, oem-monitor-dealer",
+     "id": "O04-2"
+    },
+    {
+     "kind": "Missing",
+     "question": "How are the user ID and password handed to the dealer (email, SMS, WhatsApp)?",
+     "suggestion": "Send both by email and WhatsApp, and force a password change.",
+     "source": "dealer-setup",
+     "id": "O04-3"
+    },
+    {
+     "kind": "Question",
+     "question": "What does the \"User Type\" (five price tiers) do for the OEM user? Must region, zone and MU exist before a dealer?",
+     "suggestion": "Dealers cannot be created until region, zone and MU exist.",
+     "source": "dealer-setup",
+     "id": "O04-4"
+    }
+   ]
+  },
+  {
+   "group": "OEM app",
+   "code": "O07",
+   "name": "O07 to O09 Dealer mirrors (customers, enquiries, vehicles sold)",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "No columns, buttons or fields for O08 and O09; O07 has six tabs with no names; \"open\" has no target.",
+     "suggestion": "Use the D17 tab names; use the dealer-side columns.",
+     "source": "oem-monitor-dealer",
+     "id": "O07-1"
+    },
+    {
+     "kind": "Question",
+     "question": "F9: customer PAN and Aadhaar are shown in full. Should they be masked?",
+     "suggestion": "Mask all but the last 4 characters.",
+     "source": "oem-monitor-dealer",
+     "id": "O07-2"
+    },
+    {
+     "kind": "Question",
+     "question": "How does O06 lead to the mirrors (O07 to O14)?",
+     "suggestion": "Add one tab per mirror on O06.",
+     "source": "oem-monitor-dealer",
+     "id": "O07-3"
+    }
+   ]
+  },
+  {
+   "group": "OEM app",
+   "code": "O10",
+   "name": "O10 to O14 Dealer stock, claims, POs, payments",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "O10 \"Add stock to dealer\": no submit, no effect, no product options. O11 chart and period options. O12 filters and columns. O13 \"approved minus dispatched\" columns. O14 content and its counterpart (D33 or D45).",
+     "suggestion": "Add a form for O10 (product, quantity, MU). Provide a chart type for O11.",
+     "source": "oem-monitor-dealer, dealer-payments-ledger",
+     "id": "O10-1"
+    }
+   ]
+  },
+  {
+   "group": "OEM app",
+   "code": "O15",
+   "name": "O15 / O16 Announcements (OEM)",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "Required marks on O16 are \"?\". The MU picker (muIds) has no label. The effect of create, edit and stop is not described. The Table attachment is not described. Upload effect not described. N20 (WhatsApp broadcast) has no screen.",
+     "suggestion": "Title and Description required. Stop hides the announcement. Table attachment: a simple grid upload.",
+     "source": "announcements",
+     "id": "O15-1"
+    }
+   ]
+  },
+  {
+   "group": "OEM app",
+   "code": "O17",
+   "name": "O17 / O20 Orders and Order Detail",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "O17 has no row action to open an order. O20 tab names. The O24 dialog vs inline part of O20.",
+     "suggestion": "The PO number opens O20.",
+     "source": "order-to-production, po-exceptions",
+     "id": "O17-1"
+    },
+    {
+     "kind": "Question",
+     "question": "Who approves: Sales Head or Super Admin? What status does a rejection set, and how is a rejected PO re-opened (revert)?",
+     "suggestion": "Rejection sets \"Rejected\"; revert returns it to \"Pending\".",
+     "source": "po-exceptions",
+     "id": "O17-2"
+    },
+    {
+     "kind": "Missing",
+     "question": "O24: expected dispatch date notification; what the dealer sees after a rejection (F8).",
+     "suggestion": "Notify the dealer on save; show stage \"Rejected\" and outcome \"Closed\".",
+     "source": "po-exceptions",
+     "id": "O17-3"
+    }
+   ]
+  },
+  {
+   "group": "OEM app",
+   "code": "O21",
+   "name": "O21 / O22 Assign Item and Dispatch",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "No chassis or serial field ties a vehicle to a shipment. Re-dispatch quantities are not defined. \"By Courier\" variant not walked.",
+     "suggestion": "Bind the chassis at N07 (despatch gate). Shipped count updates on dispatch.",
+     "source": "order-to-production, po-exceptions",
+     "id": "O21-1"
+    }
+   ]
+  },
+  {
+   "group": "OEM app",
+   "code": "O18",
+   "name": "O18 / O19 Production and Dispatch Plan",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "O18 only \"update produced count\". Nothing records a finished unit or links produced count to chassis or stock. O19 \"paid POs\" rule unclear.",
+     "suggestion": "Add \"Mark unit complete\" which links to N04.",
+     "source": "order-to-production",
+     "id": "O18-1"
+    }
+   ]
+  },
+  {
+   "group": "OEM app",
+   "code": "O23",
+   "name": "O23 Payment Verify",
+   "items": [
+    {
+     "kind": "Question",
+     "question": "How is the amount checked against the 30% advance? What does the ledger credit for a ledger top-up? Does \"verify\" on the row differ from the card?",
+     "suggestion": "Verify credits the amount the dealer entered. The row button opens the card.",
+     "source": "dealer-payments-ledger, order-to-production",
+     "id": "O23-1"
+    }
+   ]
+  },
+  {
+   "group": "OEM app",
+   "code": "O25",
+   "name": "O25 to O29 Products",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "O25: no field table, status filter values, add/edit/delete effects, or row link to O29. O29: week/month/year options, report content, purchased vs sold.",
+     "suggestion": "Define the O25 columns and the O29 report.",
+     "source": "oem-warehouse-products",
+     "id": "O25-1"
+    },
+    {
+     "kind": "Missing",
+     "question": "O26: purchase limit and share-of-stock by dealer type; charger hidden when WBC ticked (walkthrough shows always). O27: Category and Brand options; \"as 7.12\" reference missing; what \"Is Panel / Painted Part?\" creates. O28: fields per product type.",
+     "suggestion": "Add section 7.12. Say whether charger is hidden.",
+     "source": "oem-setup, oem-warehouse-products",
+     "id": "O25-2"
+    }
+   ]
+  },
+  {
+   "group": "OEM app",
+   "code": "O30",
+   "name": "O30 / O31 Inventory (OEM)",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "O30 has nine tabs, two named; unit and stock filter values; columns; search target. O31 columns, unit filter. O35 relation to O30.",
+     "suggestion": "Name the seven other tabs.",
+     "source": "oem-warehouse-products",
+     "id": "O30-1"
+    }
+   ]
+  },
+  {
+   "group": "OEM app",
+   "code": "O32",
+   "name": "O32 to O36 Manufacturing Units",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "O32 columns; O33 capacity and working calendar (endpoints only); who is the Production Unit Head and how is one assigned. O34 layout, edit target, production button target, and the \"Search any dealer\" field type. \"Connect a dealer\" effect and flags.",
+     "suggestion": "Add a layout for O34. Define connect-a-dealer.",
+     "source": "manufacturing-unit-operations, oem-setup",
+     "id": "O32-1"
+    },
+    {
+     "kind": "Missing",
+     "question": "O35 \"Reduce Stock\" fields; reserved stock detail. O36 marker meaning, date range, month navigation labels.",
+     "suggestion": "Fields: reason, quantity, remark.",
+     "source": "manufacturing-unit-operations",
+     "id": "O32-2"
+    },
+    {
+     "kind": "Question",
+     "question": "O37 Load Plan and O38 Containers are deferred (P2): confirm.",
+     "suggestion": "Keep deferred.",
+     "source": "manufacturing-unit-operations",
+     "id": "O32-3"
+    }
+   ]
+  },
+  {
+   "group": "OEM app",
+   "code": "O39",
+   "name": "O39 / O40 / O41 Vendors and Procurement",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "O39 list columns and the O40 target. O40 \"Needed\" source and the meaning of \"Create PO (n)\". O41 \"choose vendor\" view (section missing). PO approval by email (section missing).",
+     "suggestion": "Provide the missing sections.",
+     "source": "oem-setup, procurement-to-material-inward",
+     "id": "O39-1"
+    },
+    {
+     "kind": "Question",
+     "question": "What does N17 send on approval, and are changed POs re-sent? How do vendor POs connect to material inward or in-transit shipments (O35)?",
+     "suggestion": "Email the PO on approval; re-send on change; add a vendor PO field on O35.",
+     "source": "procurement-to-material-inward",
+     "id": "O39-2"
+    }
+   ]
+  },
+  {
+   "group": "OEM app",
+   "code": "O42",
+   "name": "O42 Issues (OEM)",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "Stage names; stage tabs; who reviews (manager vs OEM); effect of decline, settle with money, replace, dispatch replacement, resolve, reject.",
+     "suggestion": "Stages: Reported, Manager review, OEM review, Resolved, Rejected. Define each action's effect on stage.",
+     "source": "dealer-stock-and-issues",
+     "id": "O42-1"
+    },
+    {
+     "kind": "Question",
+     "question": "Does settling with money change a ledger, or notify the dealer?",
+     "suggestion": "Credit the dealer ledger and notify.",
+     "source": "dealer-stock-and-issues",
+     "id": "O42-2"
+    }
+   ]
+  },
+  {
+   "group": "OEM app",
+   "code": "O43",
+   "name": "O43 / O44 Warranty (OEM)",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "O43 status options and columns. O44: six sections with no field table (OEM review, Customer and claim, Issue and coverage, Dealer claim photos, Dealer issue report); service charge labels; \"ask cost\" sender.",
+     "suggestion": "Provide field tables for the six sections.",
+     "source": "service-warranty-claim",
+     "id": "O43-1"
+    },
+    {
+     "kind": "Missing",
+     "question": "Claim status values; claim rejection branch; replacement (stock check, OEM stock deduction); who bears the service charge (customer, dealer or configurable).",
+     "suggestion": "Add the status list; add the reject and replacement branches.",
+     "source": "service-warranty-claim",
+     "id": "O43-2"
+    }
+   ]
+  },
+  {
+   "group": "OEM app",
+   "code": "O45",
+   "name": "O45 to O48 Payments, Ledgers, Vehicles Sold",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "O45 columns (\"submitted\" vs \"received\"); how credit works after verify for a top-up; O46 list and header totals; O47 dealer options, history before first credit, validation text; O48 columns and its overlap with O09.",
+     "suggestion": "Define each; O48 is the OEM-wide report.",
+     "source": "dealer-payments-ledger, oem-setup, oem-monitor-dealer",
+     "id": "O45-1"
+    }
+   ]
+  },
+  {
+   "group": "OEM app",
+   "code": "O49",
+   "name": "O49 to O55 Settings (OEM)",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "O49 Approval Admin Email is marked \"?\". O50 state options. O51 columns and Region Head placeholder; Zone Head select. O52 user ID rule and \"role category\". O53 role options, edit-only items, \"create\" vs \"submit\". O54 columns, filters, diff content. O55 devices, sign-out effects, device limit.",
+     "suggestion": "Give option lists and effects. O52 IDs: OEM0001, OEM0002...",
+     "source": "oem-setup, oem-security-audit",
+     "id": "O49-1"
+    }
+   ]
+  },
+  {
+   "group": "New features with no screen yet",
+   "code": "N04",
+   "name": "N04 to N07 QC, Handover, Branding, Despatch",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "N04 identifiers (chassis, motor, controller, battery); N05 checklist items; N06 material list (depends on BOM); N07 rules. Who owns each: Ganesh (Production, QC, PDI) and Dhivyesh (Logistics)? No rework loop for a failed QC.",
+     "suggestion": "Provide the field lists and the rework loop.",
+     "source": "qc-and-packaging, order-to-production",
+     "id": "N04-1"
+    }
+   ]
+  },
+  {
+   "group": "New features with no screen yet",
+   "code": "N03",
+   "name": "N03 Material Requisition",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "Not specified: quantity rule, stock deduction, who raises it.",
+     "suggestion": "Specify against order, forecast or damage.",
+     "source": "order-to-production",
+     "id": "N03-1"
+    }
+   ]
+  },
+  {
+   "group": "New features with no screen yet",
+   "code": "N08",
+   "name": "N02 / N08 / N09 Material inward and BOM",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "N02 checks (received vs PO, shortfall, pass/fail, scrap) and how it relates to O35 in-transit receiving. N08 content (parts, quantities, images, landing price). N09 approver and versioning scope.",
+     "suggestion": "Provide each.",
+     "source": "procurement-to-material-inward",
+     "id": "N08-1"
+    }
+   ]
+  },
+  {
+   "group": "New features with no screen yet",
+   "code": "N10",
+   "name": "N10 / N26 / N27 E-way bill, OK to Bill, PDI",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "No screens. N10 supersedes D51 and O56. N26 replaces dispatch right after payment verification. N27 sits before a unit ships.",
+     "suggestion": "Provide screens, or confirm they stay as notes.",
+     "source": "po-exceptions",
+     "id": "N10-1"
+    }
+   ]
+  },
+  {
+   "group": "New features with no screen yet",
+   "code": "N12",
+   "name": "N12 / N13 / N14 / N24 Warehouse and spares",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "N12 bins/racks/zones per MU. N13 FIFO issuance and location report (no fields). N14 inventory type flag (terminology is a placeholder). N24 spare-part extended fields.",
+     "suggestion": "Provide fields and screens.",
+     "source": "oem-warehouse-products",
+     "id": "N12-1"
+    }
+   ]
+  },
+  {
+   "group": "New features with no screen yet",
+   "code": "N15",
+   "name": "N15 / N16 / N22 / N28 Audit and OEM profile",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "N15 purge with retention date; N16 export; N22 compliance fields (CIN, TAN, PAN, MSME, IEC, Directors); N28 expanded roles.",
+     "suggestion": "Provide screens.",
+     "source": "oem-security-audit",
+     "id": "N15-1"
+    }
+   ]
+  },
+  {
+   "group": "New features with no screen yet",
+   "code": "N17",
+   "name": "N17 / N18 / N20 / N21 / N25 Other",
+   "items": [
+    {
+     "kind": "Missing",
+     "question": "N17 vendor PO email; N18 backdated entry; N20 WhatsApp broadcast; N21 unit asset register; N25 reorder feeding O40 (how the reorder reaches the screen).",
+     "suggestion": "Provide screens.",
+     "source": "announcements, manufacturing-unit-operations, procurement-to-material-inward",
+     "id": "N17-1"
+    }
+   ]
+  }
+ ]
+}

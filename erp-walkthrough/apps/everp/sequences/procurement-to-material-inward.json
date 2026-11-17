@@ -1,0 +1,113 @@
+{
+  "id": "procurement-to-material-inward",
+  "title": "Procurement to material inward",
+  "startStep": "suresh-vendors",
+  "completionMessage": "Vendor PO {vendorPO.number} for {vendorPO.vendorName} is {vendorPO.status}. Material inward for {vendorPO.muName} is the next step in the real flow.",
+  "steps": {
+    "suresh-vendors": {
+      "user": "oem-procurement-mgr",
+      "screen": "O39",
+      "proposedAction": "Open the vendor's procurement",
+      "infoPanel": [
+        { "key": "vendorPO.status", "label": "Vendor PO status" }
+      ],
+      "notDefined": "Not defined in screen_details.md, so the GST lookup (N01) and the extended vendor profile (N23) for {vendorPO.vendorName} cannot be shown.",
+      "performedText": "looked at the vendor {vendorPO.vendorName}",
+      "nextStep": "suresh-procurement"
+    },
+    "suresh-procurement": {
+      "user": "oem-procurement-mgr",
+      "screen": "O39",
+      "proposedAction": "Click procurement",
+      "infoPanel": [
+        { "key": "vendorPO.status", "label": "Vendor PO status" }
+      ],
+      "actions": {
+        "procurement": { "performedText": "clicked procurement for {vendorPO.vendorName}", "nextStep": "bom-card" }
+      }
+    },
+    "bom-card": {
+      "user": "oem-procurement-mgr",
+      "screen": "O26",
+      "proposedAction": "Review the bill of materials before ordering",
+      "infoPanel": [
+        { "key": "vendorPO.status", "label": "Vendor PO status" }
+      ],
+      "notDefined": "Not defined in screen_details.md, so the bill of materials per vehicle model (N08) and its versioning and approval (N09) cannot be shown.",
+      "performedText": "reviewed the bill of materials for {products.vehicle.productName}",
+      "nextStep": "procurement-lines"
+    },
+    "procurement-lines": {
+      "user": "oem-procurement-mgr",
+      "screen": "O40",
+      "proposedAction": "Set the order quantity and rate, then create the PO",
+      "infoPanel": [
+        { "key": "vendorPO.status", "label": "Vendor PO status" }
+      ],
+      "notDefined": "Not defined in screen_details.md, so the minimum-stock and sales-forecast reorder (N25) that feeds this screen cannot be shown.",
+      "performedText": "set the order quantities and rates for {vendorPO.vendorName}",
+      "nextStep": "create-po"
+    },
+    "create-po": {
+      "user": "oem-procurement-mgr",
+      "screen": "O40",
+      "proposedAction": "Click Create PO",
+      "infoPanel": [
+        { "key": "vendorPO.status", "label": "Vendor PO status" }
+      ],
+      "actions": {
+        "create-po": {
+          "performedText": "created vendor PO {vendorPO.number} for {vendorPO.vendorName}",
+          "stateChange": { "vendorPO.status": { "set": "Pending approval" } },
+          "nextStep": "approval-card"
+        }
+      }
+    },
+    "approval-card": {
+      "user": "oem-procurement-mgr",
+      "screen": "O41",
+      "proposedAction": "See that the vendor PO is pending approval",
+      "infoPanel": [
+        { "key": "vendorPO.status", "label": "Vendor PO status" }
+      ],
+      "notDefined": "Not defined in screen_details.md, so the approval by the OEM approval admin, via email, cannot be shown. No approval screen is defined.",
+      "performedText": "saw vendor PO {vendorPO.number} pending approval",
+      "nextStep": "approve-po"
+    },
+    "approve-po": {
+      "user": "oem-super-admin",
+      "screen": "O41",
+      "proposedAction": "Approve the vendor PO by email",
+      "infoPanel": [
+        { "key": "vendorPO.status", "label": "Vendor PO status" }
+      ],
+      "notDefined": "Not defined in screen_details.md, so the automatic email of the approved PO to {vendorPO.vendorName} (N17) cannot be shown.",
+      "performedText": "approved vendor PO {vendorPO.number}",
+      "stateChange": { "vendorPO.status": { "set": "Approved" } },
+      "nextStep": "inward-card"
+    },
+    "inward-card": {
+      "user": "oem-inventory-mgr",
+      "screen": "O35",
+      "proposedAction": "Receive the material and check its quality",
+      "infoPanel": [
+        { "key": "vendorPO.status", "label": "Vendor PO status" }
+      ],
+      "notDefined": "Not defined in screen_details.md, so material inward receiving and quality check (N02) cannot be shown. The received count, shortfall, pass or fail per item and scrap are not defined.",
+      "performedText": "received vendor PO {vendorPO.number} at {vendorPO.muName}",
+      "stateChange": { "vendorPO.status": { "set": "Received" } },
+      "nextStep": "inward-backdated"
+    },
+    "inward-backdated": {
+      "user": "oem-inventory-mgr",
+      "screen": "O35",
+      "proposedAction": "Read the backdated entry note",
+      "infoPanel": [
+        { "key": "vendorPO.status", "label": "Vendor PO status" }
+      ],
+      "notDefined": "Not defined in screen_details.md, so backdated data entry for purchase orders and material inward (N18) cannot be shown.",
+      "performedText": "checked the backdated entry rules for {vendorPO.muName}",
+      "nextStep": null
+    }
+  }
+}

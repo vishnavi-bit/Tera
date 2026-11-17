@@ -1,0 +1,9277 @@
+{
+ "nodes": [
+  {
+   "code": "D00",
+   "name": "Header + Notifications Panel",
+   "module": "Global",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": false,
+   "degree": 2,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "D01",
+   "name": "Login",
+   "module": "Auth",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 4,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "dealer-setup"
+   ]
+  },
+  {
+   "code": "D02",
+   "name": "Forgot Password",
+   "module": "Auth",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": false,
+   "degree": 2,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "D03",
+   "name": "Shop Location Prompt",
+   "module": "Auth",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 3,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "dealer-setup"
+   ]
+  },
+  {
+   "code": "D04",
+   "name": "Dashboard",
+   "module": "Dashboard",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 4,
+   "tourSteps": 1,
+   "openQuestions": 3,
+   "tours": [
+    "dealer-setup"
+   ]
+  },
+  {
+   "code": "D05",
+   "name": "Announcements List",
+   "module": "Announcements",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 4,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "announcements"
+   ]
+  },
+  {
+   "code": "D06",
+   "name": "Announcement View",
+   "module": "Announcements",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 3,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "announcements"
+   ]
+  },
+  {
+   "code": "D07",
+   "name": "Sales Follow-ups (Enquiry List)",
+   "module": "CRM / Enquiry",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 3,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "enquiry-to-invoice"
+   ]
+  },
+  {
+   "code": "D08",
+   "name": "Enquiry Add / Edit",
+   "module": "CRM / Enquiry",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 4,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "enquiry-to-invoice"
+   ]
+  },
+  {
+   "code": "D09",
+   "name": "Enquiry Detail",
+   "module": "CRM / Enquiry",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 6,
+   "tourSteps": 2,
+   "openQuestions": 0,
+   "tours": [
+    "enquiry-to-invoice"
+   ]
+  },
+  {
+   "code": "D10",
+   "name": "Enquiry Follow-up Log",
+   "module": "CRM / Enquiry",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 2,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "enquiry-to-invoice"
+   ]
+  },
+  {
+   "code": "D11",
+   "name": "Enquiry Quotations List",
+   "module": "CRM / Enquiry",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 2,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "enquiry-to-invoice"
+   ]
+  },
+  {
+   "code": "D12",
+   "name": "Enquiry Quotation Create",
+   "module": "CRM / Enquiry",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 3,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "enquiry-to-invoice"
+   ]
+  },
+  {
+   "code": "D13",
+   "name": "Service Follow-ups List",
+   "module": "Service",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 1,
+   "tourSteps": 1,
+   "openQuestions": 2,
+   "tours": [
+    "service-to-job-card"
+   ]
+  },
+  {
+   "code": "D14",
+   "name": "Service Follow-up Detail",
+   "module": "Service",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 2,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "service-to-job-card"
+   ]
+  },
+  {
+   "code": "D15",
+   "name": "Customers List",
+   "module": "CRM / Customer",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 3,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "service-warranty-claim"
+   ]
+  },
+  {
+   "code": "D16",
+   "name": "Customer Add / Edit",
+   "module": "CRM / Customer",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 3,
+   "tourSteps": 1,
+   "openQuestions": 3,
+   "tours": [
+    "enquiry-to-invoice"
+   ]
+  },
+  {
+   "code": "D17",
+   "name": "Customer Hub: Personal Details",
+   "module": "CRM / Customer",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 3,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "enquiry-to-invoice"
+   ]
+  },
+  {
+   "code": "D18",
+   "name": "Customer Products",
+   "module": "CRM / Customer",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 3,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "service-warranty-claim"
+   ]
+  },
+  {
+   "code": "D19",
+   "name": "Customer Invoices List",
+   "module": "Sales / Invoice",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 3,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "enquiry-to-invoice"
+   ]
+  },
+  {
+   "code": "D20",
+   "name": "Sale Invoice Create",
+   "module": "Sales / Invoice",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 13,
+   "tourSteps": 2,
+   "openQuestions": 0,
+   "tours": [
+    "enquiry-to-invoice",
+    "service-warranty-claim"
+   ]
+  },
+  {
+   "code": "D21",
+   "name": "Invoice View",
+   "module": "Sales / Invoice",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 3,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "enquiry-to-invoice"
+   ]
+  },
+  {
+   "code": "D22",
+   "name": "Customer Payments List",
+   "module": "Sales / Payments",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 3,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "enquiry-to-invoice"
+   ]
+  },
+  {
+   "code": "D23",
+   "name": "Customer Payment Create",
+   "module": "Sales / Payments",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 5,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "enquiry-to-invoice"
+   ]
+  },
+  {
+   "code": "D24",
+   "name": "Inventory: Vehicle Models",
+   "module": "Inventory",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 4,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "enquiry-to-invoice"
+   ]
+  },
+  {
+   "code": "D25",
+   "name": "Inventory: Parts",
+   "module": "Inventory",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 4,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "enquiry-to-invoice"
+   ]
+  },
+  {
+   "code": "D26",
+   "name": "Service Price List",
+   "module": "Service",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 3,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "service-to-job-card"
+   ]
+  },
+  {
+   "code": "D27",
+   "name": "Inventory Issues",
+   "module": "Inventory",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 2,
+   "tourSteps": 1,
+   "openQuestions": 5,
+   "tours": [
+    "dealer-stock-and-issues"
+   ]
+  },
+  {
+   "code": "D28",
+   "name": "Purchases List",
+   "module": "Purchase",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 5,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "order-to-production"
+   ]
+  },
+  {
+   "code": "D29",
+   "name": "Purchase Create (Cart)",
+   "module": "Purchase",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 11,
+   "tourSteps": 3,
+   "openQuestions": 0,
+   "tours": [
+    "order-to-production"
+   ]
+  },
+  {
+   "code": "D30",
+   "name": "PO Detail (6 tabs)",
+   "module": "Purchase",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 14,
+   "tourSteps": 4,
+   "openQuestions": 3,
+   "tours": [
+    "dealer-stock-and-issues",
+    "order-to-production",
+    "po-exceptions"
+   ]
+  },
+  {
+   "code": "D31",
+   "name": "PO Payment Dialog",
+   "module": "Purchase / Payments",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 6,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "order-to-production"
+   ]
+  },
+  {
+   "code": "D32",
+   "name": "Shipment Confirm / Reject / Report Issue",
+   "module": "Purchase",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 7,
+   "tourSteps": 4,
+   "openQuestions": 0,
+   "tours": [
+    "dealer-stock-and-issues",
+    "order-to-production",
+    "po-exceptions"
+   ]
+  },
+  {
+   "code": "D33",
+   "name": "Payment Ledger",
+   "module": "Payments",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 7,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "dealer-payments-ledger"
+   ]
+  },
+  {
+   "code": "D34",
+   "name": "Ledger Advance",
+   "module": "Payments",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 3,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "dealer-payments-ledger"
+   ]
+  },
+  {
+   "code": "D35",
+   "name": "Received Orders / Seller Mgmt",
+   "module": "Dealers (seller)",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": false,
+   "degree": 2,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "D36",
+   "name": "Issues List",
+   "module": "Issues",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 3,
+   "tourSteps": 2,
+   "openQuestions": 0,
+   "tours": [
+    "dealer-stock-and-issues"
+   ]
+  },
+  {
+   "code": "D37",
+   "name": "Warranty List",
+   "module": "Warranty",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 6,
+   "tourSteps": 1,
+   "openQuestions": 2,
+   "tours": [
+    "service-warranty-claim"
+   ]
+  },
+  {
+   "code": "D38",
+   "name": "Warranty Claim Create",
+   "module": "Warranty",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 3,
+   "tourSteps": 1,
+   "openQuestions": 3,
+   "tours": [
+    "service-warranty-claim"
+   ]
+  },
+  {
+   "code": "D39",
+   "name": "Warranty Claim Detail",
+   "module": "Warranty",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 4,
+   "tourSteps": 3,
+   "openQuestions": 3,
+   "tours": [
+    "service-warranty-claim"
+   ]
+  },
+  {
+   "code": "D40",
+   "name": "Service List",
+   "module": "Service",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 4,
+   "tourSteps": 1,
+   "openQuestions": 3,
+   "tours": [
+    "service-to-job-card"
+   ]
+  },
+  {
+   "code": "D41",
+   "name": "Service Create (Job Card)",
+   "module": "Service",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 4,
+   "tourSteps": 2,
+   "openQuestions": 0,
+   "tours": [
+    "service-to-job-card",
+    "service-warranty-claim"
+   ]
+  },
+  {
+   "code": "D42",
+   "name": "Job Card + Complete Service",
+   "module": "Service",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 6,
+   "tourSteps": 2,
+   "openQuestions": 0,
+   "tours": [
+    "service-to-job-card",
+    "service-warranty-claim"
+   ]
+  },
+  {
+   "code": "D43",
+   "name": "Dealers (Sub-dealers)",
+   "module": "Dealers (seller)",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": false,
+   "degree": 2,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "D44",
+   "name": "Orders (as Seller)",
+   "module": "Dealers (seller)",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": false,
+   "degree": 3,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "D45",
+   "name": "Payments (2 tabs)",
+   "module": "Payments",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 7,
+   "tourSteps": 1,
+   "openQuestions": 4,
+   "tours": [
+    "dealer-payments-ledger"
+   ]
+  },
+  {
+   "code": "D46",
+   "name": "Add Payment (Ledger Top-up)",
+   "module": "Payments",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 4,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "dealer-payments-ledger"
+   ]
+  },
+  {
+   "code": "D47",
+   "name": "Settings: Profile",
+   "module": "Settings",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 5,
+   "tourSteps": 1,
+   "openQuestions": 3,
+   "tours": [
+    "dealer-settings-users"
+   ]
+  },
+  {
+   "code": "D48",
+   "name": "Settings: Users",
+   "module": "Settings",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 3,
+   "tourSteps": 3,
+   "openQuestions": 2,
+   "tours": [
+    "dealer-settings-users"
+   ]
+  },
+  {
+   "code": "D49",
+   "name": "User Add / Edit",
+   "module": "Settings",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": true,
+   "degree": 2,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "dealer-settings-users"
+   ]
+  },
+  {
+   "code": "D50",
+   "name": "Reports",
+   "module": "Reports",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": false,
+   "degree": 1,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "D51",
+   "name": "E-Way Bill (mock in reference app)",
+   "module": "Reports",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": false,
+   "degree": 2,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "D52",
+   "name": "Delivery Challan (mock)",
+   "module": "Reports",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": false,
+   "degree": 2,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "D53",
+   "name": "Legacy Dealers List (mock)",
+   "module": "Reports",
+   "app": "Dealer",
+   "inSpec": true,
+   "built": false,
+   "degree": 0,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "N01",
+   "name": "GST Lookup / Auto-fetch from GST Portal",
+   "module": "Vendors",
+   "app": "OEM",
+   "inSpec": true,
+   "built": false,
+   "degree": 3,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "N02",
+   "name": "Material Inward — Receiving & QC Check",
+   "module": "Material Inward",
+   "app": "OEM",
+   "inSpec": true,
+   "built": false,
+   "degree": 2,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "N03",
+   "name": "Material Requisition (Against Order / Forecast / Damage)",
+   "module": "Production",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 4,
+   "tourSteps": 1,
+   "openQuestions": 3,
+   "tours": [
+    "order-to-production"
+   ]
+  },
+  {
+   "code": "N04",
+   "name": "Production Completion & Handover",
+   "module": "Production",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 6,
+   "tourSteps": 2,
+   "openQuestions": 4,
+   "tours": [
+    "order-to-production",
+    "qc-and-packaging"
+   ]
+  },
+  {
+   "code": "N05",
+   "name": "QC Inspection Checklist",
+   "module": "QC",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 4,
+   "tourSteps": 1,
+   "openQuestions": 3,
+   "tours": [
+    "qc-and-packaging"
+   ]
+  },
+  {
+   "code": "N06",
+   "name": "QC Branding / Packaging Requisition",
+   "module": "QC",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 4,
+   "tourSteps": 1,
+   "openQuestions": 3,
+   "tours": [
+    "qc-and-packaging"
+   ]
+  },
+  {
+   "code": "N07",
+   "name": "Despatch — Chassis Validation Gate",
+   "module": "Orders",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 7,
+   "tourSteps": 2,
+   "openQuestions": 3,
+   "tours": [
+    "order-to-production",
+    "qc-and-packaging"
+   ]
+  },
+  {
+   "code": "N08",
+   "name": "BOM Create / Edit",
+   "module": "Production / BOM",
+   "app": "OEM",
+   "inSpec": true,
+   "built": false,
+   "degree": 6,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "N09",
+   "name": "BOM Versioning & Approval Workflow",
+   "module": "Production / BOM",
+   "app": "OEM",
+   "inSpec": true,
+   "built": false,
+   "degree": 2,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "N10",
+   "name": "E-Way Bill (real build)",
+   "module": "Orders",
+   "app": "OEM",
+   "inSpec": true,
+   "built": false,
+   "degree": 2,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "N11",
+   "name": "RBAC — Dealer & Sub-dealer Role Assignment",
+   "module": "Dealer Management",
+   "app": "OEM",
+   "inSpec": true,
+   "built": false,
+   "degree": 2,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "N12",
+   "name": "Warehouse Location Master",
+   "module": "Warehouse",
+   "app": "OEM",
+   "inSpec": true,
+   "built": false,
+   "degree": 2,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "N13",
+   "name": "FIFO Stock Issuance & Location Report",
+   "module": "Warehouse",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 7,
+   "tourSteps": 1,
+   "openQuestions": 3,
+   "tours": [
+    "oem-warehouse-products"
+   ]
+  },
+  {
+   "code": "N14",
+   "name": "Inventory Type Flag (Internal-use vs Saleable)",
+   "module": "Products",
+   "app": "OEM",
+   "inSpec": true,
+   "built": false,
+   "degree": 4,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "N15",
+   "name": "Audit Log — Purge / Retention Policy",
+   "module": "Settings",
+   "app": "OEM",
+   "inSpec": true,
+   "built": false,
+   "degree": 1,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "N16",
+   "name": "Audit Log — Customer Export / Download",
+   "module": "Settings",
+   "app": "OEM",
+   "inSpec": true,
+   "built": false,
+   "degree": 1,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "N17",
+   "name": "Auto-email PO to Vendor on Approval",
+   "module": "Vendor POs",
+   "app": "OEM",
+   "inSpec": true,
+   "built": false,
+   "degree": 1,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "N18",
+   "name": "Backdated Data Entry Support (PO, Material Inward)",
+   "module": "Orders / Material Inward",
+   "app": "OEM",
+   "inSpec": true,
+   "built": false,
+   "degree": 3,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "N19",
+   "name": "WhatsApp — Order / Delivery / Due Notifications (Dealer)",
+   "module": "Communications",
+   "app": "OEM",
+   "inSpec": true,
+   "built": false,
+   "degree": 1,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "N20",
+   "name": "WhatsApp — Employee Broadcast",
+   "module": "Communications",
+   "app": "OEM",
+   "inSpec": true,
+   "built": false,
+   "degree": 1,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "N21",
+   "name": "Unit Asset Register (Fixed/Movable)",
+   "module": "Manufacturing Unit",
+   "app": "OEM",
+   "inSpec": true,
+   "built": false,
+   "degree": 2,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "N22",
+   "name": "OEM Profile — Compliance Fields & Edit",
+   "module": "Settings",
+   "app": "OEM",
+   "inSpec": true,
+   "built": false,
+   "degree": 1,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "N23",
+   "name": "Vendor — Extended Profile (bank, contacts, status, payment terms, warranty)",
+   "module": "Vendors",
+   "app": "OEM",
+   "inSpec": true,
+   "built": false,
+   "degree": 1,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "N24",
+   "name": "Spare Part — Extended Fields (UoM, weight, material, multi-model, purchase cost, price history)",
+   "module": "Products",
+   "app": "OEM",
+   "inSpec": true,
+   "built": false,
+   "degree": 1,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "N25",
+   "name": "Min-Stock / Sales-Forecast Triggered Reorder",
+   "module": "Vendor POs",
+   "app": "OEM",
+   "inSpec": true,
+   "built": false,
+   "degree": 1,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "N26",
+   "name": "Accounts — 'OK to Bill' Gate",
+   "module": "Orders",
+   "app": "OEM",
+   "inSpec": true,
+   "built": false,
+   "degree": 2,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "N27",
+   "name": "PDI (Pre-Delivery Inspection) Checklist",
+   "module": "Orders",
+   "app": "OEM",
+   "inSpec": true,
+   "built": false,
+   "degree": 2,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "N28",
+   "name": "Expanded OEM Role Taxonomy (Procurement/Inventory Manager, National/Area Sales)",
+   "module": "Settings",
+   "app": "OEM",
+   "inSpec": true,
+   "built": false,
+   "degree": 1,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "O00",
+   "name": "Header + Notifications Panel",
+   "module": "Global",
+   "app": "OEM",
+   "inSpec": true,
+   "built": false,
+   "degree": 2,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "O01",
+   "name": "Login / Forgot Password",
+   "module": "Auth",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 3,
+   "tourSteps": 1,
+   "openQuestions": 3,
+   "tours": [
+    "oem-setup"
+   ]
+  },
+  {
+   "code": "O03",
+   "name": "Dashboard",
+   "module": "Dashboard",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 5,
+   "tourSteps": 2,
+   "openQuestions": 3,
+   "tours": [
+    "dealer-setup",
+    "oem-setup"
+   ]
+  },
+  {
+   "code": "O04",
+   "name": "Dealers List + Map",
+   "module": "Dealer Management",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 7,
+   "tourSteps": 3,
+   "openQuestions": 0,
+   "tours": [
+    "dealer-setup",
+    "oem-monitor-dealer"
+   ]
+  },
+  {
+   "code": "O05",
+   "name": "Add / Edit Dealer",
+   "module": "Dealer Management",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 9,
+   "tourSteps": 1,
+   "openQuestions": 4,
+   "tours": [
+    "dealer-setup"
+   ]
+  },
+  {
+   "code": "O06",
+   "name": "Dealer Detail (9 tabs)",
+   "module": "Dealer Management",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 7,
+   "tourSteps": 2,
+   "openQuestions": 3,
+   "tours": [
+    "dealer-setup",
+    "oem-monitor-dealer"
+   ]
+  },
+  {
+   "code": "O07",
+   "name": "Dealer → Customers + Customer Mirror",
+   "module": "Sales (mirror)",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 17,
+   "tourSteps": 2,
+   "openQuestions": 3,
+   "tours": [
+    "oem-monitor-dealer"
+   ]
+  },
+  {
+   "code": "O08",
+   "name": "Dealer → Enquiries",
+   "module": "Sales (mirror)",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 7,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "oem-monitor-dealer"
+   ]
+  },
+  {
+   "code": "O09",
+   "name": "Dealer → Vehicle Sold",
+   "module": "Sales (mirror)",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 5,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "oem-monitor-dealer"
+   ]
+  },
+  {
+   "code": "O10",
+   "name": "Dealer → Vehicle Stock + Add Stock",
+   "module": "Sales (mirror)",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 6,
+   "tourSteps": 1,
+   "openQuestions": 3,
+   "tours": [
+    "oem-monitor-dealer"
+   ]
+  },
+  {
+   "code": "O11",
+   "name": "Dealer → Warranty Claims",
+   "module": "Sales (mirror)",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 4,
+   "tourSteps": 1,
+   "openQuestions": 2,
+   "tours": [
+    "oem-monitor-dealer"
+   ]
+  },
+  {
+   "code": "O12",
+   "name": "Dealer → Purchase Orders",
+   "module": "Sales (mirror)",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 4,
+   "tourSteps": 1,
+   "openQuestions": 1,
+   "tours": [
+    "oem-monitor-dealer"
+   ]
+  },
+  {
+   "code": "O13",
+   "name": "Dealer → Pending Stock",
+   "module": "Sales (mirror)",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 3,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "oem-monitor-dealer"
+   ]
+  },
+  {
+   "code": "O14",
+   "name": "Dealer → Payment History",
+   "module": "Sales (mirror)",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 4,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "dealer-payments-ledger"
+   ]
+  },
+  {
+   "code": "O15",
+   "name": "Announcements List",
+   "module": "Announcements",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 4,
+   "tourSteps": 2,
+   "openQuestions": 3,
+   "tours": [
+    "announcements"
+   ]
+  },
+  {
+   "code": "O16",
+   "name": "Announcement Create / Edit",
+   "module": "Announcements",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 5,
+   "tourSteps": 1,
+   "openQuestions": 3,
+   "tours": [
+    "announcements"
+   ]
+  },
+  {
+   "code": "O17",
+   "name": "Orders List (+ sub-lists)",
+   "module": "Orders",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 6,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "order-to-production"
+   ]
+  },
+  {
+   "code": "O18",
+   "name": "Production (Day-wise)",
+   "module": "Orders / Production",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 4,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "order-to-production"
+   ]
+  },
+  {
+   "code": "O19",
+   "name": "Dispatch Plan (Batches)",
+   "module": "Orders / Dispatch",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 3,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "order-to-production"
+   ]
+  },
+  {
+   "code": "O20",
+   "name": "Order Detail (6 tabs)",
+   "module": "Orders",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 14,
+   "tourSteps": 2,
+   "openQuestions": 4,
+   "tours": [
+    "order-to-production",
+    "po-exceptions"
+   ]
+  },
+  {
+   "code": "O21",
+   "name": "Assign Item",
+   "module": "Orders",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 4,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "order-to-production"
+   ]
+  },
+  {
+   "code": "O22",
+   "name": "Dispatch Shipment",
+   "module": "Orders",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 8,
+   "tourSteps": 5,
+   "openQuestions": 4,
+   "tours": [
+    "order-to-production",
+    "po-exceptions"
+   ]
+  },
+  {
+   "code": "O23",
+   "name": "Payment Verify / Reject",
+   "module": "Orders / Payments",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 8,
+   "tourSteps": 3,
+   "openQuestions": 3,
+   "tours": [
+    "order-to-production",
+    "po-exceptions"
+   ]
+  },
+  {
+   "code": "O24",
+   "name": "PO Reject / Info Note / Expected Date",
+   "module": "Orders",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 3,
+   "tourSteps": 4,
+   "openQuestions": 0,
+   "tours": [
+    "po-exceptions"
+   ]
+  },
+  {
+   "code": "O25",
+   "name": "Products List",
+   "module": "Products",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 3,
+   "tourSteps": 1,
+   "openQuestions": 2,
+   "tours": [
+    "oem-warehouse-products"
+   ]
+  },
+  {
+   "code": "O26",
+   "name": "Product Create / Edit: Vehicle",
+   "module": "Products",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 6,
+   "tourSteps": 2,
+   "openQuestions": 3,
+   "tours": [
+    "oem-setup",
+    "procurement-to-material-inward"
+   ]
+  },
+  {
+   "code": "O27",
+   "name": "Product Create / Edit: Spare, Accessory",
+   "module": "Products",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 7,
+   "tourSteps": 2,
+   "openQuestions": 4,
+   "tours": [
+    "oem-setup",
+    "oem-warehouse-products"
+   ]
+  },
+  {
+   "code": "O28",
+   "name": "Product Create / Edit: Battery/Charger/Motor/Controller",
+   "module": "Products",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 4,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "oem-setup"
+   ]
+  },
+  {
+   "code": "O29",
+   "name": "Product Detail + Dashboard",
+   "module": "Products",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 3,
+   "tourSteps": 1,
+   "openQuestions": 2,
+   "tours": [
+    "oem-warehouse-products"
+   ]
+  },
+  {
+   "code": "O30",
+   "name": "Inventory (OEM Stock)",
+   "module": "Inventory",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 7,
+   "tourSteps": 1,
+   "openQuestions": 3,
+   "tours": [
+    "oem-warehouse-products"
+   ]
+  },
+  {
+   "code": "O31",
+   "name": "Inventory List per Product",
+   "module": "Inventory",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 5,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "oem-warehouse-products"
+   ]
+  },
+  {
+   "code": "O32",
+   "name": "Manufacturing Units List",
+   "module": "Manufacturing Unit",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 3,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "oem-setup"
+   ]
+  },
+  {
+   "code": "O33",
+   "name": "MU Create / Edit",
+   "module": "Manufacturing Unit",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 3,
+   "tourSteps": 1,
+   "openQuestions": 2,
+   "tours": [
+    "oem-setup"
+   ]
+  },
+  {
+   "code": "O34",
+   "name": "MU View",
+   "module": "Manufacturing Unit",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 5,
+   "tourSteps": 5,
+   "openQuestions": 3,
+   "tours": [
+    "manufacturing-unit-operations"
+   ]
+  },
+  {
+   "code": "O35",
+   "name": "MU Stock",
+   "module": "Manufacturing Unit",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 7,
+   "tourSteps": 4,
+   "openQuestions": 4,
+   "tours": [
+    "manufacturing-unit-operations",
+    "oem-warehouse-products",
+    "procurement-to-material-inward"
+   ]
+  },
+  {
+   "code": "O36",
+   "name": "MU Dispatch Plan (ETA)",
+   "module": "Manufacturing Unit",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 2,
+   "tourSteps": 1,
+   "openQuestions": 2,
+   "tours": [
+    "manufacturing-unit-operations"
+   ]
+  },
+  {
+   "code": "O37",
+   "name": "Load Plan",
+   "module": "Manufacturing Unit",
+   "app": "OEM",
+   "inSpec": true,
+   "built": false,
+   "degree": 0,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "O38",
+   "name": "Containers",
+   "module": "Manufacturing Unit",
+   "app": "OEM",
+   "inSpec": true,
+   "built": false,
+   "degree": 0,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  },
+  {
+   "code": "O39",
+   "name": "Vendors",
+   "module": "Vendors",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 5,
+   "tourSteps": 3,
+   "openQuestions": 3,
+   "tours": [
+    "oem-setup",
+    "procurement-to-material-inward"
+   ]
+  },
+  {
+   "code": "O40",
+   "name": "Vendor Procurement",
+   "module": "Vendors",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 6,
+   "tourSteps": 2,
+   "openQuestions": 3,
+   "tours": [
+    "procurement-to-material-inward"
+   ]
+  },
+  {
+   "code": "O41",
+   "name": "Vendor POs",
+   "module": "Vendor POs",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 4,
+   "tourSteps": 2,
+   "openQuestions": 3,
+   "tours": [
+    "procurement-to-material-inward"
+   ]
+  },
+  {
+   "code": "O42",
+   "name": "Issues",
+   "module": "Issues",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 5,
+   "tourSteps": 3,
+   "openQuestions": 3,
+   "tours": [
+    "dealer-stock-and-issues"
+   ]
+  },
+  {
+   "code": "O43",
+   "name": "Warranty (Received)",
+   "module": "Warranty",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 4,
+   "tourSteps": 1,
+   "openQuestions": 1,
+   "tours": [
+    "service-warranty-claim"
+   ]
+  },
+  {
+   "code": "O44",
+   "name": "Warranty Claim Page",
+   "module": "Warranty",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 4,
+   "tourSteps": 6,
+   "openQuestions": 4,
+   "tours": [
+    "service-warranty-claim"
+   ]
+  },
+  {
+   "code": "O45",
+   "name": "Payments (All Dealers)",
+   "module": "Payments",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 7,
+   "tourSteps": 1,
+   "openQuestions": 2,
+   "tours": [
+    "dealer-payments-ledger"
+   ]
+  },
+  {
+   "code": "O46",
+   "name": "Ledgers",
+   "module": "Ledger",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 5,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "oem-setup"
+   ]
+  },
+  {
+   "code": "O47",
+   "name": "Ledger Detail",
+   "module": "Ledger",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 5,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "oem-setup"
+   ]
+  },
+  {
+   "code": "O48",
+   "name": "Vehicle Sold",
+   "module": "Reports",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 3,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "oem-monitor-dealer"
+   ]
+  },
+  {
+   "code": "O49",
+   "name": "Settings: Profile",
+   "module": "Settings",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 5,
+   "tourSteps": 2,
+   "openQuestions": 2,
+   "tours": [
+    "oem-security-audit",
+    "oem-setup"
+   ]
+  },
+  {
+   "code": "O50",
+   "name": "Settings: Operating States",
+   "module": "Settings",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 2,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "oem-setup"
+   ]
+  },
+  {
+   "code": "O51",
+   "name": "Settings: Regions & Zones",
+   "module": "Settings",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 3,
+   "tourSteps": 1,
+   "openQuestions": 0,
+   "tours": [
+    "oem-setup"
+   ]
+  },
+  {
+   "code": "O52",
+   "name": "Settings: Users",
+   "module": "Settings",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 3,
+   "tourSteps": 1,
+   "openQuestions": 2,
+   "tours": [
+    "oem-setup"
+   ]
+  },
+  {
+   "code": "O53",
+   "name": "OEM User Add / Edit",
+   "module": "Settings",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 7,
+   "tourSteps": 2,
+   "openQuestions": 3,
+   "tours": [
+    "oem-security-audit",
+    "oem-setup"
+   ]
+  },
+  {
+   "code": "O54",
+   "name": "Settings: Audit Logs",
+   "module": "Settings",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 3,
+   "tourSteps": 2,
+   "openQuestions": 3,
+   "tours": [
+    "oem-security-audit"
+   ]
+  },
+  {
+   "code": "O55",
+   "name": "Settings: Security",
+   "module": "Settings",
+   "app": "OEM",
+   "inSpec": true,
+   "built": true,
+   "degree": 2,
+   "tourSteps": 1,
+   "openQuestions": 3,
+   "tours": [
+    "oem-security-audit"
+   ]
+  },
+  {
+   "code": "O56",
+   "name": "Reports / Warranty-claim / Challan / E-way bill (mocks)",
+   "module": "Reports",
+   "app": "OEM",
+   "inSpec": true,
+   "built": false,
+   "degree": 5,
+   "tourSteps": 0,
+   "openQuestions": 0,
+   "tours": []
+  }
+ ],
+ "edges": [
+  {
+   "source": "O15",
+   "target": "O16",
+   "tour": [
+    {
+     "tour": "announcements",
+     "title": "Announcements",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": "new-announcement",
+     "did": "Click new to create an announcement",
+     "result": "clicked new on the Announcements List",
+     "stateChange": null,
+     "nextStepAction": "Click create",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O16",
+   "target": "O15",
+   "tour": [
+    {
+     "tour": "announcements",
+     "title": "Announcements",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": "create-announcement",
+     "did": "Click create",
+     "result": "created the announcement {announcement.title} for {announcement.target}",
+     "stateChange": {
+      "announcements.count": 1
+     },
+     "nextStepAction": "See the new announcement on the list",
+     "gap": true
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O15",
+   "target": "D05",
+   "tour": [
+    {
+     "tour": "announcements",
+     "title": "Announcements",
+     "by": "oem-super-admin",
+     "to": "dealer-owner",
+     "handoff": true,
+     "button": null,
+     "did": "See the new announcement on the list",
+     "result": "saw {announcement.title} on the Announcements List",
+     "stateChange": null,
+     "nextStepAction": "Click view on the announcement",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D05",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "tour",
+    "spec"
+   ]
+  },
+  {
+   "source": "D05",
+   "target": "D06",
+   "tour": [
+    {
+     "tour": "announcements",
+     "title": "Announcements",
+     "by": "dealer-owner",
+     "to": "dealer-owner",
+     "handoff": false,
+     "button": "view-announcement",
+     "did": "Click view on the announcement",
+     "result": "opened the announcements list and clicked view",
+     "stateChange": null,
+     "nextStepAction": "Read the announcement",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D45",
+   "target": "D46",
+   "tour": [
+    {
+     "tour": "dealer-payments-ledger",
+     "title": "Dealer payments and ledger",
+     "by": "dealer-owner",
+     "to": "dealer-owner",
+     "handoff": false,
+     "button": "add-payment",
+     "did": "Click add payment",
+     "result": "clicked add payment",
+     "stateChange": null,
+     "nextStepAction": "Check the top-up details and submit for verification",
+     "gap": false
+    }
+   ],
+   "mock": [
+    {
+     "button": "add payment",
+     "action": "add-payment"
+    }
+   ],
+   "spec": [],
+   "kinds": [
+    "tour",
+    "mock"
+   ]
+  },
+  {
+   "source": "D46",
+   "target": "O45",
+   "tour": [
+    {
+     "tour": "dealer-payments-ledger",
+     "title": "Dealer payments and ledger",
+     "by": "dealer-owner",
+     "to": "oem-accounts",
+     "handoff": true,
+     "button": "submit-topup",
+     "did": "Check the top-up details and submit for verification",
+     "result": "submitted the ledger top-up of {topup.amount|inr}",
+     "stateChange": {
+      "topup.status": {
+       "set": "Submitted"
+      }
+     },
+     "nextStepAction": "Verify the ledger top-up",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O45 (verify)",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: counterpart O45 (verify)",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "tour",
+    "spec"
+   ]
+  },
+  {
+   "source": "O45",
+   "target": "D33",
+   "tour": [
+    {
+     "tour": "dealer-payments-ledger",
+     "title": "Dealer payments and ledger",
+     "by": "oem-accounts",
+     "to": "dealer-owner",
+     "handoff": true,
+     "button": "verify-topup",
+     "did": "Verify the ledger top-up",
+     "result": "verified the ledger top-up",
+     "stateChange": {
+      "topup.status": {
+       "set": "Verified"
+      },
+      "ledger.balance": {
+       "copy": "ledger.afterTopup"
+      }
+     },
+     "nextStepAction": "Check the ledger balance",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D33",
+   "target": "D34",
+   "tour": [
+    {
+     "tour": "dealer-payments-ledger",
+     "title": "Dealer payments and ledger",
+     "by": "dealer-owner",
+     "to": "dealer-owner",
+     "handoff": false,
+     "button": null,
+     "did": "Check the ledger balance",
+     "result": "checked the ledger balance",
+     "stateChange": null,
+     "nextStepAction": "Pay the order advance from the ledger",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D34",
+   "target": "O14",
+   "tour": [
+    {
+     "tour": "dealer-payments-ledger",
+     "title": "Dealer payments and ledger",
+     "by": "dealer-owner",
+     "to": "oem-accounts",
+     "handoff": true,
+     "button": "pay-from-ledger",
+     "did": "Pay the order advance from the ledger",
+     "result": "paid the advance of {order.advanceDue|inr} from the ledger",
+     "stateChange": {
+      "order.advanceStatus": {
+       "set": "Paid from ledger"
+      },
+      "ledger.balance": {
+       "copy": "ledger.afterAdvance"
+      }
+     },
+     "nextStepAction": "Check the dealer's payment history",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D47",
+   "target": "D48",
+   "tour": [
+    {
+     "tour": "dealer-settings-users",
+     "title": "Dealer settings and users",
+     "by": "dealer-owner",
+     "to": "dealer-owner",
+     "handoff": false,
+     "button": null,
+     "did": "Read the dealer profile and the settings",
+     "result": "read the profile of {dealer.firm}",
+     "stateChange": null,
+     "nextStepAction": "Read the staff user list",
+     "gap": true
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D48",
+   "target": "D49",
+   "tour": [
+    {
+     "tour": "dealer-settings-users",
+     "title": "Dealer settings and users",
+     "by": "dealer-owner",
+     "to": "dealer-owner",
+     "handoff": false,
+     "button": "create-user",
+     "did": "Click create",
+     "result": "clicked create",
+     "stateChange": null,
+     "nextStepAction": "Add {staff.newUser.firstName} as a {staff.newUser.role} and submit",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D49",
+   "target": "D48",
+   "tour": [
+    {
+     "tour": "dealer-settings-users",
+     "title": "Dealer settings and users",
+     "by": "dealer-owner",
+     "to": "dealer-owner",
+     "handoff": false,
+     "button": "submit-user",
+     "did": "Add {staff.newUser.firstName} as a {staff.newUser.role} and submit",
+     "result": "added {staff.newUser.firstName} as a {staff.newUser.role} and submitted",
+     "stateChange": {
+      "staff.created": {
+       "set": true
+      },
+      "staff.count": 1
+     },
+     "nextStepAction": "Read the staff user list after the submit",
+     "gap": true
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O03",
+   "target": "O04",
+   "tour": [
+    {
+     "tour": "dealer-setup",
+     "title": "Setting up dealer",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": "goto-O04",
+     "did": "Open Dealers from the menu",
+     "result": "opened the dealers list",
+     "stateChange": null,
+     "nextStepAction": "Click add",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O04",
+   "target": "O05",
+   "tour": [
+    {
+     "tour": "dealer-setup",
+     "title": "Setting up dealer",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": "add-dealer",
+     "did": "Click add",
+     "result": "clicked add",
+     "stateChange": null,
+     "nextStepAction": "Check the dealer details and click save",
+     "gap": false
+    },
+    {
+     "tour": "dealer-setup",
+     "title": "Setting up dealer",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": "add-dealer",
+     "did": "Open the new dealer",
+     "result": "clicked add",
+     "stateChange": null,
+     "nextStepAction": "Check the dealer details and click save",
+     "gap": false
+    }
+   ],
+   "mock": [
+    {
+     "button": "add",
+     "action": "add-dealer"
+    }
+   ],
+   "spec": [],
+   "kinds": [
+    "tour",
+    "mock"
+   ]
+  },
+  {
+   "source": "O05",
+   "target": "O04",
+   "tour": [
+    {
+     "tour": "dealer-setup",
+     "title": "Setting up dealer",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": "save-dealer",
+     "did": "Check the dealer details and click save",
+     "result": "clicked save",
+     "stateChange": {
+      "dealers.count": 1,
+      "newDealer.created": {
+       "set": true
+      }
+     },
+     "nextStepAction": "Open the new dealer",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O04",
+   "target": "O06",
+   "tour": [
+    {
+     "tour": "dealer-setup",
+     "title": "Setting up dealer",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": "goto-O06",
+     "did": "Open the new dealer",
+     "result": "opened the new dealer",
+     "stateChange": null,
+     "nextStepAction": "Check the dealer profile, then hand over the login details",
+     "gap": true
+    },
+    {
+     "tour": "oem-monitor-dealer",
+     "title": "OEM monitors a dealer (mirror views)",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": "goto-O06",
+     "did": "Open the dealer from the dealers list",
+     "result": "opened {dealer.name} from the dealers list",
+     "stateChange": null,
+     "nextStepAction": "Look at the dealer detail",
+     "gap": true
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O06",
+   "target": "D01",
+   "tour": [
+    {
+     "tour": "dealer-setup",
+     "title": "Setting up dealer",
+     "by": "oem-super-admin",
+     "to": "dealer-owner",
+     "handoff": true,
+     "button": null,
+     "did": "Check the dealer profile, then hand over the login details",
+     "result": "checked the dealer profile",
+     "stateChange": null,
+     "nextStepAction": "Sign in with the user ID and password",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D01",
+   "target": "D03",
+   "tour": [
+    {
+     "tour": "dealer-setup",
+     "title": "Setting up dealer",
+     "by": "dealer-owner",
+     "to": "dealer-owner",
+     "handoff": false,
+     "button": "sign-in",
+     "did": "Sign in with the user ID and password",
+     "result": "signed in for the first time",
+     "stateChange": null,
+     "nextStepAction": "Save the shop location or choose not now",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D03",
+   "target": "D04",
+   "tour": [
+    {
+     "tour": "dealer-setup",
+     "title": "Setting up dealer",
+     "by": "dealer-owner",
+     "to": "dealer-owner",
+     "handoff": false,
+     "button": "save-location",
+     "did": "Save the shop location or choose not now",
+     "result": "saved the shop location",
+     "stateChange": null,
+     "nextStepAction": "Check the dealer dashboard",
+     "gap": false
+    },
+    {
+     "tour": "dealer-setup",
+     "title": "Setting up dealer",
+     "by": "dealer-owner",
+     "to": "dealer-owner",
+     "handoff": false,
+     "button": "skip-location",
+     "did": "Save the shop location or choose not now",
+     "result": "chose not now",
+     "stateChange": null,
+     "nextStepAction": "Check the dealer dashboard",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D27",
+   "target": "D30",
+   "tour": [
+    {
+     "tour": "dealer-stock-and-issues",
+     "title": "Dealer stock and issues",
+     "by": "dealer-owner",
+     "to": "dealer-owner",
+     "handoff": false,
+     "button": null,
+     "did": "Click new issue",
+     "result": "opened the new issue dialog",
+     "stateChange": null,
+     "nextStepAction": "Open the delivered PO and click report issue",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D30",
+   "target": "D32",
+   "tour": [
+    {
+     "tour": "dealer-stock-and-issues",
+     "title": "Dealer stock and issues",
+     "by": "dealer-owner",
+     "to": "dealer-owner",
+     "handoff": false,
+     "button": "report-issue",
+     "did": "Open the delivered PO and click report issue",
+     "result": "opened report issue on {order.id}",
+     "stateChange": null,
+     "nextStepAction": "Pick the line, describe the issue and click Submit & confirm",
+     "gap": false
+    },
+    {
+     "tour": "order-to-production",
+     "title": "order-to-production",
+     "by": "dealer-owner",
+     "to": "dealer-owner",
+     "handoff": false,
+     "button": "accept-delivery",
+     "did": "See the shipment details on the Dispatch tab",
+     "result": "opened the shipment of {order.id} to confirm delivery",
+     "stateChange": null,
+     "nextStepAction": "Confirm delivery of the shipment",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D32",
+   "target": "D36",
+   "tour": [
+    {
+     "tour": "dealer-stock-and-issues",
+     "title": "Dealer stock and issues",
+     "by": "dealer-owner",
+     "to": "dealer-owner",
+     "handoff": false,
+     "button": "submit-issue",
+     "did": "Pick the line, describe the issue and click Submit & confirm",
+     "result": "reported an issue on {issue.product} ({issue.serial})",
+     "stateChange": {
+      "issue.status": {
+       "set": "Issue raised"
+      },
+      "issue.stage": {
+       "set": "Manager review"
+      }
+     },
+     "nextStepAction": "See the issue at stage Manager review",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D36",
+   "target": "O42",
+   "tour": [
+    {
+     "tour": "dealer-stock-and-issues",
+     "title": "Dealer stock and issues",
+     "by": "dealer-owner",
+     "to": "oem-inventory-mgr",
+     "handoff": true,
+     "button": null,
+     "did": "See the issue at stage Manager review",
+     "result": "saw the issue at stage {issue.stage}",
+     "stateChange": {
+      "issue.status": {
+       "set": "Manager review"
+      }
+     },
+     "nextStepAction": "Approve the issue at manager review",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O42",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R1, F8; counterpart O42",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "tour",
+    "spec"
+   ]
+  },
+  {
+   "source": "O42",
+   "target": "D36",
+   "tour": [
+    {
+     "tour": "dealer-stock-and-issues",
+     "title": "Dealer stock and issues",
+     "by": "oem-super-admin",
+     "to": "dealer-owner",
+     "handoff": true,
+     "button": "settle-money",
+     "did": "Settle with money: enter the compensation amount and transaction ID",
+     "result": "settled the issue with money: {issue.compensation|inr}",
+     "stateChange": {
+      "issue.status": {
+       "set": "Resolved"
+      },
+      "issue.stage": {
+       "set": "Resolved"
+      },
+      "issue.outcome": {
+       "set": "Settled with money"
+      }
+     },
+     "nextStepAction": "See the stage and outcome on the Issues List",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D36, D32",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: F8; counterpart D36/D32",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "tour",
+    "spec"
+   ]
+  },
+  {
+   "source": "D07",
+   "target": "D08",
+   "tour": [
+    {
+     "tour": "enquiry-to-invoice",
+     "title": "Enquiry to invoice",
+     "by": "dealer-sales",
+     "to": "dealer-sales",
+     "handoff": false,
+     "button": "new-enquiry",
+     "did": "Click new",
+     "result": "clicked new",
+     "stateChange": null,
+     "nextStepAction": "Check the enquiry details and click create",
+     "gap": false
+    }
+   ],
+   "mock": [
+    {
+     "button": "new",
+     "action": "new-enquiry"
+    }
+   ],
+   "spec": [],
+   "kinds": [
+    "tour",
+    "mock"
+   ]
+  },
+  {
+   "source": "D08",
+   "target": "D09",
+   "tour": [
+    {
+     "tour": "enquiry-to-invoice",
+     "title": "Enquiry to invoice",
+     "by": "dealer-sales",
+     "to": "dealer-sales",
+     "handoff": false,
+     "button": "create-enquiry",
+     "did": "Check the enquiry details and click create",
+     "result": "created the enquiry",
+     "stateChange": {
+      "enquiry.status": {
+       "set": "Open"
+      },
+      "counts.enquiries": 1
+     },
+     "nextStepAction": "Open the follow-up log",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D09",
+   "target": "D10",
+   "tour": [
+    {
+     "tour": "enquiry-to-invoice",
+     "title": "Enquiry to invoice",
+     "by": "dealer-sales",
+     "to": "dealer-sales",
+     "handoff": false,
+     "button": "open-followup",
+     "did": "Open the follow-up log",
+     "result": "opened the follow-up log",
+     "stateChange": null,
+     "nextStepAction": "Add a follow-up",
+     "gap": false
+    }
+   ],
+   "mock": [
+    {
+     "button": "follow-up",
+     "action": "open-followup"
+    }
+   ],
+   "spec": [],
+   "kinds": [
+    "tour",
+    "mock"
+   ]
+  },
+  {
+   "source": "D10",
+   "target": "D11",
+   "tour": [
+    {
+     "tour": "enquiry-to-invoice",
+     "title": "Enquiry to invoice",
+     "by": "dealer-sales",
+     "to": "dealer-sales",
+     "handoff": false,
+     "button": "add-followup",
+     "did": "Add a follow-up",
+     "result": "added a follow-up",
+     "stateChange": {
+      "counts.followUps": 1
+     },
+     "nextStepAction": "The customer wants a quote: click create",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D11",
+   "target": "D12",
+   "tour": [
+    {
+     "tour": "enquiry-to-invoice",
+     "title": "Enquiry to invoice",
+     "by": "dealer-sales",
+     "to": "dealer-sales",
+     "handoff": false,
+     "button": "create-quotation",
+     "did": "The customer wants a quote: click create",
+     "result": "clicked create",
+     "stateChange": null,
+     "nextStepAction": "Check the vehicle, variant and colour, then click create",
+     "gap": false
+    }
+   ],
+   "mock": [
+    {
+     "button": "create",
+     "action": "create-quotation"
+    }
+   ],
+   "spec": [],
+   "kinds": [
+    "tour",
+    "mock"
+   ]
+  },
+  {
+   "source": "D12",
+   "target": "D09",
+   "tour": [
+    {
+     "tour": "enquiry-to-invoice",
+     "title": "Enquiry to invoice",
+     "by": "dealer-sales",
+     "to": "dealer-sales",
+     "handoff": false,
+     "button": "save-quotation",
+     "did": "Check the vehicle, variant and colour, then click create",
+     "result": "created the quotation",
+     "stateChange": {
+      "quotation.status": {
+       "set": "Created"
+      },
+      "counts.quotations": 1
+     },
+     "nextStepAction": "The customer agrees: convert the enquiry to a customer",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D09",
+   "target": "D16",
+   "tour": [
+    {
+     "tour": "enquiry-to-invoice",
+     "title": "Enquiry to invoice",
+     "by": "dealer-sales",
+     "to": "dealer-sales",
+     "handoff": false,
+     "button": "convert-customer",
+     "did": "The customer agrees: convert the enquiry to a customer",
+     "result": "clicked convert to customer",
+     "stateChange": null,
+     "nextStepAction": "Check the customer details and click create",
+     "gap": false
+    }
+   ],
+   "mock": [
+    {
+     "button": "convert to customer",
+     "action": "convert-customer"
+    }
+   ],
+   "spec": [
+    {
+     "text": "Buttons / Actions: edit, delete, convert to customer (→ D16 with enquireId)",
+     "rel": "link"
+    },
+    {
+     "text": "Fields: No dedicated input form — this is a detail screen. Display/column content: Edit, delete, convert to customer (→ D16).",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "tour",
+    "mock",
+    "spec"
+   ]
+  },
+  {
+   "source": "D16",
+   "target": "D17",
+   "tour": [
+    {
+     "tour": "enquiry-to-invoice",
+     "title": "Enquiry to invoice",
+     "by": "dealer-sales",
+     "to": "dealer-sales",
+     "handoff": false,
+     "button": "create-customer",
+     "did": "Check the customer details and click create",
+     "result": "created the customer",
+     "stateChange": {
+      "customer.status": {
+       "set": "Created"
+      },
+      "enquiry.status": {
+       "set": "Converted"
+      },
+      "counts.customers": 1
+     },
+     "nextStepAction": "Open the payment tab to record the booking advance",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D17",
+   "target": "D22",
+   "tour": [
+    {
+     "tour": "enquiry-to-invoice",
+     "title": "Enquiry to invoice",
+     "by": "dealer-sales",
+     "to": "dealer-sales",
+     "handoff": false,
+     "button": "open-payment-tab",
+     "did": "Open the payment tab to record the booking advance",
+     "result": "opened the payment tab",
+     "stateChange": null,
+     "nextStepAction": "Click + new",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D22",
+   "target": "D23",
+   "tour": [
+    {
+     "tour": "enquiry-to-invoice",
+     "title": "Enquiry to invoice",
+     "by": "dealer-sales",
+     "to": "dealer-sales",
+     "handoff": false,
+     "button": "new-payment",
+     "did": "Click + new",
+     "result": "clicked + new",
+     "stateChange": null,
+     "nextStepAction": "Check the advance payment and click create",
+     "gap": false
+    }
+   ],
+   "mock": [
+    {
+     "button": "+ new",
+     "action": "new-payment"
+    }
+   ],
+   "spec": [],
+   "kinds": [
+    "tour",
+    "mock"
+   ]
+  },
+  {
+   "source": "D23",
+   "target": "D24",
+   "tour": [
+    {
+     "tour": "enquiry-to-invoice",
+     "title": "Enquiry to invoice",
+     "by": "dealer-sales",
+     "to": "dealer-sales",
+     "handoff": false,
+     "button": "create-payment",
+     "did": "Check the advance payment and click create",
+     "result": "recorded the advance payment",
+     "stateChange": {
+      "payment.status": {
+       "set": "Recorded"
+      },
+      "counts.payments": 1
+     },
+     "nextStepAction": "Check that the vehicle is in stock",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D24",
+   "target": "D25",
+   "tour": [
+    {
+     "tour": "enquiry-to-invoice",
+     "title": "Enquiry to invoice",
+     "by": "dealer-sales",
+     "to": "dealer-sales",
+     "handoff": false,
+     "button": "open-parts",
+     "did": "Check that the vehicle is in stock",
+     "result": "checked the vehicle stock",
+     "stateChange": null,
+     "nextStepAction": "Check the spares in stock",
+     "gap": false
+    }
+   ],
+   "mock": [
+    {
+     "button": "parts",
+     "action": "open-parts"
+    }
+   ],
+   "spec": [],
+   "kinds": [
+    "tour",
+    "mock"
+   ]
+  },
+  {
+   "source": "D25",
+   "target": "D19",
+   "tour": [
+    {
+     "tour": "enquiry-to-invoice",
+     "title": "Enquiry to invoice",
+     "by": "dealer-sales",
+     "to": "dealer-sales",
+     "handoff": false,
+     "button": null,
+     "did": "Check the spares in stock",
+     "result": "checked the spares stock",
+     "stateChange": null,
+     "nextStepAction": "Click + new",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D19",
+   "target": "D20",
+   "tour": [
+    {
+     "tour": "enquiry-to-invoice",
+     "title": "Enquiry to invoice",
+     "by": "dealer-sales",
+     "to": "dealer-sales",
+     "handoff": false,
+     "button": "new-invoice",
+     "did": "Click + new",
+     "result": "clicked + new",
+     "stateChange": null,
+     "nextStepAction": "Check the vehicle and serials, then click create",
+     "gap": false
+    }
+   ],
+   "mock": [
+    {
+     "button": "+ new",
+     "action": "new-invoice"
+    }
+   ],
+   "spec": [],
+   "kinds": [
+    "tour",
+    "mock"
+   ]
+  },
+  {
+   "source": "D20",
+   "target": "D21",
+   "tour": [
+    {
+     "tour": "enquiry-to-invoice",
+     "title": "Enquiry to invoice",
+     "by": "dealer-sales",
+     "to": "dealer-sales",
+     "handoff": false,
+     "button": "create-invoice",
+     "did": "Check the vehicle and serials, then click create",
+     "result": "created the invoice",
+     "stateChange": {
+      "invoice.status": {
+       "set": "Pending"
+      },
+      "counts.invoices": 1,
+      "stock.available": -1
+     },
+     "nextStepAction": "Print the invoice",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O34",
+   "target": "O35",
+   "tour": [
+    {
+     "tour": "manufacturing-unit-operations",
+     "title": "Manufacturing unit operations",
+     "by": "oem-super-admin",
+     "to": "oem-inventory-mgr",
+     "handoff": true,
+     "button": "mu-stock",
+     "did": "Click MU stock",
+     "result": "clicked MU stock for {mu.name}",
+     "stateChange": null,
+     "nextStepAction": "Read the MU stock and the in-transit material",
+     "gap": true
+    }
+   ],
+   "mock": [
+    {
+     "button": "MU stock",
+     "action": "mu-stock"
+    }
+   ],
+   "spec": [],
+   "kinds": [
+    "tour",
+    "mock"
+   ]
+  },
+  {
+   "source": "O35",
+   "target": "O34",
+   "tour": [
+    {
+     "tour": "manufacturing-unit-operations",
+     "title": "Manufacturing unit operations",
+     "by": "oem-inventory-mgr",
+     "to": "oem-super-admin",
+     "handoff": true,
+     "button": null,
+     "did": "Read the MU stock and the in-transit material",
+     "result": "read the MU stock of {mu.name}",
+     "stateChange": null,
+     "nextStepAction": "Click dispatch plan",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O34",
+   "target": "O36",
+   "tour": [
+    {
+     "tour": "manufacturing-unit-operations",
+     "title": "Manufacturing unit operations",
+     "by": "oem-super-admin",
+     "to": "oem-logistics-mgr",
+     "handoff": true,
+     "button": "dispatch-plan",
+     "did": "Click dispatch plan",
+     "result": "clicked dispatch plan for {mu.name}",
+     "stateChange": null,
+     "nextStepAction": "Read the dispatch plan calendar for {dispatchPlan.month}",
+     "gap": true
+    }
+   ],
+   "mock": [
+    {
+     "button": "dispatch plan",
+     "action": "dispatch-plan"
+    }
+   ],
+   "spec": [],
+   "kinds": [
+    "tour",
+    "mock"
+   ]
+  },
+  {
+   "source": "O36",
+   "target": "O34",
+   "tour": [
+    {
+     "tour": "manufacturing-unit-operations",
+     "title": "Manufacturing unit operations",
+     "by": "oem-logistics-mgr",
+     "to": "oem-super-admin",
+     "handoff": true,
+     "button": null,
+     "did": "Read the dispatch plan calendar for {dispatchPlan.month}",
+     "result": "read the dispatch plan for {dispatchPlan.month}",
+     "stateChange": null,
+     "nextStepAction": "Check the connect a dealer search",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O06",
+   "target": "O07",
+   "tour": [
+    {
+     "tour": "oem-monitor-dealer",
+     "title": "OEM monitors a dealer (mirror views)",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": null,
+     "did": "Look at the dealer detail",
+     "result": "looked at the {dealer.name} detail",
+     "stateChange": null,
+     "nextStepAction": "Open one customer to see the customer mirror",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O07",
+   "target": "O08",
+   "tour": [
+    {
+     "tour": "oem-monitor-dealer",
+     "title": "OEM monitors a dealer (mirror views)",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": null,
+     "did": "Read the customer mirror (read only)",
+     "result": "read the customer mirror of {customer.name} ({customer.id})",
+     "stateChange": null,
+     "nextStepAction": "Read the dealer's enquiries (read only)",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O08",
+   "target": "O09",
+   "tour": [
+    {
+     "tour": "oem-monitor-dealer",
+     "title": "OEM monitors a dealer (mirror views)",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": null,
+     "did": "Read the dealer's enquiries (read only)",
+     "result": "read the enquiries of {dealer.name}",
+     "stateChange": null,
+     "nextStepAction": "Read the vehicles sold (read only)",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O09",
+   "target": "O10",
+   "tour": [
+    {
+     "tour": "oem-monitor-dealer",
+     "title": "OEM monitors a dealer (mirror views)",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": null,
+     "did": "Read the vehicles sold (read only)",
+     "result": "read the vehicles sold by {dealer.name}",
+     "stateChange": null,
+     "nextStepAction": "Click add stock to dealer",
+     "gap": true
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O10",
+   "target": "O11",
+   "tour": [
+    {
+     "tour": "oem-monitor-dealer",
+     "title": "OEM monitors a dealer (mirror views)",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": null,
+     "did": "Click add stock to dealer",
+     "result": "opened the add stock to dealer dialog for {dealer.name}",
+     "stateChange": null,
+     "nextStepAction": "Read the warranty claims (read only)",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O11",
+   "target": "O12",
+   "tour": [
+    {
+     "tour": "oem-monitor-dealer",
+     "title": "OEM monitors a dealer (mirror views)",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": null,
+     "did": "Read the warranty claims (read only)",
+     "result": "read the warranty claims of {dealer.name}",
+     "stateChange": null,
+     "nextStepAction": "Read the purchase orders (read only)",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O12",
+   "target": "O13",
+   "tour": [
+    {
+     "tour": "oem-monitor-dealer",
+     "title": "OEM monitors a dealer (mirror views)",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": null,
+     "did": "Read the purchase orders (read only)",
+     "result": "read the purchase orders of {dealer.name}",
+     "stateChange": null,
+     "nextStepAction": "Read the pending stock (read only)",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O13",
+   "target": "O48",
+   "tour": [
+    {
+     "tour": "oem-monitor-dealer",
+     "title": "OEM monitors a dealer (mirror views)",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": null,
+     "did": "Read the pending stock (read only)",
+     "result": "read the pending stock of {dealer.name}",
+     "stateChange": null,
+     "nextStepAction": "Read the vehicle sold report (read only)",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O54",
+   "target": "O55",
+   "tour": [
+    {
+     "tour": "oem-security-audit",
+     "title": "OEM security and audit",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": null,
+     "did": "Read the audit purge and export requirements",
+     "result": "read the audit purge and export requirements",
+     "stateChange": null,
+     "nextStepAction": "Read the security settings",
+     "gap": true
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O55",
+   "target": "O49",
+   "tour": [
+    {
+     "tour": "oem-security-audit",
+     "title": "OEM security and audit",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": null,
+     "did": "Read the security settings",
+     "result": "read the security settings",
+     "stateChange": null,
+     "nextStepAction": "Read the OEM profile",
+     "gap": true
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O49",
+   "target": "O53",
+   "tour": [
+    {
+     "tour": "oem-security-audit",
+     "title": "OEM security and audit",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": null,
+     "did": "Read the OEM profile",
+     "result": "read the OEM profile of {company.readOnly.org}",
+     "stateChange": null,
+     "nextStepAction": "Read the OEM user roles",
+     "gap": true
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O01",
+   "target": "O03",
+   "tour": [
+    {
+     "tour": "oem-setup",
+     "title": "OEM setup",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": "sign-in",
+     "did": "Sign in with the user ID and password",
+     "result": "signed in",
+     "stateChange": null,
+     "nextStepAction": "Open Settings from the sidebar",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O03",
+   "target": "O49",
+   "tour": [
+    {
+     "tour": "oem-setup",
+     "title": "OEM setup",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": "goto-O49",
+     "did": "Open Settings from the sidebar",
+     "result": "opened Settings",
+     "stateChange": null,
+     "nextStepAction": "Enter the approval admin email, then click save approval email",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O49",
+   "target": "O50",
+   "tour": [
+    {
+     "tour": "oem-setup",
+     "title": "OEM setup",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": "save-approval-email",
+     "did": "Enter the approval admin email, then click save approval email",
+     "result": "saved the approval admin email",
+     "stateChange": null,
+     "nextStepAction": "Check the operating states, then click update states",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O50",
+   "target": "O32",
+   "tour": [
+    {
+     "tour": "oem-setup",
+     "title": "OEM setup",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": "update-states",
+     "did": "Check the operating states, then click update states",
+     "result": "updated the operating states",
+     "stateChange": null,
+     "nextStepAction": "Click new",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O32",
+   "target": "O33",
+   "tour": [
+    {
+     "tour": "oem-setup",
+     "title": "OEM setup",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": "new-mu",
+     "did": "Click new",
+     "result": "clicked new",
+     "stateChange": null,
+     "nextStepAction": "Check the unit details and click save",
+     "gap": false
+    }
+   ],
+   "mock": [
+    {
+     "button": "new",
+     "action": "new-mu"
+    }
+   ],
+   "spec": [],
+   "kinds": [
+    "tour",
+    "mock"
+   ]
+  },
+  {
+   "source": "O33",
+   "target": "O52",
+   "tour": [
+    {
+     "tour": "oem-setup",
+     "title": "OEM setup",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": "save-mu",
+     "did": "Check the unit details and click save",
+     "result": "clicked save",
+     "stateChange": {
+      "manufacturingUnits.count": 1,
+      "manufacturingUnits.created": {
+       "set": true
+      }
+     },
+     "nextStepAction": "Click create",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O52",
+   "target": "O53",
+   "tour": [
+    {
+     "tour": "oem-setup",
+     "title": "OEM setup",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": "create-user",
+     "did": "Click create",
+     "result": "clicked create",
+     "stateChange": null,
+     "nextStepAction": "Check the user details and click submit",
+     "gap": false
+    }
+   ],
+   "mock": [
+    {
+     "button": "create",
+     "action": "create-user"
+    }
+   ],
+   "spec": [],
+   "kinds": [
+    "tour",
+    "mock"
+   ]
+  },
+  {
+   "source": "O53",
+   "target": "O51",
+   "tour": [
+    {
+     "tour": "oem-setup",
+     "title": "OEM setup",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": "submit-user",
+     "did": "Check the user details and click submit",
+     "result": "clicked submit",
+     "stateChange": {
+      "oemUsers.created": {
+       "set": true
+      }
+     },
+     "nextStepAction": "Enter the region and zone, then click create region & zone",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O51",
+   "target": "O39",
+   "tour": [
+    {
+     "tour": "oem-setup",
+     "title": "OEM setup",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": "save-region",
+     "did": "Enter the region and zone, then click create region & zone",
+     "result": "clicked create region & zone",
+     "stateChange": {
+      "regions.count": 1,
+      "regions.created": {
+       "set": true
+      }
+     },
+     "nextStepAction": "Enter the vendor details and click add",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O39",
+   "target": "O28",
+   "tour": [
+    {
+     "tour": "oem-setup",
+     "title": "OEM setup",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": "add-vendor",
+     "did": "Enter the vendor details and click add",
+     "result": "added the vendor",
+     "stateChange": {
+      "vendors.count": 1,
+      "vendors.created": {
+       "set": true
+      }
+     },
+     "nextStepAction": "Check the motor details and click create",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O28",
+   "target": "O26",
+   "tour": [
+    {
+     "tour": "oem-setup",
+     "title": "OEM setup",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": "create-component",
+     "did": "Check the motor details and click create",
+     "result": "created the motor",
+     "stateChange": {
+      "products.count": 1,
+      "products.motor.created": {
+       "set": true
+      }
+     },
+     "nextStepAction": "Check the vehicle details and click create",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O26",
+   "target": "O27",
+   "tour": [
+    {
+     "tour": "oem-setup",
+     "title": "OEM setup",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": "create-vehicle",
+     "did": "Check the vehicle details and click create",
+     "result": "created the vehicle",
+     "stateChange": {
+      "products.count": 1,
+      "products.vehicle.created": {
+       "set": true
+      }
+     },
+     "nextStepAction": "Check the spare details and click create",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O27",
+   "target": "O46",
+   "tour": [
+    {
+     "tour": "oem-setup",
+     "title": "OEM setup",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": "create-spare",
+     "did": "Check the spare details and click create",
+     "result": "created the spare",
+     "stateChange": {
+      "products.count": 1,
+      "products.spare.created": {
+       "set": true
+      }
+     },
+     "nextStepAction": "Check the ledger name, then click new ledger",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O46",
+   "target": "O47",
+   "tour": [
+    {
+     "tour": "oem-setup",
+     "title": "OEM setup",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": "new-ledger",
+     "did": "Check the ledger name, then click new ledger",
+     "result": "created the ledger",
+     "stateChange": {
+      "ledgers.count": 1,
+      "ledgers.created": {
+       "set": true
+      }
+     },
+     "nextStepAction": "Enter the amount, then click add credit",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O25",
+   "target": "O29",
+   "tour": [
+    {
+     "tour": "oem-warehouse-products",
+     "title": "OEM warehouse and products",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": null,
+     "did": "Look at the products list",
+     "result": "opened the products list",
+     "stateChange": null,
+     "nextStepAction": "Look at the product detail and the dashboard",
+     "gap": true
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O29",
+   "target": "O30",
+   "tour": [
+    {
+     "tour": "oem-warehouse-products",
+     "title": "OEM warehouse and products",
+     "by": "oem-super-admin",
+     "to": "oem-inventory-mgr",
+     "handoff": true,
+     "button": null,
+     "did": "Look at the product detail and the dashboard",
+     "result": "opened the detail of {products.vehicle.productName}",
+     "stateChange": null,
+     "nextStepAction": "Look at the OEM stock tabs",
+     "gap": true
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O30",
+   "target": "O31",
+   "tour": [
+    {
+     "tour": "oem-warehouse-products",
+     "title": "OEM warehouse and products",
+     "by": "oem-inventory-mgr",
+     "to": "oem-inventory-mgr",
+     "handoff": false,
+     "button": null,
+     "did": "Look at the OEM stock tabs",
+     "result": "opened the OEM stock at {mu.name}",
+     "stateChange": null,
+     "nextStepAction": "Click add stock to go to the MU stock",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O31",
+   "target": "O35",
+   "tour": [
+    {
+     "tour": "oem-warehouse-products",
+     "title": "OEM warehouse and products",
+     "by": "oem-inventory-mgr",
+     "to": "oem-inventory-mgr",
+     "handoff": false,
+     "button": "add-stock",
+     "did": "Click add stock to go to the MU stock",
+     "result": "opened the stock list of {products.vehicle.productName}",
+     "stateChange": null,
+     "nextStepAction": "Read the MU stock",
+     "gap": true
+    }
+   ],
+   "mock": [
+    {
+     "button": "add stock",
+     "action": "add-stock"
+    }
+   ],
+   "spec": [
+    {
+     "text": "Buttons / Actions: status (available / locked / delivered / draft), unit, add stock (→ O35)",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "tour",
+    "mock",
+    "spec"
+   ]
+  },
+  {
+   "source": "O35",
+   "target": "N13",
+   "tour": [
+    {
+     "tour": "oem-warehouse-products",
+     "title": "OEM warehouse and products",
+     "by": "oem-inventory-mgr",
+     "to": "oem-inventory-mgr",
+     "handoff": false,
+     "button": null,
+     "did": "Read the MU stock",
+     "result": "opened the MU stock at {mu.name}",
+     "stateChange": null,
+     "nextStepAction": "Read the FIFO stock issue requirement",
+     "gap": true
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "N13",
+   "target": "O27",
+   "tour": [
+    {
+     "tour": "oem-warehouse-products",
+     "title": "OEM warehouse and products",
+     "by": "oem-inventory-mgr",
+     "to": "oem-super-admin",
+     "handoff": true,
+     "button": null,
+     "did": "Read the FIFO stock issue requirement",
+     "result": "read the FIFO stock issue requirement",
+     "stateChange": null,
+     "nextStepAction": "Look at the spare product form",
+     "gap": true
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D28",
+   "target": "D29",
+   "tour": [
+    {
+     "tour": "order-to-production",
+     "title": "order-to-production",
+     "by": "dealer-owner",
+     "to": "dealer-owner",
+     "handoff": false,
+     "button": "new-purchase",
+     "did": "Start a new purchase order",
+     "result": "started a new purchase order",
+     "stateChange": null,
+     "nextStepAction": "Choose the manufacturing unit as the seller",
+     "gap": false
+    }
+   ],
+   "mock": [
+    {
+     "button": "New",
+     "action": "new-purchase"
+    }
+   ],
+   "spec": [],
+   "kinds": [
+    "tour",
+    "mock"
+   ]
+  },
+  {
+   "source": "D29",
+   "target": "D30",
+   "tour": [
+    {
+     "tour": "order-to-production",
+     "title": "order-to-production",
+     "by": "dealer-owner",
+     "to": "dealer-owner",
+     "handoff": false,
+     "button": "place-order",
+     "did": "Review and place the order",
+     "result": "placed purchase order {order.id} for {order.qty} units",
+     "stateChange": {
+      "order.status": {
+       "set": "Pending"
+      }
+     },
+     "nextStepAction": "View the new purchase order",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D30",
+   "target": "O17",
+   "tour": [
+    {
+     "tour": "order-to-production",
+     "title": "order-to-production",
+     "by": "dealer-owner",
+     "to": "oem-sales-head",
+     "handoff": true,
+     "button": null,
+     "did": "View the new purchase order",
+     "result": "opened purchase order {order.id}",
+     "stateChange": null,
+     "nextStepAction": "Open the purchase order from the list",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O17",
+   "target": "O20",
+   "tour": [
+    {
+     "tour": "order-to-production",
+     "title": "order-to-production",
+     "by": "oem-sales-head",
+     "to": "oem-sales-head",
+     "handoff": false,
+     "button": "open-po",
+     "did": "Open the purchase order from the list",
+     "result": "opened {order.id} from the orders list",
+     "stateChange": null,
+     "nextStepAction": "Review the order and approve it",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O20",
+   "target": "O21",
+   "tour": [
+    {
+     "tour": "order-to-production",
+     "title": "order-to-production",
+     "by": "oem-sales-head",
+     "to": "oem-sales-head",
+     "handoff": false,
+     "button": "approve-order",
+     "did": "Review the order and approve it",
+     "result": "approved the order",
+     "stateChange": {
+      "order.status": {
+       "set": "Approved"
+      }
+     },
+     "nextStepAction": "Choose the manufacturing unit and assign the order",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O21",
+   "target": "D31",
+   "tour": [
+    {
+     "tour": "order-to-production",
+     "title": "order-to-production",
+     "by": "oem-sales-head",
+     "to": "dealer-owner",
+     "handoff": true,
+     "button": "assign",
+     "did": "Choose the manufacturing unit and assign the order",
+     "result": "assigned {order.id} to {mu.name}",
+     "stateChange": null,
+     "nextStepAction": "Pay the {order.advancePercent}% advance and submit the payment",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D31",
+   "target": "O23",
+   "tour": [
+    {
+     "tour": "order-to-production",
+     "title": "order-to-production",
+     "by": "dealer-owner",
+     "to": "oem-accounts",
+     "handoff": true,
+     "button": "submit-payment",
+     "did": "Pay the {order.advancePercent}% advance and submit the payment",
+     "result": "submitted the {order.advancePercent}% advance payment of {order.advanceDue|inr}",
+     "stateChange": {
+      "order.paymentStatus": {
+       "set": "Submitted - awaiting verification"
+      }
+     },
+     "nextStepAction": "Check the receipt and verify the advance payment",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O45, O23",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: F4; counterpart O45/O23",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "tour",
+    "spec"
+   ]
+  },
+  {
+   "source": "O23",
+   "target": "N03",
+   "tour": [
+    {
+     "tour": "order-to-production",
+     "title": "order-to-production",
+     "by": "oem-accounts",
+     "to": "oem-production-mgr",
+     "handoff": true,
+     "button": "verify-payment",
+     "did": "Check the receipt and verify the advance payment",
+     "result": "verified the advance payment",
+     "stateChange": {
+      "order.paid": {
+       "copy": "order.advanceDue"
+      },
+      "order.paymentStatus": {
+       "set": "Verified"
+      },
+      "order.status": {
+       "set": "Payment verified"
+      }
+     },
+     "nextStepAction": "Raise the material requisition for this order",
+     "gap": true
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "N03",
+   "target": "O18",
+   "tour": [
+    {
+     "tour": "order-to-production",
+     "title": "order-to-production",
+     "by": "oem-production-mgr",
+     "to": "oem-production-mgr",
+     "handoff": false,
+     "button": null,
+     "did": "Raise the material requisition for this order",
+     "result": "reached the material requisition stage for {order.qty} units",
+     "stateChange": null,
+     "nextStepAction": "Build the vehicles and update the produced count",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O18",
+   "target": "N04",
+   "tour": [
+    {
+     "tour": "order-to-production",
+     "title": "order-to-production",
+     "by": "oem-production-mgr",
+     "to": "oem-production-mgr",
+     "handoff": false,
+     "button": "update-produced-count",
+     "did": "Build the vehicles and update the produced count",
+     "result": "started building {order.qty} units and updated the produced count",
+     "stateChange": {
+      "order.status": {
+       "set": "In production"
+      },
+      "order.production.status": {
+       "set": "In production"
+      }
+     },
+     "nextStepAction": "Complete production and hand over the finished units",
+     "gap": true
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "N04",
+   "target": "N07",
+   "tour": [
+    {
+     "tour": "order-to-production",
+     "title": "order-to-production",
+     "by": "oem-production-mgr",
+     "to": "oem-logistics-mgr",
+     "handoff": true,
+     "button": null,
+     "did": "Complete production and hand over the finished units",
+     "result": "reached the production completion stage for {order.id}",
+     "stateChange": {
+      "order.status": {
+       "set": "Ready for Dispatch"
+      }
+     },
+     "nextStepAction": "Validate the chassis, invoice and manufacturing unit before dispatch",
+     "gap": true
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "N07",
+   "target": "O19",
+   "tour": [
+    {
+     "tour": "order-to-production",
+     "title": "order-to-production",
+     "by": "oem-logistics-mgr",
+     "to": "oem-logistics-mgr",
+     "handoff": false,
+     "button": null,
+     "did": "Validate the chassis, invoice and manufacturing unit before dispatch",
+     "result": "reached the chassis validation stage for {order.id}",
+     "stateChange": null,
+     "nextStepAction": "Combine the paid orders into a dispatch batch",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O19",
+   "target": "O22",
+   "tour": [
+    {
+     "tour": "order-to-production",
+     "title": "order-to-production",
+     "by": "oem-logistics-mgr",
+     "to": "oem-logistics-mgr",
+     "handoff": false,
+     "button": "combine-batch",
+     "did": "Combine the paid orders into a dispatch batch",
+     "result": "combined paid order {order.id} into a dispatch batch",
+     "stateChange": null,
+     "nextStepAction": "Fill in the transport details and dispatch the shipment",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O22",
+   "target": "D30",
+   "tour": [
+    {
+     "tour": "order-to-production",
+     "title": "order-to-production",
+     "by": "oem-logistics-mgr",
+     "to": "dealer-owner",
+     "handoff": true,
+     "button": "dispatch",
+     "did": "Fill in the transport details and dispatch the shipment",
+     "result": "dispatched {order.qty} units on {order.id}",
+     "stateChange": {
+      "order.status": {
+       "set": "Dispatched"
+      },
+      "order.shipment.status": {
+       "set": "Dispatched"
+      }
+     },
+     "nextStepAction": "See the shipment details on the Dispatch tab",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O24",
+   "target": "D30",
+   "tour": [
+    {
+     "tour": "po-exceptions",
+     "title": "PO exceptions and dispatch documents",
+     "by": "oem-super-admin",
+     "to": "dealer-owner",
+     "handoff": true,
+     "button": "reject",
+     "did": "Reject the PO with remarks",
+     "result": "rejected {order.id} with remarks",
+     "stateChange": {
+      "order.status": {
+       "set": "Rejected"
+      }
+     },
+     "nextStepAction": "Check what the dealer sees on the rejected PO",
+     "gap": true
+    }
+   ],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D30",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "tour",
+    "spec"
+   ]
+  },
+  {
+   "source": "D30",
+   "target": "O24",
+   "tour": [
+    {
+     "tour": "po-exceptions",
+     "title": "PO exceptions and dispatch documents",
+     "by": "dealer-owner",
+     "to": "oem-super-admin",
+     "handoff": true,
+     "button": null,
+     "did": "Check what the dealer sees on the rejected PO",
+     "result": "checked the rejected PO {order.id} as the dealer",
+     "stateChange": null,
+     "nextStepAction": "Revert the cancelled PO",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O24",
+   "target": "O20",
+   "tour": [
+    {
+     "tour": "po-exceptions",
+     "title": "PO exceptions and dispatch documents",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": "revert",
+     "did": "Revert the cancelled PO",
+     "result": "reverted the cancelled PO {order.id}",
+     "stateChange": {
+      "order.status": {
+       "set": "Pending"
+      }
+     },
+     "nextStepAction": "Approve the PO",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Path: (O20) · Type: Dialog / inline · Mode: Action · Roles: APPROVE roles",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "tour",
+    "spec"
+   ]
+  },
+  {
+   "source": "O20",
+   "target": "O23",
+   "tour": [
+    {
+     "tour": "po-exceptions",
+     "title": "PO exceptions and dispatch documents",
+     "by": "oem-super-admin",
+     "to": "oem-accounts",
+     "handoff": true,
+     "button": "approve-order",
+     "did": "Approve the PO",
+     "result": "approved {order.id}",
+     "stateChange": {
+      "order.status": {
+       "set": "Approved"
+      }
+     },
+     "nextStepAction": "Verify the payment on {order.id}",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O23",
+   "target": "O22",
+   "tour": [
+    {
+     "tour": "po-exceptions",
+     "title": "PO exceptions and dispatch documents",
+     "by": "oem-accounts",
+     "to": "oem-logistics-mgr",
+     "handoff": true,
+     "button": null,
+     "did": "Read the OK to Bill gate requirement",
+     "result": "reached the OK to Bill gate for {order.id}",
+     "stateChange": null,
+     "nextStepAction": "Read the e-way bill requirement",
+     "gap": true
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O22",
+   "target": "D32",
+   "tour": [
+    {
+     "tour": "po-exceptions",
+     "title": "PO exceptions and dispatch documents",
+     "by": "oem-logistics-mgr",
+     "to": "dealer-owner",
+     "handoff": true,
+     "button": "dispatch",
+     "did": "Dispatch {order.qty} units",
+     "result": "dispatched {order.qty} units of {order.id}",
+     "stateChange": {
+      "order.status": {
+       "set": "Dispatched"
+      },
+      "order.shipment.status": {
+       "set": "Dispatched"
+      }
+     },
+     "nextStepAction": "Reject the shipment with a reason",
+     "gap": false
+    },
+    {
+     "tour": "po-exceptions",
+     "title": "PO exceptions and dispatch documents",
+     "by": "oem-logistics-mgr",
+     "to": "dealer-owner",
+     "handoff": true,
+     "button": "dispatch",
+     "did": "Dispatch again",
+     "result": "dispatched {order.id} again",
+     "stateChange": {
+      "order.status": {
+       "set": "Dispatched"
+      },
+      "order.shipment.status": {
+       "set": "Dispatched"
+      }
+     },
+     "nextStepAction": "Confirm delivery of {order.id}",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D32 (confirm / reject)",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: counterpart D32 (confirm/reject)",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "tour",
+    "spec"
+   ]
+  },
+  {
+   "source": "D32",
+   "target": "O22",
+   "tour": [
+    {
+     "tour": "po-exceptions",
+     "title": "PO exceptions and dispatch documents",
+     "by": "dealer-owner",
+     "to": "oem-logistics-mgr",
+     "handoff": true,
+     "button": "reject-shipment",
+     "did": "Reject the shipment with a reason",
+     "result": "rejected the shipment of {order.id} with a reason",
+     "stateChange": {
+      "order.status": {
+       "set": "Shipment rejected"
+      },
+      "order.shipment.status": {
+       "set": "Shipment rejected"
+      }
+     },
+     "nextStepAction": "Read the PDI checklist requirement",
+     "gap": true
+    }
+   ],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O22, O42",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: counterpart O22/O42",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "tour",
+    "spec"
+   ]
+  },
+  {
+   "source": "O39",
+   "target": "O26",
+   "tour": [
+    {
+     "tour": "procurement-to-material-inward",
+     "title": "Procurement to material inward",
+     "by": "oem-procurement-mgr",
+     "to": "oem-procurement-mgr",
+     "handoff": false,
+     "button": "procurement",
+     "did": "Click procurement",
+     "result": "clicked procurement for {vendorPO.vendorName}",
+     "stateChange": null,
+     "nextStepAction": "Review the bill of materials before ordering",
+     "gap": true
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O26",
+   "target": "O40",
+   "tour": [
+    {
+     "tour": "procurement-to-material-inward",
+     "title": "Procurement to material inward",
+     "by": "oem-procurement-mgr",
+     "to": "oem-procurement-mgr",
+     "handoff": false,
+     "button": null,
+     "did": "Review the bill of materials before ordering",
+     "result": "reviewed the bill of materials for {products.vehicle.productName}",
+     "stateChange": null,
+     "nextStepAction": "Set the order quantity and rate, then create the PO",
+     "gap": true
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O40",
+   "target": "O41",
+   "tour": [
+    {
+     "tour": "procurement-to-material-inward",
+     "title": "Procurement to material inward",
+     "by": "oem-procurement-mgr",
+     "to": "oem-procurement-mgr",
+     "handoff": false,
+     "button": "create-po",
+     "did": "Click Create PO",
+     "result": "created vendor PO {vendorPO.number} for {vendorPO.vendorName}",
+     "stateChange": {
+      "vendorPO.status": {
+       "set": "Pending approval"
+      }
+     },
+     "nextStepAction": "See that the vendor PO is pending approval",
+     "gap": true
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O41",
+   "target": "O35",
+   "tour": [
+    {
+     "tour": "procurement-to-material-inward",
+     "title": "Procurement to material inward",
+     "by": "oem-super-admin",
+     "to": "oem-inventory-mgr",
+     "handoff": true,
+     "button": null,
+     "did": "Approve the vendor PO by email",
+     "result": "approved vendor PO {vendorPO.number}",
+     "stateChange": {
+      "vendorPO.status": {
+       "set": "Approved"
+      }
+     },
+     "nextStepAction": "Receive the material and check its quality",
+     "gap": true
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "N04",
+   "target": "N05",
+   "tour": [
+    {
+     "tour": "qc-and-packaging",
+     "title": "QC and packaging",
+     "by": "oem-production-mgr",
+     "to": "oem-production-mgr",
+     "handoff": false,
+     "button": null,
+     "did": "Read the production completion stage",
+     "result": "reached the production completion stage for {order.id}",
+     "stateChange": null,
+     "nextStepAction": "Read the QC inspection stage",
+     "gap": true
+    }
+   ],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Feeds Inventory (O30/O31) and QC (N05)",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "tour",
+    "spec"
+   ]
+  },
+  {
+   "source": "N05",
+   "target": "N06",
+   "tour": [
+    {
+     "tour": "qc-and-packaging",
+     "title": "QC and packaging",
+     "by": "oem-production-mgr",
+     "to": "oem-production-mgr",
+     "handoff": false,
+     "button": null,
+     "did": "Read the QC inspection stage",
+     "result": "reached the QC inspection stage for {order.id}",
+     "stateChange": null,
+     "nextStepAction": "Read the QC branding and packaging stage",
+     "gap": true
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "N06",
+   "target": "N07",
+   "tour": [
+    {
+     "tour": "qc-and-packaging",
+     "title": "QC and packaging",
+     "by": "oem-production-mgr",
+     "to": "oem-logistics-mgr",
+     "handoff": true,
+     "button": null,
+     "did": "Read the QC branding and packaging stage",
+     "result": "reached the QC branding and packaging stage for {order.id}",
+     "stateChange": null,
+     "nextStepAction": "Read the despatch chassis validation gate",
+     "gap": true
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D13",
+   "target": "D14",
+   "tour": [
+    {
+     "tour": "service-to-job-card",
+     "title": "Service request to job card",
+     "by": "dealer-service",
+     "to": "dealer-service",
+     "handoff": false,
+     "button": "open-followup",
+     "did": "Open the service follow-up for the customer",
+     "result": "opened the service follow-up",
+     "stateChange": null,
+     "nextStepAction": "Add a follow-up",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D14",
+   "target": "D26",
+   "tour": [
+    {
+     "tour": "service-to-job-card",
+     "title": "Service request to job card",
+     "by": "dealer-service",
+     "to": "dealer-service",
+     "handoff": false,
+     "button": "add-followup",
+     "did": "Add a follow-up",
+     "result": "added a follow-up",
+     "stateChange": {
+      "counts.followUps": 1
+     },
+     "nextStepAction": "Add the service to the price list",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D26",
+   "target": "D40",
+   "tour": [
+    {
+     "tour": "service-to-job-card",
+     "title": "Service request to job card",
+     "by": "dealer-service",
+     "to": "dealer-service",
+     "handoff": false,
+     "button": "save-price",
+     "did": "Add the service to the price list",
+     "result": "saved the service price",
+     "stateChange": {
+      "counts.prices": 1
+     },
+     "nextStepAction": "Click create to start the job card",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D40",
+   "target": "D41",
+   "tour": [
+    {
+     "tour": "service-to-job-card",
+     "title": "Service request to job card",
+     "by": "dealer-service",
+     "to": "dealer-service",
+     "handoff": false,
+     "button": "create-service",
+     "did": "Click create to start the job card",
+     "result": "clicked create",
+     "stateChange": null,
+     "nextStepAction": "Check the vehicle and customer requirement, then create the service",
+     "gap": false
+    }
+   ],
+   "mock": [
+    {
+     "button": "create",
+     "action": "create-service"
+    }
+   ],
+   "spec": [],
+   "kinds": [
+    "tour",
+    "mock"
+   ]
+  },
+  {
+   "source": "D41",
+   "target": "D42",
+   "tour": [
+    {
+     "tour": "service-to-job-card",
+     "title": "Service request to job card",
+     "by": "dealer-service",
+     "to": "dealer-service",
+     "handoff": false,
+     "button": "create-service",
+     "did": "Check the vehicle and customer requirement, then create the service",
+     "result": "created the service",
+     "stateChange": {
+      "counts.services": 1,
+      "service.status": {
+       "set": "Open"
+      }
+     },
+     "nextStepAction": "Check the job card",
+     "gap": false
+    },
+    {
+     "tour": "service-warranty-claim",
+     "title": "Service to warranty claim",
+     "by": "dealer-service",
+     "to": "dealer-service",
+     "handoff": false,
+     "button": "create-service",
+     "did": "Create the service job card",
+     "result": "created the service job card",
+     "stateChange": null,
+     "nextStepAction": "Complete the service",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D15",
+   "target": "D18",
+   "tour": [
+    {
+     "tour": "service-warranty-claim",
+     "title": "Service to warranty claim",
+     "by": "dealer-service",
+     "to": "dealer-service",
+     "handoff": false,
+     "button": "open-customer",
+     "did": "Open the customer from the customers list",
+     "result": "opened the customer from the customers list",
+     "stateChange": null,
+     "nextStepAction": "Open the vehicle tab to see the product",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D18",
+   "target": "D41",
+   "tour": [
+    {
+     "tour": "service-warranty-claim",
+     "title": "Service to warranty claim",
+     "by": "dealer-service",
+     "to": "dealer-service",
+     "handoff": false,
+     "button": "open-vehicle-tab",
+     "did": "Open the vehicle tab to see the product",
+     "result": "opened the vehicle tab",
+     "stateChange": null,
+     "nextStepAction": "Create the service job card",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D42",
+   "target": "D20",
+   "tour": [
+    {
+     "tour": "service-warranty-claim",
+     "title": "Service to warranty claim",
+     "by": "dealer-service",
+     "to": "dealer-service",
+     "handoff": false,
+     "button": "complete-service",
+     "did": "Complete the service",
+     "result": "completed the service",
+     "stateChange": null,
+     "nextStepAction": "Create the SERVICE invoice",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Buttons / Actions: complete service (→ D20 SERVICE invoice), download pdf, share, print",
+     "rel": "link"
+    },
+    {
+     "text": "On success it opens D20 with type=SERVICE, priced from D26.",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "tour",
+    "spec"
+   ]
+  },
+  {
+   "source": "D20",
+   "target": "D37",
+   "tour": [
+    {
+     "tour": "service-warranty-claim",
+     "title": "Service to warranty claim",
+     "by": "dealer-service",
+     "to": "dealer-service",
+     "handoff": false,
+     "button": "create-invoice",
+     "did": "Create the SERVICE invoice",
+     "result": "created the SERVICE invoice",
+     "stateChange": null,
+     "nextStepAction": "Click + to raise a warranty claim",
+     "gap": true
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D37",
+   "target": "D38",
+   "tour": [
+    {
+     "tour": "service-warranty-claim",
+     "title": "Service to warranty claim",
+     "by": "dealer-service",
+     "to": "dealer-service",
+     "handoff": false,
+     "button": null,
+     "did": "Click + to raise a warranty claim",
+     "result": "clicked + on the Warranty List",
+     "stateChange": null,
+     "nextStepAction": "Check the vehicle, spare and serial, then claim warranty",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D38",
+   "target": "D39",
+   "tour": [
+    {
+     "tour": "service-warranty-claim",
+     "title": "Service to warranty claim",
+     "by": "dealer-service",
+     "to": "dealer-service",
+     "handoff": false,
+     "button": "claim-warranty",
+     "did": "Check the vehicle, spare and serial, then claim warranty",
+     "result": "raised the warranty claim to OEM",
+     "stateChange": {
+      "claim.raised": {
+       "set": true
+      },
+      "claim.status": {
+       "set": "Raised to OEM"
+      }
+     },
+     "nextStepAction": "Mark the claim in transit",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "D39",
+   "target": "O43",
+   "tour": [
+    {
+     "tour": "service-warranty-claim",
+     "title": "Service to warranty claim",
+     "by": "dealer-service",
+     "to": "oem-super-admin",
+     "handoff": true,
+     "button": "mark-in-transit",
+     "did": "Mark the claim in transit",
+     "result": "marked the claim in transit",
+     "stateChange": {
+      "claim.status": {
+       "set": "inTransit"
+      }
+     },
+     "nextStepAction": "Open the claim from the Warranty (Received) queue",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O43",
+   "target": "O44",
+   "tour": [
+    {
+     "tour": "service-warranty-claim",
+     "title": "Service to warranty claim",
+     "by": "oem-super-admin",
+     "to": "oem-super-admin",
+     "handoff": false,
+     "button": "open-claim",
+     "did": "Open the claim from the Warranty (Received) queue",
+     "result": "opened the claim from the Warranty (Received) queue",
+     "stateChange": null,
+     "nextStepAction": "Verify the claim",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [],
+   "kinds": [
+    "tour"
+   ]
+  },
+  {
+   "source": "O44",
+   "target": "D39",
+   "tour": [
+    {
+     "tour": "service-warranty-claim",
+     "title": "Service to warranty claim",
+     "by": "oem-super-admin",
+     "to": "dealer-service",
+     "handoff": true,
+     "button": "request-cost",
+     "did": "Ask the dealer for the service charge",
+     "result": "asked the dealer for the service charge",
+     "stateChange": {
+      "claim.status": {
+       "set": "request service charge"
+      }
+     },
+     "nextStepAction": "Pay the service charge and enter the transaction details",
+     "gap": false
+    },
+    {
+     "tour": "service-warranty-claim",
+     "title": "Service to warranty claim",
+     "by": "oem-super-admin",
+     "to": "dealer-service",
+     "handoff": true,
+     "button": "return",
+     "did": "Enter the return details",
+     "result": "entered the return details",
+     "stateChange": {
+      "claim.status": {
+       "set": "return"
+      }
+     },
+     "nextStepAction": "Confirm receipt of the returned item",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D39",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: counterpart D39",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "tour",
+    "spec"
+   ]
+  },
+  {
+   "source": "D39",
+   "target": "O44",
+   "tour": [
+    {
+     "tour": "service-warranty-claim",
+     "title": "Service to warranty claim",
+     "by": "dealer-service",
+     "to": "oem-super-admin",
+     "handoff": true,
+     "button": "pay-service-charge",
+     "did": "Pay the service charge and enter the transaction details",
+     "result": "paid the service charge",
+     "stateChange": {
+      "claim.status": {
+       "set": "pay service charge"
+      }
+     },
+     "nextStepAction": "Verify the dealer's payment",
+     "gap": false
+    }
+   ],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O44",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R1, F8; counterpart O44",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "tour",
+    "spec"
+   ]
+  },
+  {
+   "source": "D00",
+   "target": "O00",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O00",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D01",
+   "target": "O01",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O01 (same /auth/login)",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D02",
+   "target": "O05",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: OEM resets via O05 / O53",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D02",
+   "target": "O53",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: OEM resets via O05 / O53",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D03",
+   "target": "O05",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O05 shop location",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D04",
+   "target": "O06",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O03 (all dealers), O06 header",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D04",
+   "target": "O03",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O03 (all dealers), O06 header",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D05",
+   "target": "O15",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O15",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R5; counterpart O15",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D06",
+   "target": "O16",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O16",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: counterpart O16",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D07",
+   "target": "O08",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O08 (mirror)",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R1; counterpart O08 (OEM mirror)",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D08",
+   "target": "D12",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "No vehicle-of-interest field. The model is captured only through a quotation (D12).",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D08",
+   "target": "O08",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O08 (read)",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D09",
+   "target": "O08",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O08",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D40",
+   "target": "O07",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O07 service (mirror)",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R1; counterpart O07 (mirror)",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D41",
+   "target": "O07",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O07",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D42",
+   "target": "D26",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "On success it opens D20 with type=SERVICE, priced from D26.",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D42",
+   "target": "O07",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O07 service/:id",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: counterpart O07 service/:id",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D15",
+   "target": "O07",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O07 (mirror)",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R1; counterpart O07 (mirror)",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D16",
+   "target": "O07",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O07 (read)",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D17",
+   "target": "O07",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O07 /customers/:id/customer-personal-details",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R1; counterpart O07",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D18",
+   "target": "O07",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O07 customer-vehicle-details",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R1; counterpart O07",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D19",
+   "target": "O07",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O07 customer-invoice",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R1; counterpart O07",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D20",
+   "target": "D42",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "¦ (hidden) ¦ invoiceType ¦ — ¦ ✔ ¦ VEHICLE / SERVICE / … ¦ SERVICE when opened from D42 with serviceId ¦",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D20",
+   "target": "D23",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "¦ Payment Records → + Add Payment ¦ payments[] ¦ picker ¦ — ¦ lists existing customer payments to link ¦ create payment first in D23 ¦",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D20",
+   "target": "O09",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O48 Vehicle Sold; O09; O29 \"sold to customers\"",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R1, F1; THIS IS WHERE CHASSIS BINDS TO CUSTOMER; counterpart O48/O09/O29",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D20",
+   "target": "O29",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O48 Vehicle Sold; O09; O29 \"sold to customers\"",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R1, F1; THIS IS WHERE CHASSIS BINDS TO CUSTOMER; counterpart O48/O09/O29",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D20",
+   "target": "O48",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O48 Vehicle Sold; O09; O29 \"sold to customers\"",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R1, F1; THIS IS WHERE CHASSIS BINDS TO CUSTOMER; counterpart O48/O09/O29",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D21",
+   "target": "O07",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O07 invoice-receipt",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: counterpart O07 invoice-receipt",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D22",
+   "target": "O07",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O07 customer-payment",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R1; counterpart O07",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D23",
+   "target": "O07",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O07 (read)",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D24",
+   "target": "O10",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O10 (+ manual add)",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R1; counterpart O10",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D25",
+   "target": "O10",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O10",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R1; counterpart O10",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D27",
+   "target": "O42",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O42",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R1; counterpart O42",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D28",
+   "target": "O17",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O17 / O12",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R1/R2; counterpart O17/O12",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D28",
+   "target": "O12",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O17 / O12",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R1/R2; counterpart O17/O12",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D29",
+   "target": "O30",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O20 order detail; O30 reserved stock; O18 / O19",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R4, F1, F7; counterpart O20/O30",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D29",
+   "target": "O20",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O20 order detail; O30 reserved stock; O18 / O19",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R4, F1, F7; counterpart O20/O30",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D29",
+   "target": "O19",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O20 order detail; O30 reserved stock; O18 / O19",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D29",
+   "target": "O18",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O20 order detail; O30 reserved stock; O18 / O19",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D30",
+   "target": "O20",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O20 (same tabs + OEM actions)",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R1/R2, F2, F8; counterpart O20 (same tabs + OEM actions)",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D32",
+   "target": "D30",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Path: (D30 dispatch tab) · Type: Dialog · Mode: Action + Create · Roles: D",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D32",
+   "target": "O42",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O22, O42",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: counterpart O22/O42",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D31",
+   "target": "D30",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Path: (in D30) · Type: Dialog · Mode: Create · Roles: D",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D31",
+   "target": "O45",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O45, O23",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: F4; counterpart O45/O23",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D33",
+   "target": "O47",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O46 / O47, O14",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R3; counterpart O46/O47/O14",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D33",
+   "target": "O14",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O46 / O47, O14",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R3; counterpart O46/O47/O14",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D33",
+   "target": "O46",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O46 / O47, O14",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R3; counterpart O46/O47/O14",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D34",
+   "target": "O47",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O47",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R3; counterpart O47",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D45",
+   "target": "O47",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O45, O47",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R1/R3; counterpart O45/O47",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D45",
+   "target": "O45",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O45, O47",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R1/R3; counterpart O45/O47",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D46",
+   "target": "D45",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Path: (D45) · Type: Dialog · Mode: Create · Roles: D",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D35",
+   "target": "O06",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O06 connections",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R2; counterpart O06",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D43",
+   "target": "O04",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O04 (owner)",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R2; counterpart O04 (owner)",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D44",
+   "target": "O17",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: same components as O17 / O20 / O22",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R2; reuses O17/O20/O22 patterns",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D44",
+   "target": "O20",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: same components as O17 / O20 / O22",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R2; reuses O17/O20/O22 patterns",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D44",
+   "target": "O22",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: same components as O17 / O20 / O22",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R2; reuses O17/O20/O22 patterns",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D37",
+   "target": "O43",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O43, O11",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R1; counterpart O43/O11",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D37",
+   "target": "O11",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O43, O11",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R1; counterpart O43/O11",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D38",
+   "target": "O44",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O44",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R1; counterpart O44",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D47",
+   "target": "O05",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O05 (owner)",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: F3; counterpart O05 (owner)",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D51",
+   "target": "O56",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O56 mock",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "D52",
+   "target": "O56",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: O56 mock",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O00",
+   "target": "D00",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D00",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O01",
+   "target": "D01",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D01",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O03",
+   "target": "D04",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D04",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O04",
+   "target": "D47",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D43 (seller view), D47",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O04",
+   "target": "D43",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D43 (seller view), D47",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O05",
+   "target": "O51",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "¦ Select Region ¦ regionId ¦ select ¦ ✔ ¦ regions (O51) ¦ — ¦",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O05",
+   "target": "D47",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D47 (read-only)",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O06",
+   "target": "D47",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D47, D35",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O06",
+   "target": "D35",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D47, D35",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O07",
+   "target": "D40",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D15–D23, D40–D42",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R10, F9 (PII unmasked — gap); mirrors D15-D23, D40-D42",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O07",
+   "target": "D15",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D15–D23, D40–D42",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R10, F9 (PII unmasked — gap); mirrors D15-D23, D40-D42",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O07",
+   "target": "D23",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D15–D23, D40–D42",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R10, F9 (PII unmasked — gap); mirrors D15-D23, D40-D42",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O07",
+   "target": "D42",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D15–D23, D40–D42",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R10, F9 (PII unmasked — gap); mirrors D15-D23, D40-D42",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O08",
+   "target": "D09",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D07–D09",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R10; mirrors D07-D09",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O08",
+   "target": "D07",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D07–D09",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R10; mirrors D07-D09",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O09",
+   "target": "D21",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D20 / D21",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R10; mirrors D20/D21",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O09",
+   "target": "D20",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D20 / D21",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R10; mirrors D20/D21",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O10",
+   "target": "D25",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D24 / D25",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R10; mirrors D24/D25",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O10",
+   "target": "D24",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D24 / D25",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R10; mirrors D24/D25",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O11",
+   "target": "D37",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D37",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R10; mirrors D37",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O12",
+   "target": "D28",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D28",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R6/R7; mirrors D28",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O13",
+   "target": "D30",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D30 \"pending to dispatch\"",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R6/R7; mirrors D30 'pending to dispatch'",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O14",
+   "target": "D33",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D33 / D45",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R6/R7; mirrors D33/D45",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O14",
+   "target": "D45",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D33 / D45",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R6/R7; mirrors D33/D45",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O16",
+   "target": "D06",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D06",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: mirrors D05/D06",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O16",
+   "target": "D05",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Dependency note: mirrors D05/D06",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O17",
+   "target": "D28",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D28",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R6/R7; mirrors D28",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O20",
+   "target": "D30",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D30",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R6/R7, F2; counterpart D30",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O21",
+   "target": "O20",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Path: (O20) · Type: Dialog · Mode: Action · Roles: ASSIGN roles",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O22",
+   "target": "O20",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Path: (O20) · Type: Dialog · Mode: Create · Roles: DISPATCH roles",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O18",
+   "target": "D30",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D30 banner only",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O23",
+   "target": "O20",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Path: (O20 Payment tab, O45) · Type: Action · Mode: Action · Roles: (ORDERS_PAYMENT_VERIFY)",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O23",
+   "target": "O45",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Path: (O20 Payment tab, O45) · Type: Action · Mode: Action · Roles: (ORDERS_PAYMENT_VERIFY)",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O23",
+   "target": "D31",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D31",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R6/R7; counterpart D31",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O25",
+   "target": "D29",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D29 catalogue",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O26",
+   "target": "D20",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D29, D20 picker",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O26",
+   "target": "D29",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D29, D20 picker",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O27",
+   "target": "O40",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "¦ Vendor / Supplier (spare) ¦ vendorId ¦ select ¦ — ¦ None / vendors ¦ links to O40 procurement ¦",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O27",
+   "target": "D20",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D29 (spares), D20",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O27",
+   "target": "D29",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D29 (spares), D20",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O28",
+   "target": "D29",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D29 (warranty products)",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O30",
+   "target": "D29",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D29 \"N in stock\"",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O33",
+   "target": "D30",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D30 quotation letterhead",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: counterpart D30 quotation letterhead",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O41",
+   "target": "O40",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Buttons / Actions: create (choose vendor → O40), filter, view",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O42",
+   "target": "D32",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D36, D32",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: F8; counterpart D36/D32",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O43",
+   "target": "D37",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D37",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O45",
+   "target": "D46",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D31, D46",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R6/R7; Role not keyed — confirm access; counterpart D31/D46",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O45",
+   "target": "D31",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D31, D46",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R6/R7; Role not keyed — confirm access; counterpart D31/D46",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O46",
+   "target": "D33",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D33 / D45 balance",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O46",
+   "target": "D45",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D33 / D45 balance",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O47",
+   "target": "D45",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D45 ledger history",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: F6; counterpart D45 ledger history",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O48",
+   "target": "D20",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D20",
+     "rel": "counterpart"
+    },
+    {
+     "text": "Dependency note: R6/R7; Role not keyed; mirrors D20",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O56",
+   "target": "D52",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D50–D52",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O56",
+   "target": "D50",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Counterpart: D50–D52",
+     "rel": "counterpart"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "O53",
+   "target": "O52",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Path: (O52) · Type: Form / Dialog · Mode: CRUD · Roles: ADM",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N01",
+   "target": "O05",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Extends O39/O40 (Vendor) and O05 (Dealer onboarding)",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N01",
+   "target": "O39",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Extends O39/O40 (Vendor) and O05 (Dealer onboarding)",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N01",
+   "target": "O40",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Extends O39/O40 (Vendor) and O05 (Dealer onboarding)",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N23",
+   "target": "O39",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Extends O39",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N02",
+   "target": "O35",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Extends O35 MU Stock receiving; Material Inward entity is new",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N03",
+   "target": "N08",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Depends on BOM (N08) to know required parts per model",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N04",
+   "target": "O30",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Feeds Inventory (O30/O31) and QC (N05)",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N04",
+   "target": "O31",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Feeds Inventory (O30/O31) and QC (N05)",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N05",
+   "target": "N04",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Gated after Production Completion (N04)",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N06",
+   "target": "N08",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Depends on BOM (N08) for branding/packaging line items",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N07",
+   "target": "O21",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Extends O20/O21/O22; ties to the item-identifier gap",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N07",
+   "target": "O20",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Extends O20/O21/O22; ties to the item-identifier gap",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N07",
+   "target": "O22",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Extends O20/O21/O22; ties to the item-identifier gap",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N10",
+   "target": "O56",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Buttons / Actions: *Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Full GST-compliant e-way bill generation, replacing the reference app's non-functional mock (D51/O56).",
+     "rel": "link"
+    },
+    {
+     "text": "Fields: *Not yet speced — proposed scope only:* Full GST-compliant e-way bill generation, replacing the reference app's non-functional mock (D51/O56).",
+     "rel": "link"
+    },
+    {
+     "text": "Depends on / extends: Supersedes D51/O56",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N10",
+   "target": "D51",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Buttons / Actions: *Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Full GST-compliant e-way bill generation, replacing the reference app's non-functional mock (D51/O56).",
+     "rel": "link"
+    },
+    {
+     "text": "Fields: *Not yet speced — proposed scope only:* Full GST-compliant e-way bill generation, replacing the reference app's non-functional mock (D51/O56).",
+     "rel": "link"
+    },
+    {
+     "text": "Depends on / extends: Supersedes D51/O56",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N26",
+   "target": "O23",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Buttons / Actions: *Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Explicit two-step gate: Accounts must confirm billing before Dispatch can release a unit, instead of dispatch proceeding right after payment ve…",
+     "rel": "link"
+    },
+    {
+     "text": "Fields: *Not yet speced — proposed scope only:* Explicit two-step gate: Accounts must confirm billing before Dispatch can release a unit, instead of dispatch proceeding right after payment verification (O23).",
+     "rel": "link"
+    },
+    {
+     "text": "Depends on / extends: Extends O20/O23",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N26",
+   "target": "O20",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Extends O20/O23",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N27",
+   "target": "N05",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Buttons / Actions: *Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Structured pre-delivery inspection checklist at dispatch — verifies PDI parts/packing before a unit ships. Distinct from the QC Inspection Chec…",
+     "rel": "link"
+    },
+    {
+     "text": "Fields: *Not yet speced — proposed scope only:* Structured pre-delivery inspection checklist at dispatch — verifies PDI parts/packing before a unit ships. Distinct from the QC Inspection Checklist (N05), which gates production completion, not dispatch.",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N27",
+   "target": "N07",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Extends N07 Despatch Chassis Validation Gate",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N08",
+   "target": "N09",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Prerequisite for N03, N06, N09",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N08",
+   "target": "N06",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Prerequisite for N03, N06, N09",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N08",
+   "target": "N03",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Prerequisite for N03, N06, N09",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N09",
+   "target": "N08",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Depends on N08",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N11",
+   "target": "O05",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Extends O05 (Add/Edit Dealer) and O53 (user roles); builds on R2/R7",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N11",
+   "target": "O53",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Extends O05 (Add/Edit Dealer) and O53 (user roles); builds on R2/R7",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N12",
+   "target": "N13",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Prerequisite for N13",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N13",
+   "target": "O30",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Buttons / Actions: *Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Stock issued from the correct (oldest-first) location; current stock-by-location report. Touches core inventory issuance logic across O30/O31/O35.",
+     "rel": "link"
+    },
+    {
+     "text": "Fields: *Not yet speced — proposed scope only:* Stock issued from the correct (oldest-first) location; current stock-by-location report. Touches core inventory issuance logic across O30/O31/O35.",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N13",
+   "target": "O31",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Buttons / Actions: *Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Stock issued from the correct (oldest-first) location; current stock-by-location report. Touches core inventory issuance logic across O30/O31/O35.",
+     "rel": "link"
+    },
+    {
+     "text": "Fields: *Not yet speced — proposed scope only:* Stock issued from the correct (oldest-first) location; current stock-by-location report. Touches core inventory issuance logic across O30/O31/O35.",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N13",
+   "target": "O35",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Buttons / Actions: *Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Stock issued from the correct (oldest-first) location; current stock-by-location report. Touches core inventory issuance logic across O30/O31/O35.",
+     "rel": "link"
+    },
+    {
+     "text": "Fields: *Not yet speced — proposed scope only:* Stock issued from the correct (oldest-first) location; current stock-by-location report. Touches core inventory issuance logic across O30/O31/O35.",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N13",
+   "target": "N12",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Depends on N12; significant change to existing Inventory issuance",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N14",
+   "target": "O30",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Extends O25-O28 (Products) and O30/O31 (Inventory)",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N14",
+   "target": "O25",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Extends O25-O28 (Products) and O30/O31 (Inventory)",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N14",
+   "target": "O31",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Extends O25-O28 (Products) and O30/O31 (Inventory)",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N14",
+   "target": "O28",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Extends O25-O28 (Products) and O30/O31 (Inventory)",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N24",
+   "target": "O27",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Buttons / Actions: *Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Supplier Part Number, UoM, Product Weight, Product Type/Material (Metal/Mixed Metal/Plastic/ABS), multi-vehicle-model applicability (O27 curren…",
+     "rel": "link"
+    },
+    {
+     "text": "Fields: *Not yet speced — proposed scope only:* Supplier Part Number, UoM, Product Weight, Product Type/Material (Metal/Mixed Metal/Plastic/ABS), multi-vehicle-model applicability (O27 currently ties a spare to one vehicle only), Purchase Cost excl. GST kep…",
+     "rel": "link"
+    },
+    {
+     "text": "Depends on / extends: Extends O27",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N15",
+   "target": "O54",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Extends O54",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N16",
+   "target": "O54",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Extends O54",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N22",
+   "target": "O49",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Buttons / Actions: *Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Add CIN, TAN, PAN, MSME, IEC, Directors Details; make the profile genuinely editable beyond the approval-email field (O49 is currently mostly r…",
+     "rel": "link"
+    },
+    {
+     "text": "Fields: *Not yet speced — proposed scope only:* Add CIN, TAN, PAN, MSME, IEC, Directors Details; make the profile genuinely editable beyond the approval-email field (O49 is currently mostly read-only, 'contact DMS Admin').",
+     "rel": "link"
+    },
+    {
+     "text": "Depends on / extends: Extends O49",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N28",
+   "target": "O53",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Extends O53 role list",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N17",
+   "target": "O41",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Extends O41; distinct from the existing internal approval-admin email",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N25",
+   "target": "O40",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Buttons / Actions: *Not yet speced in the reference app — proposed, pending UI design.* Based on the requirement: Flags reorder need against a configurable minimum stock level or a sales forecast, feeding into Vendor Procurement (O40) instead of relying pur…",
+     "rel": "link"
+    },
+    {
+     "text": "Fields: *Not yet speced — proposed scope only:* Flags reorder need against a configurable minimum stock level or a sales forecast, feeding into Vendor Procurement (O40) instead of relying purely on manual review.",
+     "rel": "link"
+    },
+    {
+     "text": "Depends on / extends: Extends O40; the min-stock trigger is independent of AI demand forecasting (deferred)",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N18",
+   "target": "O17",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Extends O20/O17 and N02",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N18",
+   "target": "N02",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Extends O20/O17 and N02",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N18",
+   "target": "O20",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Extends O20/O17 and N02",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N20",
+   "target": "N19",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Same WhatsApp integration as N19",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N21",
+   "target": "O32",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Extends O32-O34",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  },
+  {
+   "source": "N21",
+   "target": "O34",
+   "tour": [],
+   "mock": [],
+   "spec": [
+    {
+     "text": "Depends on / extends: Extends O32-O34",
+     "rel": "link"
+    }
+   ],
+   "kinds": [
+    "spec"
+   ]
+  }
+ ],
+ "tours": [
+  {
+   "id": "announcements",
+   "title": "Announcements",
+   "steps": [
+    {
+     "step": "oem-announcements-list",
+     "screen": "O15",
+     "user": "oem-super-admin",
+     "action": "Click new to create an announcement",
+     "notDefined": false
+    },
+    {
+     "step": "oem-create-announcement",
+     "screen": "O16",
+     "user": "oem-super-admin",
+     "action": "Click create",
+     "notDefined": false
+    },
+    {
+     "step": "oem-list-after-create",
+     "screen": "O15",
+     "user": "oem-super-admin",
+     "action": "See the new announcement on the list",
+     "notDefined": true
+    },
+    {
+     "step": "dealer-announcements-list",
+     "screen": "D05",
+     "user": "dealer-owner",
+     "action": "Click view on the announcement",
+     "notDefined": false
+    },
+    {
+     "step": "dealer-announcement-view",
+     "screen": "D06",
+     "user": "dealer-owner",
+     "action": "Read the announcement",
+     "notDefined": false
+    }
+   ],
+   "completion": "{announcement.title} is visible to {users.dealer-owner.name} on the Announcements List, and the dealer opened it."
+  },
+  {
+   "id": "dealer-payments-ledger",
+   "title": "Dealer payments and ledger",
+   "steps": [
+    {
+     "step": "payments",
+     "screen": "D45",
+     "user": "dealer-owner",
+     "action": "Click add payment",
+     "notDefined": false
+    },
+    {
+     "step": "topup",
+     "screen": "D46",
+     "user": "dealer-owner",
+     "action": "Check the top-up details and submit for verification",
+     "notDefined": false
+    },
+    {
+     "step": "verify",
+     "screen": "O45",
+     "user": "oem-accounts",
+     "action": "Verify the ledger top-up",
+     "notDefined": false
+    },
+    {
+     "step": "ledger",
+     "screen": "D33",
+     "user": "dealer-owner",
+     "action": "Check the ledger balance",
+     "notDefined": false
+    },
+    {
+     "step": "advance",
+     "screen": "D34",
+     "user": "dealer-owner",
+     "action": "Pay the order advance from the ledger",
+     "notDefined": false
+    },
+    {
+     "step": "history",
+     "screen": "O14",
+     "user": "oem-accounts",
+     "action": "Check the dealer's payment history",
+     "notDefined": false
+    }
+   ],
+   "completion": "The dealer topped up the ledger, accounts verified it, and the dealer paid the order advance from the ledger. The OEM sees both movements in the dealer's payment history. Next in the real flow: the OEM raises production for the paid order (see Dealer order to dealer delivery)."
+  },
+  {
+   "id": "dealer-settings-users",
+   "title": "Dealer settings and users",
+   "steps": [
+    {
+     "step": "dealer-profile",
+     "screen": "D47",
+     "user": "dealer-owner",
+     "action": "Read the dealer profile and the settings",
+     "notDefined": true
+    },
+    {
+     "step": "dealer-users-list",
+     "screen": "D48",
+     "user": "dealer-owner",
+     "action": "Read the staff user list",
+     "notDefined": true
+    },
+    {
+     "step": "dealer-click-create",
+     "screen": "D48",
+     "user": "dealer-owner",
+     "action": "Click create",
+     "notDefined": false
+    },
+    {
+     "step": "dealer-add-user",
+     "screen": "D49",
+     "user": "dealer-owner",
+     "action": "Add {staff.newUser.firstName} as a {staff.newUser.role} and submit",
+     "notDefined": false
+    },
+    {
+     "step": "dealer-users-after",
+     "screen": "D48",
+     "user": "dealer-owner",
+     "action": "Read the staff user list after the submit",
+     "notDefined": true
+    }
+   ],
+   "completion": "{dealer.firm} profile is shown. The staff user list now shows {staff.count} staff users, including {staff.newUser.firstName} as {staff.newUser.role}. The N11 role assignment for a dealer and its sub-dealers is not defined yet."
+  },
+  {
+   "id": "dealer-setup",
+   "title": "Setting up dealer",
+   "steps": [
+    {
+     "step": "dealer-overview",
+     "screen": "O03",
+     "user": "oem-super-admin",
+     "action": "Open Dealers from the menu",
+     "notDefined": false
+    },
+    {
+     "step": "dealers-list",
+     "screen": "O04",
+     "user": "oem-super-admin",
+     "action": "Click add",
+     "notDefined": false
+    },
+    {
+     "step": "dealer-create",
+     "screen": "O05",
+     "user": "oem-super-admin",
+     "action": "Check the dealer details and click save",
+     "notDefined": false
+    },
+    {
+     "step": "dealers-list-after",
+     "screen": "O04",
+     "user": "oem-super-admin",
+     "action": "Open the new dealer",
+     "notDefined": false
+    },
+    {
+     "step": "dealer-detail",
+     "screen": "O06",
+     "user": "oem-super-admin",
+     "action": "Check the dealer profile, then hand over the login details",
+     "notDefined": true
+    },
+    {
+     "step": "dealer-login",
+     "screen": "D01",
+     "user": "dealer-owner",
+     "action": "Sign in with the user ID and password",
+     "notDefined": false
+    },
+    {
+     "step": "shop-location",
+     "screen": "D03",
+     "user": "dealer-owner",
+     "action": "Save the shop location or choose not now",
+     "notDefined": false
+    },
+    {
+     "step": "dealer-dashboard",
+     "screen": "D04",
+     "user": "dealer-owner",
+     "action": "Check the dealer dashboard",
+     "notDefined": false
+    }
+   ],
+   "completion": "The new dealer is set up and its owner has signed in for the first time. Next in the real flow: the dealer places its first purchase order."
+  },
+  {
+   "id": "dealer-stock-and-issues",
+   "title": "Dealer stock and issues",
+   "steps": [
+    {
+     "step": "dealer-new-issue",
+     "screen": "D27",
+     "user": "dealer-owner",
+     "action": "Click new issue",
+     "notDefined": true
+    },
+    {
+     "step": "dealer-delivered-po",
+     "screen": "D30",
+     "user": "dealer-owner",
+     "action": "Open the delivered PO and click report issue",
+     "notDefined": false
+    },
+    {
+     "step": "dealer-report-issue",
+     "screen": "D32",
+     "user": "dealer-owner",
+     "action": "Pick the line, describe the issue and click Submit & confirm",
+     "notDefined": false
+    },
+    {
+     "step": "dealer-sees-stage",
+     "screen": "D36",
+     "user": "dealer-owner",
+     "action": "See the issue at stage Manager review",
+     "notDefined": false
+    },
+    {
+     "step": "manager-review",
+     "screen": "O42",
+     "user": "oem-inventory-mgr",
+     "action": "Approve the issue at manager review",
+     "notDefined": false
+    },
+    {
+     "step": "oem-review",
+     "screen": "O42",
+     "user": "oem-super-admin",
+     "action": "Approve the issue at OEM review",
+     "notDefined": false
+    },
+    {
+     "step": "settlement",
+     "screen": "O42",
+     "user": "oem-super-admin",
+     "action": "Settle with money: enter the compensation amount and transaction ID",
+     "notDefined": false
+    },
+    {
+     "step": "dealer-sees-outcome",
+     "screen": "D36",
+     "user": "dealer-owner",
+     "action": "See the stage and outcome on the Issues List",
+     "notDefined": false
+    }
+   ],
+   "completion": "The issue on {order.id} is resolved: {issue.outcome}, {issue.compensation|inr}. {users.dealer-owner.name} sees the stage and outcome on the Issues List."
+  },
+  {
+   "id": "enquiry-to-invoice",
+   "title": "Enquiry to invoice",
+   "steps": [
+    {
+     "step": "enquiry-list",
+     "screen": "D07",
+     "user": "dealer-sales",
+     "action": "Click new",
+     "notDefined": false
+    },
+    {
+     "step": "enquiry-create",
+     "screen": "D08",
+     "user": "dealer-sales",
+     "action": "Check the enquiry details and click create",
+     "notDefined": false
+    },
+    {
+     "step": "enquiry-detail",
+     "screen": "D09",
+     "user": "dealer-sales",
+     "action": "Open the follow-up log",
+     "notDefined": false
+    },
+    {
+     "step": "followup",
+     "screen": "D10",
+     "user": "dealer-sales",
+     "action": "Add a follow-up",
+     "notDefined": false
+    },
+    {
+     "step": "quotations",
+     "screen": "D11",
+     "user": "dealer-sales",
+     "action": "The customer wants a quote: click create",
+     "notDefined": false
+    },
+    {
+     "step": "quotation-create",
+     "screen": "D12",
+     "user": "dealer-sales",
+     "action": "Check the vehicle, variant and colour, then click create",
+     "notDefined": false
+    },
+    {
+     "step": "enquiry-convert",
+     "screen": "D09",
+     "user": "dealer-sales",
+     "action": "The customer agrees: convert the enquiry to a customer",
+     "notDefined": false
+    },
+    {
+     "step": "customer-create",
+     "screen": "D16",
+     "user": "dealer-sales",
+     "action": "Check the customer details and click create",
+     "notDefined": false
+    },
+    {
+     "step": "customer-hub",
+     "screen": "D17",
+     "user": "dealer-sales",
+     "action": "Open the payment tab to record the booking advance",
+     "notDefined": false
+    },
+    {
+     "step": "payments-list",
+     "screen": "D22",
+     "user": "dealer-sales",
+     "action": "Click + new",
+     "notDefined": false
+    },
+    {
+     "step": "payment-create",
+     "screen": "D23",
+     "user": "dealer-sales",
+     "action": "Check the advance payment and click create",
+     "notDefined": false
+    },
+    {
+     "step": "stock-vehicles",
+     "screen": "D24",
+     "user": "dealer-sales",
+     "action": "Check that the vehicle is in stock",
+     "notDefined": false
+    },
+    {
+     "step": "stock-parts",
+     "screen": "D25",
+     "user": "dealer-sales",
+     "action": "Check the spares in stock",
+     "notDefined": false
+    },
+    {
+     "step": "invoices-list",
+     "screen": "D19",
+     "user": "dealer-sales",
+     "action": "Click + new",
+     "notDefined": false
+    },
+    {
+     "step": "invoice-create",
+     "screen": "D20",
+     "user": "dealer-sales",
+     "action": "Check the vehicle and serials, then click create",
+     "notDefined": false
+    },
+    {
+     "step": "invoice-view",
+     "screen": "D21",
+     "user": "dealer-sales",
+     "action": "Print the invoice",
+     "notDefined": false
+    }
+   ],
+   "completion": "The enquiry became a customer, the customer paid a booking advance, and the vehicle was invoiced from dealer stock with the chassis bound to the customer. The invoice is Pending because only the advance is paid. Next in the real flow: the customer pays the balance (D23, linked to the invoice) and the OEM sees it read only (O07, O08, O09)."
+  },
+  {
+   "id": "manufacturing-unit-operations",
+   "title": "Manufacturing unit operations",
+   "steps": [
+    {
+     "step": "oem-mu-view",
+     "screen": "O34",
+     "user": "oem-super-admin",
+     "action": "Open the MU View and read the unit details",
+     "notDefined": true
+    },
+    {
+     "step": "oem-click-mu-stock",
+     "screen": "O34",
+     "user": "oem-super-admin",
+     "action": "Click MU stock",
+     "notDefined": false
+    },
+    {
+     "step": "oem-mu-stock",
+     "screen": "O35",
+     "user": "oem-inventory-mgr",
+     "action": "Read the MU stock and the in-transit material",
+     "notDefined": true
+    },
+    {
+     "step": "oem-click-dispatch-plan",
+     "screen": "O34",
+     "user": "oem-super-admin",
+     "action": "Click dispatch plan",
+     "notDefined": false
+    },
+    {
+     "step": "oem-dispatch-plan",
+     "screen": "O36",
+     "user": "oem-logistics-mgr",
+     "action": "Read the dispatch plan calendar for {dispatchPlan.month}",
+     "notDefined": true
+    },
+    {
+     "step": "oem-click-connect-dealer",
+     "screen": "O34",
+     "user": "oem-super-admin",
+     "action": "Check the connect a dealer search",
+     "notDefined": false
+    },
+    {
+     "step": "oem-n21",
+     "screen": "O34",
+     "user": "oem-super-admin",
+     "action": "Read the unit asset register requirement",
+     "notDefined": true
+    }
+   ],
+   "completion": "{mu.name} stock, its dispatch plan and the connected dealer {dealerConnect.dealer.name} are shown. The unit asset register (N21) is not defined yet."
+  },
+  {
+   "id": "oem-monitor-dealer",
+   "title": "OEM monitors a dealer (mirror views)",
+   "steps": [
+    {
+     "step": "oem-open-dealer",
+     "screen": "O04",
+     "user": "oem-super-admin",
+     "action": "Open the dealer from the dealers list",
+     "notDefined": false
+    },
+    {
+     "step": "oem-dealer-detail",
+     "screen": "O06",
+     "user": "oem-super-admin",
+     "action": "Look at the dealer detail",
+     "notDefined": true
+    },
+    {
+     "step": "oem-customers",
+     "screen": "O07",
+     "user": "oem-super-admin",
+     "action": "Open one customer to see the customer mirror",
+     "notDefined": false
+    },
+    {
+     "step": "oem-customer-mirror",
+     "screen": "O07",
+     "user": "oem-super-admin",
+     "action": "Read the customer mirror (read only)",
+     "notDefined": false
+    },
+    {
+     "step": "oem-enquiries",
+     "screen": "O08",
+     "user": "oem-super-admin",
+     "action": "Read the dealer's enquiries (read only)",
+     "notDefined": false
+    },
+    {
+     "step": "oem-vehicle-sold",
+     "screen": "O09",
+     "user": "oem-super-admin",
+     "action": "Read the vehicles sold (read only)",
+     "notDefined": false
+    },
+    {
+     "step": "oem-vehicle-stock",
+     "screen": "O10",
+     "user": "oem-super-admin",
+     "action": "Click add stock to dealer",
+     "notDefined": true
+    },
+    {
+     "step": "oem-warranty-claims",
+     "screen": "O11",
+     "user": "oem-super-admin",
+     "action": "Read the warranty claims (read only)",
+     "notDefined": false
+    },
+    {
+     "step": "oem-purchase-orders",
+     "screen": "O12",
+     "user": "oem-super-admin",
+     "action": "Read the purchase orders (read only)",
+     "notDefined": false
+    },
+    {
+     "step": "oem-pending-stock",
+     "screen": "O13",
+     "user": "oem-super-admin",
+     "action": "Read the pending stock (read only)",
+     "notDefined": false
+    },
+    {
+     "step": "oem-vehicle-sold-report",
+     "screen": "O48",
+     "user": "oem-super-admin",
+     "action": "Read the vehicle sold report (read only)",
+     "notDefined": false
+    }
+   ],
+   "completion": "{dealer.name} is viewed read-only through its mirror screens. Its customer {customer.name} ({customer.id}), invoice {invoice.id} and chassis {vehiclesSold.0.chassis} appear on each screen."
+  },
+  {
+   "id": "oem-security-audit",
+   "title": "OEM security and audit",
+   "steps": [
+    {
+     "step": "oem-audit-expand",
+     "screen": "O54",
+     "user": "oem-super-admin",
+     "action": "Click expand diff",
+     "notDefined": false
+    },
+    {
+     "step": "oem-audit-card",
+     "screen": "O54",
+     "user": "oem-super-admin",
+     "action": "Read the audit purge and export requirements",
+     "notDefined": true
+    },
+    {
+     "step": "oem-security",
+     "screen": "O55",
+     "user": "oem-super-admin",
+     "action": "Read the security settings",
+     "notDefined": true
+    },
+    {
+     "step": "oem-profile",
+     "screen": "O49",
+     "user": "oem-super-admin",
+     "action": "Read the OEM profile",
+     "notDefined": true
+    },
+    {
+     "step": "oem-users-roles",
+     "screen": "O53",
+     "user": "oem-super-admin",
+     "action": "Read the OEM user roles",
+     "notDefined": true
+    }
+   ],
+   "completion": "The audit log, the security settings and the OEM profile of {company.readOnly.org} are shown, with the OEM user roles. Audit purge (N15), audit export (N16), OEM compliance fields (N22) and the expanded role list (N28) are not defined yet."
+  },
+  {
+   "id": "oem-setup",
+   "title": "OEM setup",
+   "steps": [
+    {
+     "step": "oem-login",
+     "screen": "O01",
+     "user": "oem-super-admin",
+     "action": "Sign in with the user ID and password",
+     "notDefined": false
+    },
+    {
+     "step": "oem-dashboard",
+     "screen": "O03",
+     "user": "oem-super-admin",
+     "action": "Open Settings from the sidebar",
+     "notDefined": false
+    },
+    {
+     "step": "settings-profile",
+     "screen": "O49",
+     "user": "oem-super-admin",
+     "action": "Enter the approval admin email, then click save approval email",
+     "notDefined": false
+    },
+    {
+     "step": "operating-states",
+     "screen": "O50",
+     "user": "oem-super-admin",
+     "action": "Check the operating states, then click update states",
+     "notDefined": false
+    },
+    {
+     "step": "mu-list",
+     "screen": "O32",
+     "user": "oem-super-admin",
+     "action": "Click new",
+     "notDefined": false
+    },
+    {
+     "step": "mu-create",
+     "screen": "O33",
+     "user": "oem-super-admin",
+     "action": "Check the unit details and click save",
+     "notDefined": false
+    },
+    {
+     "step": "users-list",
+     "screen": "O52",
+     "user": "oem-super-admin",
+     "action": "Click create",
+     "notDefined": false
+    },
+    {
+     "step": "user-create",
+     "screen": "O53",
+     "user": "oem-super-admin",
+     "action": "Check the user details and click submit",
+     "notDefined": false
+    },
+    {
+     "step": "regions",
+     "screen": "O51",
+     "user": "oem-super-admin",
+     "action": "Enter the region and zone, then click create region & zone",
+     "notDefined": false
+    },
+    {
+     "step": "vendor-create",
+     "screen": "O39",
+     "user": "oem-super-admin",
+     "action": "Enter the vendor details and click add",
+     "notDefined": false
+    },
+    {
+     "step": "components-create",
+     "screen": "O28",
+     "user": "oem-super-admin",
+     "action": "Check the motor details and click create",
+     "notDefined": false
+    },
+    {
+     "step": "vehicle-create",
+     "screen": "O26",
+     "user": "oem-super-admin",
+     "action": "Check the vehicle details and click create",
+     "notDefined": false
+    },
+    {
+     "step": "spare-create",
+     "screen": "O27",
+     "user": "oem-super-admin",
+     "action": "Check the spare details and click create",
+     "notDefined": false
+    },
+    {
+     "step": "ledger-list",
+     "screen": "O46",
+     "user": "oem-super-admin",
+     "action": "Check the ledger name, then click new ledger",
+     "notDefined": false
+    },
+    {
+     "step": "ledger-detail",
+     "screen": "O47",
+     "user": "oem-super-admin",
+     "action": "Enter the amount, then click add credit",
+     "notDefined": false
+    }
+   ],
+   "completion": "The OEM is set up: company profile, operating states, regions and zones, a manufacturing unit, a vendor, OEM users, products and a ledger. Next in the flow: setting up a dealer."
+  },
+  {
+   "id": "oem-warehouse-products",
+   "title": "OEM warehouse and products",
+   "steps": [
+    {
+     "step": "oem-products-list",
+     "screen": "O25",
+     "user": "oem-super-admin",
+     "action": "Look at the products list",
+     "notDefined": true
+    },
+    {
+     "step": "oem-product-detail",
+     "screen": "O29",
+     "user": "oem-super-admin",
+     "action": "Look at the product detail and the dashboard",
+     "notDefined": true
+    },
+    {
+     "step": "oem-stock-tabs",
+     "screen": "O30",
+     "user": "oem-inventory-mgr",
+     "action": "Look at the OEM stock tabs",
+     "notDefined": true
+    },
+    {
+     "step": "oem-stock-one-product",
+     "screen": "O31",
+     "user": "oem-inventory-mgr",
+     "action": "Click add stock to go to the MU stock",
+     "notDefined": false
+    },
+    {
+     "step": "oem-mu-stock",
+     "screen": "O35",
+     "user": "oem-inventory-mgr",
+     "action": "Read the MU stock",
+     "notDefined": true
+    },
+    {
+     "step": "fifo-issuance",
+     "screen": "N13",
+     "user": "oem-inventory-mgr",
+     "action": "Read the FIFO stock issue requirement",
+     "notDefined": true
+    },
+    {
+     "step": "spare-form",
+     "screen": "O27",
+     "user": "oem-super-admin",
+     "action": "Look at the spare product form",
+     "notDefined": true
+    }
+   ],
+   "completion": "The products, the stock of {products.vehicle.productName} at {mu.name} and the new warehouse, FIFO and product-flag requirements are shown. The spec does not define them yet."
+  },
+  {
+   "id": "order-to-production",
+   "title": "order-to-production",
+   "steps": [
+    {
+     "step": "dealer-new-purchase",
+     "screen": "D28",
+     "user": "dealer-owner",
+     "action": "Start a new purchase order",
+     "notDefined": false
+    },
+    {
+     "step": "dealer-choose-mu",
+     "screen": "D29",
+     "user": "dealer-owner",
+     "action": "Choose the manufacturing unit as the seller",
+     "notDefined": false
+    },
+    {
+     "step": "dealer-cart",
+     "screen": "D29",
+     "user": "dealer-owner",
+     "action": "Pick the variant and colour, then add to cart",
+     "notDefined": false
+    },
+    {
+     "step": "dealer-place-order",
+     "screen": "D29",
+     "user": "dealer-owner",
+     "action": "Review and place the order",
+     "notDefined": false
+    },
+    {
+     "step": "dealer-po-detail",
+     "screen": "D30",
+     "user": "dealer-owner",
+     "action": "View the new purchase order",
+     "notDefined": false
+    },
+    {
+     "step": "oem-open-order",
+     "screen": "O17",
+     "user": "oem-sales-head",
+     "action": "Open the purchase order from the list",
+     "notDefined": false
+    },
+    {
+     "step": "oem-approve",
+     "screen": "O20",
+     "user": "oem-sales-head",
+     "action": "Review the order and approve it",
+     "notDefined": false
+    },
+    {
+     "step": "oem-assign",
+     "screen": "O21",
+     "user": "oem-sales-head",
+     "action": "Choose the manufacturing unit and assign the order",
+     "notDefined": false
+    },
+    {
+     "step": "dealer-pay",
+     "screen": "D31",
+     "user": "dealer-owner",
+     "action": "Pay the {order.advancePercent}% advance and submit the payment",
+     "notDefined": false
+    },
+    {
+     "step": "oem-verify",
+     "screen": "O23",
+     "user": "oem-accounts",
+     "action": "Check the receipt and verify the advance payment",
+     "notDefined": false
+    },
+    {
+     "step": "prod-requisition",
+     "screen": "N03",
+     "user": "oem-production-mgr",
+     "action": "Raise the material requisition for this order",
+     "notDefined": true
+    },
+    {
+     "step": "prod-start",
+     "screen": "O18",
+     "user": "oem-production-mgr",
+     "action": "Build the vehicles and update the produced count",
+     "notDefined": false
+    },
+    {
+     "step": "prod-complete",
+     "screen": "N04",
+     "user": "oem-production-mgr",
+     "action": "Complete production and hand over the finished units",
+     "notDefined": true
+    },
+    {
+     "step": "dispatch-check",
+     "screen": "N07",
+     "user": "oem-logistics-mgr",
+     "action": "Validate the chassis, invoice and manufacturing unit before dispatch",
+     "notDefined": true
+    },
+    {
+     "step": "dispatch-plan",
+     "screen": "O19",
+     "user": "oem-logistics-mgr",
+     "action": "Combine the paid orders into a dispatch batch",
+     "notDefined": false
+    },
+    {
+     "step": "dispatch-shipment",
+     "screen": "O22",
+     "user": "oem-logistics-mgr",
+     "action": "Fill in the transport details and dispatch the shipment",
+     "notDefined": false
+    },
+    {
+     "step": "dealer-shipment",
+     "screen": "D30",
+     "user": "dealer-owner",
+     "action": "See the shipment details on the Dispatch tab",
+     "notDefined": false
+    },
+    {
+     "step": "dealer-confirm",
+     "screen": "D32",
+     "user": "dealer-owner",
+     "action": "Confirm delivery of the shipment",
+     "notDefined": false
+    }
+   ],
+   "completion": "{order.id} is delivered and confirmed by {users.dealer-owner.name}."
+  },
+  {
+   "id": "po-exceptions",
+   "title": "PO exceptions and dispatch documents",
+   "steps": [
+    {
+     "step": "oem-note",
+     "screen": "O24",
+     "user": "oem-super-admin",
+     "action": "Save the PO info note",
+     "notDefined": false
+    },
+    {
+     "step": "oem-date",
+     "screen": "O24",
+     "user": "oem-super-admin",
+     "action": "Save the expected dispatch date",
+     "notDefined": false
+    },
+    {
+     "step": "oem-reject",
+     "screen": "O24",
+     "user": "oem-super-admin",
+     "action": "Reject the PO with remarks",
+     "notDefined": false
+    },
+    {
+     "step": "dealer-sees-rejection",
+     "screen": "D30",
+     "user": "dealer-owner",
+     "action": "Check what the dealer sees on the rejected PO",
+     "notDefined": true
+    },
+    {
+     "step": "oem-revert",
+     "screen": "O24",
+     "user": "oem-super-admin",
+     "action": "Revert the cancelled PO",
+     "notDefined": false
+    },
+    {
+     "step": "oem-approve",
+     "screen": "O20",
+     "user": "oem-super-admin",
+     "action": "Approve the PO",
+     "notDefined": false
+    },
+    {
+     "step": "accounts-verify",
+     "screen": "O23",
+     "user": "oem-accounts",
+     "action": "Verify the payment on {order.id}",
+     "notDefined": false
+    },
+    {
+     "step": "accounts-gate",
+     "screen": "O23",
+     "user": "oem-accounts",
+     "action": "Read the OK to Bill gate requirement",
+     "notDefined": true
+    },
+    {
+     "step": "eway-bill",
+     "screen": "O22",
+     "user": "oem-logistics-mgr",
+     "action": "Read the e-way bill requirement",
+     "notDefined": true
+    },
+    {
+     "step": "dispatch-first",
+     "screen": "O22",
+     "user": "oem-logistics-mgr",
+     "action": "Dispatch {order.qty} units",
+     "notDefined": false
+    },
+    {
+     "step": "dealer-rejects",
+     "screen": "D32",
+     "user": "dealer-owner",
+     "action": "Reject the shipment with a reason",
+     "notDefined": false
+    },
+    {
+     "step": "pdi-check",
+     "screen": "O22",
+     "user": "oem-logistics-mgr",
+     "action": "Read the PDI checklist requirement",
+     "notDefined": true
+    },
+    {
+     "step": "dispatch-again",
+     "screen": "O22",
+     "user": "oem-logistics-mgr",
+     "action": "Dispatch again",
+     "notDefined": false
+    },
+    {
+     "step": "dealer-confirms",
+     "screen": "D32",
+     "user": "dealer-owner",
+     "action": "Confirm delivery of {order.id}",
+     "notDefined": false
+    }
+   ],
+   "completion": "{order.id} was rejected and reverted, approved, paid, dispatched, rejected by the dealer and dispatched again, then delivered. Its status is {order.status}. The billing gate (N26), e-way bill (N10) and PDI checklist (N27) are not defined yet."
+  },
+  {
+   "id": "procurement-to-material-inward",
+   "title": "Procurement to material inward",
+   "steps": [
+    {
+     "step": "suresh-vendors",
+     "screen": "O39",
+     "user": "oem-procurement-mgr",
+     "action": "Open the vendor's procurement",
+     "notDefined": true
+    },
+    {
+     "step": "suresh-procurement",
+     "screen": "O39",
+     "user": "oem-procurement-mgr",
+     "action": "Click procurement",
+     "notDefined": false
+    },
+    {
+     "step": "bom-card",
+     "screen": "O26",
+     "user": "oem-procurement-mgr",
+     "action": "Review the bill of materials before ordering",
+     "notDefined": true
+    },
+    {
+     "step": "procurement-lines",
+     "screen": "O40",
+     "user": "oem-procurement-mgr",
+     "action": "Set the order quantity and rate, then create the PO",
+     "notDefined": true
+    },
+    {
+     "step": "create-po",
+     "screen": "O40",
+     "user": "oem-procurement-mgr",
+     "action": "Click Create PO",
+     "notDefined": false
+    },
+    {
+     "step": "approval-card",
+     "screen": "O41",
+     "user": "oem-procurement-mgr",
+     "action": "See that the vendor PO is pending approval",
+     "notDefined": true
+    },
+    {
+     "step": "approve-po",
+     "screen": "O41",
+     "user": "oem-super-admin",
+     "action": "Approve the vendor PO by email",
+     "notDefined": true
+    },
+    {
+     "step": "inward-card",
+     "screen": "O35",
+     "user": "oem-inventory-mgr",
+     "action": "Receive the material and check its quality",
+     "notDefined": true
+    },
+    {
+     "step": "inward-backdated",
+     "screen": "O35",
+     "user": "oem-inventory-mgr",
+     "action": "Read the backdated entry note",
+     "notDefined": true
+    }
+   ],
+   "completion": "Vendor PO {vendorPO.number} for {vendorPO.vendorName} is {vendorPO.status}. Material inward for {vendorPO.muName} is the next step in the real flow."
+  },
+  {
+   "id": "qc-and-packaging",
+   "title": "QC and packaging",
+   "steps": [
+    {
+     "step": "production-completion",
+     "screen": "N04",
+     "user": "oem-production-mgr",
+     "action": "Read the production completion stage",
+     "notDefined": true
+    },
+    {
+     "step": "qc-checklist",
+     "screen": "N05",
+     "user": "oem-production-mgr",
+     "action": "Read the QC inspection stage",
+     "notDefined": true
+    },
+    {
+     "step": "qc-branding",
+     "screen": "N06",
+     "user": "oem-production-mgr",
+     "action": "Read the QC branding and packaging stage",
+     "notDefined": true
+    },
+    {
+     "step": "despatch-gate",
+     "screen": "N07",
+     "user": "oem-logistics-mgr",
+     "action": "Read the despatch chassis validation gate",
+     "notDefined": true
+    }
+   ],
+   "completion": "{order.id} has passed through production completion (N04), QC checklist (N05), QC branding and packaging (N06) and the despatch chassis validation gate (N07). The spec defines none of these stages, so their detail and the rework loop are not shown."
+  },
+  {
+   "id": "service-to-job-card",
+   "title": "Service request to job card",
+   "steps": [
+    {
+     "step": "followups",
+     "screen": "D13",
+     "user": "dealer-service",
+     "action": "Open the service follow-up for the customer",
+     "notDefined": false
+    },
+    {
+     "step": "followup-detail",
+     "screen": "D14",
+     "user": "dealer-service",
+     "action": "Add a follow-up",
+     "notDefined": false
+    },
+    {
+     "step": "price-list",
+     "screen": "D26",
+     "user": "dealer-service",
+     "action": "Add the service to the price list",
+     "notDefined": false
+    },
+    {
+     "step": "service-list",
+     "screen": "D40",
+     "user": "dealer-service",
+     "action": "Click create to start the job card",
+     "notDefined": false
+    },
+    {
+     "step": "service-create",
+     "screen": "D41",
+     "user": "dealer-service",
+     "action": "Check the vehicle and customer requirement, then create the service",
+     "notDefined": false
+    },
+    {
+     "step": "job-card",
+     "screen": "D42",
+     "user": "dealer-service",
+     "action": "Check the job card",
+     "notDefined": false
+    }
+   ],
+   "completion": "The service reminder was followed up, the service price was added to the price list, and the job card was created for the customer's vehicle. Next in the real flow: complete the service and raise the SERVICE invoice, priced from the price list (see Service to warranty claim)."
+  },
+  {
+   "id": "service-warranty-claim",
+   "title": "Service to warranty claim",
+   "steps": [
+    {
+     "step": "s01-customers",
+     "screen": "D15",
+     "user": "dealer-service",
+     "action": "Open the customer from the customers list",
+     "notDefined": false
+    },
+    {
+     "step": "s02-vehicle",
+     "screen": "D18",
+     "user": "dealer-service",
+     "action": "Open the vehicle tab to see the product",
+     "notDefined": false
+    },
+    {
+     "step": "s03-service-create",
+     "screen": "D41",
+     "user": "dealer-service",
+     "action": "Create the service job card",
+     "notDefined": false
+    },
+    {
+     "step": "s04-job-card",
+     "screen": "D42",
+     "user": "dealer-service",
+     "action": "Complete the service",
+     "notDefined": false
+    },
+    {
+     "step": "s05-invoice",
+     "screen": "D20",
+     "user": "dealer-service",
+     "action": "Create the SERVICE invoice",
+     "notDefined": false
+    },
+    {
+     "step": "s06-warranty-list",
+     "screen": "D37",
+     "user": "dealer-service",
+     "action": "Click + to raise a warranty claim",
+     "notDefined": true
+    },
+    {
+     "step": "s07-claim-create",
+     "screen": "D38",
+     "user": "dealer-service",
+     "action": "Check the vehicle, spare and serial, then claim warranty",
+     "notDefined": false
+    },
+    {
+     "step": "s08-transit",
+     "screen": "D39",
+     "user": "dealer-service",
+     "action": "Mark the claim in transit",
+     "notDefined": false
+    },
+    {
+     "step": "s09-oem-received",
+     "screen": "O43",
+     "user": "oem-super-admin",
+     "action": "Open the claim from the Warranty (Received) queue",
+     "notDefined": false
+    },
+    {
+     "step": "s10-verify",
+     "screen": "O44",
+     "user": "oem-super-admin",
+     "action": "Verify the claim",
+     "notDefined": false
+    },
+    {
+     "step": "s11-inspect",
+     "screen": "O44",
+     "user": "oem-super-admin",
+     "action": "Add the inspection report",
+     "notDefined": false
+    },
+    {
+     "step": "s12-service",
+     "screen": "O44",
+     "user": "oem-super-admin",
+     "action": "Choose Service for the claim",
+     "notDefined": false
+    },
+    {
+     "step": "s13-ask-cost",
+     "screen": "O44",
+     "user": "oem-super-admin",
+     "action": "Ask the dealer for the service charge",
+     "notDefined": false
+    },
+    {
+     "step": "s14-pay-charge",
+     "screen": "D39",
+     "user": "dealer-service",
+     "action": "Pay the service charge and enter the transaction details",
+     "notDefined": false
+    },
+    {
+     "step": "s15-verify-payment",
+     "screen": "O44",
+     "user": "oem-super-admin",
+     "action": "Verify the dealer's payment",
+     "notDefined": false
+    },
+    {
+     "step": "s16-return",
+     "screen": "O44",
+     "user": "oem-super-admin",
+     "action": "Enter the return details",
+     "notDefined": false
+    },
+    {
+     "step": "s17-confirm",
+     "screen": "D39",
+     "user": "dealer-service",
+     "action": "Confirm receipt of the returned item",
+     "notDefined": false
+    }
+   ],
+   "completion": "The faulty part is replaced under warranty and the claim is confirmed received. The SERVICE invoice was created before the claim, in spec order. Next in the real flow: the dealer pays the invoice and it is viewed."
+  }
+ ]
+}

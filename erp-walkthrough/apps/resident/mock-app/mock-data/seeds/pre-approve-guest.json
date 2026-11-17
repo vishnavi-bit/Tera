@@ -1,0 +1,60 @@
+{
+  "_sample": "DEMO DATA for the Residents - Resident App walkthroughs. All names, flats, passes, parcels and times are invented. The demo pass does not grant real access and no RFID or gate hardware is connected.",
+  "resident": {
+    "name": "Demo Resident",
+    "flat": "A-1204"
+  },
+  "counts": {
+    "pending": 1,
+    "parcels": 1
+  },
+  "request": {
+    "id": "DEMO-REQ-001",
+    "visitor": "Demo Visitor Three",
+    "category": "Personal Guest",
+    "purpose": "Family visit",
+    "gate": "Gate 1",
+    "time": "11:02",
+    "status": "pending",
+    "decidedAt": "11:06"
+  },
+  "guest": {
+    "name": "Demo Guest Four",
+    "phone": "90000 00004",
+    "category": "Personal Guest",
+    "date": "Today",
+    "validUntil": "18:00",
+    "purpose": "Lunch",
+    "passId": "DEMO-PASS-002",
+    "created": false
+  },
+  "history": [
+    {
+      "visitor": "Demo Guest Two",
+      "category": "Personal Guest",
+      "gate": "Gate 1",
+      "status": "Checked Out",
+      "time": "Yesterday 18:10"
+    },
+    {
+      "visitor": "Demo Domestic Help",
+      "category": "Domestic Help",
+      "gate": "Gate 2",
+      "status": "Checked Out",
+      "time": "Yesterday 09:40"
+    },
+    {
+      "visitor": "Demo Courier",
+      "category": "Food Delivery / Courier",
+      "gate": "Gate 1",
+      "status": "Approved",
+      "time": "2 days ago 20:15"
+    }
+  ],
+  "parcel": {
+    "reference": "DEMO-PRCL-001",
+    "company": "Demo Courier",
+    "received": "10:42",
+    "gate": "Gate 1"
+  }
+}

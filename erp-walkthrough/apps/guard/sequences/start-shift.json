@@ -1,0 +1,43 @@
+{
+  "id": "start-shift",
+  "title": "Guard starts a shift",
+  "startStep": "login",
+  "completionMessage": "The guard is on shift at {gate.name}. Activity for the gate is listed on the Activity tab.",
+  "steps": {
+    "login": {
+      "user": "guard-gate1",
+      "screen": "S01",
+      "proposedAction": "Start the shift",
+      "actions": {
+        "start-shift": {
+          "performedText": "started the shift",
+          "nextStep": "home",
+          "stateChange": {
+            "guard.shift": {
+              "set": "On shift since 08:00"
+            }
+          }
+        }
+      }
+    },
+    "home": {
+      "user": "guard-gate1",
+      "screen": "S02",
+      "proposedAction": "Tap the Activity tab",
+      "actions": {
+        "goto-S09": {
+          "performedText": "opened recent activity",
+          "nextStep": "activity"
+        }
+      }
+    },
+    "activity": {
+      "user": "guard-gate1",
+      "screen": "S09",
+      "proposedAction": "Look through the gate's recent activity",
+      "performedText": "looked through the recent activity",
+      "nextStep": null,
+      "notDefined": "Who the guard reaches from the help route is not defined."
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "id": "oem-warehouse-products",
+  "title": "OEM warehouse and products",
+  "startStep": "oem-products-list",
+  "completionMessage": "The products, the stock of {products.vehicle.productName} at {mu.name} and the new warehouse, FIFO and product-flag requirements are shown. The spec does not define them yet.",
+  "steps": {
+    "oem-products-list": {
+      "user": "oem-super-admin",
+      "screen": "O25",
+      "proposedAction": "Look at the products list",
+      "infoPanel": [],
+      "notDefined": "Not defined in screen_details.md, so the list columns and the status filter values for the products list cannot be shown. The columns shown are Vehicle, Variant, Colour and Status.",
+      "performedText": "opened the products list",
+      "nextStep": "oem-product-detail"
+    },
+    "oem-product-detail": {
+      "user": "oem-super-admin",
+      "screen": "O29",
+      "proposedAction": "Look at the product detail and the dashboard",
+      "infoPanel": [],
+      "notDefined": "Not defined in screen_details.md, so the week, month and year options and the report content (per-model rollup, stock by manufacturing unit and the price matrix) cannot be shown for {products.vehicle.productName}.",
+      "performedText": "opened the detail of {products.vehicle.productName}",
+      "nextStep": "oem-stock-tabs"
+    },
+    "oem-stock-tabs": {
+      "user": "oem-inventory-mgr",
+      "screen": "O30",
+      "proposedAction": "Look at the OEM stock tabs",
+      "infoPanel": [],
+      "notDefined": "Not defined in screen_details.md, so the names of the nine tabs and the unit and stock filter values cannot be shown. Only stock history and reserved stock are named.",
+      "performedText": "opened the OEM stock at {mu.name}",
+      "nextStep": "oem-stock-one-product"
+    },
+    "oem-stock-one-product": {
+      "user": "oem-inventory-mgr",
+      "screen": "O31",
+      "proposedAction": "Click add stock to go to the MU stock",
+      "infoPanel": [],
+      "actions": {
+        "add-stock": { "performedText": "opened the stock list of {products.vehicle.productName}", "nextStep": "oem-mu-stock" }
+      }
+    },
+    "oem-mu-stock": {
+      "user": "oem-inventory-mgr",
+      "screen": "O35",
+      "proposedAction": "Read the MU stock",
+      "infoPanel": [],
+      "notDefined": "Not defined in screen_details.md, so the warehouse locations cannot be shown. N12 Warehouse Location Master defines bin, rack and zone locations per manufacturing unit.",
+      "performedText": "opened the MU stock at {mu.name}",
+      "nextStep": "fifo-issuance"
+    },
+    "fifo-issuance": {
+      "user": "oem-inventory-mgr",
+      "screen": "N13",
+      "proposedAction": "Read the FIFO stock issue requirement",
+      "infoPanel": [],
+      "notDefined": "Not defined in screen_details.md, so the FIFO stock issue (oldest first) and the stock-by-location report (N13) cannot be shown.",
+      "performedText": "read the FIFO stock issue requirement",
+      "nextStep": "spare-form"
+    },
+    "spare-form": {
+      "user": "oem-super-admin",
+      "screen": "O27",
+      "proposedAction": "Look at the spare product form",
+      "infoPanel": [],
+      "notDefined": "Not defined in screen_details.md, so the inventory type flag (N14) and the spare part extended fields (N24) cannot be shown on this form.",
+      "performedText": "looked at the spare product form",
+      "nextStep": null
+    }
+  }
+}

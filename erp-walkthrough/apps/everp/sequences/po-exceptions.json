@@ -1,0 +1,166 @@
+{
+  "id": "po-exceptions",
+  "title": "PO exceptions and dispatch documents",
+  "startStep": "oem-note",
+  "completionMessage": "{order.id} was rejected and reverted, approved, paid, dispatched, rejected by the dealer and dispatched again, then delivered. Its status is {order.status}. The billing gate (N26), e-way bill (N10) and PDI checklist (N27) are not defined yet.",
+  "steps": {
+    "oem-note": {
+      "user": "oem-super-admin",
+      "screen": "O24",
+      "proposedAction": "Save the PO info note",
+      "infoPanel": [{ "key": "order.status", "label": "Order status" }],
+      "actions": {
+        "save-note": { "performedText": "saved the PO info note on {order.id}", "nextStep": "oem-date" }
+      }
+    },
+    "oem-date": {
+      "user": "oem-super-admin",
+      "screen": "O24",
+      "proposedAction": "Save the expected dispatch date",
+      "infoPanel": [{ "key": "order.status", "label": "Order status" }],
+      "actions": {
+        "save-date": { "performedText": "saved the expected dispatch date {order.expectedDispatch}", "nextStep": "oem-reject" }
+      }
+    },
+    "oem-reject": {
+      "user": "oem-super-admin",
+      "screen": "O24",
+      "proposedAction": "Reject the PO with remarks",
+      "infoPanel": [{ "key": "order.status", "label": "Order status" }],
+      "actions": {
+        "reject": {
+          "performedText": "rejected {order.id} with remarks",
+          "nextStep": "dealer-sees-rejection",
+          "stateChange": { "order.status": { "set": "Rejected" } }
+        }
+      }
+    },
+    "dealer-sees-rejection": {
+      "user": "dealer-owner",
+      "screen": "D30",
+      "proposedAction": "Check what the dealer sees on the rejected PO",
+      "infoPanel": [{ "key": "order.status", "label": "Order status" }],
+      "notDefined": "Not defined in screen_details.md, so the stage and outcome the dealer sees after a rejection cannot be shown. F8 says the dealer sees stage and outcome only.",
+      "performedText": "checked the rejected PO {order.id} as the dealer",
+      "nextStep": "oem-revert"
+    },
+    "oem-revert": {
+      "user": "oem-super-admin",
+      "screen": "O24",
+      "proposedAction": "Revert the cancelled PO",
+      "infoPanel": [{ "key": "order.status", "label": "Order status" }],
+      "actions": {
+        "revert": {
+          "performedText": "reverted the cancelled PO {order.id}",
+          "nextStep": "oem-approve",
+          "stateChange": { "order.status": { "set": "Pending" } }
+        }
+      }
+    },
+    "oem-approve": {
+      "user": "oem-super-admin",
+      "screen": "O20",
+      "proposedAction": "Approve the PO",
+      "infoPanel": [{ "key": "order.status", "label": "Order status" }],
+      "actions": {
+        "approve-order": {
+          "performedText": "approved {order.id}",
+          "nextStep": "accounts-verify",
+          "stateChange": { "order.status": { "set": "Approved" } }
+        }
+      }
+    },
+    "accounts-verify": {
+      "user": "oem-accounts",
+      "screen": "O23",
+      "proposedAction": "Verify the payment on {order.id}",
+      "infoPanel": [{ "key": "order.status", "label": "Order status" }],
+      "actions": {
+        "verify-payment": {
+          "performedText": "verified the payment on {order.id}",
+          "nextStep": "accounts-gate",
+          "stateChange": { "order.status": { "set": "Payment verified" } }
+        }
+      }
+    },
+    "accounts-gate": {
+      "user": "oem-accounts",
+      "screen": "O23",
+      "proposedAction": "Read the OK to Bill gate requirement",
+      "infoPanel": [{ "key": "order.status", "label": "Order status" }],
+      "notDefined": "Not defined in screen_details.md, so the Accounts OK to Bill gate (N26) cannot be shown. N26 extends O20 and O23, and replaces dispatch proceeding right after payment verification.",
+      "performedText": "reached the OK to Bill gate for {order.id}",
+      "nextStep": "eway-bill"
+    },
+    "eway-bill": {
+      "user": "oem-logistics-mgr",
+      "screen": "O22",
+      "proposedAction": "Read the e-way bill requirement",
+      "infoPanel": [{ "key": "order.status", "label": "Order status" }],
+      "notDefined": "Not defined in screen_details.md, so the e-way bill (N10) cannot be shown. N10 replaces the reference app's mock (D51 and O56).",
+      "performedText": "reached the e-way bill step for {order.id}",
+      "nextStep": "dispatch-first"
+    },
+    "dispatch-first": {
+      "user": "oem-logistics-mgr",
+      "screen": "O22",
+      "proposedAction": "Dispatch {order.qty} units",
+      "infoPanel": [{ "key": "order.status", "label": "Order status" }],
+      "actions": {
+        "dispatch": {
+          "performedText": "dispatched {order.qty} units of {order.id}",
+          "nextStep": "dealer-rejects",
+          "stateChange": { "order.status": { "set": "Dispatched" }, "order.shipment.status": { "set": "Dispatched" } }
+        }
+      }
+    },
+    "dealer-rejects": {
+      "user": "dealer-owner",
+      "screen": "D32",
+      "proposedAction": "Reject the shipment with a reason",
+      "infoPanel": [{ "key": "order.status", "label": "Order status" }],
+      "actions": {
+        "reject-shipment": {
+          "performedText": "rejected the shipment of {order.id} with a reason",
+          "nextStep": "pdi-check",
+          "stateChange": { "order.status": { "set": "Shipment rejected" }, "order.shipment.status": { "set": "Shipment rejected" } }
+        }
+      }
+    },
+    "pdi-check": {
+      "user": "oem-logistics-mgr",
+      "screen": "O22",
+      "proposedAction": "Read the PDI checklist requirement",
+      "infoPanel": [{ "key": "order.status", "label": "Order status" }],
+      "notDefined": "Not defined in screen_details.md, so the PDI checklist (N27) cannot be shown. N27 extends N07 and sits before a unit ships, so it comes before the re-dispatch.",
+      "performedText": "reached the PDI checklist before the re-dispatch of {order.id}",
+      "nextStep": "dispatch-again"
+    },
+    "dispatch-again": {
+      "user": "oem-logistics-mgr",
+      "screen": "O22",
+      "proposedAction": "Dispatch again",
+      "infoPanel": [{ "key": "order.status", "label": "Order status" }],
+      "actions": {
+        "dispatch": {
+          "performedText": "dispatched {order.id} again",
+          "nextStep": "dealer-confirms",
+          "stateChange": { "order.status": { "set": "Dispatched" }, "order.shipment.status": { "set": "Dispatched" } }
+        }
+      }
+    },
+    "dealer-confirms": {
+      "user": "dealer-owner",
+      "screen": "D32",
+      "proposedAction": "Confirm delivery of {order.id}",
+      "infoPanel": [{ "key": "order.status", "label": "Order status" }],
+      "actions": {
+        "confirm-delivery": {
+          "performedText": "confirmed delivery of {order.id}",
+          "nextStep": null,
+          "stateChange": { "order.status": { "set": "Delivered" }, "order.shipment.status": { "set": "Delivered" } }
+        }
+      }
+    }
+  }
+}

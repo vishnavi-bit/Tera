@@ -1,0 +1,120 @@
+{
+  "id": "pre-approved-guest",
+  "title": "Pre-approved guest: resident creates pass, guard scans it",
+  "startStep": "r-home",
+  "completionMessage": "{guest.name} was pre-approved by the resident, the guard scanned the pass at {gate.name}, and entry is recorded.",
+  "steps": {
+    "r-home": {
+      "user": "resident-a1204",
+      "screen": "R01",
+      "proposedAction": "Tap Guests to pre-approve a guest",
+      "actions": {
+        "goto-R04": {
+          "performedText": "opened Pre-approve a guest",
+          "nextStep": "r-form"
+        }
+      }
+    },
+    "r-form": {
+      "user": "resident-a1204",
+      "screen": "R04",
+      "proposedAction": "Check the guest details and create the pass",
+      "actions": {
+        "create-pass": {
+          "performedText": "created a pass for {guest.name}",
+          "nextStep": "r-pass",
+          "stateChange": {
+            "guest.created": {
+              "set": true
+            }
+          }
+        }
+      }
+    },
+    "r-pass": {
+      "user": "resident-a1204",
+      "screen": "R05",
+      "proposedAction": "Share the pass with the guest",
+      "actions": {
+        "share-pass": {
+          "performedText": "shared the pass with {guest.name}",
+          "nextStep": "g-home"
+        }
+      }
+    },
+    "g-home": {
+      "user": "guard-gate1",
+      "screen": "S02",
+      "proposedAction": "The guest arrives at the gate. Tap Scan Pass",
+      "actions": {
+        "goto-S03": {
+          "performedText": "opened the pass scanner",
+          "nextStep": "g-scan"
+        }
+      }
+    },
+    "g-scan": {
+      "user": "guard-gate1",
+      "screen": "S03",
+      "proposedAction": "Scan the guest's pass",
+      "actions": {
+        "scan-demo-pass": {
+          "performedText": "scanned the guest's pass",
+          "nextStep": "g-valid",
+          "stateChange": {
+            "scan.result": {
+              "set": "valid"
+            }
+          }
+        }
+      }
+    },
+    "g-valid": {
+      "user": "guard-gate1",
+      "screen": "S03",
+      "proposedAction": "Check the pass details, then continue",
+      "infoPanel": [
+        {
+          "key": "pass.validity",
+          "label": "Pass"
+        }
+      ],
+      "actions": {
+        "continue-entry": {
+          "performedText": "checked the pass details",
+          "nextStep": "g-entry"
+        }
+      }
+    },
+    "g-entry": {
+      "user": "guard-gate1",
+      "screen": "S06",
+      "proposedAction": "Confirm entry",
+      "actions": {
+        "confirm-entry": {
+          "performedText": "confirmed entry for {pass.visitor}",
+          "nextStep": "g-inside",
+          "stateChange": {
+            "counts.inside": 1,
+            "entry.done": {
+              "set": true
+            }
+          }
+        }
+      }
+    },
+    "g-inside": {
+      "user": "guard-gate1",
+      "screen": "S07",
+      "proposedAction": "Check the guest is in the inside list",
+      "infoPanel": [
+        {
+          "key": "counts.inside",
+          "label": "Visitors inside"
+        }
+      ],
+      "performedText": "checked the visitors-inside list",
+      "nextStep": null
+    }
+  }
+}

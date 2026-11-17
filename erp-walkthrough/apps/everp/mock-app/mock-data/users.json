@@ -1,0 +1,62 @@
+{
+  "dealer-owner": {
+    "name": "Ravi Kumar",
+    "roleLabel": "Dealer Owner",
+    "side": "dealer",
+    "org": "Sri Lakshmi EVs (District Dealer)"
+  },
+  "dealer-sales": {
+    "name": "Swati",
+    "roleLabel": "Dealer - Sales",
+    "side": "dealer",
+    "org": "Sri Lakshmi EVs (District Dealer)"
+  },
+  "oem-super-admin": {
+    "name": "Charan",
+    "roleLabel": "Super Admin",
+    "side": "oem",
+    "org": "Tera EV OEM"
+  },
+  "oem-accounts": {
+    "name": "Charan",
+    "roleLabel": "Accounts Manager",
+    "side": "oem",
+    "org": "Tera EV OEM"
+  },
+  "oem-production-mgr": {
+    "name": "Ganesh",
+    "roleLabel": "Production Manager",
+    "side": "oem",
+    "org": "Tera EV OEM"
+  },
+  "dealer-service": {
+    "name": "Latha",
+    "roleLabel": "Service",
+    "side": "dealer",
+    "org": "Sri Lakshmi EVs (District Dealer)"
+  },
+  "oem-sales-head": {
+    "name": "Anita Rao",
+    "roleLabel": "Sales Head",
+    "side": "oem",
+    "org": "Tera EV OEM"
+  },
+  "oem-inventory-mgr": {
+    "name": "Ruby",
+    "roleLabel": "Inventory Manager",
+    "side": "oem",
+    "org": "Tera EV OEM"
+  },
+  "oem-logistics-mgr": {
+    "name": "Dhivyesh",
+    "roleLabel": "Logistics & Dispatch Manager",
+    "side": "oem",
+    "org": "Tera EV OEM"
+  },
+  "oem-procurement-mgr": {
+    "name": "Suresh",
+    "roleLabel": "Procurement Manager",
+    "side": "oem",
+    "org": "Tera EV OEM"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "id": "delivery-at-gate",
+  "title": "Delivery at the gate",
+  "startStep": "home",
+  "completionMessage": "The parcel {delivery.reference} was held at {gate.name} and collected. The courier never entered the society, so there is no visitor check-out.",
+  "steps": {
+    "home": {
+      "user": "guard-gate1",
+      "screen": "S02",
+      "proposedAction": "Tap Delivery / Parcel",
+      "actions": {
+        "goto-S08": {
+          "performedText": "opened Delivery / Parcel",
+          "nextStep": "delivery-form"
+        }
+      }
+    },
+    "delivery-form": {
+      "user": "guard-gate1",
+      "screen": "S08",
+      "proposedAction": "Check the delivery details and record the delivery",
+      "infoPanel": [
+        {
+          "key": "parcels.held",
+          "label": "Parcels held"
+        }
+      ],
+      "actions": {
+        "record-delivery": {
+          "performedText": "recorded the delivery and held the parcel",
+          "stateChange": {
+            "delivery.status": {
+              "set": "held"
+            },
+            "parcels.held": 1
+          },
+          "nextStep": "delivery-held"
+        }
+      }
+    },
+    "delivery-held": {
+      "user": "guard-gate1",
+      "screen": "S08",
+      "proposedAction": "When the resident collects it, mark the parcel collected",
+      "infoPanel": [
+        {
+          "key": "parcels.held",
+          "label": "Parcels held"
+        }
+      ],
+      "actions": {
+        "mark-collected": {
+          "performedText": "marked the parcel collected",
+          "stateChange": {
+            "delivery.status": {
+              "set": "collected"
+            },
+            "parcels.held": -1
+          },
+          "nextStep": null
+        }
+      }
+    }
+  }
+}

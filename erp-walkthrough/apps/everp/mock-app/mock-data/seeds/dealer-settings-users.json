@@ -1,0 +1,72 @@
+{
+  "_sample": "SAMPLE DATA for the Dealer settings and users walkthrough. Names, IDs, GST and PAN numbers, bank details, phone numbers, emails and addresses are invented. The dealer is the Setting up dealer sample (Sample Motors Coimbatore).",
+  "dealer": {
+    "id": "D000015",
+    "status": "Active",
+    "dealerType": "District Dealer",
+    "namePrefix": "Mr.",
+    "ownerFirstName": "Ravi",
+    "ownerLastName": "Kumar",
+    "firm": "Sample Motors Coimbatore",
+    "gstNo": "33SAMPL0000A1Z5",
+    "orgEmail": "sample.motors@example.com",
+    "contact": "9000000001",
+    "joiningDate": "2026-10-25",
+    "state": "Tamil Nadu",
+    "district": "Coimbatore",
+    "area": "Sample area",
+    "region": "South",
+    "zone": "Zone 1",
+    "mu": "MU Hosur",
+    "billing": {
+      "country": "India",
+      "state": "Tamil Nadu",
+      "address": "1 Sample Street",
+      "city": "Coimbatore",
+      "pincode": "641001"
+    },
+    "shipping": {
+      "country": "India",
+      "state": "Tamil Nadu",
+      "address": "1 Sample Street",
+      "city": "Coimbatore",
+      "pincode": "641001"
+    },
+    "shop": {
+      "latitude": 11.0168,
+      "longitude": 76.9558,
+      "address": "Sample shop, Coimbatore"
+    },
+    "bank": {
+      "accountType": "Current",
+      "beneficiaryName": "Ravi Kumar",
+      "bankName": "Sample Bank",
+      "accountNumber": "0000000000",
+      "confirmAccount": "0000000000",
+      "ifsc": "SAMP0000001"
+    }
+  },
+  "staff": {
+    "count": 1,
+    "created": false,
+    "existing": [
+      {
+        "userId": "DLR-014-0002",
+        "name": "Latha",
+        "role": "Service Man",
+        "contact": "9000000004",
+        "email": "sample.latha@example.com",
+        "status": "Active"
+      }
+    ],
+    "newUser": {
+      "userId": "DLR-014-0003",
+      "role": "Sales Man",
+      "firstName": "Swati",
+      "lastName": "Sample",
+      "email": "sample.swati@example.com",
+      "contact": "9000000003",
+      "status": "Active"
+    }
+  }
+}

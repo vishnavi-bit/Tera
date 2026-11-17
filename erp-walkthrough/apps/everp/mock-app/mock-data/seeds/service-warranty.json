@@ -1,0 +1,61 @@
+{
+  "_sample": "SAMPLE DATA for the Service to warranty claim walkthrough. Customer names, IDs, chassis, serial, registration, phone, email, tracking, transaction and amounts are invented. Dealer, MU and product names match the other walkthrough seeds.",
+  "dealer": { "id": "DLR-014", "name": "Sri Lakshmi EVs", "mu": "MU Hosur" },
+  "product": { "name": "Tera Zip", "variant": "60V 30Ah", "colour": "Matte Black", "netRate": 62000, "gstPercent": 5, "price": 65100 },
+  "customer": { "id": "CUS-0101", "name": "Meena Sample", "phone": "9000000101", "email": "meena.sample@example.com" },
+  "customers": [
+    { "id": "CUS-0101", "name": "Meena Sample", "phone": "9000000101", "email": "meena.sample@example.com" },
+    { "id": "CUS-0102", "name": "Arun Sample", "phone": "9000000102", "email": "arun.sample@example.com" }
+  ],
+  "vehicle": {
+    "chassis": "TZ-SAMPLE-0101",
+    "regNumber": "TN00SA0101",
+    "motor": "MTR-SAMPLE-0101",
+    "controller": "CTL-SAMPLE-0101",
+    "charger": "CHG-SAMPLE-0101",
+    "batteries": ["BAT-SAMPLE-0101A", "BAT-SAMPLE-0101B"]
+  },
+  "service": {
+    "number": "SRV-SAMPLE-0001",
+    "productType": "Vehicle",
+    "meterReading": "1520",
+    "jobType": "Maintenance",
+    "serviceType": "Paid Service",
+    "requirements": ["Battery not holding charge"],
+    "customerNotes": "Battery drains within a day (sample)."
+  },
+  "jobCard": {
+    "mileage": "1600",
+    "rsa": false,
+    "rectification": ["Replace battery pack"],
+    "additionalWork": [{ "text": "Check charger output", "done": false }]
+  },
+  "invoice": {
+    "name": "Meena Sample",
+    "date": "2026-10-25",
+    "dueDate": "2026-11-08",
+    "adjustment": 0,
+    "terms": "Sample terms and conditions text.",
+    "payments": [],
+    "lines": [
+      { "item": "Service labour (sample)", "hsn": "998719", "rate": 1500, "discount": 0, "discountAmount": 0, "sgst": 135, "cgst": 135, "amount": 1770 }
+    ]
+  },
+  "claim": {
+    "id": "WC-SAMPLE-0001",
+    "raised": false,
+    "raisedTo": "OEM",
+    "status": "—",
+    "receivedOn": "2026-10-25",
+    "stillWarrantyUntil": "2028-10-25",
+    "spare": "Battery",
+    "brand": "Sample Cells Co",
+    "issue": "Not Working",
+    "serials": ["BAT-SAMPLE-0101A"],
+    "remarks": "Battery not holding charge (sample).",
+    "transit": { "company": "Sample Courier Co", "contactNumber": "9000000199", "trackingId": "TRK-SAMPLE-0001" },
+    "serviceCharge": { "amount": 2500, "transactionId": "UTR-SAMPLE-0001" },
+    "returnDetails": { "company": "Sample Courier Co", "contactNumber": "9000000199", "transport": "Road", "trackingNo": "RTN-SAMPLE-0001", "payment": "Paid", "date": "2026-11-05" },
+    "replacement": { "warrantyType": "", "productName": "", "replacementId": "", "inventorySource": "", "claimedDate": "" }
+  }
+}
