@@ -1,0 +1,14 @@
+{
+  "name": "tera-ev",
+  "title": "TERA EV ERP",
+  "spec": "docs/project/context.md",
+  "walkthroughs": [
+    {
+      "id": "dealer-order-to-delivery",
+      "title": "Dealer order to delivery",
+      "description": "PO-1042 from the dealer's purchase order to delivery confirmed: advance, approval, stock reservation, dispatch and receipt (REQ-378 to REQ-387).",
+      "sequenceFile": "sequences/dealer-order-to-delivery.json",
+      "seedData": "mock-app/mock-data/seeds/dealer-order-to-delivery.json"
+    }
+  ]
+}

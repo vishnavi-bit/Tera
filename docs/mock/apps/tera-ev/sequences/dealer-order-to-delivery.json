@@ -1,0 +1,148 @@
+{
+  "id": "dealer-order-to-delivery",
+  "title": "Dealer order to delivery",
+  "startStep": "place-order",
+  "completionMessage": "PO-1042 went from the dealer's order to delivered: 16 units, advance verified, order in production, units assigned and stock reserved, dispatched, receipt confirmed. The real flow also covers rejections, partial dispatch and the dealer ledger; see the gap list.",
+  "steps": {
+    "place-order": {
+      "user": "dealer-owner",
+      "screen": "S01",
+      "proposedAction": "Pick the seller, product, variant and colour, then place the order",
+      "infoPanel": [
+        { "key": "order.units", "label": "Units" },
+        { "key": "stock.available", "label": "Stock available" }
+      ],
+      "actions": {
+        "place-order": { "performedText": "placed PO-1042 for 16 units", "nextStep": "pay-advance" }
+      }
+    },
+    "pay-advance": {
+      "user": "dealer-owner",
+      "screen": "S02",
+      "proposedAction": "Submit the 30% advance with the transaction details",
+      "infoPanel": [{ "key": "order.advanceRequired", "label": "Advance due" }],
+      "actions": {
+        "submit-payment": { "performedText": "submitted the advance payment", "nextStep": "payment-waiting" }
+      }
+    },
+    "payment-waiting": {
+      "user": "dealer-owner",
+      "screen": "S02",
+      "stateChange": {
+        "payment.status": { "set": "Waiting for verification" },
+        "payment.txnId": { "set": "8837" }
+      },
+      "performedText": "the payment waits for OEM verification",
+      "nextStep": "approval-who"
+    },
+    "approval-who": {
+      "user": "oem-sales",
+      "screen": "S03",
+      "notDefined": "Which OEM roles can approve orders is not defined. The spec says Sales (Head, Regional, Zonal) approves and Accounts verifies payments, and asks to confirm the split. This tour uses a Sales approver.",
+      "nextStep": "approve-order"
+    },
+    "approve-order": {
+      "user": "oem-sales",
+      "screen": "S03",
+      "proposedAction": "Approve the pending order PO-1042",
+      "infoPanel": [{ "key": "order.status", "label": "Order" }],
+      "actions": {
+        "approve-order": { "performedText": "approved PO-1042", "nextStep": "order-approved" }
+      }
+    },
+    "order-approved": {
+      "user": "oem-sales",
+      "screen": "S03",
+      "stateChange": { "order.status": { "set": "Approved" } },
+      "performedText": "the order is approved",
+      "nextStep": "verify-payment"
+    },
+    "verify-payment": {
+      "user": "oem-accounts",
+      "screen": "S03",
+      "proposedAction": "Verify the advance payment (txn 8837)",
+      "infoPanel": [{ "key": "payment.status", "label": "Payment" }],
+      "actions": {
+        "verify-payment": { "performedText": "verified the advance of 36,000", "nextStep": "production-started" }
+      }
+    },
+    "production-started": {
+      "user": "oem-accounts",
+      "screen": "S03",
+      "stateChange": {
+        "payment.status": { "set": "Verified" },
+        "order.status": { "set": "In production" }
+      },
+      "performedText": "the order is in production",
+      "nextStep": "assign-gap"
+    },
+    "assign-gap": {
+      "user": "oem-logistics",
+      "screen": "S04",
+      "notDefined": "Whether a chassis number is entered when units are assigned is not defined. The source says no chassis is entered at assignment (O21), but N07 says identifiers are validated before assignment. This tour assigns without typing chassis numbers.",
+      "nextStep": "assign-units"
+    },
+    "assign-units": {
+      "user": "oem-logistics",
+      "screen": "S04",
+      "proposedAction": "Assign the 16 QC-passed units to PO-1042",
+      "infoPanel": [{ "key": "assign.qcPassed", "label": "QC-passed units" }],
+      "actions": {
+        "assign-units": { "performedText": "assigned 16 units to PO-1042", "nextStep": "stock-reserved" }
+      }
+    },
+    "stock-reserved": {
+      "user": "oem-logistics",
+      "screen": "S04",
+      "stateChange": {
+        "stock.reserved": 16,
+        "stock.available": -16
+      },
+      "performedText": "16 units are reserved for the order",
+      "nextStep": "validate-gap"
+    },
+    "validate-gap": {
+      "user": "oem-logistics",
+      "screen": "S05",
+      "notDefined": "Which identifiers are checked before dispatch is not defined. The source says the correct chassis number and all identifiers (N07) without a list. This tour shows the chassis and motor checks.",
+      "nextStep": "dispatch"
+    },
+    "dispatch": {
+      "user": "oem-logistics",
+      "screen": "S05",
+      "proposedAction": "Dispatch the ready units on truck TN-01-1234",
+      "infoPanel": [{ "key": "dispatch.status", "label": "Check status" }],
+      "actions": {
+        "dispatch": { "performedText": "dispatched 16 units on TN-01-1234", "nextStep": "dispatched" }
+      }
+    },
+    "dispatched": {
+      "user": "oem-logistics",
+      "screen": "S05",
+      "stateChange": {
+        "order.status": { "set": "Dispatched" },
+        "dispatch.status": { "set": "Dispatched" },
+        "stock.reserved": -16,
+        "shipment.dispatched": { "set": true }
+      },
+      "performedText": "the shipment is dispatched",
+      "nextStep": "confirm-receipt"
+    },
+    "confirm-receipt": {
+      "user": "dealer-owner",
+      "screen": "S06",
+      "proposedAction": "Confirm receipt of the 16 units",
+      "infoPanel": [{ "key": "order.status", "label": "Order status" }],
+      "actions": {
+        "confirm-receipt": { "performedText": "confirmed receipt of 16 units", "nextStep": "delivered" }
+      }
+    },
+    "delivered": {
+      "user": "dealer-owner",
+      "screen": "S06",
+      "stateChange": { "order.status": { "set": "Delivered" } },
+      "performedText": "the order is delivered",
+      "nextStep": null
+    }
+  }
+}

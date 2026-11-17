@@ -1,0 +1,8 @@
+[
+  { "code": "S01", "name": "Dealer places purchase order", "section": "Purchase", "type": "form", "mode": "create", "buttons": "Add, Place order", "fields": "seller, product, variant, colour, quantity, cart lines with live stock, total check 16/20/32/40" },
+  { "code": "S02", "name": "Dealer pays order advance", "section": "Purchase", "type": "form", "mode": "create", "buttons": "Upload receipt, Submit payment", "fields": "order total, required 30%, transaction id, amount, date, payment status" },
+  { "code": "S03", "name": "OEM approves order and verifies payment", "section": "Orders", "type": "detail", "mode": "approve", "buttons": "Approve, Reject order, Verify payment, Reject payment", "fields": "order status, advance 30%, payment status, surplus credited to ledger" },
+  { "code": "S04", "name": "Assign units to dealer order", "section": "Dispatch", "type": "form", "mode": "create", "buttons": "Assign", "fields": "unit, model, variant, colour, quantity, chassis numbers, reserved units, QC-passed units" },
+  { "code": "S05", "name": "Chassis validation and dispatch shipment", "section": "Dispatch", "type": "detail", "mode": "action", "buttons": "Dispatch ready units", "fields": "lines, chassis and motor check, status, transport" },
+  { "code": "S06", "name": "Dealer confirms delivery or reports issue", "section": "Deliveries", "type": "detail", "mode": "action", "buttons": "Confirm receipt, Reject shipment, Report issue", "fields": "shipment date, units, lines, order status, rejection reason" }
+]

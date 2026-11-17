@@ -1,0 +1,32 @@
+{
+  "dealer-owner": {
+    "name": "Asha Rao",
+    "roleLabel": "Dealer owner",
+    "side": "dealer"
+  },
+  "oem-procurement": {
+    "name": "Vikram Shah",
+    "roleLabel": "Procurement Manager",
+    "side": "oem"
+  },
+  "oem-production": {
+    "name": "Meena Iyer",
+    "roleLabel": "Production and QC Manager",
+    "side": "oem"
+  },
+  "oem-logistics": {
+    "name": "Arjun Das",
+    "roleLabel": "Logistics and Dispatch Manager",
+    "side": "oem"
+  },
+  "oem-accounts": {
+    "name": "Kavya Nair",
+    "roleLabel": "Accounts Manager",
+    "side": "oem"
+  },
+  "oem-sales": {
+    "name": "Sanjay Menon",
+    "roleLabel": "Sales approver (role to confirm)",
+    "side": "oem"
+  }
+}
