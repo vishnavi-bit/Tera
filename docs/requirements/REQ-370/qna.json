@@ -1,0 +1,13 @@
+{
+  "requirementId": "REQ-370",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "text",
+      "text": "GSTIN auto-fill from the GST portal (N01): which provider or API? It needs an external integration partner.",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    }
+  ]
+}

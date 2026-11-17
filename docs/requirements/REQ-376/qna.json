@@ -1,0 +1,21 @@
+{
+  "requirementId": "REQ-376",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "text",
+      "text": "Is the PO document emailed to the vendor, or only the internal approval request? (feature catalog O41; N17 auto-email is not in this story.)",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    },
+    {
+      "id": "q2",
+      "type": "text",
+      "text": "Who approves the vendor PO? Approval is by email to the OEM approval admin today.",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    }
+  ]
+}

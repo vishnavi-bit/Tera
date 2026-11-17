@@ -1,0 +1,13 @@
+{
+  "requirementId": "REQ-393",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "text",
+      "text": "Is the quotation a formal document for the customer, using the manufacturing unit letterhead (O33)? Confirm the output format.",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    }
+  ]
+}

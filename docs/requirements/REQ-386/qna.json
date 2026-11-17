@@ -1,0 +1,13 @@
+{
+  "requirementId": "REQ-386",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "text",
+      "text": "What exactly is validated (chassis number against the invoice, or all four identifiers)? Source says \"correct chassis number and all identifiers\" (N07) without a list.",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    }
+  ]
+}

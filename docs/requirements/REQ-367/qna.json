@@ -1,0 +1,13 @@
+{
+  "requirementId": "REQ-367",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "text",
+      "text": "Is region and zone access (R8) scoped by server-side rules, or only by assigned dealers (R7)? Source says this needs a server-side test (feature catalog O51).",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    }
+  ]
+}

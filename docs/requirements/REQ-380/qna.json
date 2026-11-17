@@ -1,0 +1,13 @@
+{
+  "requirementId": "REQ-380",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "text",
+      "text": "Which OEM roles can approve orders and verify payments? The approval is by Sales (Head, Regional, Zonal); the Accounts role also verifies payments. Confirm the split.",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    }
+  ]
+}

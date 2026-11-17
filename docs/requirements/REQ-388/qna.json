@@ -1,0 +1,13 @@
+{
+  "requirementId": "REQ-388",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "text",
+      "text": "Who approves at each stage? The source names a manager review, then OEM approval (O42). Which roles?",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    }
+  ]
+}

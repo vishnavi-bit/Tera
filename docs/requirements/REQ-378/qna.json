@@ -1,0 +1,13 @@
+{
+  "requirementId": "REQ-378",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "text",
+      "text": "Can a dealer order from a higher-tier dealer as seller, and does the 16/20/32/40 rule apply the same way? Source says both are possible; the rule is stated for the cart.",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    }
+  ]
+}

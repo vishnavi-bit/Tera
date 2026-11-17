@@ -1,0 +1,13 @@
+{
+  "requirementId": "REQ-400",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "text",
+      "text": "Dealer's own service team (self-contained) is also an option. Is that path in this story, or only the OEM route?",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    }
+  ]
+}

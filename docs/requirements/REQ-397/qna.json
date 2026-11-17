@@ -1,0 +1,13 @@
+{
+  "requirementId": "REQ-397",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "text",
+      "text": "Customer PII is unmasked on the OEM side in the reference app (O07, F9 gap). Which roles see unmasked data, and does masking apply here?",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    }
+  ]
+}

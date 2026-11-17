@@ -1,0 +1,13 @@
+{
+  "requirementId": "REQ-373",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "text",
+      "text": "GSTIN auto-fill for dealer onboarding (N01): same open provider question as the vendor master.",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    }
+  ]
+}

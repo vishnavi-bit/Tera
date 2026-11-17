@@ -1,0 +1,13 @@
+{
+  "requirementId": "REQ-389",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "text",
+      "text": "Ledger top-ups have no proof upload in the reference app (D46, spec gap). Close the gap or keep it?",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    }
+  ]
+}

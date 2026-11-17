@@ -1,0 +1,13 @@
+{
+  "requirementId": "REQ-382",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "text",
+      "text": "Is one motor and one battery per unit always the case, or can a unit have several? Source shows one of each per line on the invoice (D20).",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    }
+  ]
+}

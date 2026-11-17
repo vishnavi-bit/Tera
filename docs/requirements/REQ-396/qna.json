@@ -1,0 +1,13 @@
+{
+  "requirementId": "REQ-396",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "text",
+      "text": "Refunds (type) are listed in D23 but no refund rule is given. What is the refund flow?",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    }
+  ]
+}

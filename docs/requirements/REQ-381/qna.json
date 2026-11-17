@@ -1,0 +1,13 @@
+{
+  "requirementId": "REQ-381",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "text",
+      "text": "Requisition against a forecast and for loss or damage replacement (the other two cases in N03) are not in this story. Add them later, or in this story?",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    }
+  ]
+}

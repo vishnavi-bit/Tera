@@ -1,0 +1,13 @@
+{
+  "requirementId": "REQ-394",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "text",
+      "text": "Customer PII is unmasked on the OEM side (D16, F9 gap). Covered in story 31. Confirm the masking rule.",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    }
+  ]
+}

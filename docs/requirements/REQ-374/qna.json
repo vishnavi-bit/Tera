@@ -1,0 +1,13 @@
+{
+  "requirementId": "REQ-374",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "text",
+      "text": "Sub-dealer role assignment (N11): is it in this story or a later one? Source calls it a new requirement.",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    }
+  ]
+}

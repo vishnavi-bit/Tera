@@ -1,0 +1,13 @@
+{
+  "requirementId": "REQ-392",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "text",
+      "text": "Enquiry can be reopened after closing (D09). Can it be deleted too, and who may?",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    }
+  ]
+}

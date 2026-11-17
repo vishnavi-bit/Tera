@@ -1,0 +1,13 @@
+{
+  "requirementId": "REQ-385",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "text",
+      "text": "The source notes no chassis is entered at assignment (O21), but N07 says identifiers are validated before assignment. Which is it? Confirm in story 20.",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    }
+  ]
+}

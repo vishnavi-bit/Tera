@@ -1,0 +1,21 @@
+{
+  "requirementId": "REQ-395",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "text",
+      "text": "Only the invoice total is taken from the product. Are custom serial fields needed (D20 mentions custom fields)?",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    },
+    {
+      "id": "q2",
+      "type": "text",
+      "text": "The enquiry-to-invoice flow mentions a service-type invoice too; that is story 33.",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    }
+  ]
+}

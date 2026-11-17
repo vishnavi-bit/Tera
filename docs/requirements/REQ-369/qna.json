@@ -1,0 +1,13 @@
+{
+  "requirementId": "REQ-369",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "text",
+      "text": "Which OEM roles can view and send announcements, and manage vendors? The role map does not key these (feature catalog O15, O39).",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    }
+  ]
+}

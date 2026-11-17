@@ -1,0 +1,13 @@
+{
+  "requirementId": "REQ-377",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "text",
+      "text": "Is scrap a separate state from fail, and does scrap need a reason? Source says \"mark scrap\" without detail.",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    }
+  ]
+}

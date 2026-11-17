@@ -1,0 +1,13 @@
+{
+  "requirementId": "REQ-383",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "text",
+      "text": "The checklist items themselves are not in the sources. Who maintains them, and what are the items? Needed before build.",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    }
+  ]
+}

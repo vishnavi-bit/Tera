@@ -1,0 +1,13 @@
+{
+  "requirementId": "REQ-402",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "text",
+      "text": "If the OEM charges a service fee, is it passed to the customer, absorbed by the dealer, or configurable? The source leaves this open (flow_service_warranty.md); the decision is needed before build.",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "requirementId": "REQ-375",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "text",
+      "text": "BOM versioning and approval (N09): does every change need versioning, or only material changes? Who approves: Production Head, QC or OEM Admin? Not in this story.",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    }
+  ]
+}

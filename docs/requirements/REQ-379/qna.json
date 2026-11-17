@@ -1,0 +1,21 @@
+{
+  "requirementId": "REQ-379",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "text",
+      "text": "Receipt upload uses OCR to fill transaction, amount and date (D31). Is OCR in this story, or is manual entry enough for the first release?",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    },
+    {
+      "id": "q2",
+      "type": "text",
+      "text": "Ledger top-ups have no proof upload (D46, spec gap). Keep or close that gap? See story 23.",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    }
+  ]
+}

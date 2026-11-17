@@ -1,0 +1,13 @@
+{
+  "requirementId": "REQ-401",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "text",
+      "text": "Service-or-replacement decision rules: who chooses, and on what basis? Source only says the OEM decides.",
+      "required": true,
+      "reason": "From the Open questions section of req.md.",
+      "answer": null
+    }
+  ]
+}
