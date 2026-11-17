@@ -4,6 +4,10 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  server: { port: Number(process.env.PORT ?? 5173) },
+  server: {
+    port: Number(process.env.PORT ?? 5173),
+    // dev: the API (default port 3000) is reached through the web origin, so the screens can call /api/*
+    proxy: { '/api': `http://localhost:${process.env.API_PORT ?? 3000}` }
+  },
   build: { outDir: 'dist', sourcemap: true }
 });
