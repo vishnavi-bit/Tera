@@ -36,9 +36,15 @@ export function requireAuth(req: AuthReq, res: AuthRes, next: Next) {
 }
 
 export function requireRole(role: string) {
+  return requireAnyRole([role]);
+}
+
+// Allows a signed-in caller that holds at least one of the roles; anyone else gets 403 (no token gets 401).
+export function requireAnyRole(roles: string[]) {
   return (req: AuthReq, res: AuthRes, next: Next) => {
     if (!req.auth) { res.status(401).json({ error: 'unauthorized' }); return; }
-    if (!(req.auth.roles ?? []).includes(role)) { res.status(403).json({ error: 'forbidden' }); return; }
+    const held = req.auth.roles ?? [];
+    if (!roles.some((r) => held.includes(r))) { res.status(403).json({ error: 'forbidden' }); return; }
     next();
   };
 }

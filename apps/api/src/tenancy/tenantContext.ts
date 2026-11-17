@@ -1,10 +1,16 @@
 // Resolves the tenant of a request from the authenticated identity (never from a client-chosen header by default).
-export interface TenantRequest { tenantId?: string; auth?: { tenantId?: unknown }; user?: { tenantId?: unknown } }
+export interface TenantRequest { tenantId?: string; auth?: { tenantId?: unknown }; user?: { tenantId?: unknown }; method?: string; path?: string }
 export interface TenantResponse { status(code: number): TenantResponse; json(body: unknown): unknown }
 export type Next = (err?: unknown) => void;
+
+// Routes that run before anyone has a tenant (sign-in itself). Nothing else is public: every other route needs a tenant.
+export const PUBLIC_ROUTES: { method: string; path: string }[] = [{ method: 'POST', path: '/api/auth/login' }];
+
 export interface TenantContextOptions {
   /** Returns the tenant id for the request, or undefined. Default: the authenticated `req.auth.tenantId` / `req.user.tenantId`. */
   resolve?: (req: TenantRequest) => unknown | Promise<unknown>;
+  /** Routes that skip the tenant check. Default: PUBLIC_ROUTES. */
+  publicRoutes?: { method: string; path: string }[];
 }
 
 const TENANT_ID = /^[A-Za-z0-9_-]{1,64}$/;
@@ -12,7 +18,11 @@ const fromIdentity = (req: TenantRequest) => req.auth?.tenantId ?? req.user?.ten
 
 export function createTenantMiddleware(options: TenantContextOptions = {}) {
   const resolve = options.resolve ?? fromIdentity;
+  const publicRoutes = options.publicRoutes ?? PUBLIC_ROUTES;
+  const isPublic = (req: TenantRequest) =>
+    publicRoutes.some((r) => r.method === String(req.method ?? '').toUpperCase() && r.path === req.path);
   return async (req: TenantRequest, res: TenantResponse, next: Next) => {
+    if (isPublic(req)) { next(); return; }
     let id: unknown;
     try {
       id = await resolve(req);

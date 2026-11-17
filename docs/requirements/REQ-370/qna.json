@@ -8,6 +8,30 @@
       "required": true,
       "reason": "From the Open questions section of req.md.",
       "answer": null
+    },
+    {
+      "id": "q2",
+      "type": "text",
+      "text": "Is the PO document emailed to the vendor, or only the internal approval request? (feature catalog O41; N17 auto-email is not in this story.)",
+      "required": true,
+      "reason": "Carried over from REQ-376 (merged into this requirement).",
+      "answer": null
+    },
+    {
+      "id": "q3",
+      "type": "text",
+      "text": "Who approves the vendor PO? Approval is by email to the OEM approval admin today.",
+      "required": true,
+      "reason": "Carried over from REQ-376 (merged into this requirement).",
+      "answer": null
+    },
+    {
+      "id": "q4",
+      "type": "text",
+      "text": "Where do 'needed' (from the BOM) and 'stock in hand' come from for the shortage view? WI-032 flags stock as still to be confirmed.",
+      "required": true,
+      "reason": "Carried over from REQ-376 merge; blocks Release 2 (acceptance criterion 4).",
+      "answer": null
     }
   ]
 }

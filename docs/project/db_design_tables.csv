@@ -1,0 +1,72 @@
+table,pk,important_fields,description,feedback,status
+tenants,id,name,"One OEM installation (the tenant every other row belongs to)",,New
+operating_states,id,"tenant_id, name","Operating states (REQ-367)",,New
+regions,id,"tenant_id, name, head_name","Regions with a head (REQ-367)",,New
+zones,id,"region_id, name, head_name","Zones under a region (REQ-367); composite FK keeps zone and region consistent",,New
+manufacturing_units,id,"tenant_id, name, gst_number, latitude, longitude","Manufacturing unit: stock source, dispatch origin, letterhead (REQ-368)",,New
+price_tiers,code,"code, label, sort_order","Reference: distributor, divisional_distributor, district_dealer, area_dealer, customer (REQ-371). Global, no tenant_id",,New
+product_types,code,"code, label, kind","Reference: vehicle types (e.g. scooter) and spare types (battery, charger, motor, controller, ...). kind = vehicle or spare. Global, no tenant_id",,New
+user_roles,code,"code, label, scope","Reference: OEM roles and dealer roles (owner, salesman, serviceman). Seed list incomplete, see report. Global, no tenant_id",,New
+payment_modes,code,"code, label","Reference: customer payment modes (UPI in sources; others to confirm). Global, no tenant_id",,New
+customer_types,code,"code, label","Reference: individual, business (REQ-394). Global, no tenant_id",,New
+service_job_types,code,"code, label","Reference: job types on a service card, e.g. periodic (REQ-398). Global, no tenant_id",,New
+vehicle_models,id,"tenant_id, product_type_code, name, motor_spare_id, controller_spare_id, hsn, gst_percent","Vehicle model with HSN, GST, motor and controller links (REQ-371)",,New
+vehicle_variants,id,"tenant_id, model_id, name","Variant of a model (REQ-371)",,New
+variant_colours,id,"tenant_id, variant_id, name","Colours of a variant (REQ-371)",,New
+variant_prices,id,"tenant_id, variant_id, price_tier_code, price","Price of a variant per tier; five tiers (REQ-371)",,New
+unit_model_availability,id,"tenant_id, unit_id, model_id, is_available","Model available at a manufacturing unit (REQ-371)",,New
+vendors,id,"tenant_id, name, gst_number, is_active","Supplier master; inactive vendors not selectable (REQ-370)",,New
+spare_items,id,"tenant_id, name, product_type_code, vendor_id, hsn, dealer_price, customer_price","Spares and components linked to a vendor (REQ-372)",,New
+spare_item_images,id,"tenant_id, spare_item_id, image_ref","Images of a spare (REQ-372)",,New
+spare_unit_availability,id,"tenant_id, spare_item_id, unit_id, is_active","Spare switched on per manufacturing unit (REQ-372)",,New
+bom_lines,id,"tenant_id, model_id, spare_item_id, quantity, landing_price","Bill of materials line per model (REQ-375). Branding and packaging items also come from here",,New
+dealers,id,"tenant_id, price_tier_code, firm_name, region_id, zone_id, unit_id, gst_number","Dealer onboarding: firm, GST, region, zone, unit, addresses, bank (REQ-373)",,New
+users,id,"tenant_id, role_code, name, phone, email, unit_id, dealer_id, device_limit","OEM users and dealer staff/owners; scoped to a unit or a dealer (REQ-369, REQ-373, REQ-374)",,New
+user_dealer_assignments,"user_id, dealer_id","tenant_id, user_id, dealer_id","Dealers an OEM sales user is assigned to (REQ-369, REQ-397)",,New
+vendor_purchase_orders,id,"tenant_id, vendor_id, unit_id, po_number, status, created_by","Vendor PO (merged REQ-376 into REQ-370); numbered PO-YYYY-NNNN",,New
+vendor_purchase_order_lines,id,"tenant_id, vpo_id, spare_item_id, quantity, rate","Lines of a vendor PO; rate in paise (REQ-370)",,New
+po_number_sequences,year,"tenant_id, last_no","PO number counter per tenant and year (REQ-370)",,New
+material_receipts,id,"tenant_id, vpo_id, received_by, received_at","Receipt of material against a vendor PO (REQ-377)",,New
+material_receipt_lines,id,"tenant_id, receipt_id, vpo_line_id, received_qty, passed_qty, failed_qty, scrap_qty","QC result per item; only passed quantity enters stock (REQ-377)",,New
+unit_spare_stock,id,"tenant_id, unit_id, spare_item_id, quantity_on_hand, quantity_reserved","OEM stock of a spare at a unit; stored balance (REQ-377, REQ-381, REQ-402)",,New
+dealer_orders,id,"tenant_id, buyer_dealer_id, seller_unit_id, seller_dealer_id, status, total_units, total_amount","Dealer purchase order; total units 16, 20, 32 or 40 (REQ-378)",,New
+dealer_order_lines,id,"tenant_id, dealer_order_id, line_type, variant_id, colour_id, spare_item_id, quantity, unit_price","Vehicle or spare line of a dealer order (REQ-378)",,New
+dealer_payments,id,"tenant_id, dealer_order_id, transaction_id, amount, payment_date, verification_status","Advance payment on a dealer order, verified by OEM (REQ-379, REQ-380)",,New
+dealer_ledgers,id,"tenant_id, name","Shared credit ledger (REQ-389)",,New
+ledger_dealers,"ledger_id, dealer_id","tenant_id, ledger_id, dealer_id","Dealers connected to a shared ledger (REQ-389)",,New
+ledger_entries,id,"tenant_id, ledger_id, entry_type, amount, entry_date, dealer_payment_id","Credit or debit history; surplus payments credited here (REQ-389, REQ-380)",,New
+material_requisitions,id,"tenant_id, requisition_type, dealer_order_id, vehicle_unit_id, requested_by","Requisition against an order or for a passed unit (REQ-381, REQ-384)",,New
+material_requisition_lines,id,"tenant_id, requisition_id, spare_item_id, bom_line_id, quantity_required","Parts required, taken from the BOM (REQ-381, REQ-384)",,New
+vehicle_units,id,"tenant_id, origin_unit_id, variant_id, colour_id, chassis_no, motor_no, battery_no, controller_no, status, holder_dealer_id","One row per built vehicle (chassis): traceability from production to sale (REQ-382, REQ-385, REQ-403)",,New
+qc_checklist_items,id,"tenant_id, prompt, sort_order, is_active","Yes/no inspection items; the items are not in the sources (REQ-383)",,New
+qc_inspections,id,"tenant_id, vehicle_unit_id, result, inspected_by, inspected_at","One QC run on a unit (REQ-383)",,New
+qc_answers,id,"tenant_id, inspection_id, checklist_item_id, answer","Yes/no answer per checklist item (REQ-383)",,New
+order_unit_assignments,id,"tenant_id, dealer_order_id, vehicle_unit_id, status, shipment_id","Units assigned and reserved to a dealer order; a unit is assigned once (REQ-385)",,New
+shipments,id,"tenant_id, dealer_order_id, transport_ref, dispatched_by, dispatched_at","Dispatch of one or more units or lines; partial dispatch allowed (REQ-386)",,New
+shipment_lines,id,"tenant_id, shipment_id, dealer_order_line_id, quantity","Per-line quantities of a shipment (REQ-386)",,New
+shipment_receipts,id,"tenant_id, shipment_id, decision, reason, decided_by","Dealer confirms or rejects a shipment; confirm sets the order delivered (REQ-387)",,New
+shipment_issues,id,"tenant_id, shipment_id, status, settlement, replacement_shipment_id","Issue reported by dealer, reviewed and settled (REQ-387, REQ-388)",,New
+shipment_issue_lines,id,"tenant_id, issue_id, shipment_line_id, shortage_qty","Lines affected by an issue (REQ-388)",,New
+shipment_issue_attachments,id,"tenant_id, issue_id, file_ref","Photos or files attached to an issue (REQ-388)",,New
+shipment_issue_reviews,id,"tenant_id, issue_id, stage, decision, reviewed_by","Approve or decline per review stage (REQ-388)",,New
+dealer_spare_stock,id,"tenant_id, dealer_id, spare_item_id, quantity","Dealer stock of spares; vehicle stock comes from vehicle_units.holder_dealer_id (REQ-390, REQ-395, REQ-398)",,New
+enquiries,id,"tenant_id, dealer_id, salesman_user_id, enquiry_type, customer_type_code, name, phone, status, scheduled_on","Customer enquiry hot, warm or cold; no vehicle field (REQ-392)",,New
+enquiry_followups,id,"tenant_id, enquiry_id, subject, caller_user_id, next_scheduled_on","Follow-up log on an enquiry (REQ-392)",,New
+quotations,id,"tenant_id, enquiry_id, variant_id, colour_id, unit_price, gst_applied, discount_amount, adjustment_amount","Sales quotation on an enquiry; unit_price snapshot of the customer price (REQ-393)",,New
+quotation_attachments,id,"tenant_id, quotation_id, file_ref","Attachments of a quotation (REQ-393)",,New
+customers,id,"tenant_id, dealer_id, enquiry_id, customer_type_code, name, gst_number, phone","Customer record created from an enquiry (REQ-394)",,New
+customer_identity_documents,id,"tenant_id, customer_id, doc_type, doc_number, file_ref","PAN, Aadhaar or licence with file; at least one per customer (REQ-394)",,New
+sales_invoices,id,"tenant_id, dealer_id, customer_id, invoice_number, invoice_type, total_amount, invoice_date","Sale or service invoice to a customer (REQ-395, REQ-399)",,New
+sales_invoice_lines,id,"tenant_id, invoice_id, line_type, vehicle_unit_id, charger_serial, spare_item_id, service_item_id, quantity, unit_price","Invoice lines; a chassis can be sold once (REQ-395)",,New
+customer_payments,id,"tenant_id, invoice_id, payment_type, payment_mode_code, amount, transaction_id, paid_at","Customer payment against an invoice; invoice paid or pending is derived (REQ-396)",,New
+service_items,id,"tenant_id, dealer_id, name, price, deleted_at","Dealer service price list (REQ-399)",,New
+service_job_cards,id,"tenant_id, dealer_id, vehicle_unit_id, customer_id, job_type_code, is_free, meter_reading_km, status, service_invoice_id","Service job card for a vehicle (REQ-398)",,New
+service_job_card_photos,id,"tenant_id, job_card_id, file_ref","Photos on a job card (REQ-398)",,New
+service_job_lines,id,"tenant_id, job_card_id, line_type, service_item_id, spare_item_id, quantity, unit_price, is_warranty","Labour and part lines of a job card (REQ-399)",,New
+warranty_claims,id,"tenant_id, dealer_id, customer_id, vehicle_unit_id, spare_item_id, serial_no, raised_to, status","Warranty claim raised by the dealer to the OEM or its own service team (REQ-400)",,New
+warranty_claim_photos,id,"tenant_id, claim_id, file_ref","Up to 10 images per claim (REQ-400)",,New
+warranty_inspections,id,"tenant_id, claim_id, verified_ok, report, inspected_by","OEM verification and inspection report, one per claim (REQ-401)",,New
+warranty_replacements,id,"tenant_id, claim_id, unit_id, spare_item_id, quantity","Replacement sent from OEM stock on approval (REQ-401)",,New
+warranty_service_charges,id,"tenant_id, claim_id, amount, status, requested_by","Service charge requested, edited or waived by OEM (REQ-402)",,New
+warranty_charge_payments,id,"tenant_id, charge_id, transaction_id, amount, receipt_ref, verification_status","Dealer payment of a service charge, verified by OEM (REQ-402)",,New
+whatsapp_messages,id,"tenant_id, dealer_id, dealer_order_id, event_code, status, sent_at","WhatsApp message on order accepted or delivered; failure logged, not blocking (REQ-391)",,New

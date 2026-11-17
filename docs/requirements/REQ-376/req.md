@@ -1,3 +1,10 @@
+# OEM: Vendor purchase order for shortfall (MERGED)
+
+> Merged into REQ-370 (OEM: Vendor master and vendor purchase orders). Feature FEAT-1339 and decision DEC-411 are superseded
+> by FEAT-1333 and DEC-405. The original text is kept below for audit; the merged requirement is the source of truth.
+
+---
+
 # OEM: Vendor purchase order for shortfall
 
 Requirement REQ-376 · Feature FEAT-1339 · Decision DEC-411

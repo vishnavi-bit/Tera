@@ -1,7 +1,7 @@
 # OEM: Material inward with QC check
 
 Requirement REQ-377 · Feature FEAT-1340 · Decision DEC-412
-Order: 11 of 37 · Depends on: 10 OEM: Vendor purchase order for shortfall
+Order: 11 of 37 · Depends on: 4 OEM: Vendor master and vendor purchase orders (merged from 10)
 
 ## Purpose
 Inventory executive receives material against a vendor PO and QC-checks each item. Only good stock enters inventory.
