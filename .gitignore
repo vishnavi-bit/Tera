@@ -1,3 +1,11 @@
 # KNM
 .claude/requirements.json
 .knm/
+
+# Build output and dependencies (scaffold)
+node_modules/
+dist/
+coverage/
+
+# Secrets (scaffold never stores secret values)
+.env

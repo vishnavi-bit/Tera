@@ -10,7 +10,32 @@
       "framework": "react",
       "frameworkVersion": "19",
       "runtime": "node 20",
-      "modules": [],
+      "modules": [
+        {
+          "type": "frontend-framework",
+          "id": "react-vite",
+          "version": "1.0.0",
+          "variant": "ts-react-18"
+        },
+        {
+          "type": "styling",
+          "id": "chakra-styling",
+          "version": "1.0.0",
+          "variant": "ts-react-18"
+        },
+        {
+          "type": "state-management",
+          "id": "zustand-state",
+          "version": "1.0.0",
+          "variant": "ts-react-18"
+        },
+        {
+          "type": "testing",
+          "id": "jest-react",
+          "version": "1.0.0",
+          "variant": "ts-react-18"
+        }
+      ],
       "glue": [
         {
           "id": "providers",
@@ -29,7 +54,13 @@
           "file": "src/app/config.ts"
         }
       ],
-      "capabilities": [],
+      "capabilities": [
+        "router",
+        "state-management",
+        "styling",
+        "testing",
+        "ui-framework"
+      ],
       "designTokens": "src/app/theme.ts"
     },
     {
@@ -39,7 +70,62 @@
       "framework": "express",
       "frameworkVersion": "5",
       "runtime": "node 20",
-      "modules": [],
+      "modules": [
+        {
+          "type": "backend-framework",
+          "id": "express",
+          "version": "1.0.0",
+          "variant": "ts-node-20"
+        },
+        {
+          "type": "testing",
+          "id": "jest-testing",
+          "version": "1.0.0",
+          "variant": "ts-node-20"
+        },
+        {
+          "type": "build-tools",
+          "id": "node-build",
+          "version": "1.0.0",
+          "variant": "ts-node-20"
+        },
+        {
+          "type": "audit-trail",
+          "id": "audit-trail",
+          "version": "1.0.0",
+          "variant": "ts-node-20"
+        },
+        {
+          "type": "database",
+          "id": "sqlite-database",
+          "version": "1.0.0",
+          "variant": "ts-node-20"
+        },
+        {
+          "type": "orm",
+          "id": "drizzle-sqlite",
+          "version": "1.0.0",
+          "variant": "ts-node-20"
+        },
+        {
+          "type": "auth",
+          "id": "jwt-auth",
+          "version": "1.0.0",
+          "variant": "ts-node-20"
+        },
+        {
+          "type": "multi-tenancy",
+          "id": "multi-tenant",
+          "version": "1.0.0",
+          "variant": "ts-node-20"
+        },
+        {
+          "type": "server-cache",
+          "id": "memory-cache",
+          "version": "1.0.0",
+          "variant": "ts-node-20"
+        }
+      ],
       "glue": [
         {
           "id": "routes",
@@ -58,7 +144,17 @@
           "file": "src/glue/config.ts"
         }
       ],
-      "capabilities": []
+      "capabilities": [
+        "audit",
+        "auth",
+        "build",
+        "db",
+        "http-server",
+        "multi-tenancy",
+        "orm",
+        "server-cache",
+        "testing"
+      ]
     }
   ]
 }

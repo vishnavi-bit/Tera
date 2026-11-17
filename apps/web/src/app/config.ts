@@ -3,5 +3,6 @@
 
 export const config = [
   // knm:entries
+  { key: 'PORT', default: "5173" }, // knm:module react-vite
   // knm:entries-end
 ];
