@@ -1,0 +1,9 @@
+{
+  "apps": [
+    {
+      "name": "tera-ev",
+      "title": "TERA EV ERP",
+      "platform": "desktop"
+    }
+  ]
+}

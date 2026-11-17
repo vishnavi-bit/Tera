@@ -1,0 +1,47 @@
+{
+  "_sample": "Sample data only. Names, ids and numbers are invented.",
+  "order": {
+    "id": "PO-1042",
+    "seller": "OEM - Chennai Unit",
+    "product": "S1",
+    "variant": "Std",
+    "colour": "Red",
+    "units": 16,
+    "total": 120000,
+    "advanceRequired": 36000,
+    "status": "Pending"
+  },
+  "stock": {
+    "available": 24,
+    "reserved": 0
+  },
+  "payment": {
+    "status": "Not submitted",
+    "txnId": "",
+    "amount": 36000,
+    "date": "2026-11-17"
+  },
+  "ledger": {
+    "surplus": 0
+  },
+  "assign": {
+    "unit": "Chennai",
+    "model": "S1",
+    "variant": "Std",
+    "colour": "Red",
+    "qty": 16,
+    "qcPassed": 16
+  },
+  "dispatch": {
+    "status": "Ready",
+    "chassisCheck": "16 of 16 OK",
+    "motorCheck": "16 of 16 OK",
+    "transport": "Truck TN-01-1234"
+  },
+  "shipment": {
+    "dispatched": false,
+    "date": "2026-11-17",
+    "lines": "S1 Red x16",
+    "units": 16
+  }
+}

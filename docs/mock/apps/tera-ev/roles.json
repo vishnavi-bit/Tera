@@ -1,0 +1,26 @@
+{
+  "dealer-owner": {
+    "label": "Dealer owner",
+    "color": "#0d9488"
+  },
+  "oem-procurement": {
+    "label": "Procurement Manager",
+    "color": "#2563eb"
+  },
+  "oem-production": {
+    "label": "Production and QC Manager",
+    "color": "#7c3aed"
+  },
+  "oem-logistics": {
+    "label": "Logistics and Dispatch Manager",
+    "color": "#ea580c"
+  },
+  "oem-accounts": {
+    "label": "Accounts Manager",
+    "color": "#16a34a"
+  },
+  "oem-sales": {
+    "label": "Sales approver (role to confirm)",
+    "color": "#db2777"
+  }
+}
