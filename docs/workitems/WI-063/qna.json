@@ -2,7 +2,7 @@
   "entity_type": "workItem",
   "entity_id": "WI-063",
   "assigned_to": "Pua6ezZowteUtW37dndRPa890B93",
-  "status": "pending",
+  "status": "completed",
   "questions": [
     {
       "id": "q1",
@@ -15,9 +15,10 @@
       ],
       "reason": "Decides whether the dealer model and form change in this work item, and whether the catalogue step is in scope.",
       "required": true,
-      "answer": null,
-      "answered_by": null,
-      "answered_at": null
+      "answer": "Tier is a field on the dealer form (add it to this work item)",
+      "answered_by": "Pua6ezZowteUtW37dndRPa890B93",
+      "answered_at": "2026-11-23T14:58:52.000Z",
+      "other": null
     },
     {
       "id": "q2",
@@ -25,9 +26,10 @@
       "text": "Confirm GSTIN auto-fill is out of scope for this work item (same as the vendor master, WI-035)?",
       "reason": "req.md lists GSTIN auto-fill (N01) as an open question; the plan assumes it is not built here.",
       "required": true,
-      "answer": null,
-      "answered_by": null,
-      "answered_at": null
+      "answer": "Yes",
+      "answered_by": "Pua6ezZowteUtW37dndRPa890B93",
+      "answered_at": "2026-11-23T14:58:52.000Z",
+      "other": null
     }
   ]
 }
