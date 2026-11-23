@@ -1,0 +1,33 @@
+{
+  "entity_type": "workItem",
+  "entity_id": "WI-063",
+  "assigned_to": "Pua6ezZowteUtW37dndRPa890B93",
+  "status": "pending",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single_choice",
+      "text": "Where does a dealer's tier come from, and what does the tier's catalogue contain? REQ-373 acceptance 4 says the dealer sees its tier's catalogue, but the dealer form has no tier field and the repo has no tier or catalogue code yet.",
+      "options": [
+        "Tier is a field on the dealer form (add it to this work item)",
+        "Tier is assigned by another requirement; this work item only reads it",
+        "Catalogue visibility is out of scope here (sign-in only); a later work item covers it"
+      ],
+      "reason": "Decides whether the dealer model and form change in this work item, and whether the catalogue step is in scope.",
+      "required": true,
+      "answer": null,
+      "answered_by": null,
+      "answered_at": null
+    },
+    {
+      "id": "q2",
+      "type": "yes_no",
+      "text": "Confirm GSTIN auto-fill is out of scope for this work item (same as the vendor master, WI-035)?",
+      "reason": "req.md lists GSTIN auto-fill (N01) as an open question; the plan assumes it is not built here.",
+      "required": true,
+      "answer": null,
+      "answered_by": null,
+      "answered_at": null
+    }
+  ]
+}
